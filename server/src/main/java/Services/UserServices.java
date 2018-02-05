@@ -22,8 +22,6 @@ public class UserServices implements IServerUser {
                 response = user.getToken();
             }
         }
-        //Do we want to start every error message with "ERROR"?
-        //TODO: Decide how we want to indicate an error vs a token
         return response;
     }
 
