@@ -1,3 +1,5 @@
+package Server;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
@@ -9,9 +11,10 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 
-import Models.GenericCommand;
+import Models.Command;
+import Models.Result;
 
-public class handler implements HttpHandler {
+public class Handler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         boolean success = false;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -20,28 +23,28 @@ public class handler implements HttpHandler {
             if (httpExchange.getRequestMethod().toLowerCase().equals("post")) {
                 // Extract the JSON string from the HTTP request body
                 Reader read = new InputStreamReader(httpExchange.getRequestBody());
-                GenericCommand command = gson.fromJson(read, GenericCommand.class);
+                Command command = gson.fromJson(read, Command.class);
                 read.close();
-//                Results result = new Results();
+                Result result = new Result();
 
                 // TODO: execute command
                 try {
-                    //result = command.execute();
-                    command.execute();
+                    result = command.execute();
 //                    result.setSuccess(true);
-                }catch (NumberFormatException e)
+                }catch (Exception e)
                 {
 //                    result.setErrorInfo("Sorry, that's not a valid number format");
-//                    result.setSuccess(false);
+                    result.setSuccess(false);
                     System.out.println("ERROR");
+                    e.printStackTrace();
                 }
 
                 httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
-                //String gsonResponse = gson.toJson(result);
+                String gsonResponse = gson.toJson(result);
 
                 PrintWriter pw = new PrintWriter(httpExchange.getResponseBody());
-                //pw.write(gsonResponse);
+                pw.write(gsonResponse);
                 pw.close();
 
                 success = true;

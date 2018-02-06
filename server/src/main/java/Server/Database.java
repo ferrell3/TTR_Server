@@ -1,26 +1,43 @@
 package Server;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import Models.Game;
 import Models.User;
 
 public class Database {
-    private HashMap<String, User> users;
-    private HashMap<String, Game> games;
+    private HashMap<String, User> users; //Key: username, Value: user object
+    private HashMap<String, Game> games; //Key: gameId, Value: game object
+    private List<String> clients; //List of active clients //For use with commands and polling mostly
 
     private static Database theDB = new Database();
 
     public static Database getInstance() {
         return theDB;
     }
+
     private Database() {
-        User u1 = new User("username","password","authToken");
-        User u2 = new User("","",""); //Add constructor with params
+//        User u = new User("username","password","authToken");
+        User u1 = new User("jordan", "jf", randomString());
+        User u2 = new User("kip","kh",randomString());
+        User u3 = new User("brian","bo",randomString());
+        User u4 = new User("finn","fj",randomString());
+        User u5 = new User("daniel","dk",randomString());
+
+        //add team users to database
         users.put(u1.getUsername(), u1);
         users.put(u1.getAuthToken(), u1);
         users.put(u2.getUsername(), u2);
         users.put(u2.getAuthToken(), u2);
+        users.put(u3.getUsername(), u3);
+        users.put(u3.getAuthToken(), u3);
+        users.put(u4.getUsername(), u4);
+        users.put(u4.getAuthToken(), u4);
+        users.put(u5.getUsername(), u5);
+        users.put(u5.getAuthToken(), u5);
     }
 
 
@@ -46,8 +63,26 @@ public class Database {
         return users.get(token);
     }
 
+    public String getUsername(String token){
+        return findUserByToken(token).getUsername();
+    }
+
     public User findUserByName(String username) {
         return users.get(username);
+    }
+
+    public List<String> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<String> clients) {
+        this.clients = clients;
+    }
+
+    //to create authTokens for hard coded team users
+    public String randomString()
+    {
+        return UUID.randomUUID().toString();
     }
 
 
