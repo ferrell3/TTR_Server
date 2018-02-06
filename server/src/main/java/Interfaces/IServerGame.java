@@ -9,8 +9,6 @@ public interface IServerGame {
 
     Result createGame(String authToken, String gameId);
 
-
-    //TODO decide if we are passing in username or authtoken
     Result joinGame(String authToken, String gameId);
 
     Result startGame(String authToken, String gameId);
