@@ -27,7 +27,7 @@ public class Handler implements HttpHandler {
                 read.close();
                 Result result = new Result();
 
-                // TODO: execute command
+                // execute command
                 try {
                     result = command.execute();
 //                    result.setSuccess(true);
