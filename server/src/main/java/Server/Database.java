@@ -18,9 +18,9 @@ public class Database {
         User u1 = new User("username","password","authToken");
         User u2 = new User("","",""); //Add constructor with params
         users.put(u1.getUsername(), u1);
-        users.put(u1.getToken(), u1);
+        users.put(u1.getAuthToken(), u1);
         users.put(u2.getUsername(), u2);
-        users.put(u2.getToken(), u2);
+        users.put(u2.getAuthToken(), u2);
     }
 
 

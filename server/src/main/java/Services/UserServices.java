@@ -19,7 +19,7 @@ public class UserServices implements IServerUser {
         {
             if (password.equals(user.getPassword()))
             {
-                response = user.getToken();
+                response = user.getAuthToken();
             }
         }
         return response;
