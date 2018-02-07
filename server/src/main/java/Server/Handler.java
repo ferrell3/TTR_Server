@@ -30,15 +30,14 @@ public class Handler implements HttpHandler {
                 // execute command
                 try {
                     result = command.execute();
-//                    result.setSuccess(true);
                 }catch (Exception e)
                 {
-//                    result.setErrorInfo("Sorry, that's not a valid number format");
                     result.setSuccess(false);
                     System.out.println("ERROR");
                     e.printStackTrace();
                 }
 
+                //Create response for client
                 httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
 
                 String gsonResponse = gson.toJson(result);

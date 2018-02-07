@@ -31,6 +31,7 @@ public class GameServices implements IServerGame {
         String gameId = request.getGameId();
         Result result = new Result();
 
+        //check if requesting client is an active (logged in) client
         if(Database.getInstance().getClients().contains(authToken))
         {
             //check if gameId already exists
@@ -46,6 +47,7 @@ public class GameServices implements IServerGame {
 //                result.setGameId(gameId); //do we want to return anything other than a boolean?
                 result.setSuccess(true);
 
+                //create commands for other active clients
                 Request clientRequest = new Request();
                 clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
                 clientRequest.setUsername(username); //This is specific to createGame()
@@ -78,10 +80,11 @@ public class GameServices implements IServerGame {
         return null;
     }
 
-    @Override
+    @Override //polling response
     public Result updateClient(Request request) { //(String authToken);
         return null;
     }
 
+    //TODO:
 
 }

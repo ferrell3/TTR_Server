@@ -40,11 +40,13 @@ public class UserServices implements IServerUser {
             else
             {
                 response.setErrorMsg("ERROR: Incorrect username/password combination");
+                response.setSuccess(false);
             }
         }
         else
         {
             response.setErrorMsg("ERROR: Incorrect username/password combination");
+            response.setSuccess(false);
         }
         return response;
     }

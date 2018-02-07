@@ -29,6 +29,7 @@ public class Server {
     private void init(String portNumber) {
         System.out.println("Initializing HTTP server on port " + portNumber);
 
+        //loads database with team hard coded users
         Database.getInstance().loadTeam();
 
         try {

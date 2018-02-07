@@ -1,6 +1,5 @@
 package Models;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import Interfaces.ICommand;
 import Services.ClientProxy;
@@ -13,8 +12,6 @@ public class Command implements ICommand {
     private Class<?>[] _paramTypes;
     private String[] _strParamTypes;
     private Request[] _paramValues;
-//    private Object[] _paramValues;
-
 
     public Command(String className, String methodName,
                    String[] paramTypes, Request[] paramValues) {

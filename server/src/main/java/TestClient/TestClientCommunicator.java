@@ -25,7 +25,7 @@ public class TestClientCommunicator {
 
     public static TestClientCommunicator getInstance() { return myInstance; }
 
-    private String serverHost = "192.168.2.170"; //"10.24.66.130";
+    private String serverHost = "192.168.2.175"; //"10.24.66.130";
     private String serverPort = "8888";
 
     private TestClientCommunicator() {}
@@ -46,13 +46,6 @@ public class TestClientCommunicator {
         return post(url, jsonStr);
     }
 
-//    public Result sendGenericCommand(Command command) {
-//        String url = "http://" + serverHost + ":" + serverPort + "/G";
-//
-//        Gson gson = new GsonBuilder().create();
-//        String jsonStr = gson.toJson(command);
-//        return post(url, jsonStr);
-//    }
 
     private Result post(String urlAddress, String reqData)
     {

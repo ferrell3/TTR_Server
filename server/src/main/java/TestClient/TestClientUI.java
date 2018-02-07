@@ -71,15 +71,15 @@ public class TestClientUI {
         if (gameResult.isSuccessful())
         {
             System.out.println(gameRequest.getGameId() + " successfuly created!");
-//            System.out.println(gameResult.getAuthToken());
         }
         else
         {
             System.out.println("Error:");
             System.out.println(gameResult.getErrorMsg());
         }
-        System.out.println();
         //END CREATE GAME TEST
+        System.out.println();
+
 //        while (true)
 //        {
 //            System.out.println("Welcome to Phase 0.5! Prepare to have your strings processed! (Enter Q to quit)");
