@@ -9,6 +9,15 @@ import Models.User;
 import Server.Database;
 
 public class UserServices implements IServerUser {
+
+    private static UserServices theUS = new UserServices();
+
+    public static UserServices getInstance() {
+        return theUS;
+    }
+
+    private UserServices() {}
+
     //Pass in username and password
     //Checks if user exists in database
     //Checks given password against existing password
@@ -25,6 +34,8 @@ public class UserServices implements IServerUser {
             if (password.equals(user.getPassword()))
             {
                 response.setAuthToken(user.getAuthToken());
+                response.setSuccess(true);
+                Database.getInstance().getClients().add(user.getAuthToken());
             }
             else
             {
@@ -57,10 +68,13 @@ public class UserServices implements IServerUser {
             Database.getInstance().getUsers().put(username, user); //for login purposes
             Database.getInstance().getUsers().put(authToken, user); //for authentication purposes
             response.setAuthToken(authToken);
+            response.setSuccess(true);
+            Database.getInstance().getClients().add(authToken);
         }
         else
         {
             response.setErrorMsg("ERROR: Invalid Username");
+            response.setSuccess(false);
         }
         return response;
     }

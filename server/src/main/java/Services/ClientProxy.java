@@ -1,6 +1,7 @@
 package Services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import Interfaces.ICommand;
 import Models.Command;
 import Models.Request;
 import Server.Database;
+import sun.util.resources.cldr.zh.CalendarData_zh_Hans_HK;
 
 /**
  * Created by ferrell3 on 2/5/18.
@@ -22,6 +24,9 @@ public class ClientProxy implements IClient {
         return theCP;
     }
 
+    private ClientProxy() {
+        clientCommands = new HashMap<>();
+    }
 
     //The server will add a new list or add to the list of commands in the GameServices
     private Map<String,List<ICommand>> clientCommands; //Client authToken is the key String

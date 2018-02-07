@@ -21,12 +21,15 @@ public class Server {
     private HttpServer server;
 
     public static void main(String[] args) {
-        String portNumber = args[0];
+//        String portNumber = args[0];
+        String portNumber = "8888";
         new Server().init(portNumber);
     }
 
     private void init(String portNumber) {
         System.out.println("Initializing HTTP server on port " + portNumber);
+
+        Database.getInstance().loadTeam();
 
         try {
             server = HttpServer.create(new InetSocketAddress(Integer.parseInt(portNumber)), MAX_WAITING_CONNECTIONS);

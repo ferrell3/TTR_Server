@@ -1,5 +1,6 @@
 package Interfaces;
 
+import Models.Request;
 import Models.Result;
 
 public interface IServerGame {
@@ -7,13 +8,13 @@ public interface IServerGame {
     //the UML said + joinGame(String token, String gameId):boolean, but maybe we call token something else
     //so it makes more sense...
 
-    Result createGame(String authToken, String gameId);
+    Result createGame(Request request); //(String authToken, String gameId);
 
-    Result joinGame(String authToken, String gameId);
+    Result joinGame(Request request); //(String authToken, String gameId);
 
-    Result startGame(String authToken, String gameId);
+    Result startGame(Request request); //(String authToken, String gameId);
 
-    Result updateClient(String authToken);
+    Result updateClient(Request request); //(String authToken);
 
 
 }

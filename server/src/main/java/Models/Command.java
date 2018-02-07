@@ -3,6 +3,9 @@ package Models;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import Interfaces.ICommand;
+import Services.ClientProxy;
+import Services.GameServices;
+import Services.UserServices;
 
 public class Command implements ICommand {
     private String _className;
@@ -28,7 +31,18 @@ public class Command implements ICommand {
         try {
             Class<?> receiver = Class.forName(_className);
             Method method = receiver.getMethod(_methodName, _paramTypes);
-//            result = (Result) method.invoke(StringProcessor.getInstance(), _paramValues);
+            if(_className.equals("Interfaces.IServerUser"))
+            {
+                result = (Result) method.invoke(UserServices.getInstance(), _paramValues);
+            }
+            else if(_className.equals("Interfaces.IServerGame"))
+            {
+                result = (Result) method.invoke(GameServices.getInstance(), _paramValues);
+            }
+            else //if(_className.equals("Interfaces.IClient"))
+            {
+                result = (Result) method.invoke(ClientProxy.getInstance(), _paramValues);
+            }
         }
         catch (Exception e) {
             e.printStackTrace();

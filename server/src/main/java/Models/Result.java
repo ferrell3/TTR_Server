@@ -31,11 +31,11 @@ public class Result {
         this.authToken = authToken;
     }
 
-    public String getgameId() {
+    public String getGameId() {
         return gameId;
     }
 
-    public void setgameId(String id) {
+    public void setGameId(String id) {
         gameId = id;
     }
 
