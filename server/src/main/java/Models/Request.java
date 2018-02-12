@@ -7,6 +7,15 @@ public class Request {
     private String authToken;
     private String gameId;
     private boolean status; //Game started or not?, etc.
+    private Integer commandNum; //Gives positions on masterCommandList
+
+    public Integer getCommandNum() {
+        return commandNum;
+    }
+
+    public void setCommandNum(Integer commandNum) {
+        this.commandNum = commandNum;
+    }
 
     public Request(){
     }

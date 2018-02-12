@@ -1,8 +1,10 @@
 package Services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import Interfaces.ICommand;
 import Interfaces.IServerGame;
 import Models.Game;
 import Models.Request;
@@ -48,9 +50,11 @@ public class GameServices implements IServerGame {
 //                result.setGameId(gameId); //do we want to return anything other than a boolean?
                 result.setSuccess(true);
 
+                // ToDo poller
+
                 //create commands for other active clients
                 Request clientRequest = new Request();
-                clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
+                //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
                 clientRequest.setUsername(username); //This is specific to createGame()
                 clientRequest.setGameId(gameId); //This is specific to createGame()
                 //add command for other clients
@@ -109,6 +113,17 @@ public class GameServices implements IServerGame {
                     System.out.println(username+ " joined gameId: "+gameId);
 
                     // ToDo poller
+
+                    //create commands for other active clients
+                    Request clientRequest = new Request();
+                    //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
+                    clientRequest.setUsername(username); //This is specific to joinGame()
+                    clientRequest.setGameId(gameId); //This is specific to joinGame()
+                    //add command for other clients
+                    //creates a command object for each client except the requesting client
+                    ClientProxy.getInstance().createGame(request);
+
+                    System.out.println(username + " created new game: "+ gameId);
 
                 }
                 else
@@ -182,6 +197,17 @@ public class GameServices implements IServerGame {
 
                         // ToDo poller
 
+                        //create commands for other active clients
+                        Request clientRequest = new Request();
+                        //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
+                        //clientRequest.setUsername(username); //This is specific to createGame()
+                        clientRequest.setGameId(gameId); //This is specific to startGame()
+                        //add command for other clients
+                        //creates a command object for each client except the requesting client
+                        ClientProxy.getInstance().createGame(request);
+
+                        System.out.println(username + " created new game: "+ gameId);
+
                     }else
                     {
                         result.setSuccess(false);
@@ -211,9 +237,35 @@ public class GameServices implements IServerGame {
 
     @Override //polling response
     public Result updateClient(Request request) { //(String authToken);
-        return null;
+        String authToken = request.getAuthToken();
+        Integer commandNum = request.getCommandNum();
+       // String gameId = request.getGameId();
+        Result result = new Result();
+
+        //check if requesting client is an active (logged in) client
+        if(Database.getInstance().getClients().contains(authToken))
+        {
+            ArrayList <ICommand> responseCommands = new ArrayList<>();
+            for (int i = commandNum; i < Database.getInstance().getMasterCommandList().size(); i++){
+
+                responseCommands.add(Database.getInstance().getMasterCommandList().get(i));
+
+            }
+            result.setSuccess(true);
+            result.setUpdateCommands(responseCommands);
+
+
+            System.out.println("Poller request responded to.");
+        }
+
+        else
+        {
+            result.setSuccess(false);
+            result.setErrorMsg("Invalid authorization token.");
+        }
+        return result;
+
     }
 
-    //TODO:
 
 }

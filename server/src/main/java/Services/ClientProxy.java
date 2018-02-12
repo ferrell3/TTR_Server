@@ -10,7 +10,6 @@ import Interfaces.ICommand;
 import Models.Command;
 import Models.Request;
 import Server.Database;
-import sun.util.resources.cldr.zh.CalendarData_zh_Hans_HK;
 
 /**
  * Created by ferrell3 on 2/5/18.
@@ -40,7 +39,12 @@ public class ClientProxy implements IClient {
         ICommand command = new Command("Interfaces.IClient", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
-        updateCommands(clientRequest.getAuthToken(), command);
+        //update master command list in database - for all clients to access:
+        ArrayList<ICommand> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
+
+        //updateCommands(clientRequest.getAuthToken(), command);
     }
 
     @Override
@@ -52,7 +56,12 @@ public class ClientProxy implements IClient {
         ICommand command = new Command("Interfaces.IClient", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
-        updateCommands(clientRequest.getAuthToken(), command);
+        //update master command list in database - for all clients to access:
+        ArrayList<ICommand> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
+
+        //updateCommands(clientRequest.getAuthToken(), command);
     }
 
     @Override
@@ -62,7 +71,12 @@ public class ClientProxy implements IClient {
         ICommand command = new Command("Interfaces.IClient", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
-        updateCommands(clientRequest.getAuthToken(), command);
+        //update master command list in database - for all clients to access:
+        ArrayList<ICommand> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
+
+        //updateCommands(clientRequest.getAuthToken(), command);
     }
 
     public Map<String, List<ICommand>> getClientCommands() {
@@ -74,27 +88,30 @@ public class ClientProxy implements IClient {
     }
 
     private void updateCommands(String authToken, ICommand command){
-        for(String clientToken : Database.getInstance().getClients())
-        {
-            //for all other clients (skip the requested client)
-            if(!clientToken.equals(authToken))
-            {
-                //check if the CP already has a list of commands for the client
-                if(clientCommands.containsKey(authToken))
-                {
-                    //it does, add command to existing list
-                    clientCommands.get(clientToken).add(command);
-                }
-                else //does not have a list for this client yet
-                {
-                    //create a list
-                    ArrayList<ICommand> commandList = new ArrayList<>();
-                    //add command to list
-                    commandList.add(command);
-                    //add list to the map of client commands
-                    clientCommands.put(clientToken, commandList);
-                }
-            }
-        }
+
+
+
+        //        for(String clientToken : Database.getInstance().getClients())
+//        {
+//            //for all other clients (skip the requested client)
+//            if(!clientToken.equals(authToken))
+//            {
+//                //check if the CP already has a list of commands for the client
+//                if(clientCommands.containsKey(authToken))
+//                {
+//                    //it does, add command to existing list
+//                    clientCommands.get(clientToken).add(command);
+//                }
+//                else //does not have a list for this client yet
+//                {
+//                    //create a list
+//                    ArrayList<ICommand> commandList = new ArrayList<>();
+//                    //add command to list
+//                    commandList.add(command);
+//                    //add list to the map of client commands
+//                    clientCommands.put(clientToken, commandList);
+//                }
+//            }
+//        }
     }
 }

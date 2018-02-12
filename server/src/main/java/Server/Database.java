@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import Interfaces.ICommand;
 import Models.Game;
 import Models.User;
 
@@ -14,6 +15,7 @@ public class Database {
     private HashMap<String, Game> games; //Key: gameId, Value: game object
     private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
+    private ArrayList <ICommand> masterCommandList;
 
     private static Database theDB = new Database();
 
@@ -26,6 +28,7 @@ public class Database {
         games = new HashMap<>();
         clients = new ArrayList<>();
         activeGames = new HashMap<>();
+        masterCommandList = new ArrayList<>();
     }
 
     public void loadTeam() {
@@ -99,6 +102,14 @@ public class Database {
 
     public void setActiveGames(HashMap<String, Game> activeGames) {
         this.activeGames = activeGames;
+    }
+
+    public ArrayList<ICommand> getMasterCommandList() {
+        return masterCommandList;
+    }
+
+    public void setMasterCommandList(ArrayList<ICommand> masterCommandList) {
+        this.masterCommandList = masterCommandList;
     }
 
 

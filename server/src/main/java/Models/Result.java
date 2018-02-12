@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.ICommand;
@@ -10,6 +11,16 @@ public class Result {
     private String authToken; //user authToken
     private String gameId; //game ID
     private boolean success;
+    private ArrayList <ICommand> updateCommands;   //list of commands to execute
+
+    public ArrayList<ICommand> getUpdateCommands() {
+        return updateCommands;
+    }
+
+    public void setUpdateCommands(ArrayList<ICommand> updateCommands) {
+        this.updateCommands = updateCommands;
+    }
+
 
     //probably won't use for a response to a client response like startGame()
     //I'm thinking more for use with the poller and updating the other clients
