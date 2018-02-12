@@ -75,7 +75,7 @@ public class UserServices implements IServerUser {
         }
         else
         {
-            response.setErrorMsg("ERROR: Invalid Username");
+            response.setErrorMsg("ERROR: Invalid Registration");
             response.setSuccess(false);
         }
         return response;

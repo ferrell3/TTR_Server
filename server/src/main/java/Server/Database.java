@@ -12,6 +12,7 @@ import Models.User;
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
     private HashMap<String, Game> games; //Key: gameId, Value: game object
+    private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
 
     private static Database theDB = new Database();
@@ -24,6 +25,7 @@ public class Database {
         users = new HashMap<>();
         games = new HashMap<>();
         clients = new ArrayList<>();
+        activeGames = new HashMap<>();
     }
 
     public void loadTeam() {
@@ -89,6 +91,14 @@ public class Database {
     public String randomString()
     {
         return UUID.randomUUID().toString();
+    }
+
+    public HashMap<String, Game> getActiveGames() {
+        return activeGames;
+    }
+
+    public void setActiveGames(HashMap<String, Game> activeGames) {
+        this.activeGames = activeGames;
     }
 
 
