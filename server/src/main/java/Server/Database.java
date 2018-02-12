@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import Interfaces.ICommand;
+import Models.Command;
 import Models.Game;
 import Models.User;
 
@@ -15,7 +15,7 @@ public class Database {
     private HashMap<String, Game> games; //Key: gameId, Value: game object
     private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
-    private ArrayList <ICommand> masterCommandList;
+    private ArrayList <Command> masterCommandList;
 
     private static Database theDB = new Database();
 
@@ -104,11 +104,11 @@ public class Database {
         this.activeGames = activeGames;
     }
 
-    public ArrayList<ICommand> getMasterCommandList() {
+    public ArrayList<Command> getMasterCommandList() {
         return masterCommandList;
     }
 
-    public void setMasterCommandList(ArrayList<ICommand> masterCommandList) {
+    public void setMasterCommandList(ArrayList<Command> masterCommandList) {
         this.masterCommandList = masterCommandList;
     }
 

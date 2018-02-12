@@ -36,6 +36,8 @@ public class UserServices implements IServerUser {
                 response.setAuthToken(user.getAuthToken());
                 response.setSuccess(true);
                 Database.getInstance().getClients().add(user.getAuthToken());
+
+                System.out.println(username+" logged in.");
             }
             else
             {
@@ -72,6 +74,8 @@ public class UserServices implements IServerUser {
             response.setAuthToken(authToken);
             response.setSuccess(true);
             Database.getInstance().getClients().add(authToken);
+
+            System.out.println(username + " registered as a new user.");
         }
         else
         {

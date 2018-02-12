@@ -36,11 +36,12 @@ public class ClientProxy implements IClient {
         request.setUsername(clientRequest.getUsername());
         request.setGameId(clientRequest.getGameId());
 
-        ICommand command = new Command("Interfaces.IClient", "createGame",
+
+        Command command = new Command("Interfaces.IClient", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         //update master command list in database - for all clients to access:
-        ArrayList<ICommand> temp = Database.getInstance().getMasterCommandList();
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
 
@@ -53,11 +54,11 @@ public class ClientProxy implements IClient {
         request.setUsername(clientRequest.getUsername());
         request.setGameId(clientRequest.getGameId());
 
-        ICommand command = new Command("Interfaces.IClient", "joinGame",
+        Command command = new Command("Interfaces.IClient", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         //update master command list in database - for all clients to access:
-        ArrayList<ICommand> temp = Database.getInstance().getMasterCommandList();
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
 
@@ -68,11 +69,11 @@ public class ClientProxy implements IClient {
     public void startGame(Request clientRequest){ //(String gameId){
         Request request = new Request();
         request.setGameId(clientRequest.getGameId());
-        ICommand command = new Command("Interfaces.IClient", "startGame",
+        Command command = new Command("Interfaces.IClient", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         //update master command list in database - for all clients to access:
-        ArrayList<ICommand> temp = Database.getInstance().getMasterCommandList();
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
 

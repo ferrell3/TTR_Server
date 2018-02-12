@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import Interfaces.ICommand;
 import Interfaces.IServerGame;
+import Models.Command;
 import Models.Game;
 import Models.Request;
 import Models.Result;
@@ -59,9 +59,9 @@ public class GameServices implements IServerGame {
                 clientRequest.setGameId(gameId); //This is specific to createGame()
                 //add command for other clients
                 //creates a command object for each client except the requesting client
-                ClientProxy.getInstance().createGame(request);
+                ClientProxy.getInstance().createGame(clientRequest);
 
-                System.out.println(username + " created new game: "+ gameId);
+                System.out.println(clientRequest.getUsername() + " created new game: "+ gameId);
             }
             else
             {
@@ -121,7 +121,7 @@ public class GameServices implements IServerGame {
                     clientRequest.setGameId(gameId); //This is specific to joinGame()
                     //add command for other clients
                     //creates a command object for each client except the requesting client
-                    ClientProxy.getInstance().createGame(request);
+                    ClientProxy.getInstance().joinGame(clientRequest);
 
                     System.out.println(username + " created new game: "+ gameId);
 
@@ -178,6 +178,15 @@ public class GameServices implements IServerGame {
                         //Response to client
                         result.setSuccess(true);
 
+                        //create commands for other active clients
+                        Request clientRequest = new Request();
+                        //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
+                        //clientRequest.setUsername(username); //This is specific to createGame()
+                        clientRequest.setGameId(gameId); //This is specific to startGame()
+                        //add command for other clients
+                        //creates a command object for each client except the requesting client
+                        ClientProxy.getInstance().startGame(clientRequest);
+
                         System.out.println(gameId+ " started ");
 
                     }else if(!Database.getInstance().getActiveGames().containsKey(gameId)){
@@ -204,7 +213,7 @@ public class GameServices implements IServerGame {
                         clientRequest.setGameId(gameId); //This is specific to startGame()
                         //add command for other clients
                         //creates a command object for each client except the requesting client
-                        ClientProxy.getInstance().createGame(request);
+                        ClientProxy.getInstance().startGame(clientRequest);
 
                         System.out.println(username + " created new game: "+ gameId);
 
@@ -245,7 +254,7 @@ public class GameServices implements IServerGame {
         //check if requesting client is an active (logged in) client
         if(Database.getInstance().getClients().contains(authToken))
         {
-            ArrayList <ICommand> responseCommands = new ArrayList<>();
+            ArrayList <Command> responseCommands = new ArrayList<>();
             for (int i = commandNum; i < Database.getInstance().getMasterCommandList().size(); i++){
 
                 responseCommands.add(Database.getInstance().getMasterCommandList().get(i));

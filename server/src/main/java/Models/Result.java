@@ -11,13 +11,13 @@ public class Result {
     private String authToken; //user authToken
     private String gameId; //game ID
     private boolean success;
-    private ArrayList <ICommand> updateCommands;   //list of commands to execute
+    private ArrayList <Command> updateCommands;   //list of commands to execute
 
-    public ArrayList<ICommand> getUpdateCommands() {
+    public ArrayList<Command> getUpdateCommands() {
         return updateCommands;
     }
 
-    public void setUpdateCommands(ArrayList<ICommand> updateCommands) {
+    public void setUpdateCommands(ArrayList<Command> updateCommands) {
         this.updateCommands = updateCommands;
     }
 
