@@ -25,8 +25,6 @@ public class Handler implements HttpHandler {
                 Reader read = new InputStreamReader(httpExchange.getRequestBody());
                 Command command = gson.fromJson(read, Command.class);
 
-               // String prettyJson = gson.toJson(command);
-               // System.out.println(prettyJson);
                 read.close();
                 Result result = new Result();
 
@@ -45,7 +43,8 @@ public class Handler implements HttpHandler {
 
                 String gsonResponse = gson.toJson(result);
 
-                System.out.println(gsonResponse);
+                //System.out.println(gsonResponse);
+
                 PrintWriter pw = new PrintWriter(httpExchange.getResponseBody());
                 pw.write(gsonResponse);
                 pw.close();

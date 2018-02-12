@@ -21,17 +21,12 @@ public class GameServices implements IServerGame {
 
     private GameServices() {}
 
-    //TODO: Finish implementing IServerGame and adding functionality to methods
 
-    //ToDo: poller - Add completed commands to poller list for client to get new commands from
-
-    //TODO: Remember to add the authToken to each request in order to skip it while adding commands
-
-    //this one should be done
     @Override
     public Result createGame(Request request){ //(String authToken, String gameId){
         String authToken = request.getAuthToken();
         String gameId = request.getGameId();
+        Integer commandNum = request.getCommandNum();
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
@@ -47,12 +42,8 @@ public class GameServices implements IServerGame {
                 newGame.getPlayers().add(username);
                 //add the game to the database
                 Database.getInstance().getGames().put(gameId, newGame);
-//                result.setGameId(gameId); //do we want to return anything other than a boolean?
-                result.setSuccess(true);
 
-                // ToDo poller
-
-                //create commands for other active clients
+                //create commands
                 Request clientRequest = new Request();
                 //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
                 clientRequest.setUsername(username); //This is specific to createGame()
@@ -60,6 +51,9 @@ public class GameServices implements IServerGame {
                 //add command for other clients
                 //creates a command object for each client except the requesting client
                 ClientProxy.getInstance().createGame(clientRequest);
+
+                result = updateClient(request);
+               // result.setSuccess(true);
 
                 System.out.println(clientRequest.getUsername() + " created new game: "+ gameId);
             }
@@ -95,9 +89,6 @@ public class GameServices implements IServerGame {
                 // Check if player not in a current game
                 if(!currentGame.getPlayers().contains(username)) {
 
-
-                    // Get game
-
                     // Add player to game
                     //this will need to change with the player model class (phase 2)
                     List<String> temp =  currentGame.getPlayers();
@@ -107,14 +98,8 @@ public class GameServices implements IServerGame {
                     //Add game to database with new user
                     Database.getInstance().getGames().put(gameId, currentGame);
 
-                    //Response to client
-                    result.setSuccess(true);
 
-                    System.out.println(username+ " joined gameId: "+gameId);
-
-                    // ToDo poller
-
-                    //create commands for other active clients
+                    //create commands
                     Request clientRequest = new Request();
                     //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
                     clientRequest.setUsername(username); //This is specific to joinGame()
@@ -123,7 +108,9 @@ public class GameServices implements IServerGame {
                     //creates a command object for each client except the requesting client
                     ClientProxy.getInstance().joinGame(clientRequest);
 
-                    System.out.println(username + " created new game: "+ gameId);
+                    result = updateClient(request);
+
+                    System.out.println(username+ " joined gameId: "+gameId);
 
                 }
                 else
@@ -175,19 +162,18 @@ public class GameServices implements IServerGame {
                         //Add activeGame to database
                         Database.getInstance().setActiveGames(temp);
 
-                        //Response to client
-                        result.setSuccess(true);
 
-                        //create commands for other active clients
+                        //create commands
                         Request clientRequest = new Request();
-                        //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
-                        //clientRequest.setUsername(username); //This is specific to createGame()
+
                         clientRequest.setGameId(gameId); //This is specific to startGame()
                         //add command for other clients
                         //creates a command object for each client except the requesting client
                         ClientProxy.getInstance().startGame(clientRequest);
 
-                        System.out.println(gameId+ " started ");
+                        result = updateClient(request);
+
+                        System.out.println(gameId+ " started.");
 
                     }else if(!Database.getInstance().getActiveGames().containsKey(gameId)){
 
@@ -199,12 +185,6 @@ public class GameServices implements IServerGame {
                         //Add activeGame to database
                         Database.getInstance().setActiveGames(temp);
 
-                        //Response to client
-                        result.setSuccess(true);
-
-                        System.out.println(gameId+ " started ");
-
-                        // ToDo poller
 
                         //create commands for other active clients
                         Request clientRequest = new Request();
@@ -215,7 +195,10 @@ public class GameServices implements IServerGame {
                         //creates a command object for each client except the requesting client
                         ClientProxy.getInstance().startGame(clientRequest);
 
-                        System.out.println(username + " created new game: "+ gameId);
+                        result = updateClient(request);
+
+                        System.out.println(gameId+ " started.");
+
 
                     }else
                     {
@@ -264,7 +247,7 @@ public class GameServices implements IServerGame {
             result.setUpdateCommands(responseCommands);
 
 
-            System.out.println("Poller request responded to.");
+            System.out.println("updateClient request responded to.");
         }
 
         else

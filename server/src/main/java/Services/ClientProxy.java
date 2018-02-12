@@ -37,7 +37,7 @@ public class ClientProxy implements IClient {
         request.setGameId(clientRequest.getGameId());
 
 
-        Command command = new Command("Interfaces.IClient", "createGame",
+        Command command = new Command("Interfaces.IServerGame", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         //update master command list in database - for all clients to access:
@@ -45,7 +45,6 @@ public class ClientProxy implements IClient {
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
 
-        //updateCommands(clientRequest.getAuthToken(), command);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ClientProxy implements IClient {
         request.setUsername(clientRequest.getUsername());
         request.setGameId(clientRequest.getGameId());
 
-        Command command = new Command("Interfaces.IClient", "joinGame",
+        Command command = new Command("Interfaces.IServerGame", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         //update master command list in database - for all clients to access:
@@ -62,14 +61,13 @@ public class ClientProxy implements IClient {
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
 
-        //updateCommands(clientRequest.getAuthToken(), command);
     }
 
     @Override
     public void startGame(Request clientRequest){ //(String gameId){
         Request request = new Request();
         request.setGameId(clientRequest.getGameId());
-        Command command = new Command("Interfaces.IClient", "startGame",
+        Command command = new Command("Interfaces.IServerGame", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
 
         //update master command list in database - for all clients to access:
@@ -77,7 +75,6 @@ public class ClientProxy implements IClient {
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
 
-        //updateCommands(clientRequest.getAuthToken(), command);
     }
 
     public Map<String, List<ICommand>> getClientCommands() {
@@ -89,7 +86,6 @@ public class ClientProxy implements IClient {
     }
 
     private void updateCommands(String authToken, ICommand command){
-
 
 
         //        for(String clientToken : Database.getInstance().getClients())
