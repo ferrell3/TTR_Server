@@ -99,8 +99,14 @@ public class GameServices implements IServerGame {
                 Game currentGame = Database.getInstance().getGames().get(gameId);
                 String username = Database.getInstance().getUsername(authToken);
 
+                if(currentGame.getPlayers().size() >= 5)
+                {
+                    result.setSuccess(false);
+                    result.setErrorMsg("That game is full");
+                    System.out.println("ERROR: in joinGame() -- The requested game is full");
+                }
                 // Check if player not in a current game
-                if(!currentGame.getPlayers().contains(username)) {
+                else if(!currentGame.getPlayers().contains(username)) {
 
                     // Add player to game
                     //this will need to change with the player model class (phase 2)

@@ -50,6 +50,14 @@ public class Database {
         users.put(u4.getAuthToken(), u4);
         users.put(u5.getUsername(), u5);
         users.put(u5.getAuthToken(), u5);
+        Game game = new Game("jordan\'s game");
+
+        game.getPlayers().add("kip");
+        game.getPlayers().add("brian");
+        game.getPlayers().add("daniel");
+        game.getPlayers().add("tom");
+        game.getPlayers().add("jerry");
+        games.put(game.getId(), game);
     }
 
     public HashMap<String, User> getUsers() {
