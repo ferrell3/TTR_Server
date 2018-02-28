@@ -8,7 +8,9 @@ import java.util.UUID;
 
 import Models.Command;
 import Models.Game;
+import Models.Request;
 import Models.User;
+import Services.GameServices;
 
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
@@ -50,14 +52,24 @@ public class Database {
         users.put(u4.getAuthToken(), u4);
         users.put(u5.getUsername(), u5);
         users.put(u5.getAuthToken(), u5);
-        Game game = new Game("jordan\'s game");
 
-        game.getPlayers().add("kip");
-        game.getPlayers().add("brian");
-        game.getPlayers().add("daniel");
-        game.getPlayers().add("tom");
-        game.getPlayers().add("jerry");
-        games.put(game.getId(), game);
+//        Game startable = new Game("partly full game");
+
+//        Game game = new Game("full game");
+//
+//        game.getPlayers().add("kip");
+//        game.getPlayers().add("brian");
+//        game.getPlayers().add("daniel");
+//        game.getPlayers().add("tom");
+//        game.getPlayers().add("jerry");
+////        games.put(game.getId(), game);
+//        Request req = new Request();
+//        req.setGameId("full game");
+//        req.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+//        GameServices.getInstance().createGame(req);
+//        Request req1 = new Request();
+//        req1.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
+//        GameServices.getInstance().joinGame()
     }
 
     public HashMap<String, User> getUsers() {
@@ -119,23 +131,5 @@ public class Database {
     public void setMasterCommandList(ArrayList<Command> masterCommandList) {
         this.masterCommandList = masterCommandList;
     }
-
-
-    //Not sure if we will use these or just getUsers().put(User) instead
-//    public boolean addUser(User u){
-//        return users.add(u);
-//    }
-//
-//    public boolean removeUser(User u) {
-//        return users.remove(u);
-//    }
-//
-//    public boolean addGame(Game g){
-//        return games.add(g);
-//    }
-//
-//    public boolean removeGame(Game g){
-//        return games.remove(g);
-//    }
 
 }
