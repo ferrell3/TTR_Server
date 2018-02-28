@@ -21,10 +21,7 @@ public class Result {
         this.updateCommands = updateCommands;
     }
 
-
-    //probably won't use for a response to a client response like startGame()
-    //I'm thinking more for use with the poller and updating the other clients
-    private List<ICommand> commands; //list of client commands?
+    private List<ICommand> commands; //list of client commands
 
     public String getErrorMsg() {
         return errorMsg;

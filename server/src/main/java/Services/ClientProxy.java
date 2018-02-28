@@ -11,10 +11,6 @@ import Models.Command;
 import Models.Request;
 import Server.Database;
 
-/**
- * Created by ferrell3 on 2/5/18.
- */
-
 public class ClientProxy implements IClient {
 
     private static ClientProxy theCP = new ClientProxy();
@@ -74,7 +70,6 @@ public class ClientProxy implements IClient {
         ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
-
     }
 
     public Map<String, List<ICommand>> getClientCommands() {
@@ -85,10 +80,8 @@ public class ClientProxy implements IClient {
         this.clientCommands = clientCommands;
     }
 
-    private void updateCommands(String authToken, ICommand command){
-
-
-        //        for(String clientToken : Database.getInstance().getClients())
+//    private void updateCommands(String authToken, ICommand command){
+//        for(String clientToken : Database.getInstance().getClients())
 //        {
 //            //for all other clients (skip the requested client)
 //            if(!clientToken.equals(authToken))
@@ -110,5 +103,5 @@ public class ClientProxy implements IClient {
 //                }
 //            }
 //        }
-    }
+//    }
 }

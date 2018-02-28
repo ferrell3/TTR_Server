@@ -8,9 +8,8 @@ import java.util.HashMap;
 public class Game {
 
     private String id;
-    //    private Map<String,String> players; // not sure what the key and value are
     private List<String> players; //list of players' usernames
-    private boolean joinable;
+    private boolean joinable = true;
 
     public Game(){
         players = new ArrayList<>();
@@ -29,14 +28,6 @@ public class Game {
     public void setId(String id) {
         this.id = id;
     }
-
-//    public Map<String, String> getPlayers() {
-//        return players;
-//    }
-
-//    public void setPlayers(Map<String, String> players) {
-//        this.players = players;
-//    }
 
     public List<String> getPlayers() {
         return players;

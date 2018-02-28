@@ -44,6 +44,10 @@ public class GameServices implements IServerGame {
             {
                 //if it doesn't exist yet, create it
                 Game newGame = new Game(gameId);
+                if(gameId.equals("full"))
+                {
+                    newGame.setJoinable(false);
+                }
                 //add the creator to the game
                 String username = Database.getInstance().getUsername(authToken);
                 newGame.getPlayers().add(username);
@@ -59,6 +63,7 @@ public class GameServices implements IServerGame {
                 //creates a command object for each client except the requesting client
                 ClientProxy.getInstance().createGame(clientRequest);
 
+                //TODO: fix result
                 result = updateClient(request);
                // result.setSuccess(true);
 
@@ -86,7 +91,8 @@ public class GameServices implements IServerGame {
         String gameId = request.getGameId();
         Result result = new Result();
 
-        //TODO: revisit what should happen when attempting to re-join a game
+        //TODO: Revisit whether we still need this todo
+        //TODO: revisit what should happen when attempting to re-join a game?
         //If it goes to a new screen, do that again, basically this would be how to get back to the game screen
         //if it stays in the lobby screen, print a message saying "you are already in that game"
 
@@ -99,7 +105,7 @@ public class GameServices implements IServerGame {
                 Game currentGame = Database.getInstance().getGames().get(gameId);
                 String username = Database.getInstance().getUsername(authToken);
 
-                if(currentGame.getPlayers().size() >= 5)
+                if(!currentGame.isJoinable())
                 {
                     result.setSuccess(false);
                     result.setErrorMsg("That game is full");
@@ -113,7 +119,10 @@ public class GameServices implements IServerGame {
                     List<String> temp =  currentGame.getPlayers();
                     temp.add(username);
                     currentGame.setPlayers(temp);
-
+                    if(currentGame.getPlayers().size() == 5)
+                    {
+                        currentGame.setJoinable(false);
+                    }
                     //Add game to database with new user
                     Database.getInstance().getGames().put(gameId, currentGame);
 
@@ -127,6 +136,7 @@ public class GameServices implements IServerGame {
                     //creates a command object for each client except the requesting client
                     ClientProxy.getInstance().joinGame(clientRequest);
 
+                    //TODO: fix result
                     result = updateClient(request);
 
                     System.out.println(username+ " joined gameId: "+gameId);
@@ -181,13 +191,6 @@ public class GameServices implements IServerGame {
                         Game activeGame = Database.getInstance().getGames().get(gameId);
                         Database.getInstance().getActiveGames().put(gameId, activeGame);
 
-//                        HashMap<String,Game> temp =  Database.getInstance().getActiveGames();
-//                        temp.put(gameId, activeGame);
-//
-//                        //Add activeGame to database
-//                        Database.getInstance().setActiveGames(temp);
-
-
                         //create commands
                         Request clientRequest = new Request();
 
@@ -196,35 +199,11 @@ public class GameServices implements IServerGame {
                         //creates a command object for each client except the requesting client
                         ClientProxy.getInstance().startGame(clientRequest);
 
+                        //TODO: fix result
                         result = updateClient(request);
 
                         System.out.println(gameId+ " started.");
-
                     }
-//                    else if(!Database.getInstance().getActiveGames().containsKey(gameId))
-//                    {
-//                        // Add game to activeGame hashMap
-//                        Game activeGame = Database.getInstance().getGames().get(gameId);
-//                        HashMap<String,Game> temp =  Database.getInstance().getActiveGames();
-//                        temp.put(gameId, activeGame);
-//
-//                        //Add activeGame to database
-//                        Database.getInstance().setActiveGames(temp);
-//
-//
-//                        //create commands for other active clients
-//                        Request clientRequest = new Request();
-//                        //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
-//                        //clientRequest.setUsername(username); //This is specific to createGame()
-//                        clientRequest.setGameId(gameId); //This is specific to startGame()
-//                        //add command for other clients
-//                        //creates a command object for each client except the requesting client
-//                        ClientProxy.getInstance().startGame(clientRequest);
-//
-//                        result = updateClient(request);
-//
-//                        System.out.println(gameId+ " started.");
-//                    }
                     else
                     {
                         result.setSuccess(false);
@@ -275,8 +254,7 @@ public class GameServices implements IServerGame {
             result.setSuccess(true);
             result.setUpdateCommands(responseCommands);
 
-
-            System.out.println("updateClient request responded to.");
+//            System.out.println("updateClient request responded to.");
         }
 
         else
