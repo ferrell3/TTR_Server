@@ -1,4 +1,4 @@
-gitapply plugin: 'java'
+apply plugin: 'java'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
