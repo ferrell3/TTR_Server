@@ -55,6 +55,11 @@ public class Database {
         users.put(u4.getUsername(), u4);
         users.put(u4.getAuthToken(), u4);
 
+        clients.add(u1.getAuthToken());
+        clients.add(u2.getAuthToken());
+        clients.add(u3.getAuthToken());
+        clients.add(u4.getAuthToken());
+
 
 
 //        Game startable = new Game("partly full game");
@@ -92,6 +97,20 @@ public class Database {
         this.games = games;
     }
 
+    public String findClientGame(String username) {
+        for(Game g : games.values())
+        {
+            if(g.getPlayers().contains(username))
+            {
+                return g.getId();
+            }
+        }
+        return "";
+    }
+
+    public boolean removePlayerFromGame(String username){
+        return games.get(findClientGame(username)).getPlayers().remove(username);
+    }
 
     //We probably want to store it by token, but for login, we need to get it by username. We can do both
     public User findUserByToken(String token){

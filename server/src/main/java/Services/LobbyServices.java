@@ -20,7 +20,7 @@ public class LobbyServices implements ILobby {
 
     private LobbyServices() {}
 
-    //TODO: leave game when joining another
+    //TODO: leave game when joining another?
 
     @Override
     public Result createGame(Request request){ //(String authToken, String gameId){
@@ -44,12 +44,10 @@ public class LobbyServices implements ILobby {
             {
                 //if it doesn't exist yet, create it
                 Game newGame = new Game(gameId);
-                if(gameId.equals("full"))
-                {
-                    newGame.setJoinable(false);
-                }
+                //leave current game
                 //add the creator to the game
                 String username = Database.getInstance().getUsername(authToken);
+//                Database.getInstance().removePlayerFromGame(username);
                 newGame.getPlayers().add(username);
                 //add the game to the database
                 Database.getInstance().getGames().put(gameId, newGame);
@@ -111,9 +109,9 @@ public class LobbyServices implements ILobby {
                     result.setErrorMsg("That game is full");
                     System.out.println("ERROR: in joinGame() -- The requested game is full");
                 }
-                // Check if player not in a current game
-                else if(!currentGame.getPlayers().contains(username)) {
-
+                // Check if player not in any other game
+                else if(Database.getInstance().findClientGame(username).equals("")) //!currentGame.getPlayers().contains(username)) {
+                    {
                     // Add player to game
                     //this will need to change with the player model class (phase 2)
                     List<String> temp =  currentGame.getPlayers();
@@ -142,11 +140,19 @@ public class LobbyServices implements ILobby {
                     System.out.println(username+ " joined gameId: "+gameId);
 
                 }
+                else if(currentGame.getPlayers().contains(username))
+                {
+                    //Is this going to cause issues?
+                    //TODO: Re-evaluate what happens if they are in that game
+                    result.setSuccess(false);
+                    result.setErrorMsg("You are already in that game.");
+                    System.out.println("NOTE: in joinGame() -- Requesting user already in requested game");
+                }
                 else
                 {
                     result.setSuccess(false);
-                    result.setErrorMsg("You are already in that game.");
-                    System.out.println("ERROR: in joinGame() -- Requesting user already in requested game");
+                    result.setErrorMsg("You are already in a different game.");
+                    System.out.println("ERROR: in joinGame() -- Requesting user already in a different game");
                 }
             }
             else
