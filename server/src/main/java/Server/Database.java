@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import Models.City;
 import Models.Command;
 import Models.Game;
-import Models.Request;
+import Models.Route;
 import Models.User;
-import Services.GameServices;
 
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
@@ -18,6 +18,8 @@ public class Database {
     private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
     private ArrayList <Command> masterCommandList;
+    private ArrayList <City> cities;
+    private ArrayList <Route> routes;
 
     private static Database theDB = new Database();
 
@@ -31,6 +33,9 @@ public class Database {
         clients = new ArrayList<>();
         activeGames = new HashMap<>();
         masterCommandList = new ArrayList<>();
+        cities = new ArrayList<>();
+        routes = new ArrayList<>();
+
     }
 
     public void loadTeam() {
@@ -39,7 +44,6 @@ public class Database {
         User u2 = new User("kip","kh","1fee61ae-d871-4548-8fba-a775dab78f8b");
         User u3 = new User("brian","bo","01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
         User u4 = new User("finn","fj", "82f90744-ef61-4298-84ce-3070dfc25137");
-        User u5 = new User("daniel","dk",randomString());
 
         //add team users to database
         users.put(u1.getUsername(), u1);
@@ -50,8 +54,6 @@ public class Database {
         users.put(u3.getAuthToken(), u3);
         users.put(u4.getUsername(), u4);
         users.put(u4.getAuthToken(), u4);
-        users.put(u5.getUsername(), u5);
-        users.put(u5.getAuthToken(), u5);
 
 //        Game startable = new Game("partly full game");
 
@@ -66,10 +68,10 @@ public class Database {
 //        Request req = new Request();
 //        req.setGameId("full game");
 //        req.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-//        GameServices.getInstance().createGame(req);
+//        LobbyServices.getInstance().createGame(req);
 //        Request req1 = new Request();
 //        req1.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
-//        GameServices.getInstance().joinGame()
+//        LobbyServices.getInstance().joinGame()
     }
 
     public HashMap<String, User> getUsers() {

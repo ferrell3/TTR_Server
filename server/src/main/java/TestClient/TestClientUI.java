@@ -63,7 +63,7 @@ public class TestClientUI {
         Request gameRequest = new Request();
         gameRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
         gameRequest.setGameId("Jordan's Game");
-        Command gameCommand = new Command("Interfaces.IServerGame", "createGame",
+        Command gameCommand = new Command("Interfaces.ILobby", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ gameRequest });
 
         Result gameResult = TestClientCommunicator.getInstance().sendCommand(gameCommand);

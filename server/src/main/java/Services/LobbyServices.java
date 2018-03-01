@@ -1,25 +1,24 @@
 package Services;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import Interfaces.IServerGame;
+import Interfaces.ILobby;
 import Models.Command;
 import Models.Game;
 import Models.Request;
 import Models.Result;
 import Server.Database;
 
-public class GameServices implements IServerGame {
+public class LobbyServices implements ILobby {
 
-    private static GameServices theGS = new GameServices();
+    private static LobbyServices theGS = new LobbyServices();
 
-    public static GameServices getInstance() {
+    public static LobbyServices getInstance() {
         return theGS;
     }
 
-    private GameServices() {}
+    private LobbyServices() {}
 
 
     @Override

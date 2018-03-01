@@ -3,7 +3,7 @@ package Interfaces;
 import Models.Request;
 import Models.Result;
 
-public interface IServerGame {
+public interface ILobby {
     Result createGame(Request request); //(String authToken, String gameId);
 
     Result joinGame(Request request); //(String authToken, String gameId);
