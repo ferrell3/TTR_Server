@@ -55,6 +55,8 @@ public class Database {
         users.put(u4.getUsername(), u4);
         users.put(u4.getAuthToken(), u4);
 
+
+
 //        Game startable = new Game("partly full game");
 
 //        Game game = new Game("full game");

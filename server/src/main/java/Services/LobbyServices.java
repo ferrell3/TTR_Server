@@ -20,6 +20,7 @@ public class LobbyServices implements ILobby {
 
     private LobbyServices() {}
 
+    //TODO: leave game when joining another
 
     @Override
     public Result createGame(Request request){ //(String authToken, String gameId){
