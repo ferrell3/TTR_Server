@@ -110,7 +110,7 @@ public class LobbyServices implements ILobby {
                     System.out.println("ERROR: in joinGame() -- The requested game is full");
                 }
                 // Check if player not in any other game
-                else if(Database.getInstance().findClientGame(username).equals("")) //!currentGame.getPlayers().contains(username)) {
+                else if(!currentGame.getPlayers().contains(username)) //Database.getInstance().findClientGame(username).equals("")) //!currentGame.getPlayers().contains(username)) {
                     {
                     // Add player to game
                     //this will need to change with the player model class (phase 2)
@@ -140,14 +140,14 @@ public class LobbyServices implements ILobby {
                     System.out.println(username+ " joined gameId: "+gameId);
 
                 }
-                else if(currentGame.getPlayers().contains(username))
-                {
-                    //Is this going to cause issues?
-                    //TODO: Re-evaluate what happens if they are in that game
-                    result.setSuccess(false);
-                    result.setErrorMsg("You are already in that game.");
-                    System.out.println("NOTE: in joinGame() -- Requesting user already in requested game");
-                }
+//                else if(currentGame.getPlayers().contains(username))
+//                {
+//                    //Is this going to cause issues?
+//                    //TODO: Re-evaluate what happens if they are in that game
+//                    result.setSuccess(false);
+//                    result.setErrorMsg("You are already in that game.");
+//                    System.out.println("NOTE: in joinGame() -- Requesting user already in requested game");
+//                }
                 else
                 {
                     result.setSuccess(false);
