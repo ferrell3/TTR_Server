@@ -8,9 +8,9 @@ public interface ILobby {
 
     Result joinGame(Request request); //(String authToken, String gameId);
 
+    Result leaveGame(Request request); //String authToken, String gameId);
+
     Result startGame(Request request); //(String authToken, String gameId);
 
     Result updateClient(Request request); //(String authToken);
-
-
 }

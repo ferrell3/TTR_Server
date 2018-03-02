@@ -20,18 +20,17 @@ public class ClientProxy implements IClient {
     }
 
     private ClientProxy() {
-        clientCommands = new HashMap<>();
+//        clientCommands = new HashMap<>();
     }
 
     //The server will add a new list or add to the list of commands in the LobbyServices
-    private Map<String,List<ICommand>> clientCommands; //Client authToken is the key String
+//    private Map<String,List<ICommand>> clientCommands; //Client authToken is the key String
 
     @Override //creates a command and adds it to the list for each client
     public void createGame(Request clientRequest){ //(String username, String gameId)
         Request request = new Request();
         request.setUsername(clientRequest.getUsername());
         request.setGameId(clientRequest.getGameId());
-
 
         Command command = new Command("Interfaces.ILobby", "createGame",
                 new String[]{ "Models.Request" }, new Request[]{ request });
@@ -40,7 +39,6 @@ public class ClientProxy implements IClient {
         ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
-
     }
 
     @Override
@@ -56,7 +54,21 @@ public class ClientProxy implements IClient {
         ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
+    }
 
+    @Override
+    public void leaveGame(Request clientRequest) {
+        Request request = new Request();
+        request.setUsername(clientRequest.getUsername());
+        request.setGameId(clientRequest.getGameId());
+
+        Command command = new Command("Interfaces.ILobby", "leaveGame",
+                new String[]{ "Models.Request" }, new Request[]{ request });
+
+        //update master command list in database - for all clients to access:
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
     }
 
     @Override
@@ -72,36 +84,12 @@ public class ClientProxy implements IClient {
         Database.getInstance().setMasterCommandList(temp);
     }
 
-    public Map<String, List<ICommand>> getClientCommands() {
-        return clientCommands;
-    }
-
-    public void setClientCommands(Map<String, List<ICommand>> clientCommands) {
-        this.clientCommands = clientCommands;
-    }
-
-//    private void updateCommands(String authToken, ICommand command){
-//        for(String clientToken : Database.getInstance().getClients())
-//        {
-//            //for all other clients (skip the requested client)
-//            if(!clientToken.equals(authToken))
-//            {
-//                //check if the CP already has a list of commands for the client
-//                if(clientCommands.containsKey(authToken))
-//                {
-//                    //it does, add command to existing list
-//                    clientCommands.get(clientToken).add(command);
-//                }
-//                else //does not have a list for this client yet
-//                {
-//                    //create a list
-//                    ArrayList<ICommand> commandList = new ArrayList<>();
-//                    //add command to list
-//                    commandList.add(command);
-//                    //add list to the map of client commands
-//                    clientCommands.put(clientToken, commandList);
-//                }
-//            }
-//        }
+//    public Map<String, List<ICommand>> getClientCommands() {
+//        return clientCommands;
 //    }
+//
+//    public void setClientCommands(Map<String, List<ICommand>> clientCommands) {
+//        this.clientCommands = clientCommands;
+//    }
+
 }

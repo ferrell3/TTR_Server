@@ -35,9 +35,12 @@ public class UserServices implements IServerUser {
         {
             if (password.equals(user.getPassword()))
             {
+                Database.getInstance().getClients().add(user.getAuthToken());
+                request.setAuthToken(user.getAuthToken());
+                response = LobbyServices.getInstance().updateClient(request);
+
                 response.setAuthToken(user.getAuthToken());
                 response.setSuccess(true);
-                Database.getInstance().getClients().add(user.getAuthToken());
 
                 System.out.println(username+" logged in.");
             }
@@ -73,9 +76,13 @@ public class UserServices implements IServerUser {
             User user = new User(username, password, authToken);
             Database.getInstance().getUsers().put(username, user); //for login purposes
             Database.getInstance().getUsers().put(authToken, user); //for authentication purposes
+            Database.getInstance().getClients().add(authToken);
+
+            request.setAuthToken(user.getAuthToken());
+            response = LobbyServices.getInstance().updateClient(request);
+
             response.setAuthToken(authToken);
             response.setSuccess(true);
-            Database.getInstance().getClients().add(authToken);
 
             System.out.println(username + " registered as a new user.");
         }
