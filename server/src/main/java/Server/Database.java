@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import Data.DataHandler;
 import Models.City;
 import Models.Command;
+import Models.DestinationCard;
 import Models.Game;
 import Models.Route;
 import Models.User;
@@ -21,6 +23,7 @@ public class Database {
     private ArrayList <City> cities;
     private ArrayList <Route> routes;
 
+    private  DataHandler dataHandler;
     private static Database theDB = new Database();
 
     public static Database getInstance() {
@@ -35,7 +38,7 @@ public class Database {
         masterCommandList = new ArrayList<>();
         cities = new ArrayList<>();
         routes = new ArrayList<>();
-
+        dataHandler = new DataHandler();
     }
 
     public void loadTeam() {
@@ -87,6 +90,10 @@ public class Database {
 
     public void setUsers(HashMap<String, User> users) {
         this.users = users;
+    }
+
+    public ArrayList<DestinationCard> getDestinationCards() {
+        return dataHandler.getDestinationCards();
     }
 
     public Map<String, Game> getGames() {

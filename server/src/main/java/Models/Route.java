@@ -8,6 +8,7 @@ public class Route {
     private City startCity;
     private City endCity;
 
+    public Route() {}
 
     public String getOwner() {
         return owner;
