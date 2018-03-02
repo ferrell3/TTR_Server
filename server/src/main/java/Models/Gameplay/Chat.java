@@ -1,4 +1,4 @@
-package Models;
+package Models.Gameplay;
 
 /**
  * Created by kiphacking on 3/2/18.

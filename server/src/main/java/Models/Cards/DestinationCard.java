@@ -1,4 +1,4 @@
-package Models;
+package Models.Cards;
 
 public class DestinationCard {
     private String start;

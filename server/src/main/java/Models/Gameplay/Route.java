@@ -1,4 +1,4 @@
-package Models;
+package Models.Gameplay;
 
 public class Route {
     private String owner;

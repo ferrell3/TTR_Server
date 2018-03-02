@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.UUID;
 
 import Data.DataHandler;
-import Models.City;
+import Models.Gameplay.City;
 import Models.Command;
-import Models.DestinationCard;
-import Models.Game;
-import Models.Route;
+import Models.Cards.DestinationCard;
+import Models.Gameplay.Game;
+import Models.Gameplay.Route;
 import Models.User;
 
 public class Database {

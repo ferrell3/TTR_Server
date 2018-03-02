@@ -1,4 +1,4 @@
-package Models;
+package Models.Gameplay;
 
 public class City {
     private String name;

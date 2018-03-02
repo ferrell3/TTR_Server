@@ -1,11 +1,10 @@
 package Services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Interfaces.ILobby;
 import Models.Command;
-import Models.Game;
+import Models.Gameplay.Game;
 import Models.Request;
 import Models.Result;
 import Server.Database;

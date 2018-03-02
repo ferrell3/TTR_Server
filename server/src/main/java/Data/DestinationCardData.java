@@ -1,6 +1,6 @@
 package Data;
 
-import Models.DestinationCard;
+import Models.Cards.DestinationCard;
 
 public class DestinationCardData {
     DestinationCard[] data;

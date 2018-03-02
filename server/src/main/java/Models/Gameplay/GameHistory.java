@@ -1,4 +1,4 @@
-package Models;
+package Models.Gameplay;
 
 import java.util.List;
 

@@ -1,7 +1,10 @@
-package Models;
+package Models.Gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Models.Cards.DestinationCard;
+import Models.Cards.DestinationDeck;
 
 public class Game {
 

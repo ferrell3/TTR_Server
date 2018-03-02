@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Models.DestinationCard;
+import Models.Cards.DestinationCard;
 
 public class DataHandler {
     private DestinationCardData dcData;
