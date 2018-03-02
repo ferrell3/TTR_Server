@@ -21,8 +21,10 @@ public class DataHandler {
         try{
             JsonReader dcReader = new JsonReader(new FileReader("destinationCards.json"));
             dcData = gson.fromJson(dcReader, DestinationCardData.class);
+            System.out.println("Destination cards successfully loaded.");
         }catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("Destination cards not loaded.");
         }
     }
 
