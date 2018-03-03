@@ -11,6 +11,11 @@ public class Result {
     private String authToken; //user authToken
     private String gameId; //game ID
     private boolean success;
+    //chats section:
+    private ArrayList<String> chatMessages;
+
+
+
     private ArrayList <Command> updateCommands;   //list of commands to execute
 
     public ArrayList<Command> getUpdateCommands() {
@@ -61,5 +66,13 @@ public class Result {
 
     public void setCommands(List<ICommand> commands) {
         this.commands = commands;
+    }
+
+    public ArrayList<String> getChatMessages() {
+        return chatMessages;
+    }
+
+    public void setChatMessages(ArrayList<String> chatMessages) {
+        this.chatMessages = chatMessages;
     }
 }

@@ -1,5 +1,7 @@
 package Models;
 
+import Models.Gameplay.Chat;
+
 public class Request {
 
     //test
@@ -10,6 +12,17 @@ public class Request {
     private String gameId;
     private boolean status; //Game started or not?, etc.
     private int commandNum; //Gives positions on masterCommandList
+    //Chat request Features:
+    private Chat chat;
+    private int chatNum;
+
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
 
     public int getCommandNum() {
         return commandNum;
@@ -62,4 +75,11 @@ public class Request {
         this.status = status;
     }
 
+    public int getChatNum() {
+        return chatNum;
+    }
+
+    public void setChatNum(int chatNum) {
+        this.chatNum = chatNum;
+    }
 }

@@ -2,6 +2,7 @@ package Models;
 
 import java.lang.reflect.Method;
 import Interfaces.ICommand;
+import Services.ChatServices;
 import Services.ClientProxy;
 import Services.LobbyServices;
 import Services.UserServices;
@@ -35,6 +36,10 @@ public class Command implements ICommand {
             else if(_className.equals("Interfaces.ILobby"))
             {
                 result = (Result) method.invoke(LobbyServices.getInstance(), _paramValues);
+            }
+            else if(_className.equals("Interfaces.IChat"))
+            {
+                result = (Result) method.invoke(ChatServices.getInstance(), _paramValues);
             }
             else //if(_className.equals("Interfaces.IClient"))
             {
