@@ -19,13 +19,10 @@ public class LobbyServices implements ILobby {
 
     private LobbyServices() {}
 
-    //TODO: leave game when joining another?
-
     @Override
     public Result createGame(Request request){ //(String authToken, String gameId){
         String authToken = request.getAuthToken();
         String gameId = request.getGameId();
-        int commandNum = request.getCommandNum();
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
@@ -41,22 +38,18 @@ public class LobbyServices implements ILobby {
             //check if gameId already exists
             else if(!Database.getInstance().getGames().containsKey(gameId))
             {
-                //if it doesn't exist yet, create it
-                Game newGame = new Game(gameId);
-                //leave current game
-                //add the creator to the game
                 String username = Database.getInstance().getUsername(authToken);
-//                Database.getInstance().removePlayerFromGame(username);
-                newGame.getPlayers().add(username);
-                //add the game to the database
-                Database.getInstance().getGames().put(gameId, newGame);
-                //create commands
+
+                //if it doesn't exist yet, create it
+                Database.getInstance().getGames().put(gameId, new Game(gameId));
+
+                //add the creator to the game
                 //add command for other clients
                 request.setUsername(username);
                 ClientProxy.getInstance().createGame(request);
                 result = updateClient(request);
-               // result.setSuccess(true);
                 System.out.println(username + " created new game: "+ gameId);
+                joinGame(request);
             }
             else
             {
@@ -80,8 +73,7 @@ public class LobbyServices implements ILobby {
         String gameId = request.getGameId();
         Result result = new Result();
 
-        //TODO: Revisit whether we still need this todo
-        //TODO: revisit what should happen when attempting to re-join a game?
+        //revisit what should happen when attempting to re-join a game?
         //If it goes to a new screen, do that again, basically this would be how to get back to the game screen
         //if it stays in the lobby screen, print a message saying "you are already in that game"
 
@@ -102,18 +94,21 @@ public class LobbyServices implements ILobby {
                 }
                 else if(currentGame.getPlayers().contains(username))
                 {
-                    //Is this going to cause issues?
-                    //TODO: Re-evaluate what happens if they are in that game
                     result.setSuccess(false);
                     result.setErrorMsg("You are already in that game.");
                     System.out.println("NOTE: in joinGame() -- Requesting user already in requested game");
                 }
                 else //if(Database.getInstance().findClientGame(username).equals("")) //!currentGame.getPlayers().contains(username)) {
                 {
-                    // Check if player not in any other game
-                    if(!Database.getInstance().findClientGame(username).equals(""))
+                    // requesting client's current game
+                    String prevGame = Database.getInstance().findClientGame(username);
+                    if(!prevGame.equals(""))
                     {
+                        //prepare request for leaveGame
+                        request.setGameId(prevGame);
                         leaveGame(request);
+                        //reset request to the current join request
+                        request.setGameId(gameId);
                     }
                     // Add player to game
                     //this will need to change with the player model class (phase 2)
@@ -123,27 +118,12 @@ public class LobbyServices implements ILobby {
                         currentGame.setJoinable(false);
                     }
                     //Add game to database with new user
-                    //TODO: Make sure this does in fact work
                     Database.getInstance().getGames().put(gameId, currentGame);
-
-                    //create commands
-//                        Request clientRequest = new Request();
-                        //clientRequest.setAuthToken(authToken); //DO THIS FOR EACH METHOD
-//                        clientRequest.setGameId(gameId); //This is specific to joinGame()
-                        //add command for other clients
-                        //creates a command object for each client except the requesting client
                     request.setUsername(username);
                     ClientProxy.getInstance().joinGame(request);
                     result = updateClient(request);
                     System.out.println(username+ " joined gameId: "+gameId);
                 }
-
-//                else
-//                {
-//                    result.setSuccess(false);
-//                    result.setErrorMsg("You are already in a different game.");
-//                    System.out.println("ERROR: in joinGame() -- Requesting user already in a different game");
-//                }
             }
             else
             {
@@ -179,9 +159,7 @@ public class LobbyServices implements ILobby {
                 {
                     currentGame.getPlayers().remove(username);
                     //Add game to database without that user
-                    //TODO: Make sure this does in fact work
                     Database.getInstance().getGames().put(gameId, currentGame);
-
                     request.setUsername(username);
                     ClientProxy.getInstance().leaveGame(request);
                     result = updateClient(request);
@@ -228,19 +206,12 @@ public class LobbyServices implements ILobby {
                 if(currentGame.getPlayers().contains(username))
                 {
                     // Check if game is in activeGame list
-                    //if(Database.getInstance().getActiveGames().isEmpty()) //if(Database.getInstance().getActiveGames() == null)
-                    if(!Database.getInstance().getActiveGames().containsKey(gameId))
+                    if(!Database.getInstance().getGames().containsKey(gameId))
                     {
                         // Add game to activeGame hashMap
                         Game activeGame = Database.getInstance().getGames().get(gameId);
-                        Database.getInstance().getActiveGames().put(gameId, activeGame);
+                        Database.getInstance().getGames().put(gameId, activeGame);
 
-                        //create commands
-//                        Request clientRequest = new Request();
-
-//                        clientRequest.setGameId(gameId); //This is specific to startGame()
-                        //add command for other clients
-                        //creates a command object for each client except the requesting client
                         ClientProxy.getInstance().startGame(request);
                         result = updateClient(request);
                         System.out.println(gameId+ " started.");

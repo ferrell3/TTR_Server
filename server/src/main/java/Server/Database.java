@@ -17,7 +17,7 @@ import Models.User;
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
     private HashMap<String, Game> games; //Key: gameId, Value: game object
-    private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
+//    private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
     private ArrayList <Command> masterCommandList;
     private ArrayList <City> cities;
@@ -34,7 +34,7 @@ public class Database {
         users = new HashMap<>();
         games = new HashMap<>();
         clients = new ArrayList<>();
-        activeGames = new HashMap<>();
+//        activeGames = new HashMap<>();
         masterCommandList = new ArrayList<>();
         cities = new ArrayList<>();
         routes = new ArrayList<>();
@@ -62,8 +62,6 @@ public class Database {
         clients.add(u2.getAuthToken());
         clients.add(u3.getAuthToken());
         clients.add(u4.getAuthToken());
-
-
 
 //        Game startable = new Game("partly full game");
 
@@ -146,13 +144,13 @@ public class Database {
         return UUID.randomUUID().toString();
     }
 
-    public HashMap<String, Game> getActiveGames() {
-        return activeGames;
-    }
-
-    public void setActiveGames(HashMap<String, Game> activeGames) {
-        this.activeGames = activeGames;
-    }
+//    public HashMap<String, Game> getActiveGames() {
+//        return activeGames;
+//    }
+//
+//    public void setActiveGames(HashMap<String, Game> activeGames) {
+//        this.activeGames = activeGames;
+//    }
 
     public ArrayList<Command> getMasterCommandList() {
         return masterCommandList;
