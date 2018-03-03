@@ -5,29 +5,22 @@ import java.util.List;
 
 import Models.Cards.DestinationCard;
 import Models.Cards.DestinationDeck;
+import Models.Cards.TrainCard;
+import Models.Cards.TrainDeck;
 
 public class Game {
 
     private String id;
     private List<Player> players; //list of players' usernames
-
-    public List<String> getPlayerNames() {
-        return playerNames;
-    }
-
-    public void setPlayerNames(List<String> playerNames) {
-        this.playerNames = playerNames;
-    }
-
     private List<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
     private List<Route> Routes;
     private List<String> Cities;
    // private boolean joinable = true;
-    private DestinationCard destinationCard;
+    private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
     private boolean active = false;    //Has the game started
-    //chat features/data:
+
     private GameHistory history;
 
     public Game(){
@@ -39,6 +32,8 @@ public class Game {
         this.id = id;
         players = new ArrayList<>();
         chats = new ArrayList<>();
+        trainDeck = new TrainDeck();
+        destinationDeck = new DestinationDeck();
     }
 
     public void addChatMessage(String message){
@@ -106,12 +101,12 @@ public class Game {
         Cities = cities;
     }
 
-    public DestinationCard getDestinationCard() {
-        return destinationCard;
+    public TrainDeck getTrainDeck() {
+        return trainDeck;
     }
 
-    public void setDestinationCard(DestinationCard destinationCard) {
-        this.destinationCard = destinationCard;
+    public void setTrainDeck(TrainDeck trainDeck) {
+        this.trainDeck = trainDeck;
     }
 
     public DestinationDeck getDestinationDeck() {
@@ -136,6 +131,24 @@ public class Game {
 
     public void setHistory(GameHistory history) {
         this.history = history;
+    }
+
+    public List<String> getPlayerNames() {
+        return playerNames;
+    }
+
+    public void setPlayerNames(List<String> playerNames) {
+        this.playerNames = playerNames;
+    }
+
+    public TrainCard drawTrainCard(){
+
+        return trainDeck.draw();
+    }
+
+    public DestinationCard drawDestinationCard(){
+
+        return destinationDeck.draw();
     }
 
 

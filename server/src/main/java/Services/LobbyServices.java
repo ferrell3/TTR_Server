@@ -213,6 +213,9 @@ public class LobbyServices implements ILobby {
                         ClientProxy.getInstance().startGame(request);
                         result = updateClient(request);
                         System.out.println(gameId+ " started.");
+
+                        // setupGame now that game has started (player order, color, and cards)
+                        GameServices.getInstance().setupGame(request);
                     }
                     else
                     {
