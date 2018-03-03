@@ -105,8 +105,8 @@ public class TestClientUI {
         // TEST JOIN GAME
         Request joinRequest = new Request();
         //Kip's authToken
-        joinRequest.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
-        joinRequest.setGameId("Jordan's Game");
+        joinRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        joinRequest.setGameId("hello");
 
         Command joinCmd = new Command("Interfaces.ILobby", "joinGame",
                 new String[]{ "Models.Request" }, new Request[]{ joinRequest });
@@ -125,25 +125,25 @@ public class TestClientUI {
         System.out.println();
 
 
-        // TEST START GAME
-        Request startRequest = new Request();
-        startRequest.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
-        startRequest.setGameId("Jordan's Game");
-        Command startCmd = new Command("Interfaces.ILobby", "startGame",
-                new String[]{ "Models.Request" }, new Request[]{ startRequest });
-
-        Result result4 = TestClientCommunicator.getInstance().sendCommand(startCmd);
-
-        if (result4.isSuccessful())
-        {
-            System.out.println("Start game successful!");
-        }
-        else
-        {
-            System.out.println("Error:");
-            System.out.println(result4.getErrorMsg());
-        }
-        System.out.println();
+//        // TEST START GAME
+//        Request startRequest = new Request();
+//        startRequest.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
+//        startRequest.setGameId("Jordan's Game");
+//        Command startCmd = new Command("Interfaces.ILobby", "startGame",
+//                new String[]{ "Models.Request" }, new Request[]{ startRequest });
+//
+//        Result result4 = TestClientCommunicator.getInstance().sendCommand(startCmd);
+//
+//        if (result4.isSuccessful())
+//        {
+//            System.out.println("Start game successful!");
+//        }
+//        else
+//        {
+//            System.out.println("Error:");
+//            System.out.println(result4.getErrorMsg());
+//        }
+//        System.out.println();
 
 
         //  CHAT

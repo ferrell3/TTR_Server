@@ -51,6 +51,9 @@ public class LobbyServices implements ILobby {
                 result = updateClient(request);
                 System.out.println(username + " created new game: "+ gameId);
                 joinGame(request);
+
+
+
             }
             else
             {
@@ -214,7 +217,8 @@ public class LobbyServices implements ILobby {
                         result = updateClient(request);
                         System.out.println(gameId+ " started.");
 
-                        // setupGame now that game has started (player order, color, and cards)
+
+                        // setupGame and create cmdObjects (player order, color, and cards)
                         GameServices.getInstance().setupGame(request);
                     }
                     else

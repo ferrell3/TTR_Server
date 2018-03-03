@@ -34,6 +34,7 @@ public class Game {
         chats = new ArrayList<>();
         trainDeck = new TrainDeck();
         destinationDeck = new DestinationDeck();
+        playerNames = new ArrayList<>();
     }
 
     public void addChatMessage(String message){
