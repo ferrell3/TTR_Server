@@ -113,11 +113,7 @@ public class LobbyServices implements ILobby {
                     // Add player to game
                     //this will need to change with the player model class (phase 2)
                     currentGame.getPlayers().add(username);
-//                    if(currentGame.getPlayers().size() == 5)
-//                    {
-//                        currentGame.setJoinable(false);
-//                    }
-                    //Add game to database with new user
+
                     Database.getInstance().getGames().put(gameId, currentGame);
                     request.setUsername(username);
                     ClientProxy.getInstance().joinGame(request);
@@ -206,10 +202,11 @@ public class LobbyServices implements ILobby {
                 if(currentGame.getPlayers().contains(username))
                 {
                     // Check if game is in activeGame list
-                    if(!Database.getInstance().getGames().containsKey(gameId))
+                    if(!currentGame.isActive())
                     {
                         // Add game to activeGame hashMap
                         Game activeGame = Database.getInstance().getGames().get(gameId);
+                        activeGame.setActive(true);
                         Database.getInstance().getGames().put(gameId, activeGame);
 
                         ClientProxy.getInstance().startGame(request);
