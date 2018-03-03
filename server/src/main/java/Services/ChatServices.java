@@ -24,33 +24,39 @@ public class ChatServices implements IChat{
     public Result addChat(Request request) {
         String authToken = request.getAuthToken();
         String gameId = request.getGameId();
-        String username = request.getUsername();
-        Chat chat = request.getChat();
+        String username = Database.getInstance().getUsername(authToken);
+        String message = request.getChatMessage();
 
-        //int commandNum = request.getCommandNum();
+        Chat chat = new Chat();
+        chat.setMessage(message);
+        chat.setUsername(username);
+        request.setChat(chat);
         Result result = new Result();
 
         try {
-            //check if requesting client is an active (logged in) client
+            // Check if requesting client is an active (logged in) client
             if (Database.getInstance().getClients().contains(authToken)) {
-                //check if active game exists
+
+                // Check if game doesn't exist, if true throw error
                 if (!Database.getInstance().getGames().containsKey(gameId)) {
                     result.setSuccess(false);
-                    result.setErrorMsg("Please enter a valid game ID.");
-                    System.out.println("ERROR: in addChat() -- Empty gameID");
+                    result.setErrorMsg("addChat: Please enter a valid game ID.");
+                    System.out.println("ERROR: in addChat() -- Empty gameID.");
                 }
-                //check if gameId already exists
+
+                // Else: game exists, add chat to database and create cmd object
                 else{
-                    //populate the active game with the chat object
+                    //populate the game with the chat strings
                     Database.getInstance().getGames().get(gameId).addChatMessage(chat.displayChat());
                     ChatProxy.getInstance().addChat(request);
 
                     result.setSuccess(true);
-                    System.out.println(username + " sent chat message");
+                    System.out.println(username + " added chat: " + "\"" + chat.displayChat() +"\"");
+                    System.out.println(Database.getInstance().getGameCommands());
                 }
             } else {
                 result.setSuccess(false);
-                result.setErrorMsg("Invalid authorization token.");
+                result.setErrorMsg("addChat: Invalid authorization token.");
                 System.out.println("ERROR: in addChat() -- Invalid auth token");
             }
             return result;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import Models.Cards.DestinationCard;
 import Models.Cards.DestinationDeck;
-import Models.Command;
 
 public class Game {
 
@@ -14,12 +13,12 @@ public class Game {
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
     private List<Route> Routes;
     private List<String> Cities;
-    private boolean joinable = true;
+   // private boolean joinable = true;
     private DestinationCard destinationCard;
     private DestinationDeck destinationDeck;
     private boolean active = false;    //Has the game started
     //chat features/data:
-    private ArrayList<Command> gameCommands;
+
     private GameHistory history;
 
 
@@ -28,10 +27,6 @@ public class Game {
         players = new ArrayList<>();
     }
 
-
-    public void addGameCommand(Command command){
-        gameCommands.add(command);
-    }
     //constructor allowing to instantiate new game with given id
     public Game(String id){
         this.id = id;
@@ -60,13 +55,9 @@ public class Game {
     }
 
     public boolean isJoinable() {
-        return joinable;
+        return (players.size() <5) && !active;
     }
 
-
-    public void setJoinable(boolean joinable) {
-        this.joinable = joinable;
-    }
 
     public ArrayList<String> getChats() {
         return chats;
@@ -124,11 +115,5 @@ public class Game {
         this.history = history;
     }
 
-    public ArrayList<Command> getGameCommands() {
-        return gameCommands;
-    }
 
-    public void setGameCommands(ArrayList<Command> gameCommands) {
-        this.gameCommands = gameCommands;
-    }
 }

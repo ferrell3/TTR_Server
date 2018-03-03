@@ -23,6 +23,8 @@ public class Database {
     private ArrayList <City> cities;
     private ArrayList <Route> routes;
 
+    private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
+
     private  DataHandler dataHandler;
     private static Database theDB = new Database();
 
@@ -39,6 +41,7 @@ public class Database {
         cities = new ArrayList<>();
         routes = new ArrayList<>();
         dataHandler = new DataHandler();
+        gameCommands = new HashMap<>();
     }
 
     public void loadTeam() {
@@ -80,6 +83,14 @@ public class Database {
 //        Request req1 = new Request();
 //        req1.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
 //        LobbyServices.getInstance().joinGame()
+    }
+
+    public HashMap<String, ArrayList<Command>> getGameCommands() {
+        return gameCommands;
+    }
+
+    public void setGameCommands(HashMap<String, ArrayList<Command>> gameCommands) {
+        this.gameCommands = gameCommands;
     }
 
     public HashMap<String, User> getUsers() {
@@ -158,6 +169,20 @@ public class Database {
 
     public void setMasterCommandList(ArrayList<Command> masterCommandList) {
         this.masterCommandList = masterCommandList;
+    }
+
+    public void addGameCommand(String gameId, Command command){
+
+        if(gameCommands.containsKey(gameId)) {
+            gameCommands.get(gameId).add(command);
+
+        }else{
+
+            ArrayList <Command> commands = new ArrayList<>();
+            commands.add(command);
+            gameCommands.put(gameId, commands);
+
+        }
     }
 
 }

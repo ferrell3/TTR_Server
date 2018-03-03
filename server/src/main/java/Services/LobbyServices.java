@@ -113,10 +113,10 @@ public class LobbyServices implements ILobby {
                     // Add player to game
                     //this will need to change with the player model class (phase 2)
                     currentGame.getPlayers().add(username);
-                    if(currentGame.getPlayers().size() == 5)
-                    {
-                        currentGame.setJoinable(false);
-                    }
+//                    if(currentGame.getPlayers().size() == 5)
+//                    {
+//                        currentGame.setJoinable(false);
+//                    }
                     //Add game to database with new user
                     Database.getInstance().getGames().put(gameId, currentGame);
                     request.setUsername(username);
