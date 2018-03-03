@@ -21,6 +21,13 @@ public class Player {
         destination_cards = new ArrayList<>();
     }
 
+    public Player(String username){
+        name = username;
+        claimedRoutes = new ArrayList<>();
+        hand = new ArrayList<>();
+        destination_cards = new ArrayList<>();
+    }
+
     public void chooseDestCard(){
         //TODO: decide how to implement this method
     }

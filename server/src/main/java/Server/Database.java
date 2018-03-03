@@ -35,7 +35,6 @@ public class Database {
         users = new HashMap<>();
         games = new HashMap<>();
         clients = new ArrayList<>();
-//        activeGames = new HashMap<>();
         masterCommandList = new ArrayList<>();
         cities = new ArrayList<>();
         routes = new ArrayList<>();
@@ -65,10 +64,6 @@ public class Database {
         clients.add(u3.getAuthToken());
         clients.add(u4.getAuthToken());
 
-//        Game startable = new Game("partly full game");
-
-//        Game game = new Game("full game");
-//
 //        game.getPlayers().add("kip");
 //        game.getPlayers().add("brian");
 //        game.getPlayers().add("daniel");
@@ -115,7 +110,7 @@ public class Database {
     public String findClientGame(String username) {
         for(Game g : games.values())
         {
-            if(g.getPlayers().contains(username))
+            if(g.getPlayerNames().contains(username))
             {
                 return g.getId();
             }
@@ -123,9 +118,9 @@ public class Database {
         return "";
     }
 
-    public boolean removePlayerFromGame(String username){
-        return games.get(findClientGame(username)).getPlayers().remove(username);
-    }
+//    public boolean removePlayerFromGame(String username){
+//        return games.get(findClientGame(username)).getPlayers().remove(username);
+//    }
 
     //We probably want to store it by token, but for login, we need to get it by username. We can do both
     public User findUserByToken(String token){
@@ -153,14 +148,6 @@ public class Database {
     {
         return UUID.randomUUID().toString();
     }
-
-//    public HashMap<String, Game> getActiveGames() {
-//        return activeGames;
-//    }
-//
-//    public void setActiveGames(HashMap<String, Game> activeGames) {
-//        this.activeGames = activeGames;
-//    }
 
     public ArrayList<Command> getMasterCommandList() {
         return masterCommandList;

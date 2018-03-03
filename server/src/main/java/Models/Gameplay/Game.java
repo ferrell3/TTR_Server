@@ -9,7 +9,17 @@ import Models.Cards.DestinationDeck;
 public class Game {
 
     private String id;
-    private List<String> players; //list of players' usernames
+    private List<Player> players; //list of players' usernames
+
+    public List<String> getPlayerNames() {
+        return playerNames;
+    }
+
+    public void setPlayerNames(List<String> playerNames) {
+        this.playerNames = playerNames;
+    }
+
+    private List<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
     private List<Route> Routes;
     private List<String> Cities;
@@ -18,10 +28,7 @@ public class Game {
     private DestinationDeck destinationDeck;
     private boolean active = false;    //Has the game started
     //chat features/data:
-
     private GameHistory history;
-
-
 
     public Game(){
         players = new ArrayList<>();
@@ -46,11 +53,27 @@ public class Game {
         this.id = id;
     }
 
-    public List<String> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<String> players) {
+    public boolean addPlayer(Player player) {
+        return players.add(player) && playerNames.add(player.getName());
+    }
+
+    public void removePlayer(String username){
+        playerNames.remove(username);
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(players.get(i).getName().equals(username))
+            {
+                players.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 

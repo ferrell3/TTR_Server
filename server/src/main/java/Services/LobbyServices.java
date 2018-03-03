@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Interfaces.ILobby;
 import Models.Command;
 import Models.Gameplay.Game;
+import Models.Gameplay.Player;
 import Models.Request;
 import Models.Result;
 import Server.Database;
@@ -85,6 +86,7 @@ public class LobbyServices implements ILobby {
             {
                 Game currentGame = Database.getInstance().getGames().get(gameId);
                 String username = Database.getInstance().getUsername(authToken);
+                Player player = new Player(username);
 
                 if(!currentGame.isJoinable())
                 {
@@ -92,7 +94,7 @@ public class LobbyServices implements ILobby {
                     result.setErrorMsg("That game is full");
                     System.out.println("ERROR: in joinGame() -- The requested game is full");
                 }
-                else if(currentGame.getPlayers().contains(username))
+                else if(currentGame.getPlayerNames().contains(username))
                 {
                     result.setSuccess(false);
                     result.setErrorMsg("You are already in that game.");
@@ -111,8 +113,7 @@ public class LobbyServices implements ILobby {
                         request.setGameId(gameId);
                     }
                     // Add player to game
-                    //this will need to change with the player model class (phase 2)
-                    currentGame.getPlayers().add(username);
+                    currentGame.addPlayer(player);
 
                     Database.getInstance().getGames().put(gameId, currentGame);
                     request.setUsername(username);
@@ -153,7 +154,7 @@ public class LobbyServices implements ILobby {
                 //check if user is in that game
                 if(Database.getInstance().findClientGame(username).equals(gameId))
                 {
-                    currentGame.getPlayers().remove(username);
+                    currentGame.removePlayer(username);
                     //Add game to database without that user
                     Database.getInstance().getGames().put(gameId, currentGame);
                     request.setUsername(username);
@@ -199,7 +200,7 @@ public class LobbyServices implements ILobby {
                 String username = Database.getInstance().getUsername(authToken);
 
                 // Check if player is not in the current game
-                if(currentGame.getPlayers().contains(username))
+                if(currentGame.getPlayerNames().contains(username))
                 {
                     // Check if game is in activeGame list
                     if(!currentGame.isActive())
