@@ -20,7 +20,6 @@ public class ClientProxy implements IClient {
     }
 
     private ClientProxy() {
-//        clientCommands = new HashMap<>();
     }
 
     //The server will add a new list or add to the list of commands in the LobbyServices
@@ -83,13 +82,4 @@ public class ClientProxy implements IClient {
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
     }
-
-//    public Map<String, List<ICommand>> getClientCommands() {
-//        return clientCommands;
-//    }
-//
-//    public void setClientCommands(Map<String, List<ICommand>> clientCommands) {
-//        this.clientCommands = clientCommands;
-//    }
-
 }
