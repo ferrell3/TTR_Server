@@ -22,10 +22,9 @@ public class Database {
     private ArrayList <Command> masterCommandList;
     private ArrayList <City> cities;
     private ArrayList <Route> routes;
-
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
+    private DataHandler dataHandler;
 
-    private  DataHandler dataHandler;
     private static Database theDB = new Database();
 
     public static Database getInstance() {

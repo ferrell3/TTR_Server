@@ -37,7 +37,7 @@ public class ChatServices implements IChat{
             // Check if requesting client is an active (logged in) client
             if (Database.getInstance().getClients().contains(authToken)) {
 
-                // Check if game doesn't exist, if true throw error
+                // Check if game doesn't exist, return error
                 if (!Database.getInstance().getGames().containsKey(gameId)) {
                     result.setSuccess(false);
                     result.setErrorMsg("addChat: Please enter a valid game ID.");
@@ -52,7 +52,6 @@ public class ChatServices implements IChat{
 
                     result.setSuccess(true);
                     System.out.println(username + " added chat: " + "\"" + chat.displayChat() +"\"");
-                    System.out.println(Database.getInstance().getGameCommands());
                 }
             } else {
                 result.setSuccess(false);
