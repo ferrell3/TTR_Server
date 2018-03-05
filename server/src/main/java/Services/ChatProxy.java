@@ -21,13 +21,13 @@ public class ChatProxy implements IChatProxy {
 //        clientCommands = new HashMap<>();
     }
 
-    @Override //creates a command and adds it to the list for each client
-    public void addChat(Request clientRequest){ //(String username, String gameId)
+    @Override //creates a command and adds it to the gameCommands list
+    public void addChat(Request clientRequest){
 
         Command command = new Command("Interfaces.IChat", "addChat",
                 new String[]{ "Models.Request" }, new Request[]{ clientRequest });
 
-        //adds the command to the gameCommands list:
-        Database.getInstance().getGames().get(clientRequest.getGameId()).addGameCommand(command);
+        //adds the command to the gameCommands arraylist in database:
+        Database.getInstance().addGameCommand(clientRequest.getGameId(), command);
     }
 }

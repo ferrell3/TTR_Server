@@ -22,8 +22,9 @@ public class Database {
     private ArrayList <Command> masterCommandList;
     private ArrayList <City> cities;
     private ArrayList <Route> routes;
+    private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
+    private DataHandler dataHandler;
 
-    private  DataHandler dataHandler;
     private static Database theDB = new Database();
 
     public static Database getInstance() {
@@ -34,11 +35,11 @@ public class Database {
         users = new HashMap<>();
         games = new HashMap<>();
         clients = new ArrayList<>();
-//        activeGames = new HashMap<>();
         masterCommandList = new ArrayList<>();
         cities = new ArrayList<>();
         routes = new ArrayList<>();
         dataHandler = new DataHandler();
+        gameCommands = new HashMap<>();
     }
 
     public void loadTeam() {
@@ -63,10 +64,6 @@ public class Database {
         clients.add(u3.getAuthToken());
         clients.add(u4.getAuthToken());
 
-//        Game startable = new Game("partly full game");
-
-//        Game game = new Game("full game");
-//
 //        game.getPlayers().add("kip");
 //        game.getPlayers().add("brian");
 //        game.getPlayers().add("daniel");
@@ -80,6 +77,14 @@ public class Database {
 //        Request req1 = new Request();
 //        req1.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
 //        LobbyServices.getInstance().joinGame()
+    }
+
+    public HashMap<String, ArrayList<Command>> getGameCommands() {
+        return gameCommands;
+    }
+
+    public void setGameCommands(HashMap<String, ArrayList<Command>> gameCommands) {
+        this.gameCommands = gameCommands;
     }
 
     public HashMap<String, User> getUsers() {
@@ -105,7 +110,7 @@ public class Database {
     public String findClientGame(String username) {
         for(Game g : games.values())
         {
-            if(g.getPlayers().contains(username))
+            if(g.getPlayerNames().contains(username))
             {
                 return g.getId();
             }
@@ -113,9 +118,9 @@ public class Database {
         return "";
     }
 
-    public boolean removePlayerFromGame(String username){
-        return games.get(findClientGame(username)).getPlayers().remove(username);
-    }
+//    public boolean removePlayerFromGame(String username){
+//        return games.get(findClientGame(username)).getPlayers().remove(username);
+//    }
 
     //We probably want to store it by token, but for login, we need to get it by username. We can do both
     public User findUserByToken(String token){
@@ -144,20 +149,26 @@ public class Database {
         return UUID.randomUUID().toString();
     }
 
-//    public HashMap<String, Game> getActiveGames() {
-//        return activeGames;
-//    }
-//
-//    public void setActiveGames(HashMap<String, Game> activeGames) {
-//        this.activeGames = activeGames;
-//    }
-
     public ArrayList<Command> getMasterCommandList() {
         return masterCommandList;
     }
 
     public void setMasterCommandList(ArrayList<Command> masterCommandList) {
         this.masterCommandList = masterCommandList;
+    }
+
+    public void addGameCommand(String gameId, Command command){
+
+        if(gameCommands.containsKey(gameId)) {
+            gameCommands.get(gameId).add(command);
+
+        }else{
+
+            ArrayList <Command> commands = new ArrayList<>();
+            commands.add(command);
+            gameCommands.put(gameId, commands);
+
+        }
     }
 
 }

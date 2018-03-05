@@ -9,7 +9,6 @@ import Models.Result;
 
 public interface IChat {
 
-    Result addChat(Request request);
-//    Result getChats(Request request);
+    Result addChat(Request request);        //authtoken, gameId, and message
 
 }

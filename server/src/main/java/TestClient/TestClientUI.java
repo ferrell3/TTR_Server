@@ -1,7 +1,5 @@
 package TestClient;
 
-import java.util.Scanner;
-
 import Models.Command;
 import Models.Request;
 import Models.Result;
@@ -79,6 +77,105 @@ public class TestClientUI {
         }
         //END CREATE GAME TEST
         System.out.println();
+
+        //TEST LOGIN
+        Request loginRequest2 = new Request();
+        loginRequest2.setUsername("kip");
+        loginRequest2.setPassword("kh");
+        Command loginCommand2 = new Command("Interfaces.IServerUser", "login",
+                new String[]{ "Models.Request" }, new Request[]{ loginRequest2 });
+
+
+        Result result2 = TestClientCommunicator.getInstance().sendCommand(loginCommand2);
+
+        if (result2.isSuccessful())
+        {
+            System.out.println("Login successful!");
+            System.out.println(result2.getAuthToken());
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(result2.getErrorMsg());
+        }
+        System.out.println();
+        //END LOGIN TEST
+
+
+        // TEST JOIN GAME
+        Request joinRequest = new Request();
+        //Kip's authToken
+        joinRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        joinRequest.setGameId("hello");
+
+        Command joinCmd = new Command("Interfaces.ILobby", "joinGame",
+                new String[]{ "Models.Request" }, new Request[]{ joinRequest });
+
+        Result result3 = TestClientCommunicator.getInstance().sendCommand(joinCmd);
+
+        if (result3.isSuccessful())
+        {
+            System.out.println("Join successful!");
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(result3.getErrorMsg());
+        }
+        System.out.println();
+
+
+//        // TEST START GAME
+//        Request startRequest = new Request();
+//        startRequest.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
+//        startRequest.setGameId("Jordan's Game");
+//        Command startCmd = new Command("Interfaces.ILobby", "startGame",
+//                new String[]{ "Models.Request" }, new Request[]{ startRequest });
+//
+//        Result result4 = TestClientCommunicator.getInstance().sendCommand(startCmd);
+//
+//        if (result4.isSuccessful())
+//        {
+//            System.out.println("Start game successful!");
+//        }
+//        else
+//        {
+//            System.out.println("Error:");
+//            System.out.println(result4.getErrorMsg());
+//        }
+//        System.out.println();
+
+
+        //  CHAT
+        Request chatRequest = new Request();
+        chatRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        chatRequest.setGameId("Jordan's Game");
+        chatRequest.setChatMessage("Hi its Kip!");
+        Command chatCmd = new Command("Interfaces.IChat", "addChat",
+                new String[]{ "Models.Request" }, new Request[]{ chatRequest });
+
+        Result chatResult = TestClientCommunicator.getInstance().sendCommand(chatCmd);
+
+        if (chatResult.isSuccessful())
+        {
+            System.out.println("Chat successfully added!");
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(chatResult.getErrorMsg());
+        }
+        System.out.println();
+
+//        Result joinResult = ClientCommunicator.getInstance().sendCommand(joinCmd);
+
+//        System.out.println();
+
+
+//        temp = Client.getInstance().getCommandNum();
+//        joinRequest.setCommandNum(temp);
+//        joinGame(joinRequest);
+        //END JOIN GAME TEST
 
 //        while (true)
 //        {

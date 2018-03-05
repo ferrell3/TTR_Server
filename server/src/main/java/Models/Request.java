@@ -1,6 +1,7 @@
 package Models;
 
 import Models.Gameplay.Chat;
+import Models.Gameplay.Game;
 
 public class Request {
 
@@ -15,6 +16,18 @@ public class Request {
     //Chat request Features:
     private Chat chat;
     private int chatNum;
+    private String chatMessage;
+    private Game game;      //Pass back Game object
+
+
+    public String getChatMessage() {
+        return chatMessage;
+    }
+
+    public void setChatMessage(String chatMessage) {
+        this.chatMessage = chatMessage;
+    }
+
 
     public Chat getChat() {
         return chat;
@@ -81,5 +94,13 @@ public class Request {
 
     public void setChatNum(int chatNum) {
         this.chatNum = chatNum;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

@@ -13,8 +13,8 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import Models.Command;
-import Models.Request;
 import Models.Result;
 
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -25,7 +25,7 @@ public class TestClientCommunicator {
 
     public static TestClientCommunicator getInstance() { return myInstance; }
 
-    private String serverHost = "192.168.2.175"; //"10.24.66.130";
+    private String serverHost = "10.24.66.234"; //"10.24.66.130";
     private String serverPort = "8888";
 
     private TestClientCommunicator() {}
