@@ -154,6 +154,16 @@ public class GameServices implements IGame {
         return result;
     }
 
+    // Add game history to database and create cmd object
+    private void addGameHistory(String gameId, String message){
+        Request request = new Request();
+        request.setGameId(gameId);
+        // TODO: set history message to request object (play)
+        // TODO: add to database
+
+        GameProxy.getInstance().addGameHistory(request);
+
+    }
 
 
 }
