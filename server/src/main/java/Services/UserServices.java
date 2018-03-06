@@ -10,16 +10,14 @@ import Server.Database;
 
 public class UserServices implements IServerUser {
 
-    private static UserServices theUS = new UserServices();
+    private static UserServices theOne = new UserServices();
 
     public static UserServices getInstance() {
-        return theUS;
+        return theOne;
     }
 
     private UserServices() {}
 
-
-    //TODO: make sure the user is added to the client list when logged in
     //Pass in username and password
     //Checks if user exists in database
     //Checks given password against existing password

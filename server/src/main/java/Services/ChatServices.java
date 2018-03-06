@@ -12,10 +12,10 @@ import Server.Database;
 
 public class ChatServices implements IChat{
 
-    private static ChatServices theCS = new ChatServices();
+    private static ChatServices theOne = new ChatServices();
 
     public static ChatServices getInstance() {
-        return theCS;
+        return theOne;
     }
 
     private ChatServices() {}
@@ -47,7 +47,7 @@ public class ChatServices implements IChat{
                 // Else: game exists, add chat to database and create cmd object
                 else{
                     // Populate the game with the chat strings
-                    Database.getInstance().getGames().get(gameId).addChatMessage(chat.displayChat());
+                    Database.getInstance().getGameById(gameId).addChatMessage(chat.displayChat());
 
                     // Create cmdOject for chat object
                     ChatProxy.getInstance().addChat(request);

@@ -4,9 +4,11 @@ public class Route {
     private String owner;
     private int points;
     private int length;
-    private String name;
-    private City startCity;
-    private City endCity;
+//    private String name;
+    private String start;
+    private String end;
+//    private City startCity;
+//    private City endCity;
 
     public Route() {}
 
@@ -34,27 +36,45 @@ public class Route {
         this.length = length;
     }
 
-    public String getName() {
-        return name;
+    public String getName()
+    {
+        return start + " - " + end;
+//        return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+
+    public String getStartCity() {
+        return start;
     }
 
-    public City getStartCity() {
-        return startCity;
+    public void setStartCity(String startCity) {
+        this.start = startCity;
     }
 
-    public void setStartCity(City startCity) {
-        this.startCity = startCity;
+    public String getEndCity() {
+        return end;
     }
 
-    public City getEndCity() {
-        return endCity;
+    public void setEndCity(String endCity) {
+        this.end = endCity;
     }
 
-    public void setEndCity(City endCity) {
-        this.endCity = endCity;
-    }
+//    public City getStartCity() {
+//        return startCity;
+//    }
+//
+//    public void setStartCity(City startCity) {
+//        this.startCity = startCity;
+//    }
+//
+//    public City getEndCity() {
+//        return endCity;
+//    }
+//
+//    public void setEndCity(City endCity) {
+//        this.endCity = endCity;
+//    }
 }

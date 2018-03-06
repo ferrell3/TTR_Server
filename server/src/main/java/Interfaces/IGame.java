@@ -9,7 +9,7 @@ import Models.Result;
 
 public interface IGame {
 
-//    Result addGameHistory(Request request);
-    Result updateClient(Request request);
-//    Result returnDestCards(Request request);
+    void setupGame(Request request);
+    Result addGameHistory(Request request);
+    Result discardDestCards(Request request);
 }

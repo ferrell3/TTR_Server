@@ -12,10 +12,10 @@ import Server.Database;
 
 public class LobbyServices implements ILobby {
 
-    private static LobbyServices theGS = new LobbyServices();
+    private static LobbyServices theOne = new LobbyServices();
 
     public static LobbyServices getInstance() {
-        return theGS;
+        return theOne;
     }
 
     private LobbyServices() {}
@@ -51,9 +51,6 @@ public class LobbyServices implements ILobby {
                 result = updateClient(request);
                 System.out.println(username + " created new game: "+ gameId);
                 joinGame(request);
-
-
-
             }
             else
             {
@@ -87,7 +84,7 @@ public class LobbyServices implements ILobby {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
             {
-                Game currentGame = Database.getInstance().getGames().get(gameId);
+                Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
                 Player player = new Player(username);
 
@@ -152,7 +149,7 @@ public class LobbyServices implements ILobby {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
             {
-                Game currentGame = Database.getInstance().getGames().get(gameId);
+                Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
                 //check if user is in that game
                 if(Database.getInstance().findClientGame(username).equals(gameId))
@@ -199,7 +196,7 @@ public class LobbyServices implements ILobby {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
             {
-                Game currentGame = Database.getInstance().getGames().get(gameId);
+                Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
 
                 // Check if player is not in the current game
@@ -209,42 +206,38 @@ public class LobbyServices implements ILobby {
                     if(!currentGame.isActive())
                     {
                         // Add game to activeGame hashMap
-                        Game activeGame = Database.getInstance().getGames().get(gameId);
+                        Game activeGame = Database.getInstance().getGameById(gameId);
                         activeGame.setActive(true);
                         Database.getInstance().getGames().put(gameId, activeGame);
 
                         ClientProxy.getInstance().startGame(request);
-                        result = updateClient(request);
-                        System.out.println(gameId+ " started.");
-
 
                         // setupGame and create cmdObjects (player order, color, and cards)
                         GameServices.getInstance().setupGame(request);
+
+                        result = updateClient(request);
+                        System.out.println(gameId + " started.");
                     }
                     else
                     {
-                        result.setSuccess(false);
                         result.setErrorMsg("That game is already started.");
                         System.out.println("ERROR: in startGame() -- Game is already started");
                     }
                 }
                 else
                 {
-                    result.setSuccess(false);
                     result.setErrorMsg("You cannot start that, you are not in that game.");
                     System.out.println("ERROR: in startGame() -- Requesting user is not in the requested game");
                 }
             }
             else
             {
-                result.setSuccess(false);
                 result.setErrorMsg("The requested game ID doesn't exist.");
                 System.out.println("ERROR: in startGame() -- Game doesn't exist");
             }
         }
         else
         {
-            result.setSuccess(false);
             result.setErrorMsg("Invalid authorization token.");
             System.out.println("ERROR: in startGame() -- Invalid auth token");
         }
@@ -267,11 +260,10 @@ public class LobbyServices implements ILobby {
             }
             result.setSuccess(true);
             result.setUpdateCommands(responseCommands);
-//            System.out.println("updateClient request responded to.");
+            //System.out.println("updateClient request responded to.");
         }
         else
         {
-            result.setSuccess(false);
             result.setErrorMsg("ERROR: in updateClientLobby() -- Invalid auth token");
         }
         return result;

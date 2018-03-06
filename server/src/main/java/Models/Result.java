@@ -27,6 +27,7 @@ public class Result {
         chatMessages = new ArrayList<>();
         destinationCards = new ArrayList<>();
         game = new Game();
+        success = false;
     }
 
     private ArrayList <Command> updateCommands;   //list of commands to execute

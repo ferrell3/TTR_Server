@@ -1,0 +1,371 @@
+{ "data":[	
+		{
+			"start": "Vancouver",
+			"end": "Calgary",
+			"color": "wild",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Vancouver",
+			"end": "Seattle",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		}, 
+		{
+			"start": "Seattle",
+			"end": "Vancouver",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Seattle",
+			"end": "Portland",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Seattle",
+			"end": "Helena",
+			"color": "yellow",
+			"length": 6,
+			"points": 15
+		},
+		{
+			"start": "Seattle",
+			"end": "Calgary",
+			"color": "wild",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Portland",
+			"end": "Seattle",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Portland",
+			"end": "Salt Lake City",
+			"color": "blue",
+			"length": 6,
+			"points": 15
+		},
+		{
+			"start": "Portland",
+			"end": "San Francisco",
+			"color": "pink",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "San Francisco",
+			"end": "Portland",
+			"color": "green",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "San Francisco",
+			"end": "Los Angeles",
+			"color": "pink",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "San Francisco",
+			"end": "Salt Lake City",
+			"color": "orange",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "Los Angeles",
+			"end": "San Francisco",
+			"color": "yellow",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Los Angeles",
+			"end": "Las Vegas",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Los Angeles",
+			"end": "Phoenix",
+			"color": "wild",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Los Angeles",
+			"end": "El Paso",
+			"color": "black",
+			"length": 6,
+			"points": 15
+		},
+		{
+			"start": "Salt Lake City",
+			"end": "San Francisco",
+			"color": "white",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "Salt Lake City",
+			"end": "Las Vegas",
+			"color": "orange",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Salt Lake City",
+			"end": "Helena",
+			"color": "pink",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Salt Lake City",
+			"end": "Denver",
+			"color": "red",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Denver",
+			"end": "Salt Lake City",
+			"color": "yellow",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Calgary",
+			"end": "Helena",
+			"color": "wild",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Calgary",
+			"end": "Winnipeg",
+			"color": "white",
+			"length": 6,
+			"points": 15
+		},
+		{
+			"start": "Helena",
+			"end": "Winnipeg",
+			"color": "blue",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Helena",
+			"end": "Winnipeg",
+			"color": "blue",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Helena",
+			"end": "Denver",
+			"color": "green",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Helena",
+			"end": "Winnipeg",
+			"color": "blue",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Helena",
+			"end": "Duluth",
+			"color": "orange",
+			"length": 6,
+			"points": 15
+		},
+		{
+			"start": "Helena",
+			"end": "Omaha",
+			"color": "red",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "Winnipeg",
+			"end": "Duluth",
+			"color": "black",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Duluth",
+			"end": "Omaha",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Omaha",
+			"end": "Duluth",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Omaha",
+			"end": "Denver",
+			"color": "pink",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Omaha",
+			"end": "Kansas City",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Kansas City",
+			"end": "Omaha",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Kansas City",
+			"end": "Denver",
+			"color": "black",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Denver",
+			"end": "Kansas City",
+			"color": "orange",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Kansas City",
+			"end": "Oklahoma City",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Oklahoma City",
+			"end": "Kansas City",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Oklahoma City",
+			"end": "Denver",
+			"color": "red",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Oklahoma City",
+			"end": "Santa Fe",
+			"color": "blue",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Oklahoma City",
+			"end": "El Paso",
+			"color": "yellow",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "Oklahoma City",
+			"end": "Dallas",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Dallas",
+			"end": "Houston",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Dallas",
+			"end": "El Paso",
+			"color": "red",
+			"length": 4,
+			"points": 7
+		},
+		{
+			"start": "Dallas",
+			"end": "Oklahoma City",
+			"color": "wild",
+			"length": 2
+		},
+		{
+			"start": "Houston",
+			"end": "Dallas",
+			"color": "wild",
+			"length": 1,
+			"points": 1
+		},
+		{
+			"start": "Houston",
+			"end": "El Paso",
+			"color": "green",
+			"length": 6,
+			"points": 15
+		},
+		{
+			"start": "El Paso",
+			"end": "Santa Fe",
+			"color": "wild",
+			"length": 2,
+			"points": 2
+		},
+		{
+			"start": "El Paso",
+			"end": "Phoenix",
+			"color": "wild",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Phoenix",
+			"end": "Santa Fe",
+			"color": "wild",
+			"length": 3,
+			"points": 4
+		},
+		{
+			"start": "Phoenix",
+			"end": "Denver",
+			"color": "white",
+			"length": 5,
+			"points": 10
+		},
+		{
+			"start": "Denver",
+			"end": "Santa Fe",
+			"color": "wild",
+			"length": 2,
+			"points": 2
+		}
+	] 
+}
+
+
+
+

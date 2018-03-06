@@ -11,10 +11,10 @@ import Server.Database;
 
 public class ChatProxy implements IChatProxy {
 
-    private static ChatProxy theCP = new ChatProxy();
+    private static ChatProxy theChP = new ChatProxy();
 
     public static ChatProxy getInstance() {
-        return theCP;
+        return theChP;
     }
 
     private ChatProxy() {

@@ -25,4 +25,8 @@ public class DestinationDeck {
     private void shuffle() {
         Collections.shuffle(deck);
     }
+
+    public boolean insert(DestinationCard card){
+        return deck.add(card);
+    }
 }

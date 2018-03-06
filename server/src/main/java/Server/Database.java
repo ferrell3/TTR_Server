@@ -20,8 +20,8 @@ public class Database {
 //    private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
     private ArrayList <Command> masterCommandList;
-    private ArrayList <City> cities;
-    private ArrayList <Route> routes;
+//    private ArrayList <City> cities;
+//    private ArrayList <Route> routes;
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
     private DataHandler dataHandler;
 
@@ -36,8 +36,8 @@ public class Database {
         games = new HashMap<>();
         clients = new ArrayList<>();
         masterCommandList = new ArrayList<>();
-        cities = new ArrayList<>();
-        routes = new ArrayList<>();
+//        cities = new ArrayList<>();
+//        routes = new ArrayList<>();
         dataHandler = new DataHandler();
         gameCommands = new HashMap<>();
     }
@@ -79,13 +79,17 @@ public class Database {
 //        LobbyServices.getInstance().joinGame()
     }
 
-    public HashMap<String, ArrayList<Command>> getGameCommands() {
+    public HashMap<String, ArrayList<Command>> getAllGameCommands() {
         return gameCommands;
     }
 
-    public void setGameCommands(HashMap<String, ArrayList<Command>> gameCommands) {
-        this.gameCommands = gameCommands;
+    public ArrayList<Command> getGameCommands(String gameId) {
+        return gameCommands.get(gameId);
     }
+
+//    public void setGameCommands(HashMap<String, ArrayList<Command>> gameCommands) {
+//        this.gameCommands = gameCommands;
+//    }
 
     public HashMap<String, User> getUsers() {
         return users;
@@ -101,6 +105,10 @@ public class Database {
 
     public Map<String, Game> getGames() {
         return games;
+    }
+
+    public Game getGameById(String id){
+        return games.get(id);
     }
 
     public void setGames(HashMap<String, Game> games) {
@@ -176,4 +184,7 @@ public class Database {
         games.get(gameId).getHistory().addPlay(msg);
     }
 
+    public ArrayList<Route> getRoutes() {
+        return dataHandler.getRoutes();
+    }
 }

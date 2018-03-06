@@ -7,6 +7,7 @@ import Models.Cards.DestinationCard;
 import Models.Cards.DestinationDeck;
 import Models.Cards.TrainCard;
 import Models.Cards.TrainDeck;
+import Server.Database;
 
 public class Game {
 
@@ -14,8 +15,8 @@ public class Game {
     private List<Player> players; //list of players' usernames
     private List<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
-    private List<Route> Routes;
-    private List<String> Cities;
+    private List<Route> routes;
+//    private List<String> cities;
    // private boolean joinable = true;
     private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
@@ -25,6 +26,12 @@ public class Game {
 
     public Game(){
         players = new ArrayList<>();
+        chats = new ArrayList<>();
+        trainDeck = new TrainDeck();
+        destinationDeck = new DestinationDeck();
+        playerNames = new ArrayList<>();
+        history = new GameHistory();
+        routes = Database.getInstance().getRoutes();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -36,6 +43,7 @@ public class Game {
         destinationDeck = new DestinationDeck();
         playerNames = new ArrayList<>();
         history = new GameHistory();
+        routes = Database.getInstance().getRoutes();
     }
 
     public void addChatMessage(String message){
@@ -88,20 +96,20 @@ public class Game {
     }
 
     public List<Route> getRoutes() {
-        return Routes;
+        return routes;
     }
 
     public void setRoutes(List<Route> routes) {
-        Routes = routes;
+        this.routes = routes;
     }
 
-    public List<String> getCities() {
-        return Cities;
-    }
-
-    public void setCities(List<String> cities) {
-        Cities = cities;
-    }
+//    public List<String> getCities() {
+//        return cities;
+//    }
+//
+//    public void setCities(List<String> cities) {
+//        this.cities = cities;
+//    }
 
     public TrainDeck getTrainDeck() {
         return trainDeck;
@@ -144,13 +152,18 @@ public class Game {
     }
 
     public TrainCard drawTrainCard(){
-
         return trainDeck.draw();
     }
 
     public DestinationCard drawDestinationCard(){
-
         return destinationDeck.draw();
+    }
+
+    public void discardDestCards(ArrayList<DestinationCard> cards) {
+        for(DestinationCard card : cards)
+        {
+            destinationDeck.insert(card);
+        }
     }
 
 
