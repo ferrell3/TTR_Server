@@ -9,3 +9,4 @@
 ### How to rebase your branch with the master branch:
 *git fetch origin <br>
 *git rebase origin/master <br>
+*git push<br>
