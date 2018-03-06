@@ -272,7 +272,7 @@ public class LobbyServices implements ILobby {
         else
         {
             result.setSuccess(false);
-            result.setErrorMsg("Invalid authorization token.");
+            result.setErrorMsg("ERROR: in updateClientLobby() -- Invalid auth token");
         }
         return result;
     }
