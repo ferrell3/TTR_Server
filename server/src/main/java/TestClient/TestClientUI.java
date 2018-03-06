@@ -115,7 +115,7 @@ public class TestClientUI {
 
         if (result3.isSuccessful())
         {
-            System.out.println("Join successful!");
+            System.out.println("join successful!");
         }
         else
         {
@@ -166,6 +166,51 @@ public class TestClientUI {
             System.out.println(chatResult.getErrorMsg());
         }
         System.out.println();
+
+        //  CHAT
+        Request chatRequest2 = new Request();
+        chatRequest2.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        chatRequest2.setGameId("Jordan's Game");
+        chatRequest2.setChatMessage("This is test two!");
+        Command chatCmd2 = new Command("Interfaces.IChat", "addChat",
+                new String[]{ "Models.Request" }, new Request[]{ chatRequest2 });
+
+        Result chatResult2 = TestClientCommunicator.getInstance().sendCommand(chatCmd2);
+
+        if (chatResult2.isSuccessful())
+        {
+            System.out.println("Chat successfully added!");
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(chatResult2.getErrorMsg());
+        }
+        System.out.println();
+
+
+
+        //  updateClient
+        Request updateRequest = new Request();
+        updateRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        updateRequest.setGameId("Jordan's Game");
+        updateRequest.setCommandNum(0);
+        Command updateCMD = new Command("Interfaces.IGame", "updateClient",
+                new String[]{ "Models.Request" }, new Request[]{ updateRequest });
+
+        Result updateResult = TestClientCommunicator.getInstance().sendCommand(updateCMD);
+
+        if (updateResult.isSuccessful())
+        {
+            System.out.println("updateClient successfully added!");
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(updateResult.getErrorMsg());
+        }
+        System.out.println();
+
 
 //        Result joinResult = ClientCommunicator.getInstance().sendCommand(joinCmd);
 

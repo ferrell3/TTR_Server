@@ -1,5 +1,8 @@
 package Interfaces;
 
+import Models.Request;
+import Models.Result;
+
 /**
  * Created by kiphacking on 3/3/18.
  */
@@ -7,6 +10,6 @@ package Interfaces;
 public interface IGame {
 
 //    Result addGameHistory(Request request);
-//    Result updateClient(Request request);
+    Result updateClient(Request request);
 //    Result returnDestCards(Request request);
 }

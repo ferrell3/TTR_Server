@@ -25,7 +25,7 @@ public class TestClientCommunicator {
 
     public static TestClientCommunicator getInstance() { return myInstance; }
 
-    private String serverHost = "10.24.66.234"; //"10.24.66.130";
+    private String serverHost = "10.24.64.207"; //"10.24.66.130";
     private String serverPort = "8888";
 
     private TestClientCommunicator() {}

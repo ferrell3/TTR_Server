@@ -6,8 +6,10 @@ import java.util.List;
 import Interfaces.IGame;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
+import Models.Command;
 import Models.Gameplay.Player;
 import Models.Request;
+import Models.Result;
 import Server.Database;
 
 /**
@@ -50,7 +52,7 @@ public class GameServices implements IGame {
                     // Create cmdObject for setupGame by passing entire game object
                     GameProxy.getInstance().setupGame(Database.getInstance().getGames().get(gameId), gameId);
 
-                    System.out.println("setupGame() successfully completed for game: " + gameId);
+                    System.out.println("setupGame successful for game: " + gameId);
 
                 }
             } else {
@@ -112,6 +114,44 @@ public class GameServices implements IGame {
         //Replace database players list with updated players
         Database.getInstance().getGames().get(gameId).setPlayers(players);
 
+    }
+
+    @Override //polling response
+    public Result updateClient(Request request) { //(String authToken);
+        String authToken = request.getAuthToken();
+        int commandNum = request.getCommandNum();
+        String gameId = request.getGameId();
+        Result result = new Result();
+
+        //check if requesting client is an active (logged in) client
+        if(Database.getInstance().getClients().contains(authToken))
+        {
+            // Check if game doesn't exist, return error
+            if (!Database.getInstance().getGames().containsKey(gameId)) {
+                System.out.println("ERROR: in updateClient() -- Empty gameID.");
+            }
+
+            else{
+
+                ArrayList <Command> responseCommands = new ArrayList<>();
+                for (int i = commandNum; i < Database.getInstance().getGameCommands().get(gameId).size(); i++)
+                {
+                    responseCommands.add(Database.getInstance().getGameCommands().get(gameId).get(i));
+                }
+                result.setSuccess(true);
+                result.setUpdateCommands(responseCommands);
+
+                System.out.println("updateClient successful for game: " + gameId);
+
+            }
+
+        }
+        else
+        {
+            result.setSuccess(false);
+            result.setErrorMsg("ERROR: in updateClient() -- Invalid auth token");
+        }
+        return result;
     }
 
 
