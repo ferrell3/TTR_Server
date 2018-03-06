@@ -171,4 +171,9 @@ public class Database {
         }
     }
 
+    public void addGameHistory(String gameId, String msg){
+
+        games.get(gameId).getHistory().addPlay(msg);
+    }
+
 }

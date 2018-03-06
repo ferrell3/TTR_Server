@@ -44,6 +44,9 @@ public class GameServices implements IGame {
                 }
 
                 else{
+                    // Add game history
+                    String startGame = gameId + " started!";
+                    addGameHistory(gameId, startGame);
 
                     // setPlayerColor, assignPlayerOrder, and dealCards for each player object
                     setupPlayer(gameId);
@@ -53,7 +56,6 @@ public class GameServices implements IGame {
                     GameProxy.getInstance().setupGame(Database.getInstance().getGames().get(gameId), gameId);
 
                     System.out.println("setupGame successful for game: " + gameId);
-
                 }
             } else {
                 System.out.println("ERROR: in setupGame() -- Invalid auth token");
@@ -76,6 +78,13 @@ public class GameServices implements IGame {
         for(int i = 0; i < players.size(); i++){
             // Assign users a color
             players.get(i).setColor(colors[i]);
+
+            // Add game history
+            String playerColor = players.get(i).getColor();
+            String playerName = players.get(i).getName();
+            String gameMessage = playerName + " is assigned the color " + playerColor + ".";
+
+            addGameHistory(gameId,gameMessage);
 
             // Assign order
             players.get(i).setTurn(i+1);
@@ -158,9 +167,12 @@ public class GameServices implements IGame {
     private void addGameHistory(String gameId, String message){
         Request request = new Request();
         request.setGameId(gameId);
-        // TODO: set history message to request object (play)
-        // TODO: add to database
+        request.setPlay(message);
 
+        // Add game history to database
+        Database.getInstance().addGameHistory(gameId, message);
+
+        // Create game history object
         GameProxy.getInstance().addGameHistory(request);
 
     }
