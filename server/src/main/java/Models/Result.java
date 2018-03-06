@@ -2,19 +2,32 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import Interfaces.ICommand;
+import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
+import Models.Gameplay.Game;
 
 public class Result {
-    //We don't necessarily need these variables, these are just some possible ideas
     private String errorMsg;
     private String authToken; //user authToken
     private String gameId; //game ID
     private boolean success;
+
+    //game section:
+    private Game game;
+    private List<TrainCard> trainCards;
+    private List<DestinationCard> destinationCards;
     //chats section:
     private ArrayList<String> chatMessages;
 
-
+    public Result() {
+        trainCards = new ArrayList<>();
+        chatMessages = new ArrayList<>();
+        destinationCards = new ArrayList<>();
+        game = new Game();
+    }
 
     private ArrayList <Command> updateCommands;   //list of commands to execute
 
@@ -74,5 +87,29 @@ public class Result {
 
     public void setChatMessages(ArrayList<String> chatMessages) {
         this.chatMessages = chatMessages;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public List<TrainCard> getTrainCards() {
+        return trainCards;
+    }
+
+    public void setTrainCards(List<TrainCard> trainCards) {
+        this.trainCards = trainCards;
+    }
+
+    public List<DestinationCard> getDestinationCards() {
+        return destinationCards;
+    }
+
+    public void setDestinationCards(List<DestinationCard> destinationCards) {
+        this.destinationCards = destinationCards;
     }
 }
