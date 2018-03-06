@@ -17,7 +17,7 @@ public class TestClientUI {
         loginRequest.setUsername("jordan");
         loginRequest.setPassword("jf");
         Command loginCommand = new Command("Interfaces.IServerUser", "login",
-                new String[]{ "Models.Request" }, new Request[]{ loginRequest });
+                new String[]{ "Models.LobbyRequest" }, new Request[]{ loginRequest });
 
 
         Result result = TestClientCommunicator.getInstance().sendCommand(loginCommand);

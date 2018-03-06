@@ -1,33 +1,41 @@
 package Models;
 
+import java.util.ArrayList;
+
+import Models.Cards.DestinationCard;
 import Models.Gameplay.Chat;
 import Models.Gameplay.Game;
 
 public class Request {
 
-    //test
-
     private String username;
     private String password;
     private String authToken;
     private String gameId;
-    private boolean status; //Game started or not?, etc.
     private int commandNum; //Gives positions on masterCommandList
+
+    //Gameplay request features
+    private Game game;      //Pass back Game object
+    private String play; //Game history entry
+    private ArrayList<DestinationCard> discardDest;
+
     //Chat request Features:
     private Chat chat;
     private int chatNum;
     private String chatMessage;
-    private Game game;      //Pass back Game object
 
+
+    public Request(){
+    }
 
     public String getChatMessage() {
         return chatMessage;
     }
 
+
     public void setChatMessage(String chatMessage) {
         this.chatMessage = chatMessage;
     }
-
 
     public Chat getChat() {
         return chat;
@@ -43,9 +51,6 @@ public class Request {
 
     public void setCommandNum(int commandNum) {
         this.commandNum = commandNum;
-    }
-
-    public Request(){
     }
 
     public String getUsername() {
@@ -80,14 +85,6 @@ public class Request {
         this.gameId = gameId;
     }
 
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     public int getChatNum() {
         return chatNum;
     }
@@ -102,5 +99,21 @@ public class Request {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public ArrayList<DestinationCard> getDiscardDest() {
+        return discardDest;
+    }
+
+    public void setDiscardDest(ArrayList<DestinationCard> discardDest) {
+        this.discardDest = discardDest;
+    }
+
+    public String getPlay() {
+        return play;
+    }
+
+    public void setPlay(String play) {
+        this.play = play;
     }
 }
