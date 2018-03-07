@@ -96,4 +96,9 @@ public class Player {
     public void setNumTrains(int numTrains) {
         this.numTrains = numTrains;
     }
+
+    public void discardDestCards(ArrayList<DestinationCard> cards)
+    {
+        destination_cards.removeAll(cards);
+    }
 }

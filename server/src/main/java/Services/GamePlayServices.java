@@ -159,12 +159,14 @@ public class GamePlayServices implements IGamePlay {
                    result.setErrorMsg("Invalid number of cards.");
                    return result;
                 }
+                Database.getInstance().getGameById(gameId).getPlayer(username).discardDestCards(request.getDiscardDest());
                 Database.getInstance().getGameById(gameId).discardDestCards(request.getDiscardDest());
-                result.setSuccess(true);
+//                result.setSuccess(true);
+                GamePlayProxy.getInstance().discardDestCards(request);
+                result = updateClient(request);
                 //add game history
                 request.setAction(play);
                 addGameHistory(request);
-                //TODO update client:
             }
             else
             {

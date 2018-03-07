@@ -179,4 +179,13 @@ public class Game {
     public void dealFaceUp() {
         faceUpCards.add(trainDeck.draw());
     }
+
+    public Player getPlayer(String username){
+        for(Player p: players){
+            if(p.getName().equals(username)){
+                return p;
+            }
+        }
+        return null;
+    }
 }
