@@ -11,6 +11,7 @@ public class Player {
     private String name;
     private int points;
     private int turn;
+    private int numTrains; //will be decremented when a route is claimed
     private List<Route> claimedRoutes;
     private List<TrainCard> hand;
     private List<DestinationCard> destination_cards;
@@ -19,6 +20,7 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        numTrains = 45;
     }
 
     public Player(String username){
@@ -26,10 +28,9 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
-    }
-
-    public void chooseDestCard(){
-        //TODO: decide how to implement this method
+        //TODO: how many trains does a player get?
+        //board game rules say 45
+        numTrains = 45;
     }
 
     public String getColor() {
@@ -86,5 +87,13 @@ public class Player {
 
     public void setDestination_cards(List<DestinationCard> destination_cards) {
         this.destination_cards = destination_cards;
+    }
+
+    public int getNumTrains() {
+        return numTrains;
+    }
+
+    public void setNumTrains(int numTrains) {
+        this.numTrains = numTrains;
     }
 }
