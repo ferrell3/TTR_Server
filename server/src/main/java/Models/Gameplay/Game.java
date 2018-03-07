@@ -16,13 +16,14 @@ public class Game {
     private List<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
     private List<Route> routes;
-//    private List<String> cities;
-   // private boolean joinable = true;
     private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
+    private List<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
 
     private GameHistory history;
+
+    //TODO: Add face up train cards to client and server
 
     public Game(){
         players = new ArrayList<>();
@@ -166,5 +167,15 @@ public class Game {
         }
     }
 
+    public List<TrainCard> getFaceUpCards() {
+        return faceUpCards;
+    }
 
+    public void setFaceUpCards(List<TrainCard> faceUpCards) {
+        this.faceUpCards = faceUpCards;
+    }
+
+    public void dealFaceUp() {
+        faceUpCards.add(trainDeck.draw());
+    }
 }

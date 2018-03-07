@@ -11,10 +11,6 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
-/**
- * Created by kiphacking on 3/3/18.
- */
-
 public class GameServices implements IGame {
     private static GameServices theOne = new GameServices();
 
@@ -120,6 +116,23 @@ public class GameServices implements IGame {
 
         //Replace database players list with updated players
         Database.getInstance().getGameById(gameId).setPlayers(players);
+
+        //deal the faceUp cards to the game
+        //TODO: how many face up cards again?
+        for(int i = 0; i < 5; i++)
+        {
+            Database.getInstance().getGameById(gameId).dealFaceUp();
+        }
+    }
+
+    public Result dealFaceUp(Request request) {
+        String gameId = request.getGameId();
+        Result result = new Result();
+        //TODO: finish this with all the checks and the proper result object with the update commands
+        //do we really need to do all the checks every time?
+        //could make another method -- validRequest(Request request) that checks authToken and gameId, further checks can be done in each method
+        Database.getInstance().getGameById(gameId).dealFaceUp();
+        return result;
     }
 
     @Override
