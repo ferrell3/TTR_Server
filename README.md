@@ -3,7 +3,7 @@
 ### How to merge your branch with the master branch:
 *git checkout master<br>
 *git pull origin master<br>
-*git merge test<br>
+*git merge (your branch)<br>
 *git push origin master<br>
 <br>
 ### How to rebase your branch with the master branch:
