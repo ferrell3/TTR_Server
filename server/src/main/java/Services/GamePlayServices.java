@@ -42,8 +42,7 @@ public class GamePlayServices implements IGamePlay {
                 {
                     // Add game history
                     String startGame = gameId + " started!";
-                    request.setPlay(startGame);
-                    addGameHistory(request);
+                    Database.getInstance().getGameById(gameId).getHistory().addAction(startGame);
 
                     // setPlayerColor, assignPlayerOrder, and dealCards for each player object
                     setupPlayer(gameId);
@@ -80,10 +79,11 @@ public class GamePlayServices implements IGamePlay {
             String playerColor = players.get(i).getColor();
             String playerName = players.get(i).getName();
             String gameMessage = playerName + " is assigned the color " + playerColor + ".";
-            Request request = new Request();
-            request.setGameId(gameId);
-            request.setPlay(gameMessage);
-            addGameHistory(request);
+//            Request request = new Request();
+//            request.setGameId(gameId);
+//            request.setAction(gameMessage);
+//            addGameHistory(request);
+            Database.getInstance().getGameById(gameId).getHistory().addAction(gameMessage);
 
             // Assign order
             players.get(i).setTurn(i+1);
@@ -122,7 +122,7 @@ public class GamePlayServices implements IGamePlay {
         Database.getInstance().getGameById(gameId).setPlayers(players);
 
         //deal the faceUp cards to the game
-        //TODO: how many face up cards again?
+        //TODO: how many face up cards again? - FAIL
         for(int i = 0; i < 5; i++)
         {
             Database.getInstance().getGameById(gameId).dealFaceUp();
@@ -159,12 +159,12 @@ public class GamePlayServices implements IGamePlay {
                    result.setErrorMsg("Invalid number of cards.");
                    return result;
                 }
-
                 Database.getInstance().getGameById(gameId).discardDestCards(request.getDiscardDest());
                 result.setSuccess(true);
                 //add game history
-                request.setPlay(play);
+                request.setAction(play);
                 addGameHistory(request);
+                //TODO update client:
             }
             else
             {
@@ -220,7 +220,7 @@ public class GamePlayServices implements IGamePlay {
     @Override // Add game history to database and create cmd object
     public Result addGameHistory(Request request){
         String gameId = request.getGameId();
-        String play = request.getPlay();
+        String play = request.getAction();
 
         // Add game history to database
         Database.getInstance().addGameHistory(gameId, play);

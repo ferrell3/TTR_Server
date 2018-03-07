@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import Data.DataHandler;
-import Models.Gameplay.City;
 import Models.Command;
 import Models.Cards.DestinationCard;
 import Models.Gameplay.Game;
@@ -181,7 +180,7 @@ public class Database {
 
     public void addGameHistory(String gameId, String msg){
 
-        games.get(gameId).getHistory().addPlay(msg);
+        games.get(gameId).getHistory().addAction(msg);
     }
 
     public ArrayList<Route> getRoutes() {

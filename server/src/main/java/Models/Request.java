@@ -17,7 +17,7 @@ public class Request {
 
     //Gameplay request features
     private Game game;      //Pass back Game object
-    private String play; //Game history entry
+    private String action; //Game history entry
     private ArrayList<DestinationCard> discardDest;
     private ArrayList<TrainCard> discardTrains;
     private int gameCMDNum;
@@ -103,12 +103,12 @@ public class Request {
         this.discardDest = discardDest;
     }
 
-    public String getPlay() {
-        return play;
+    public String getAction() {
+        return action;
     }
 
-    public void setPlay(String play) {
-        this.play = play;
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public int getGameCMDNum() {

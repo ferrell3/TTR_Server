@@ -5,50 +5,50 @@ import java.util.List;
 
 public class GameHistory {
 
-    private List<String> gamePlays;
+    private List<String> gameActions;
 
     public GameHistory(){
-        gamePlays = new ArrayList<>();
+        gameActions = new ArrayList<>();
     }
 
-    public boolean addPlay(String play) {
-        return gamePlays.add(play);
+    public boolean addAction(String play) {
+        return gameActions.add(play);
     }
 
     public void clearHistory() {
-        gamePlays.clear();
+        gameActions.clear();
     }
 
     public int size() {
-        return gamePlays.size();
+        return gameActions.size();
     }
 
     public String get(int i) {
-        return gamePlays.get(i);
+        return gameActions.get(i);
     }
 
     public String remove(int i) {
-        return gamePlays.remove(i);
+        return gameActions.remove(i);
     }
 
     public boolean remove(String str) {
-        return gamePlays.remove(str);
+        return gameActions.remove(str);
     }
 
     public int indexOf(String str){
-        return gamePlays.indexOf(str);
+        return gameActions.indexOf(str);
     }
 
     public boolean isEmpty() {
-        return gamePlays.isEmpty();
+        return gameActions.isEmpty();
     }
 
-    public List<String> getGamePlays() {
-        return gamePlays;
+    public List<String> getGameActions() {
+        return gameActions;
     }
 
-    public void setGamePlays(List<String> gamePlays) {
-        this.gamePlays = gamePlays;
+    public void setGameActions(List<String> gameActions) {
+        this.gameActions = gameActions;
     }
 
 

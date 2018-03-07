@@ -45,6 +45,7 @@ public class Game {
         playerNames = new ArrayList<>();
         history = new GameHistory();
         routes = Database.getInstance().getRoutes();
+        faceUpCards = new ArrayList<>();
     }
 
     public void addChatMessage(String message){
