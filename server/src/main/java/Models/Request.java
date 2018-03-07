@@ -3,6 +3,7 @@ package Models;
 import java.util.ArrayList;
 
 import Models.Cards.DestinationCard;
+import Models.Cards.TrainCard;
 import Models.Gameplay.Chat;
 import Models.Gameplay.Game;
 
@@ -18,10 +19,11 @@ public class Request {
     private Game game;      //Pass back Game object
     private String play; //Game history entry
     private ArrayList<DestinationCard> discardDest;
+    private ArrayList<TrainCard> discardTrains;
+    private int gameCMDNum;
 
     //Chat request Features:
     private Chat chat;
-    private int chatNum;
     private String chatMessage;
 
 
@@ -85,14 +87,6 @@ public class Request {
         this.gameId = gameId;
     }
 
-    public int getChatNum() {
-        return chatNum;
-    }
-
-    public void setChatNum(int chatNum) {
-        this.chatNum = chatNum;
-    }
-
     public Game getGame() {
         return game;
     }
@@ -115,5 +109,21 @@ public class Request {
 
     public void setPlay(String play) {
         this.play = play;
+    }
+
+    public int getGameCMDNum() {
+        return gameCMDNum;
+    }
+
+    public void setGameCMDNum(int gameCMDNum) {
+        this.gameCMDNum = gameCMDNum;
+    }
+
+    public ArrayList<TrainCard> getDiscardTrains() {
+        return discardTrains;
+    }
+
+    public void setDiscardTrains(ArrayList<TrainCard> discardTrains) {
+        this.discardTrains = discardTrains;
     }
 }

@@ -1,20 +1,24 @@
 package Services;
 
-import Interfaces.IGame;
+import Interfaces.IGamePlay;
 import Models.Command;
 import Models.Request;
 import Models.Result;
 import Server.Database;
 
-public class GameProxy implements IGame {
+/**
+ * Created by kiphacking on 3/3/18.
+ */
 
-    private static GameProxy theGP = new GameProxy();
+public class GamePlayProxy implements IGamePlay {
 
-    public static GameProxy getInstance() {
+    private static GamePlayProxy theGP = new GamePlayProxy();
+
+    public static GamePlayProxy getInstance() {
         return theGP;
     }
 
-    private GameProxy() {
+    private GamePlayProxy() {
     }
 
     @Override //creates a setupGame command and adds it to the gameCommands list for setupGame
@@ -28,6 +32,11 @@ public class GameProxy implements IGame {
         return null;
     }
 
+    @Override
+    public Result updateClient(Request request) {
+        return null;
+    }
+
     @Override //creates an addGameHistory command and adds it to the gameCommands list
     public Result addGameHistory(Request clientRequest){
         createCommand("addGameHistory", clientRequest);
@@ -35,7 +44,7 @@ public class GameProxy implements IGame {
     }
 
     private void createCommand(String methodName, Request clientRequest){
-        Command command = new Command("Interfaces.IGame", methodName,
+        Command command = new Command("Interfaces.IGamePlay", methodName,
                 new String[]{ "Models.Request" }, new Request[]{ clientRequest });
 
         //adds the command to the gameCommands arraylist in database:

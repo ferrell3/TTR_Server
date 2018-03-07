@@ -195,7 +195,7 @@ public class TestClientUI {
         updateRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
         updateRequest.setGameId("Jordan's Game");
         updateRequest.setCommandNum(0);
-        Command updateCMD = new Command("Interfaces.IGame", "updateClient",
+        Command updateCMD = new Command("Interfaces.IGamePlay", "updateClient",
                 new String[]{ "Models.Request" }, new Request[]{ updateRequest });
 
         Result updateResult = TestClientCommunicator.getInstance().sendCommand(updateCMD);

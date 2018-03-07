@@ -2,7 +2,7 @@ package Services;
 
 import java.util.ArrayList;
 import java.util.List;
-import Interfaces.IGame;
+import Interfaces.IGamePlay;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Command;
@@ -11,14 +11,18 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
-public class GameServices implements IGame {
-    private static GameServices theOne = new GameServices();
+/**
+ * Created by kiphacking on 3/3/18.
+ */
 
-    public static GameServices getInstance() {
+public class GamePlayServices implements IGamePlay {
+    private static GamePlayServices theOne = new GamePlayServices();
+
+    public static GamePlayServices getInstance() {
         return theOne;
     }
 
-    private GameServices() {}
+    private GamePlayServices() {}
 
     @Override // Called in startGame when game starts
     public void setupGame(Request request) {
@@ -46,7 +50,7 @@ public class GameServices implements IGame {
                     dealCards(gameId);
                     request.setGame(Database.getInstance().getGameById(gameId));
                     // Create cmdObject for setupGame by passing entire game object
-                    GameProxy.getInstance().setupGame(request);
+                    GamePlayProxy.getInstance().setupGame(request);
                     System.out.println("setupGame successful for game: " + gameId);
                 }
             }
@@ -177,6 +181,7 @@ public class GameServices implements IGame {
     }
 
     //polling response
+    @Override
     public Result updateClient(Request request) { //(String authToken);
         String authToken = request.getAuthToken();
         int commandNum = request.getCommandNum();
@@ -221,7 +226,7 @@ public class GameServices implements IGame {
         Database.getInstance().addGameHistory(gameId, play);
 
         // Create game history object
-        GameProxy.getInstance().addGameHistory(request);
+        GamePlayProxy.getInstance().addGameHistory(request);
         return null;
     }
 }
