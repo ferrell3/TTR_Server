@@ -186,7 +186,7 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public Result updateClient(Request request) { //(String authToken);
         String authToken = request.getAuthToken();
-        int commandNum = request.getCommandNum();
+        int commandNum = request.getGameCMDNum();
         String gameId = request.getGameId();
         Result result = new Result();
 
