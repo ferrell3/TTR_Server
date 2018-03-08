@@ -72,10 +72,10 @@ public class ClientProxy implements IClient {
 
     @Override
     public void startGame(Request clientRequest){ //(String gameId){
-        Request request = new Request();
-        request.setGameId(clientRequest.getGameId());
+//        Request request = new Request();
+//        request.setGameId(clientRequest.getGameId());
         Command command = new Command("Interfaces.ILobby", "startGame",
-                new String[]{ "Models.Request" }, new Request[]{ request });
+                new String[]{ "Models.Request" }, new Request[]{ clientRequest });
 
         //update master command list in database - for all clients to access:
         ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
