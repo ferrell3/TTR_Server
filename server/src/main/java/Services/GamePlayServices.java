@@ -122,7 +122,7 @@ public class GamePlayServices implements IGamePlay {
         Database.getInstance().getGameById(gameId).setPlayers(players);
 
         //deal the faceUp cards to the game
-        //TODO: how many face up cards again? - FAIL
+        //TODO: how many face up cards again? - FAILED Wednesday test:
         for(int i = 0; i < 5; i++)
         {
             Database.getInstance().getGameById(gameId).dealFaceUp();
