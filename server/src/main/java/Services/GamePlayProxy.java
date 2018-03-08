@@ -1,5 +1,7 @@
 package Services;
 
+import java.util.ArrayList;
+
 import Interfaces.IGamePlay;
 import Models.Command;
 import Models.Request;
@@ -23,7 +25,13 @@ public class GamePlayProxy implements IGamePlay {
 
     @Override //creates a setupGame command and adds it to the gameCommands list for setupGame
     public void setupGame(Request clientRequest){
-        createCommand("setupGame", clientRequest);
+        Command command = new Command("Interfaces.IGamePlay", "setupGame",
+                new String[]{ "Models.Request" }, new Request[]{ clientRequest });
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
+        Database.getInstance().getAllGameCommands().put(clientRequest.getGameId(), new ArrayList<Command>());
+//        createCommand("setupGame", clientRequest);
     }
 
     @Override
