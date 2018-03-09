@@ -43,10 +43,10 @@ public class Database {
 
     public void loadTeam() {
         //        User u = new User("username","password","authToken");
-        User u1 = new User("jordan", "jf", "a1fb6d30-51e7-4669-b944-120989aefb06");
-        User u2 = new User("kip","kh","1fee61ae-d871-4548-8fba-a775dab78f8b");
-        User u3 = new User("brian","bo","01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
-        User u4 = new User("finn","fj", "82f90744-ef61-4298-84ce-3070dfc25137");
+        User u1 = new User("jordan", "aa", "a1fb6d30-51e7-4669-b944-120989aefb06");
+        User u2 = new User("kip","aa","1fee61ae-d871-4548-8fba-a775dab78f8b");
+        User u3 = new User("brian","aa","01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
+        User u4 = new User("finn","aa", "82f90744-ef61-4298-84ce-3070dfc25137");
 
         //add team users to database
         users.put(u1.getUsername(), u1);
