@@ -188,6 +188,7 @@ public class GamePlayServices implements IGamePlay {
         String authToken = request.getAuthToken();
         int commandNum = request.getGameCMDNum();
         String gameId = request.getGameId();
+        String username = Database.getInstance().getUsername(request.getAuthToken());
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
@@ -208,7 +209,7 @@ public class GamePlayServices implements IGamePlay {
                 result.setSuccess(true);
                 result.setUpdateCommands(responseCommands);
 
-                System.out.println("updateClient successful for game: " + gameId);
+                System.out.println("updateClient successful for " + username + " in game: " + gameId);
             }
         }
         else
