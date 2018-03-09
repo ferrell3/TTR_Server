@@ -54,6 +54,11 @@ public class ChatServices implements IChat{
 
                     result.setSuccess(true);
                     System.out.println(username + " added chat: " + "\"" + chat.displayChat() +"\"");
+
+                    // TEST OF GAME HISTORY
+                    String gameMessage = username + " sent a chat.";
+                    request.setAction(gameMessage);
+                    GamePlayServices.getInstance().addGameHistory(request);
                 }
             } else {
                 result.setSuccess(false);
