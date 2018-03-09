@@ -10,7 +10,7 @@ public class Player {
     private String color;
     private String name;
     private int points;
-    private int turn;
+    private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
     private List<Route> claimedRoutes;
     private List<TrainCard> hand;
@@ -28,9 +28,8 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
-        //TODO: how many trains does a player get?
-        //board game rules say 45
         numTrains = 45;
+        turn = false;
     }
 
     public String getColor() {
@@ -57,11 +56,11 @@ public class Player {
         this.points = points;
     }
 
-    public int getTurn() {
+    public boolean isTurn() {
         return turn;
     }
 
-    public void setTurn(int turn) {
+    public void setTurn(boolean turn) {
         this.turn = turn;
     }
 
