@@ -85,8 +85,11 @@ public class GamePlayServices implements IGamePlay {
 //            addGameHistory(request);
             Database.getInstance().getGameById(gameId).getHistory().addAction(gameMessage);
 
-            // Assign order
-            players.get(i).setTurn(i+1);
+            if(i ==0){
+                // Assign true for starting player
+                players.get(i).setTurn(true);
+            }
+
         }
         //Replace database players list with updated players
         Database.getInstance().getGameById(gameId).setPlayers(players);
