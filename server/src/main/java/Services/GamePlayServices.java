@@ -170,6 +170,8 @@ public class GamePlayServices implements IGamePlay {
                 //add game history
                 request.setAction(play);
                 addGameHistory(request);
+
+                System.out.println(play);
             }
             else
             {
