@@ -11,10 +11,6 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
-/**
- * Created by kiphacking on 3/3/18.
- */
-
 public class GamePlayServices implements IGamePlay {
     private static GamePlayServices theOne = new GamePlayServices();
 
@@ -79,17 +75,12 @@ public class GamePlayServices implements IGamePlay {
             String playerColor = players.get(i).getColor();
             String playerName = players.get(i).getName();
             String gameMessage = playerName + " is assigned the color " + playerColor + ".";
-//            Request request = new Request();
-//            request.setGameId(gameId);
-//            request.setAction(gameMessage);
-//            addGameHistory(request);
             Database.getInstance().getGameById(gameId).getHistory().addAction(gameMessage);
 
             if(i ==0){
                 // Assign true for starting player
                 players.get(i).setTurn(true);
             }
-
         }
         //Replace database players list with updated players
         Database.getInstance().getGameById(gameId).setPlayers(players);
@@ -125,7 +116,6 @@ public class GamePlayServices implements IGamePlay {
         Database.getInstance().getGameById(gameId).setPlayers(players);
 
         //deal the faceUp cards to the game
-        //TODO: how many face up cards again? - FAIL
         for(int i = 0; i < 5; i++)
         {
             Database.getInstance().getGameById(gameId).dealFaceUp();
@@ -164,7 +154,6 @@ public class GamePlayServices implements IGamePlay {
                 }
                 Database.getInstance().getGameById(gameId).getPlayer(username).discardDestCards(request.getDiscardDest());
                 Database.getInstance().getGameById(gameId).discardDestCards(request.getDiscardDest());
-//                result.setSuccess(true);
                 GamePlayProxy.getInstance().discardDestCards(request);
                 result = updateClient(request);
                 //add game history

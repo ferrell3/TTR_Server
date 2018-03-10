@@ -23,7 +23,6 @@ public class ClientProxy implements IClient {
     }
 
     //The server will add a new list or add to the list of commands in the LobbyServices
-//    private Map<String,List<ICommand>> clientCommands; //Client authToken is the key String
 
     @Override //creates a command and adds it to the list for each client
     public void createGame(Request clientRequest){ //(String username, String gameId)
@@ -72,8 +71,6 @@ public class ClientProxy implements IClient {
 
     @Override
     public void startGame(Request clientRequest){ //(String gameId){
-//        Request request = new Request();
-//        request.setGameId(clientRequest.getGameId());
         Command command = new Command("Interfaces.ILobby", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ clientRequest });
 
