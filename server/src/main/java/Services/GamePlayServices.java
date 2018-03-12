@@ -12,7 +12,8 @@ import Models.Result;
 import Server.Database;
 
 /**
- * Created by kiphacking on 3/3/18.
+ *  This class handles game play method calls from the client command object
+ *
  */
 
 public class GamePlayServices implements IGamePlay {
@@ -22,8 +23,30 @@ public class GamePlayServices implements IGamePlay {
         return theOne;
     }
 
+    /**
+     * Constructor for GamePlayServices()
+     * A singleton is used to create only one instance of this class
+     */
     private GamePlayServices() {}
 
+    /**
+     * Updates a game object with player attributes: name, color, turn order,
+     *      train cards, and destination cards to setup game
+     *
+     * @param request Request is object from client request
+     *
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     * @pre request contains valid authToken and gameId for that client
+     * @pre gameId = started game
+     *
+     * @post masterCommandList != empty
+     * @post masterCommandList.size() += 1
+     * @post gameHistory has 3 to 6 entries
+     *
+     *
+     */
     @Override // Called in startGame when game starts
     public void setupGame(Request request) {
         String authToken = request.getAuthToken();
@@ -64,6 +87,19 @@ public class GamePlayServices implements IGamePlay {
     }
 
 
+    /**
+     * Updates the player's color and turn order in the game object
+     *
+     * @param gameId
+     *
+     * @pre Database.getGameById(gameId) != null
+     * @pre players.size() >= 1 && players.size() <= 5
+     * @pre gameId != null
+     * @pre gameId = started game
+     *
+     * @post game object's players have assigned String 'color' and Boolean 'turn'
+     * @post gameHistory has 2-5 additional entries
+     */
     // Assign order and color to each player in game
     private void setupPlayer(String gameId){
         String [] colors = {"red","green","blue","black","yellow"};
@@ -79,12 +115,9 @@ public class GamePlayServices implements IGamePlay {
             String playerColor = players.get(i).getColor();
             String playerName = players.get(i).getName();
             String gameMessage = playerName + " is assigned the color " + playerColor + ".";
-//            Request request = new Request();
-//            request.setGameId(gameId);
-//            request.setAction(gameMessage);
-//            addGameHistory(request);
             Database.getInstance().getGameById(gameId).getHistory().addAction(gameMessage);
 
+            // Assign player order
             if(i ==0){
                 // Assign true for starting player
                 players.get(i).setTurn(true);
@@ -96,6 +129,22 @@ public class GamePlayServices implements IGamePlay {
     }
 
 
+    /**
+     * Deal destination and train cards for each player inside game object
+     *
+     * @param gameId
+     *
+     * @pre gameId != null
+     * @pre gameId = started game
+     * @pre Database.getGameById(gameId) != null
+     * @pre players.size() >= 2 && players.size() <= 5
+     *
+     * @post game object's players have assigned Object 'trainDeck' and Object 'destinationDeck'
+     * @post trainDeck.size() = 4
+     * @post destinationDeck.size() = 3
+     *
+     *
+     */
     // Deal cards (destination and train) to each player in game
     private void dealCards(String gameId){
         List<Player> players = Database.getInstance().getGameById(gameId).getPlayers();
@@ -125,13 +174,16 @@ public class GamePlayServices implements IGamePlay {
         Database.getInstance().getGameById(gameId).setPlayers(players);
 
         //deal the faceUp cards to the game
-        //TODO: how many face up cards again? - FAIL
         for(int i = 0; i < 5; i++)
         {
             Database.getInstance().getGameById(gameId).dealFaceUp();
         }
     }
 
+    /**
+     * @param request
+     * @return result
+     */
     public Result dealFaceUp(Request request) {
         String gameId = request.getGameId();
         Result result = new Result();
@@ -142,6 +194,26 @@ public class GamePlayServices implements IGamePlay {
         return result;
     }
 
+    /**
+     * Add 1-2 destination cards back to the deck
+     *
+     * @param request Request is object from client request
+     *
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     * @pre request.getUsername() != null
+     * @pre request.getDiscardDest().size() = 1 || 2
+     * @pre request.getDiscardDest() = typeOf( ArrayList<DestinationCard> )
+     * @pre request contains valid authToken, gameId, and username for that client
+     * @pre gameId = started game
+     *
+     * @post result.setSuccess = true
+     * @post destinationDeck.size() != null
+     * @post destinationDeck.size() += 1 || 2
+     *
+     * @return Result object with boolean 'success'
+     */
     @Override
     public Result discardDestCards(Request request) {
         String authToken = request.getAuthToken();
@@ -187,6 +259,25 @@ public class GamePlayServices implements IGamePlay {
         return result;
     }
 
+    /**
+     * Returns a list of all new Command objects since the client last requested them
+     *
+     * @param request Request is object from client request
+     *
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     * @pre request.getUsername() != null
+     * @pre request.getGameCMDNum() != null
+     * @pre request contains valid authToken, gameId, CMDNum, and username for that client
+     * @pre gameId = valid started game
+     *
+     * @post result.setSuccess = true
+     * @post returns an ArrayList of command objects; if there are new commands since the client
+     *      last checked with the server
+     *
+     * @return Result object with an ArrayList of Command objects
+     */
     //polling response
     @Override
     public Result updateClient(Request request) { //(String authToken);
@@ -225,6 +316,23 @@ public class GamePlayServices implements IGamePlay {
         return result;
     }
 
+    /**
+     * Adds gameHistory to the database and adds a gameHistory command object to masterCommandList
+     *
+     * @param request Request object with gameId and action
+     * @pre request != null
+     * @pre request.getGameId() != null
+     * @pre request.getAction() != null
+     * @pre request contains valid gameId and action
+     * @pre gameId = valid started game
+     *
+     * @post GameHistory.size() != null
+     * @post GameHistory.size() += 1
+     * @post masterCommandList != empty
+     * @post masterCommandList.size() += 1
+     *
+     * @return null
+     */
     @Override // Add game history to database and create cmd object
     public Result addGameHistory(Request request){
         String gameId = request.getGameId();
