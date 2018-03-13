@@ -16,7 +16,6 @@ import Models.User;
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
     private HashMap<String, Game> games; //Key: gameId, Value: game object
-//    private HashMap<String, Game> activeGames; //Key: gameId, Value: game object
     private List<String> clients; //List of active clients //For use with commands and polling mostly
     private ArrayList <Command> masterCommandList;
 //    private ArrayList <City> cities;
@@ -35,7 +34,6 @@ public class Database {
         games = new HashMap<>();
         clients = new ArrayList<>();
         masterCommandList = new ArrayList<>();
-//        cities = new ArrayList<>();
 //        routes = new ArrayList<>();
         dataHandler = new DataHandler();
         gameCommands = new HashMap<>();
@@ -62,20 +60,6 @@ public class Database {
         clients.add(u2.getAuthToken());
         clients.add(u3.getAuthToken());
         clients.add(u4.getAuthToken());
-
-//        game.getPlayers().add("kip");
-//        game.getPlayers().add("brian");
-//        game.getPlayers().add("daniel");
-//        game.getPlayers().add("tom");
-//        game.getPlayers().add("jerry");
-////        games.put(game.getId(), game);
-//        Request req = new Request();
-//        req.setGameId("full game");
-//        req.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
-//        LobbyServices.getInstance().createGame(req);
-//        Request req1 = new Request();
-//        req1.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b");
-//        LobbyServices.getInstance().joinGame()
     }
 
     public HashMap<String, ArrayList<Command>> getAllGameCommands() {
@@ -86,16 +70,8 @@ public class Database {
         return gameCommands.get(gameId);
     }
 
-//    public void setGameCommands(HashMap<String, ArrayList<Command>> gameCommands) {
-//        this.gameCommands = gameCommands;
-//    }
-
     public HashMap<String, User> getUsers() {
         return users;
-    }
-
-    public void setUsers(HashMap<String, User> users) {
-        this.users = users;
     }
 
     public ArrayList<DestinationCard> getDestinationCards() {
@@ -110,10 +86,6 @@ public class Database {
         return games.get(id);
     }
 
-    public void setGames(HashMap<String, Game> games) {
-        this.games = games;
-    }
-
     public String findClientGame(String username) {
         for(Game g : games.values())
         {
@@ -124,10 +96,6 @@ public class Database {
         }
         return "";
     }
-
-//    public boolean removePlayerFromGame(String username){
-//        return games.get(findClientGame(username)).getPlayers().remove(username);
-//    }
 
     //We probably want to store it by token, but for login, we need to get it by username. We can do both
     public User findUserByToken(String token){
@@ -144,16 +112,6 @@ public class Database {
 
     public List<String> getClients() {
         return clients;
-    }
-
-    public void setClients(List<String> clients) {
-        this.clients = clients;
-    }
-
-    //to create authTokens for hard coded team users
-    public String randomString()
-    {
-        return UUID.randomUUID().toString();
     }
 
     public ArrayList<Command> getMasterCommandList() {

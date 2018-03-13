@@ -23,8 +23,6 @@ public class Game {
 
     private GameHistory history;
 
-    //TODO: Add face up train cards to client and server
-
     public Game(){
         players = new ArrayList<>();
         chats = new ArrayList<>();

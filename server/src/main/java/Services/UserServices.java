@@ -92,7 +92,7 @@ public class UserServices implements IServerUser {
         return response;
     }
 
-    public String randomString()
+    private String randomString()
     {
         return UUID.randomUUID().toString();
     }
