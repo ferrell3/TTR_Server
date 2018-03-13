@@ -27,6 +27,7 @@ public class ChatServices implements IChat{
         String username = Database.getInstance().getUsername(authToken);
         String message = request.getChatMessage();
 
+        //TODO: Move creating a chat to the client
         Chat chat = new Chat();
         chat.setMessage(message);
         chat.setUsername(username);
@@ -67,7 +68,7 @@ public class ChatServices implements IChat{
             }
             return result;
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             result.setSuccess(false);
             result.setErrorMsg("ERROR: addChat method failed");
             return result;

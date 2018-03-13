@@ -19,6 +19,8 @@ public class Result {
     private Game game;
     private List<TrainCard> trainCards;
     private List<DestinationCard> destinationCards;
+    private ArrayList <Command> updateCommands;   //list of commands to execute
+
     //chats section:
     private ArrayList<String> chatMessages;
 
@@ -30,8 +32,6 @@ public class Result {
         success = false;
     }
 
-    private ArrayList <Command> updateCommands;   //list of commands to execute
-
     public ArrayList<Command> getUpdateCommands() {
         return updateCommands;
     }
@@ -39,8 +39,6 @@ public class Result {
     public void setUpdateCommands(ArrayList<Command> updateCommands) {
         this.updateCommands = updateCommands;
     }
-
-    private List<ICommand> commands; //list of client commands
 
     public String getErrorMsg() {
         return errorMsg;
@@ -72,14 +70,6 @@ public class Result {
 
     public void setSuccess(boolean success) {
         this.success = success;
-    }
-
-    public List<ICommand> getCommands() {
-        return commands;
-    }
-
-    public void setCommands(List<ICommand> commands) {
-        this.commands = commands;
     }
 
     public ArrayList<String> getChatMessages() {
