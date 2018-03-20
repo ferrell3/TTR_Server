@@ -345,4 +345,52 @@ public class GamePlayServices implements IGamePlay {
         GamePlayProxy.getInstance().addGameHistory(request);
         return null;
     }
+
+
+    //TODO test drawDestCard. Created method but haven't tested yet
+    @Override
+    public Result drawDestCard(Request request){
+        Result result = new Result();
+        String authToken = request.getAuthToken();
+        String gameId = request.getGameId();
+
+        // Check if requesting client is an active (logged in) client
+        if (Database.getInstance().getClients().contains(authToken))
+        {
+            // Check if game doesn't exist, return error
+            if (!Database.getInstance().getGames().containsKey(gameId))
+            {
+                System.out.println("ERROR: in drawDestCard() -- Empty gameID.");
+            }
+            else
+            {
+                // Deal card from Game object
+                ArrayList <DestinationCard> dealDest = new ArrayList<>();
+
+                // Deal three destination cards
+                for (int i = 0; i < 3; i++) {
+                    dealDest.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
+                }
+                request.setDestCard(dealDest);
+
+                // Create cmdObject for drawDestCard
+                GamePlayProxy.getInstance().drawDestCard(request);
+
+                // Add game history
+                String dealCardHistory = gameId + " drew three destination cards";
+                request.setAction(dealCardHistory);
+                addGameHistory(request);
+
+                result.setSuccess(true);
+                System.out.println("drawDestCard successful for game: " + gameId);
+            }
+        }
+        else
+        {
+            System.out.println("ERROR: in drawDestCard() -- Invalid auth token");
+        }
+
+        return result;
+
+    }
 }

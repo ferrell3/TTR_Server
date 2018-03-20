@@ -21,6 +21,8 @@ public class Request {
     private ArrayList<DestinationCard> discardDest;
     private ArrayList<TrainCard> discardTrains;
     private int gameCMDNum;
+    private ArrayList<DestinationCard> destCard;
+
 
     //Chat request Features:
     private Chat chat;
@@ -28,6 +30,7 @@ public class Request {
 
 
     public Request(){
+//        destCard = new ArrayList<>();
     }
 
     public String getChatMessage() {
@@ -125,5 +128,13 @@ public class Request {
 
     public void setDiscardTrains(ArrayList<TrainCard> discardTrains) {
         this.discardTrains = discardTrains;
+    }
+
+    public ArrayList<DestinationCard> getDestCard() {
+        return destCard;
+    }
+
+    public void setDestCard(ArrayList<DestinationCard> destCard) {
+        this.destCard = destCard;
     }
 }

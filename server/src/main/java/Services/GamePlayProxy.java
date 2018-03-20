@@ -51,6 +51,12 @@ public class GamePlayProxy implements IGamePlay {
         return null;
     }
 
+    @Override
+    public Result drawDestCard (Request clientRequest) {
+        createCommand("drawDestCard", clientRequest);
+        return null;
+    }
+
     private void createCommand(String methodName, Request clientRequest){
         Command command = new Command("Interfaces.IGamePlay", methodName,
                 new String[]{ "Models.Request" }, new Request[]{ clientRequest });
