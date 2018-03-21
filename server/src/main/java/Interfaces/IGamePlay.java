@@ -13,5 +13,10 @@ public interface IGamePlay {
     Result addGameHistory(Request request);
     Result discardDestCards(Request request);
     Result updateClient(Request request);
-    Result drawDestCard(Request request);
+    Result drawDestCards(Request request);
+    Result takeFaceUpCard(Request request);
+    Result drawTrainCard(Request request);
+    Result claimRoute(Request request);
+    Result incTurn(Request request);
+
 }

@@ -178,6 +178,11 @@ public class Game {
         faceUpCards.add(trainDeck.draw());
     }
 
+    public TrainCard replaceFaceUp(int index) {
+        faceUpCards.get(index).setColor(trainDeck.draw().getColor());
+        return faceUpCards.get(index);
+    }
+
     public Player getPlayer(String username){
         for(Player p: players){
             if(p.getName().equals(username)){

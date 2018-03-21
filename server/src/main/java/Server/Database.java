@@ -10,6 +10,7 @@ import Data.DataHandler;
 import Models.Command;
 import Models.Cards.DestinationCard;
 import Models.Gameplay.Game;
+import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.User;
 
@@ -84,6 +85,10 @@ public class Database {
 
     public Game getGameById(String id){
         return games.get(id);
+    }
+
+    public List<Player> getGamePlayers(String gameId) {
+        return games.get(gameId).getPlayers();
     }
 
     public String findClientGame(String username) {

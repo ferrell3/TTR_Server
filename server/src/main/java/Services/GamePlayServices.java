@@ -82,7 +82,8 @@ public class GamePlayServices implements IGamePlay {
             }
 
         } catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
+//            System.out.println(e);
         }
     }
 
@@ -184,13 +185,49 @@ public class GamePlayServices implements IGamePlay {
      * @param request
      * @return result
      */
-    public Result dealFaceUp(Request request) {
+    @Override
+    public Result takeFaceUpCard(Request request) {
+        Result result;// = new Result();
         String gameId = request.getGameId();
-        Result result = new Result();
-        //TODO: finish this with all the checks and the proper result object with the update commands
+        String authToken = request.getAuthToken();
+        String username = Database.getInstance().getUsername(authToken);
+        request.setUsername(username);
+        //add the face up card to the player's hand
+        TrainCard card = Database.getInstance().getGameById(gameId)
+                .getFaceUpCards().get(request.getCardIndex());
+        Database.getInstance().getGameById(gameId).getPlayer(username).getHand().add(card);
+        //replace the requested face up card with another from the deck
+        TrainCard newCard = Database.getInstance().getGameById(gameId).replaceFaceUp(request.getCardIndex());
+        //add the requested card to the request list and then the replacement card too
+        ArrayList<TrainCard> cards = new ArrayList<>();
+        cards.add(card);
+        cards.add(newCard);
+        request.setTrainCards(cards);
+        GamePlayProxy.getInstance().takeFaceUpCard(request);
+        result = updateClient(request);
+
+        request.setAction(username + " took a face up train card.");
+        addGameHistory(request);
+
+        System.out.println(username + " took a face up train card.");
+
         //do we really need to do all the checks every time?
         //could make another method -- validRequest(Request request) that checks authToken and gameId, further checks can be done in each method
-        Database.getInstance().getGameById(gameId).dealFaceUp();
+//        Database.getInstance().getGameById(gameId).dealFaceUp();
+        return result;
+    }
+
+
+    @Override
+    public Result drawTrainCard(Request request) {
+        String gameId = request.getGameId();
+        String authToken = request.getAuthToken();
+        String username = Database.getInstance().getUsername(authToken);
+        request.setUsername(username);
+        Result result = new Result();
+
+        //could make another method -- validRequest(Request request) that checks authToken and gameId, further checks can be done in each method
+//        Database.getInstance().getGameById(gameId).dealFaceUp();
         return result;
     }
 
@@ -216,9 +253,10 @@ public class GamePlayServices implements IGamePlay {
      */
     @Override
     public Result discardDestCards(Request request) {
-        String authToken = request.getAuthToken();
         String gameId = request.getGameId();
-        String username = request.getUsername();
+        String authToken = request.getAuthToken();
+        String username = Database.getInstance().getUsername(authToken);
+        request.setUsername(username);
         int numCards = request.getDiscardDest().size();
         Result result = new Result();
 
@@ -234,7 +272,8 @@ public class GamePlayServices implements IGamePlay {
                    result.setErrorMsg("Invalid number of cards.");
                    return result;
                 }
-                Database.getInstance().getGameById(gameId).getPlayer(username).discardDestCards(request.getDiscardDest());
+                Database.getInstance().getGameById(gameId).getPlayer(username)
+                        .discardDestCards(request.getDiscardDest());
                 Database.getInstance().getGameById(gameId).discardDestCards(request.getDiscardDest());
 //                result.setSuccess(true);
                 GamePlayProxy.getInstance().discardDestCards(request);
@@ -337,22 +376,22 @@ public class GamePlayServices implements IGamePlay {
     public Result addGameHistory(Request request){
         String gameId = request.getGameId();
         String play = request.getAction();
-
         // Add game history to database
         Database.getInstance().addGameHistory(gameId, play);
-
         // Create game history object
         GamePlayProxy.getInstance().addGameHistory(request);
         return null;
     }
 
 
-    //TODO test drawDestCard. Created method but haven't tested yet
+    //TODO test drawDestCards. Created method but haven't tested yet
     @Override
-    public Result drawDestCard(Request request){
+    public Result drawDestCards(Request request){
         Result result = new Result();
-        String authToken = request.getAuthToken();
         String gameId = request.getGameId();
+        String authToken = request.getAuthToken();
+        String username = Database.getInstance().getUsername(authToken);
+        request.setUsername(username);
 
         // Check if requesting client is an active (logged in) client
         if (Database.getInstance().getClients().contains(authToken))
@@ -360,7 +399,7 @@ public class GamePlayServices implements IGamePlay {
             // Check if game doesn't exist, return error
             if (!Database.getInstance().getGames().containsKey(gameId))
             {
-                System.out.println("ERROR: in drawDestCard() -- Empty gameID.");
+                System.out.println("ERROR: in drawDestCards() -- Empty gameID.");
             }
             else
             {
@@ -368,29 +407,65 @@ public class GamePlayServices implements IGamePlay {
                 ArrayList <DestinationCard> dealDest = new ArrayList<>();
 
                 // Deal three destination cards
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 3; i++)
+                {
                     dealDest.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
                 }
                 request.setDestCard(dealDest);
 
-                // Create cmdObject for drawDestCard
-                GamePlayProxy.getInstance().drawDestCard(request);
+                // Create cmdObject for drawDestCards
+                GamePlayProxy.getInstance().drawDestCards(request);
 
                 // Add game history
-                String dealCardHistory = gameId + " drew three destination cards";
+                String dealCardHistory = username + " drew three destination cards";
                 request.setAction(dealCardHistory);
                 addGameHistory(request);
 
                 result.setSuccess(true);
-                System.out.println("drawDestCard successful for game: " + gameId);
+                System.out.println("drawDestCards successful for game: " + gameId);
             }
         }
         else
         {
-            System.out.println("ERROR: in drawDestCard() -- Invalid auth token");
+            System.out.println("ERROR: in drawDestCards() -- Invalid auth token");
         }
-
         return result;
+    }
 
+    @Override
+    public Result claimRoute(Request request) {
+        return null;
+    }
+
+    @Override
+    public Result incTurn(Request request) {
+//        Result result = new Result();
+        String gameId = request.getGameId();
+        String activeUser = "";
+        for(int i = 1; i < Database.getInstance().getGamePlayers(gameId).size(); i++)
+        {
+            if (Database.getInstance().getGamePlayers(gameId).get(i-1).isTurn())
+            {
+                Database.getInstance().getGamePlayers(gameId).get(i-1).setTurn(false);
+                Database.getInstance().getGamePlayers(gameId).get(i).setTurn(true);
+                activeUser = Database.getInstance().getGamePlayers(gameId).get(i).getName();
+                break;
+            }
+            else if(i == (Database.getInstance().getGamePlayers(gameId).size()-1))
+            {
+                if(Database.getInstance().getGamePlayers(gameId).get(i).isTurn())
+                {
+                    Database.getInstance().getGamePlayers(gameId).get(i).setTurn(false);
+                    Database.getInstance().getGamePlayers(gameId).get(0).setTurn(true);
+                    activeUser = Database.getInstance().getGamePlayers(gameId).get(0).getName();
+                }
+            }
+        }
+        request.setUsername(activeUser);
+        GamePlayProxy.getInstance().incTurn(request);
+        request.setAction("It's " + activeUser + "\'s turn.");
+        addGameHistory(request);
+        return updateClient(request);
+//        return result;
     }
 }

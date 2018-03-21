@@ -52,8 +52,32 @@ public class GamePlayProxy implements IGamePlay {
     }
 
     @Override
-    public Result drawDestCard (Request clientRequest) {
-        createCommand("drawDestCard", clientRequest);
+    public Result drawDestCards(Request clientRequest) {
+        createCommand("drawDestCards", clientRequest);
+        return null;
+    }
+
+    @Override
+    public Result drawTrainCard(Request clientRequest) {
+        createCommand("drawTrainCard", clientRequest);
+        return null;
+    }
+
+    @Override
+    public Result takeFaceUpCard(Request clientRequest) {
+        createCommand("takeFaceUpCard", clientRequest);
+        return null;
+    }
+
+    @Override
+    public Result claimRoute(Request clientRequest) {
+        createCommand("claimRoute", clientRequest);
+        return null;
+    }
+
+    @Override
+    public Result incTurn(Request clientRequest) {
+        createCommand("incTurn", clientRequest);
         return null;
     }
 
