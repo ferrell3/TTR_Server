@@ -18,7 +18,7 @@ public class Game {
     private List<Route> routes;
     private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
-    private List<TrainCard> faceUpCards;
+    private ArrayList<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
 
     private GameHistory history;
@@ -166,16 +166,20 @@ public class Game {
         }
     }
 
-    public List<TrainCard> getFaceUpCards() {
+    public ArrayList<TrainCard> getFaceUpCards() {
         return faceUpCards;
     }
 
-    public void setFaceUpCards(List<TrainCard> faceUpCards) {
+    public void setFaceUpCards(ArrayList<TrainCard> faceUpCards) {
         this.faceUpCards = faceUpCards;
     }
 
     public void dealFaceUp() {
         faceUpCards.add(trainDeck.draw());
+    }
+
+    public TrainCard getFaceUpCard(int index) {
+        return faceUpCards.get(index);
     }
 
     public TrainCard replaceFaceUp(int index) {

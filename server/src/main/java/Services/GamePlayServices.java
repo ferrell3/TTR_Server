@@ -6,6 +6,7 @@ import Interfaces.IGamePlay;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Command;
+import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import Models.Request;
 import Models.Result;
@@ -28,6 +29,15 @@ public class GamePlayServices implements IGamePlay {
      * A singleton is used to create only one instance of this class
      */
     private GamePlayServices() {}
+
+    //right now I'm adding the destination cards to the player's hand and to another list (drawnDestCards)
+    //that way the player can just keep all of them and we just clear the other list
+    //todo: add the other list to the active game on the client
+    //that way we can only display the ones drawn
+    //If they want to discard 1 or 2 cards, does anything need to change from what we have now?
+    //maybe on the client, we just need to...anything?
+    //add a toast, press discard again to keep all these cards?
+    //or just add functionality to the other button?
 
     /**
      * Updates a game object with player attributes: name, color, turn order,
@@ -153,8 +163,8 @@ public class GamePlayServices implements IGamePlay {
         // Lookup each users in game
         for(int i = 0; i < players.size(); i++)
         {
-            List<TrainCard> hand = new ArrayList<>();
-            List<DestinationCard> destHand = new ArrayList<>();
+            ArrayList<TrainCard> hand = new ArrayList<>();
+            ArrayList<DestinationCard> destHand = new ArrayList<>();
 
             // Deal train cards
             for(int j = 0; j < 4; j++)
@@ -169,15 +179,45 @@ public class GamePlayServices implements IGamePlay {
                 destHand.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
             }
             players.get(i).setDestination_cards(destHand);
+            players.get(i).setDrawnDestCards(destHand);
         }
 
         //Replace database players list with updated players
         Database.getInstance().getGameById(gameId).setPlayers(players);
 
         //deal the faceUp cards to the game
+        Request request = new Request();
+        request.setGameId(gameId);
+        dealFaceUpCards(request);
+    }
+
+    @Override
+    public void dealFaceUpCards(Request request) {
+        String gameId = request.getGameId();
+        Database.getInstance().getGameById(gameId).getFaceUpCards().clear();
         for(int i = 0; i < 5; i++)
         {
             Database.getInstance().getGameById(gameId).dealFaceUp();
+        }
+        locomotiveCheck(gameId);
+    }
+
+    private void locomotiveCheck(String gameId) {
+        int locoCount = 0;
+        for(TrainCard card : Database.getInstance().getGameById(gameId).getFaceUpCards())
+        {
+            if(card.getColor().equals("wild"))
+            {
+                locoCount++;
+            }
+        }
+        if(locoCount > 2)
+        {
+            Request request = new Request();
+            request.setGameId(gameId);
+            dealFaceUpCards(request);
+            request.setTrainCards(Database.getInstance().getGameById(gameId).getFaceUpCards());
+            GamePlayProxy.getInstance().dealFaceUpCards(request);
         }
     }
 
@@ -193,11 +233,11 @@ public class GamePlayServices implements IGamePlay {
         String username = Database.getInstance().getUsername(authToken);
         request.setUsername(username);
         //add the face up card to the player's hand
-        TrainCard card = Database.getInstance().getGameById(gameId)
-                .getFaceUpCards().get(request.getCardIndex());
+        TrainCard card = new TrainCard(Database.getInstance().getGameById(gameId).getFaceUpCard(request.getCardIndex()).getColor());
         Database.getInstance().getGameById(gameId).getPlayer(username).getHand().add(card);
         //replace the requested face up card with another from the deck
         TrainCard newCard = Database.getInstance().getGameById(gameId).replaceFaceUp(request.getCardIndex());
+        locomotiveCheck(gameId);
         //add the requested card to the request list and then the replacement card too
         ArrayList<TrainCard> cards = new ArrayList<>();
         cards.add(card);
@@ -213,7 +253,6 @@ public class GamePlayServices implements IGamePlay {
 
         //do we really need to do all the checks every time?
         //could make another method -- validRequest(Request request) that checks authToken and gameId, further checks can be done in each method
-//        Database.getInstance().getGameById(gameId).dealFaceUp();
         return result;
     }
 
@@ -224,10 +263,16 @@ public class GamePlayServices implements IGamePlay {
         String authToken = request.getAuthToken();
         String username = Database.getInstance().getUsername(authToken);
         request.setUsername(username);
-        Result result = new Result();
-
+//        Result result = new Result();
+        ArrayList<TrainCard> cards = new ArrayList<>();
+        cards.add(Database.getInstance().getGameById(gameId).drawTrainCard());
+        request.setTrainCards(cards);
+        GamePlayProxy.getInstance().drawTrainCard(request);
+        Result result = updateClient(request);
+        request.setAction(username + " drew a train card.");
+        addGameHistory(request);
+        System.out.println(username + " drew a train card.");
         //could make another method -- validRequest(Request request) that checks authToken and gameId, further checks can be done in each method
-//        Database.getInstance().getGameById(gameId).dealFaceUp();
         return result;
     }
 
@@ -272,8 +317,7 @@ public class GamePlayServices implements IGamePlay {
                    result.setErrorMsg("Invalid number of cards.");
                    return result;
                 }
-                Database.getInstance().getGameById(gameId).getPlayer(username)
-                        .discardDestCards(request.getDiscardDest());
+                Database.getInstance().getGameById(gameId).getPlayer(username).discardDestCards(request.getDiscardDest());
                 Database.getInstance().getGameById(gameId).discardDestCards(request.getDiscardDest());
 //                result.setSuccess(true);
                 GamePlayProxy.getInstance().discardDestCards(request);
@@ -438,8 +482,7 @@ public class GamePlayServices implements IGamePlay {
     }
 
     @Override
-    public Result incTurn(Request request) {
-//        Result result = new Result();
+    public void incTurn(Request request) {
         String gameId = request.getGameId();
         String activeUser = "";
         for(int i = 1; i < Database.getInstance().getGamePlayers(gameId).size(); i++)
@@ -465,7 +508,5 @@ public class GamePlayServices implements IGamePlay {
         GamePlayProxy.getInstance().incTurn(request);
         request.setAction("It's " + activeUser + "\'s turn.");
         addGameHistory(request);
-        return updateClient(request);
-//        return result;
     }
 }

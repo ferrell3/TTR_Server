@@ -17,6 +17,7 @@ public interface IGamePlay {
     Result takeFaceUpCard(Request request);
     Result drawTrainCard(Request request);
     Result claimRoute(Request request);
-    Result incTurn(Request request);
+    void incTurn(Request request);
+    void dealFaceUpCards(Request request);
 
 }

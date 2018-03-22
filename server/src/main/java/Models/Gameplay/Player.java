@@ -14,12 +14,15 @@ public class Player {
     private int numTrains; //will be decremented when a route is claimed
     private List<Route> claimedRoutes;
     private List<TrainCard> hand;
-    private List<DestinationCard> destination_cards;
+    private ArrayList<DestinationCard> destination_cards;
+    private ArrayList<DestinationCard> drawnDestCards;
 
     public Player() {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        drawnDestCards = new ArrayList<>();
+
         numTrains = 45;
     }
 
@@ -28,6 +31,7 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        drawnDestCards = new ArrayList<>();
         numTrains = 45;
         turn = false;
     }
@@ -80,11 +84,11 @@ public class Player {
         this.hand = hand;
     }
 
-    public List<DestinationCard> getDestination_cards() {
+    public ArrayList<DestinationCard> getDestination_cards() {
         return destination_cards;
     }
 
-    public void setDestination_cards(List<DestinationCard> destination_cards) {
+    public void setDestination_cards(ArrayList<DestinationCard> destination_cards) {
         this.destination_cards = destination_cards;
     }
 
@@ -99,5 +103,14 @@ public class Player {
     public void discardDestCards(ArrayList<DestinationCard> cards)
     {
         destination_cards.removeAll(cards);
+        drawnDestCards.clear();
+    }
+
+    public ArrayList<DestinationCard> getDrawnDestCards() {
+        return drawnDestCards;
+    }
+
+    public void setDrawnDestCards(ArrayList<DestinationCard> drawnDestCards) {
+        this.drawnDestCards = drawnDestCards;
     }
 }

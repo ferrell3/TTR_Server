@@ -76,9 +76,14 @@ public class GamePlayProxy implements IGamePlay {
     }
 
     @Override
-    public Result incTurn(Request clientRequest) {
+    public void incTurn(Request clientRequest) {
         createCommand("incTurn", clientRequest);
-        return null;
+//        return null;
+    }
+
+    @Override
+    public void dealFaceUpCards(Request clientRequest) {
+        createCommand("shuffleFaceUp", clientRequest);
     }
 
     private void createCommand(String methodName, Request clientRequest){

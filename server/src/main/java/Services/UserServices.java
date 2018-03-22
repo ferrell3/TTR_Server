@@ -7,6 +7,7 @@ import Models.Request;
 import Models.Result;
 import Models.User;
 import Server.Database;
+import TestClient.TestClientServices;
 
 public class UserServices implements IServerUser {
 
@@ -35,6 +36,7 @@ public class UserServices implements IServerUser {
             {
                 Database.getInstance().getClients().add(user.getAuthToken());
                 request.setAuthToken(user.getAuthToken());
+                TestClientServices.getInstance().createGame();
                 response = LobbyServices.getInstance().updateClient(request);
 
                 response.setAuthToken(user.getAuthToken());
