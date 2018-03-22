@@ -8,11 +8,8 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
-/**
- * Created by kiphacking on 3/3/18.
- */
 
-public class GamePlayProxy implements IGamePlay {
+class GamePlayProxy implements IGamePlay {
 
     private static GamePlayProxy theGP = new GamePlayProxy();
 
@@ -31,7 +28,6 @@ public class GamePlayProxy implements IGamePlay {
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
         Database.getInstance().getAllGameCommands().put(clientRequest.getGameId(), new ArrayList<Command>());
-//        createCommand("setupGame", clientRequest);
     }
 
     @Override
@@ -78,7 +74,6 @@ public class GamePlayProxy implements IGamePlay {
     @Override
     public void incTurn(Request clientRequest) {
         createCommand("incTurn", clientRequest);
-//        return null;
     }
 
     @Override

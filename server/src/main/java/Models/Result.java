@@ -1,10 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
 
-import Interfaces.ICommand;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Gameplay.Game;
@@ -17,8 +14,8 @@ public class Result {
 
     //game section:
     private Game game;
-    private List<TrainCard> trainCards;
-    private List<DestinationCard> destinationCards;
+    private ArrayList<TrainCard> trainCards;
+    private ArrayList<DestinationCard> destinationCards;
     private ArrayList <Command> updateCommands;   //list of commands to execute
 
     //chats section:
@@ -88,19 +85,19 @@ public class Result {
         this.game = game;
     }
 
-    public List<TrainCard> getTrainCards() {
+    public ArrayList<TrainCard> getTrainCards() {
         return trainCards;
     }
 
-    public void setTrainCards(List<TrainCard> trainCards) {
+    public void setTrainCards(ArrayList<TrainCard> trainCards) {
         this.trainCards = trainCards;
     }
 
-    public List<DestinationCard> getDestinationCards() {
+    public ArrayList<DestinationCard> getDestinationCards() {
         return destinationCards;
     }
 
-    public void setDestinationCards(List<DestinationCard> destinationCards) {
+    public void setDestinationCards(ArrayList<DestinationCard> destinationCards) {
         this.destinationCards = destinationCards;
     }
 }

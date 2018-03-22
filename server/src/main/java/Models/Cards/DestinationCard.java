@@ -4,7 +4,6 @@ public class DestinationCard {
     private String start;
     private String end;
     private int points;
-//    private List<Route> routes; //Do we need this?
 
     public DestinationCard() {}
 
@@ -31,6 +30,4 @@ public class DestinationCard {
     public void setPoints(int points) {
         this.points = points;
     }
-
-//    public boolean compareRoutes(List<Route> playerRoutes){} // What is this for?
 }

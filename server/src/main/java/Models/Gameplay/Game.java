@@ -12,10 +12,10 @@ import Server.Database;
 public class Game {
 
     private String id;
-    private List<Player> players; //list of players' usernames
-    private List<String> playerNames;
+    private ArrayList<Player> players; //list of players' usernames
+    private ArrayList<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
-    private List<Route> routes;
+    private ArrayList<Route> routes;
     private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
     private ArrayList<TrainCard> faceUpCards;
@@ -58,7 +58,7 @@ public class Game {
         this.id = id;
     }
 
-    public List<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -78,7 +78,7 @@ public class Game {
         }
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
@@ -95,21 +95,13 @@ public class Game {
         this.chats = chat;
     }
 
-    public List<Route> getRoutes() {
+    public ArrayList<Route> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(List<Route> routes) {
+    public void setRoutes(ArrayList<Route> routes) {
         this.routes = routes;
     }
-
-//    public List<String> getCities() {
-//        return cities;
-//    }
-//
-//    public void setCities(List<String> cities) {
-//        this.cities = cities;
-//    }
 
     public TrainDeck getTrainDeck() {
         return trainDeck;
@@ -143,11 +135,11 @@ public class Game {
         this.history = history;
     }
 
-    public List<String> getPlayerNames() {
+    public ArrayList<String> getPlayerNames() {
         return playerNames;
     }
 
-    public void setPlayerNames(List<String> playerNames) {
+    public void setPlayerNames(ArrayList<String> playerNames) {
         this.playerNames = playerNames;
     }
 

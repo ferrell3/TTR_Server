@@ -2,7 +2,7 @@ package Data;
 
 import Models.Gameplay.Route;
 
-public class RouteData {
+class RouteData {
     Route[] data;
 
     public Route[] getData() {

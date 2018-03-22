@@ -1,9 +1,5 @@
 package Models.Gameplay;
 
-/**
- * Created by kiphacking on 3/2/18.
- */
-
 public class Chat {
     private String username;
     private String message;
@@ -25,14 +21,9 @@ public class Chat {
         this.message = message;
     }
 
-
     public String displayChat(){
 
         return username + ": "+ message;
 
     }
-
-
-
-
 }

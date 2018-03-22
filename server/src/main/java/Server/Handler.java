@@ -14,7 +14,7 @@ import java.net.HttpURLConnection;
 import Models.Command;
 import Models.Result;
 
-public class Handler implements HttpHandler {
+class Handler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         boolean success = false;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

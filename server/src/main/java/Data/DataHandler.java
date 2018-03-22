@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import java.io.FileReader;
-import java.io.FilterReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 

@@ -1,6 +1,7 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import Models.Cards.DestinationCard;
@@ -12,8 +13,8 @@ public class Player {
     private int points;
     private boolean turn;
     private int numTrains; //will be decremented when a route is claimed
-    private List<Route> claimedRoutes;
-    private List<TrainCard> hand;
+    private ArrayList<Route> claimedRoutes;
+    private ArrayList<TrainCard> hand;
     private ArrayList<DestinationCard> destination_cards;
     private ArrayList<DestinationCard> drawnDestCards;
 
@@ -22,7 +23,6 @@ public class Player {
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-
         numTrains = 45;
     }
 
@@ -72,7 +72,7 @@ public class Player {
         return claimedRoutes;
     }
 
-    public void setClaimedRoutes(List<Route> claimedRoutes) {
+    public void setClaimedRoutes(ArrayList<Route> claimedRoutes) {
         this.claimedRoutes = claimedRoutes;
     }
 
@@ -80,7 +80,7 @@ public class Player {
         return hand;
     }
 
-    public void setHand(List<TrainCard> hand) {
+    public void setHand(ArrayList<TrainCard> hand) {
         this.hand = hand;
     }
 
@@ -112,5 +112,10 @@ public class Player {
 
     public void setDrawnDestCards(ArrayList<DestinationCard> drawnDestCards) {
         this.drawnDestCards = drawnDestCards;
+    }
+
+    public void drawDestCards(ArrayList<DestinationCard> destCards) {
+        destination_cards.addAll(destCards);
+        drawnDestCards.addAll(destCards);
     }
 }

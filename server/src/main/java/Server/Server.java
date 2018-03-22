@@ -7,14 +7,14 @@ import java.net.InetSocketAddress;
 public class Server {
     private static final int MAX_WAITING_CONNECTIONS = 12;
 
-    private HttpServer server;
-
     public static void main(String[] args) {
         String portNumber = "8888";
         new Server().init(portNumber);
     }
 
     private void init(String portNumber) {
+        HttpServer server;
+
         System.out.println("Initializing HTTP server on port " + portNumber);
 
         //loads database with team hard coded users

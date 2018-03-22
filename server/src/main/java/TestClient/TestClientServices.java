@@ -4,10 +4,6 @@ import Models.Request;
 import Server.Database;
 import Services.LobbyServices;
 
-/**
- * Created by ferrell3 on 3/21/18.
- */
-
 public class TestClientServices {
     private static TestClientServices theOne = new TestClientServices();
 

@@ -4,10 +4,6 @@ import Models.Command;
 import Models.Request;
 import Models.Result;
 
-/**
- * Created by ferrell3 on 2/6/18.
- */
-
 public class TestClientUI {
     public static void main(String[] args) {
 //        Scanner in = new Scanner(System.in);
@@ -210,63 +206,5 @@ public class TestClientUI {
             System.out.println(updateResult.getErrorMsg());
         }
         System.out.println();
-
-
-//        Result joinResult = ClientCommunicator.getInstance().sendCommand(joinCmd);
-
-//        System.out.println();
-
-
-//        temp = Client.getInstance().getCommandNum();
-//        joinRequest.setCommandNum(temp);
-//        joinGame(joinRequest);
-        //END JOIN GAME TEST
-
-//        while (true)
-//        {
-//            System.out.println("Welcome to Phase 0.5! Prepare to have your strings processed! (Enter Q to quit)");
-//            System.out.print("Enter a method to process: ");
-//            String type = in.nextLine().toLowerCase().trim();
-//            if(type.equals("q")) { break; }
-////            else if(!type.equals("parseinteger")
-////                    && !type.equals("trim")
-////                    && !type.equals("tolowercase"))
-////            {
-////                System.out.println("Sorry, that's not a valid suffix. Valid options include: toLowerCase, trim, and parseInteger.");
-////            }
-//            else
-//            {
-//                if(type.equals("parseinteger") || type.equals("parse")){
-//                    type = "parseInteger";
-//                }
-//                else if(type.equals("tolowercase") || type.equals("lower"))
-//                {
-//                    type = "toLowerCase";
-//                }
-//                System.out.print("Enter the string: ");
-//
-//                String input = in.nextLine();
-//                if(input.toLowerCase().equals("q")) { break; }
-//
-//                Command command = new Command("Interfaces.IStringProcessor", type,
-//                        new String[]{ "Models.Request" }, new Request[]{new Request(input)});
-//
-////                GenericCommand move = new GenericCommand("VideoGame", "move",
-////                        new Class<?>[]{ int.class, Request.class },
-////                        new Object[] { 3 , new Location(75, 12) });
-//
-//                Result result = TestClientCommunicator.getInstance().sendCommand(command);
-//
-//                if (result.isSuccessful())
-//                {
-//                    System.out.println(result.getData());
-//                }
-//                else
-//                {
-//                    System.out.println(result.getErrorMsg());
-//                }
-//                System.out.println();
-//            }
-//        }
     }
 }
