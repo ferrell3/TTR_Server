@@ -10,6 +10,13 @@ public class Route {
 
     public Route() {}
 
+    public Route(String startPt, String endPt, int edgeWeight){
+        start = startPt;
+        end = endPt;
+        length = edgeWeight;
+    }
+
+
     public String getOwner() {
         return owner;
     }

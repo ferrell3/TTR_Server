@@ -1,7 +1,7 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import Models.Cards.DestinationCard;
@@ -36,6 +36,28 @@ public class Player {
         turn = false;
     }
 
+    // Map of all cities in claimed routes without duplicates
+    public HashMap<String, Integer> getListClaimedRouteCities(){
+        ArrayList <String> cityList = new ArrayList<>();
+        HashMap<String, Integer> cities = new HashMap<>();
+
+        for(int i = 0; i < claimedRoutes.size(); i++){
+            cityList.add(claimedRoutes.get(i).getStartCity());
+            cityList.add(claimedRoutes.get(i).getEndCity());
+        }
+
+        int count = 0;
+        for(int i = 0; i < cityList.size(); i++){
+
+            if(!cities.containsKey(cityList.get(i))){
+                cities.put(cityList.get(i), count);
+                count++;
+            }
+        }
+
+        return cities;
+    }
+
     public String getColor() {
         return color;
     }
@@ -68,7 +90,7 @@ public class Player {
         this.turn = turn;
     }
 
-    public List<Route> getClaimedRoutes() {
+    public ArrayList<Route> getClaimedRoutes() {
         return claimedRoutes;
     }
 

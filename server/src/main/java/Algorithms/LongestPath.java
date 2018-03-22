@@ -1,4 +1,4 @@
-package TestClient;
+package Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,13 +9,11 @@ import Models.Gameplay.Graph;
 import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 
-
 /**
- * Created by kiphacking on 3/21/18.
+ * Created by kiphacking on 3/22/18.
  */
 
-class LongestPath
-{
+public class LongestPath {
     private int numVertices;
     public int getNumVertices() {
         return numVertices;
@@ -187,28 +185,5 @@ class LongestPath
 
 
     }
-}
 
-//class Graph {
-//    private int adjMatrix[][];
-//    private int numVertices;
-//
-//    public int[][] getAdjMatrix() {
-//        return adjMatrix;
-//    }
-//
-//    public void setAdjMatrix(int[][] adjMatrix) {
-//        this.adjMatrix = adjMatrix;
-//    }
-//
-//    public Graph(int numVertices) {
-//        this.numVertices = numVertices;
-//        adjMatrix = new int[numVertices][numVertices];
-//    }
-//
-//    public void addEdge(int i, int j, int weight) {
-//        adjMatrix[i][j] = weight;
-//        adjMatrix[j][i] = weight;
-//    }
-//
-//}
+}
