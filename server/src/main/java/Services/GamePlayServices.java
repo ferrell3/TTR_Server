@@ -441,7 +441,7 @@ public class GamePlayServices implements IGamePlay {
                     dealDest.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
                 }
                 Database.getInstance().getGameById(gameId).getPlayer(username).drawDestCards(dealDest);
-                request.setDestCard(dealDest);
+                request.setDestCards(dealDest);
 
                 // Create cmdObject for drawDestCards
                 GamePlayProxy.getInstance().drawDestCards(request);

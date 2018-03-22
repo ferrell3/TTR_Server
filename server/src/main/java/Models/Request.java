@@ -21,7 +21,7 @@ public class Request {
     private ArrayList<DestinationCard> discardDest;
     private ArrayList<TrainCard> trainCards;
     private int gameCMDNum;
-    private ArrayList<DestinationCard> destCard;
+    private ArrayList<DestinationCard> destCards;
     private int cardIndex;
 
 
@@ -31,7 +31,7 @@ public class Request {
 
 
     public Request(){
-//        destCard = new ArrayList<>();
+//        destCards = new ArrayList<>();
     }
 
     public String getChatMessage() {
@@ -131,12 +131,12 @@ public class Request {
         this.trainCards = trainCards;
     }
 
-    public ArrayList<DestinationCard> getDestCard() {
-        return destCard;
+    public ArrayList<DestinationCard> getDestCards() {
+        return destCards;
     }
 
-    public void setDestCard(ArrayList<DestinationCard> destCard) {
-        this.destCard = destCard;
+    public void setDestCards(ArrayList<DestinationCard> destCards) {
+        this.destCards = destCards;
     }
 
     public int getCardIndex() {
