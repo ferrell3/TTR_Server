@@ -17,9 +17,8 @@ import Models.User;
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
     private HashMap<String, Game> games; //Key: gameId, Value: game object
-    private List<String> clients; //List of active clients //For use with commands and polling mostly
+    private ArrayList<String> clients; //List of active clients //For use with commands and polling mostly
     private ArrayList <Command> masterCommandList;
-//    private ArrayList <City> cities;
 //    private ArrayList <Route> routes;
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
     private DataHandler dataHandler;
@@ -40,7 +39,7 @@ public class Database {
         gameCommands = new HashMap<>();
     }
 
-    public void loadTeam() {
+    void loadTeam() {
         //        User u = new User("username","password","authToken");
         User u1 = new User("jordan", "aa", "a1fb6d30-51e7-4669-b944-120989aefb06");
         User u2 = new User("kip","aa","1fee61ae-d871-4548-8fba-a775dab78f8b");
@@ -87,7 +86,7 @@ public class Database {
         return games.get(id);
     }
 
-    public List<Player> getGamePlayers(String gameId) {
+    public ArrayList<Player> getGamePlayers(String gameId) {
         return games.get(gameId).getPlayers();
     }
 
@@ -103,7 +102,7 @@ public class Database {
     }
 
     //We probably want to store it by token, but for login, we need to get it by username. We can do both
-    public User findUserByToken(String token){
+    private User findUserByToken(String token){
         return users.get(token);
     }
 
@@ -115,7 +114,7 @@ public class Database {
         return users.get(username);
     }
 
-    public List<String> getClients() {
+    public ArrayList<String> getClients() {
         return clients;
     }
 

@@ -6,10 +6,6 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
-/**
- * Created by kiphacking on 3/2/18.
- */
-
 public class ChatServices implements IChat{
 
     private static ChatServices theOne = new ChatServices();
@@ -27,7 +23,6 @@ public class ChatServices implements IChat{
         String username = Database.getInstance().getUsername(authToken);
         String message = request.getChatMessage();
 
-        //TODO: Move creating a chat to the client
         Chat chat = new Chat();
         chat.setMessage(message);
         chat.setUsername(username);
@@ -50,7 +45,7 @@ public class ChatServices implements IChat{
                     // Populate the game with the chat strings
                     Database.getInstance().getGameById(gameId).addChatMessage(chat.displayChat());
 
-                    // Create cmdOject for chat object
+                    // Create cmdObject for chat object
                     ChatProxy.getInstance().addChat(request);
 
                     result.setSuccess(true);

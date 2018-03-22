@@ -1,12 +1,8 @@
 package Services;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import Interfaces.IClient;
-import Interfaces.ICommand;
 import Models.Command;
 import Models.Request;
 import Server.Database;
@@ -19,11 +15,9 @@ public class ClientProxy implements IClient {
         return theCP;
     }
 
-    private ClientProxy() {
-    }
+    private ClientProxy() {}
 
     //The server will add a new list or add to the list of commands in the LobbyServices
-//    private Map<String,List<ICommand>> clientCommands; //Client authToken is the key String
 
     @Override //creates a command and adds it to the list for each client
     public void createGame(Request clientRequest){ //(String username, String gameId)
@@ -72,8 +66,6 @@ public class ClientProxy implements IClient {
 
     @Override
     public void startGame(Request clientRequest){ //(String gameId){
-//        Request request = new Request();
-//        request.setGameId(clientRequest.getGameId());
         Command command = new Command("Interfaces.ILobby", "startGame",
                 new String[]{ "Models.Request" }, new Request[]{ clientRequest });
 

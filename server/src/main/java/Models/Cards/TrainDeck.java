@@ -7,7 +7,7 @@ import java.util.List;
 public class TrainDeck {
     private String[] trainTypes =
             { "purple", "white", "blue", "yellow", "orange", "black", "red", "green", "wild"};
-    private List<TrainCard> deck;
+    private ArrayList<TrainCard> deck;
 
     public TrainDeck() {
         deck = new ArrayList<>();

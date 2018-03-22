@@ -5,14 +5,14 @@ import java.util.List;
 
 public class GameHistory {
 
-    private List<String> gameActions;
+    private ArrayList<String> gameActions;
 
     public GameHistory(){
         gameActions = new ArrayList<>();
     }
 
-    public boolean addAction(String play) {
-        return gameActions.add(play);
+    public boolean addAction(String action) {
+        return gameActions.add(action);
     }
 
     public void clearHistory() {
@@ -47,7 +47,7 @@ public class GameHistory {
         return gameActions;
     }
 
-    public void setGameActions(List<String> gameActions) {
+    public void setGameActions(ArrayList<String> gameActions) {
         this.gameActions = gameActions;
     }
 

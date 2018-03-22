@@ -7,8 +7,6 @@ public class Route {
 //    private String name;
     private String start;
     private String end;
-//    private City startCity;
-//    private City endCity;
 
     public Route() {}
 
@@ -61,20 +59,4 @@ public class Route {
     public void setEndCity(String endCity) {
         this.end = endCity;
     }
-
-//    public City getStartCity() {
-//        return startCity;
-//    }
-//
-//    public void setStartCity(City startCity) {
-//        this.startCity = startCity;
-//    }
-//
-//    public City getEndCity() {
-//        return endCity;
-//    }
-//
-//    public void setEndCity(City endCity) {
-//        this.endCity = endCity;
-//    }
 }

@@ -3,10 +3,6 @@ package Interfaces;
 import Models.Request;
 import Models.Result;
 
-/**
- * Created by kiphacking on 3/3/18.
- */
-
 public interface IGamePlay {
 
     void setupGame(Request request);
