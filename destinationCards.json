@@ -1,152 +1,152 @@
 { "data":[	
 		{
-			"start": "Three Towers",
-			"end": "The Eyrie",
+			"start": "Hellholt",
+			"end": "Winterfell",
 			"points": 30
 		},
 		{
 			"start": "Sunspeare",
-			"end": "Sharp Point",
-			"points": 30
-		},
-		{
-			"start": "Green Stone",
-			"end": "Casterly Rock",
-			"points": 15
-		},
-		{
-			"start": "River Run",
-			"end": "High Garden",
-			"points": 10
-		},
-		{
-			"start": "Bronzegate",
-			"end": "Grassy Vale",
-			"points": 8
-		},
-		{
-			"start": "Blackmont",
-			"end": "Summer Hall",
-			"points": 8
-		},
-		{
-			"start": "River Run",
-			"end": "Winterfell",
-			"points": 18
-		},
-		{
-			"start": "Casterly Rock",
-			"end": "The Eyrie",
-			"points": 15
-		},
-		{
-			"start": "Kings Landing",
-			"end": "High Garden",
-			"points": 10
-		},
-				{
-			"start": "Old Oak",
-			"end": "Maiden Pool",
-			"points": 12
+			"end": "Flints Finger",
+			"points": 25
 		},
 		{
 			"start": "Old Town",
-			"end": "Sunspeare",
-			"points": 9
-		},
-		{
-			"start": "Flints Finger",
-			"end": "Bloody Gate",
-			"points": 10
-		},
-		{
-			"start": "Gull Town",
-			"end": "The Twins",
-			"points": 9
-		},
-		{
-			"start": "Storms End",
-			"end": "Cider Hall",
-			"points": 9
-		},
-		{
-			"start": "High Garden",
 			"end": "Widows Watch",
 			"points": 30
 		},
 		{
-			"start": "The Crag",
-			"end": "Stoney Sept",
-			"points": 6
+			"start": "Star Fall",
+			"end": "Runestone",
+			"points": 30
 		},
 		{
-			"start": "Longbow Hall",
-			"end": "High Garden",
-			"points": 18
-		},
-				{
-			"start": "The Tor",
-			"end": "Green Stone",
-			"points": 13
+			"start": "Green Stone",
+			"end": "Salt Pans",
+			"points": 30
 		},
 		{
-			"start": "Old Town",
-			"end": "Black Haven",
-			"points": 8
-		},
-		{
-			"start": "Moat Cailin",
-			"end": "Flints Finger",
-			"points": 6
-		},
-		{
-			"start": "Widows Watch",
-			"end": "The Twins",
-			"points": 6
-		},
-		{
-			"start": "Acorn Hill",
-			"end": "Bloody Gate",
-			"points": 5
-		},
-		{
-			"start": "Bronzegate",
-			"end": "The Twins",
-			"points": 18
-		},
-		{
-			"start": "Starfall",
-			"end": "Black Haven",
-			"points": 8
-		},
-		{
-			"start": "Hellholt",
-			"end": "High Garden",
-			"points": 8
-		},
-				{
-			"start": "Silverhill",
+			"start": "High Garden",
 			"end": "Winterfell",
-			"points": 13
+			"points": 25
 		},
 		{
-			"start": "Runestone",
-			"end": "Old Stones",
-			"points": 7
+			"start": "Old Oak",
+			"end": "Winterfell",
+			"points": 25
 		},
 		{
-			"start": "Cracken Hall",
-			"end": "Kings Landing",
+			"start": "Old Archer",
+			"end": "The Tor",
+			"points": 20
+		},
+		{
+			"start": "Kings Landing",
+			"end": "High Garden",
 			"points": 6
 		},
+				{
+			"start": "Feast Fires",
+			"end": "Bloody Gate",
+			"points": 8
+		},
 		{
-			"start": "Mistwood",
-			"end": "Golden Tooth",
+			"start": "Summer Hall",
+			"end": "Sunspeare",
+			"points": 8
+		},
+		{
+			"start": "The Eyrie",
+			"end": "Bloody Gate",
+			"points": 15
+		},
+		{
+			"start": "The Crag",
+			"end": "Green Stone",
+			"points": 15
+		},
+		{
+			"start": "Kings Landing",
+			"end": "The Twins",
+			"points": 15
+		},
+		{
+			"start": "Feast Fires",
+			"end": "White Harbor",
+			"points": 15
+		},
+		{
+			"start": "Summer Hall",
+			"end": "Longbow Hall",
 			"points": 12
 		},
 		{
-			"start": "Golden Grove",
-			"end": "Salt Shore",
+			"start": "Longbow Hall",
+			"end": "Runestone",
+			"points": 12
+		},
+				{
+			"start": "The Tor",
+			"end": "River Run",
+			"points": 10
+		},
+		{
+			"start": "Star Fall",
+			"end": "Summer Hall",
+			"points": 6
+		},
+		{
+			"start": "Winterfell",
+			"end": "The Twins",
+			"points": 6
+		},
+		{
+			"start": "Old Stones",
+			"end": "Kings Landing",
+			"points": 8
+		},
+		{
+			"start": "The Crag",
+			"end": "Old Oak",
+			"points": 5
+		},
+		{
+			"start": "Kings Landing",
+			"end": "Green Stone",
+			"points": 6
+		},
+		{
+			"start": "Old Archer",
+			"end": "Widows Watch",
+			"points": 5
+		},
+		{
+			"start": "Sharp Point",
+			"end": "Old Stones",
+			"points": 6
+		},
+				{
+			"start": "Summer Hall",
+			"end": "Kings Landing",
+			"points": 5
+		},
+		{
+			"start": "Runestone",
+			"end": "Flints Finger",
+			"points": 5
+		},
+		{
+			"start": "Wyl",
+			"end": "Old Oak",
+			"points": 10
+		},
+		{
+			"start": "Green Stone",
+			"end": "Sharp Point",
+			"points": 10
+		},
+		{
+			"start": "Salt Pans",
+			"end": "Bloody Gate",
 			"points": 10
 		}
 	] 
