@@ -413,7 +413,6 @@ public class GamePlayServices implements IGamePlay {
     }
 
 
-    //TODO test drawDestCards. Created method but haven't tested yet
     @Override
     public Result drawDestCards(Request request){
         Result result = new Result();
@@ -468,7 +467,7 @@ public class GamePlayServices implements IGamePlay {
     }
 
     @Override
-    public void incTurn(Request request) {
+    public void endTurn(Request request) {
         String gameId = request.getGameId();
         String activeUser = "";
         for(int i = 1; i < Database.getInstance().getGamePlayers(gameId).size(); i++)
@@ -491,7 +490,7 @@ public class GamePlayServices implements IGamePlay {
             }
         }
         request.setUsername(activeUser);
-        GamePlayProxy.getInstance().incTurn(request);
+        GamePlayProxy.getInstance().endTurn(request);
         request.setAction("It's " + activeUser + "\'s turn.");
         addGameHistory(request);
     }
