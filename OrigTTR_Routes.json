@@ -1,10 +1,13 @@
 { "data":[	
 		{
 			"start": "Sunspeare",
+			"startX": 40,
+			"startY": 50,
 			"end": "The Tor",
+			"endX": 40,
+			"endY": 50,
 			"color": "purple",
-			"length": 6,
-			"points": 15
+			"length": 6
 		},
 		{
 			"start": "Sunspeare",

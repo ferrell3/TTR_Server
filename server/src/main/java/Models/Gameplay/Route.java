@@ -8,6 +8,7 @@ public class Route {
     private String start;
     private String end;
 
+
     public Route() {}
 
     public Route(String startPt, String endPt, int edgeWeight){

@@ -1,10 +1,16 @@
 package Services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import Algorithms.LongestPath;
 import Interfaces.IGamePlay;
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
 import Models.Command;
+import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import Models.Request;
 import Models.Result;
@@ -464,6 +470,17 @@ public class GamePlayServices implements IGamePlay {
 
     @Override
     public Result claimRoute(Request request) {
+        //TODO implement claim route (See steps below)
+        // Check if route is free (game.routes)
+        // Check that they have enough train cards/correct color
+        // Add game to player's claimed route
+        // Remove player's used train cards
+        // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
+        // Decrement number of train cars for player
+
+        // check for "last round" if train cars are less than 3
+
+
         return null;
     }
 
@@ -495,4 +512,146 @@ public class GamePlayServices implements IGamePlay {
         request.setAction("It's " + activeUser + "\'s turn.");
         addGameHistory(request);
     }
+
+    // Calculates longest route winner for a game
+    public void calculateLongestRoute(String gameId){
+        Game game = Database.getInstance().getGameById(gameId);
+
+        // Calculate longest route by calling longest route algorithm
+        for(int i = 0; i < game.getPlayers().size(); i++){
+
+            int longestPathSize = LongestPath.calcLongestRoute(game.getPlayers().get(i));
+            game.getPlayers().get(i).setLongestPathSize(longestPathSize);
+        }
+
+        // Determine which player has the longest route
+        ArrayList<Player> playersList = game.getPlayers();
+        Set<Player> highestScoringPlayers = new HashSet<>();
+        int maxScore = Integer.MIN_VALUE;
+        for (Player player : playersList) {
+            maxScore = Math.max(maxScore, player.getLongestPathSize());
+        }
+        for (Player player : playersList) {
+            if (player.getLongestPathSize() == maxScore) {
+                highestScoringPlayers.add(player);
+            }
+        }
+
+        List <Player> longestRoutePlayers = new ArrayList<>(highestScoringPlayers);
+
+        // Check for tie for longest route and add longest route points (10pts)
+        if(longestRoutePlayers.size() > 1){
+            for (Player player: longestRoutePlayers) {
+                game.getPlayer(player.getName()).getScore().addLongestRoad();
+                System.out.println("LongestRoute by: "+player.getName()+" with a length of "+ maxScore+" train cars");
+            }
+
+        }else{
+            game.getPlayer(longestRoutePlayers.get(0).getName()).getScore().addLongestRoad();
+            System.out.println("LongestRoute by: "+longestRoutePlayers.get(0).getName()+" with a length of "+maxScore +" train cars");
+        }
+
+    }
+
+
+    // Calculates destination card scores for each player in a game
+    public void calculateDestCard(String gameId){
+        Game game = Database.getInstance().getGameById(gameId);
+
+        for(int i = 0; i < game.getPlayers().size(); i++){
+
+            for(int j = 0; j < game.getPlayers().get(i).getDestination_cards().size(); j++){
+                Player player = game.getPlayers().get(i);
+                DestinationCard destCard = game.getPlayers().get(i).getDestination_cards().get(j);
+                boolean destCardCompleted = LongestPath.calcDestCard(player,destCard);
+
+                int destCardPoints = destCard.getPoints();
+                if(destCardCompleted){
+
+                    game.getPlayer(player.getName()).getScore().addPosDestPoints(destCardPoints);
+                    System.out.println("Dest card completed: "+destCard.getCity1()+" to "+destCard.getCity2());
+                    System.out.println("Current score: "+game.getPlayer(player.getName()).getScore().getTotal());
+                }
+                else{
+                    game.getPlayer(player.getName()).getScore().addNegDestPoints(destCardPoints);
+                    System.out.println("Dest card incomplete: "+destCard.getCity1()+" to "+destCard.getCity2());
+                    System.out.println("Current score: "+game.getPlayer(player.getName()).getScore().getTotal());
+                }
+
+            }
+
+        }
+
+    }
+
+
+//    public static void main (String[] args)
+//    {
+//        // Testing of calculateDestCard and calculateLongestRoute
+//        Game game = new Game();
+//
+//        Player player = new Player();
+//        player.setName("Kip");
+//        Route route1 = new Route("Seattle", "SF",4);
+//        Route route2 = new Route("Seattle", "Portland",2);
+//        Route route3 = new Route("Seattle", "SLC",3);
+//        Route route4 = new Route("Portland", "SF",5);
+//        Route route5 = new Route("Portland", "DC",6);
+//        Route route6 = new Route("SF", "Langley",2);
+//        Route route7 = new Route("SLC", "Langley",2);
+//        Route route8 = new Route("Langley", "DC",6);
+//
+//        Route route9 = new Route("Dig", "pirate",6);
+//
+//        Player player2 = new Player();
+//        player2.setName("Jordan");
+//
+//        Player player3 = new Player();
+//        player3.setName("Finn");
+//
+//        ArrayList<Route> routes = new ArrayList<>(Arrays.asList(route1,route2,route3,route4,route5,route6,route7,route8,route9));
+//        player.setClaimedRoutes(routes);
+//        player3.setClaimedRoutes(routes);
+//
+//        ArrayList<Route> routes2 = new ArrayList<>(Arrays.asList(route1,route5));
+//        player2.setClaimedRoutes(routes2);
+//
+//        DestinationCard destCard = new DestinationCard();
+//        destCard.setCity1("Seattle");
+//        destCard.setCity2("SF");
+//        destCard.setPoints(7);
+//
+//        DestinationCard destCard2 = new DestinationCard();
+//        destCard2.setCity1("Seattle");
+//        destCard2.setCity2("Dig");
+//        destCard2.setPoints(5);
+//
+//        ArrayList<DestinationCard> destinationCards = new ArrayList<>();
+//        destinationCards.add(destCard);
+//        destinationCards.add(destCard);
+//
+//        ArrayList<DestinationCard> destinationCards2 = new ArrayList<>();
+//        destinationCards2.add(destCard2);
+//        destinationCards2.add(destCard);
+//
+//
+//        player.setDestination_cards(destinationCards);
+//        player2.setDestination_cards(destinationCards);
+//        player3.setDestination_cards(destinationCards2);
+//
+//        game.addPlayer(player);
+//        game.addPlayer(player2);
+//        game.addPlayer(player3);
+//
+//
+//
+//        GamePlayServices.getInstance().calculateDestCard(game);
+////        boolean temp = LongestPath.calcDestCard(player, destCard);
+////
+////        System.out.println(temp);
+////        GamePlayServices.getInstance().calculateLongestRoute(game);
+//
+//
+//
+//    }
 }
