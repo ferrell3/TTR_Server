@@ -72,8 +72,8 @@ class GamePlayProxy implements IGamePlay {
     }
 
     @Override
-    public void incTurn(Request clientRequest) {
-        createCommand("incTurn", clientRequest);
+    public void endTurn(Request clientRequest) {
+        createCommand("endTurn", clientRequest);
     }
 
     @Override
