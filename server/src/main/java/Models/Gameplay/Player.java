@@ -180,6 +180,10 @@ public class Player {
         this.numTrains = numTrains;
     }
 
+    public void decrementNumTrains(int trainNum){
+        numTrains -= trainNum;
+    }
+
     public void discardDestCards(ArrayList<DestinationCard> cards)
     {
         destination_cards.removeAll(cards);
