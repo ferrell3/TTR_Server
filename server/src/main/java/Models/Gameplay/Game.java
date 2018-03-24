@@ -1,30 +1,36 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import Models.Cards.DestinationCard;
 import Models.Cards.DestinationDeck;
 import Models.Cards.TrainCard;
 import Models.Cards.TrainDeck;
+import Server.Database;
 
 public class Game {
 
     private String id;
-    private List<Player> players; //list of players' usernames
-    private List<String> playerNames;
+    private ArrayList<Player> players; //list of players' usernames
+    private ArrayList<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
-    private List<Route> Routes;
-    private List<String> Cities;
-   // private boolean joinable = true;
     private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
+    private ArrayList<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
+    private HashMap<Integer, Route> routesMap; // Map of unclaimed routes
 
     private GameHistory history;
 
     public Game(){
         players = new ArrayList<>();
+        chats = new ArrayList<>();
+        trainDeck = new TrainDeck();
+        destinationDeck = new DestinationDeck();
+        playerNames = new ArrayList<>();
+        history = new GameHistory();
+        routesMap = Database.getInstance().getRoutes();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -35,6 +41,9 @@ public class Game {
         trainDeck = new TrainDeck();
         destinationDeck = new DestinationDeck();
         playerNames = new ArrayList<>();
+        history = new GameHistory();
+        faceUpCards = new ArrayList<>();
+        routesMap = Database.getInstance().getRoutes();
     }
 
     public void addChatMessage(String message){
@@ -49,7 +58,7 @@ public class Game {
         this.id = id;
     }
 
-    public List<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -69,7 +78,7 @@ public class Game {
         }
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
@@ -86,20 +95,20 @@ public class Game {
         this.chats = chat;
     }
 
-    public List<Route> getRoutes() {
-        return Routes;
+    public boolean containsRoute(Route route){
+
+        if(routesMap.containsKey(route.getRouteNumber())){
+
+            return true;
+        }else {
+            return false;
+        }
     }
 
-    public void setRoutes(List<Route> routes) {
-        Routes = routes;
-    }
+    public void removeClaimedRoute(){
 
-    public List<String> getCities() {
-        return Cities;
-    }
 
-    public void setCities(List<String> cities) {
-        Cities = cities;
+        //TODO add help function
     }
 
     public TrainDeck getTrainDeck() {
@@ -134,23 +143,60 @@ public class Game {
         this.history = history;
     }
 
-    public List<String> getPlayerNames() {
+    public ArrayList<String> getPlayerNames() {
         return playerNames;
     }
 
-    public void setPlayerNames(List<String> playerNames) {
+    public void setPlayerNames(ArrayList<String> playerNames) {
         this.playerNames = playerNames;
     }
 
     public TrainCard drawTrainCard(){
-
         return trainDeck.draw();
     }
 
     public DestinationCard drawDestinationCard(){
-
         return destinationDeck.draw();
     }
 
+    public void discardDestCards(ArrayList<DestinationCard> cards) {
+        for(DestinationCard card : cards)
+        {
+            destinationDeck.insert(card);
+        }
+    }
 
+    public ArrayList<TrainCard> getFaceUpCards() {
+        return faceUpCards;
+    }
+
+    public void setFaceUpCards(ArrayList<TrainCard> faceUpCards) {
+        this.faceUpCards = faceUpCards;
+    }
+
+    public void dealFaceUp() {
+        faceUpCards.add(trainDeck.draw());
+    }
+
+    public TrainCard getFaceUpCard(int index) {
+        return faceUpCards.get(index);
+    }
+
+    public TrainCard replaceFaceUp(int index) {
+        faceUpCards.get(index).setColor(trainDeck.draw().getColor());
+        return faceUpCards.get(index);
+    }
+
+    public Player getPlayer(String username){
+        for(Player p: players){
+            if(p.getName().equals(username)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public HashMap<Integer, Route> getRoutesMap() {
+        return routesMap;
+    }
 }

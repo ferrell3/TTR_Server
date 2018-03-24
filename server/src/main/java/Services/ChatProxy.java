@@ -5,21 +5,15 @@ import Models.Command;
 import Models.Request;
 import Server.Database;
 
-/**
- * Created by kiphacking on 3/2/18.
- */
+class ChatProxy implements IChatProxy {
 
-public class ChatProxy implements IChatProxy {
-
-    private static ChatProxy theCP = new ChatProxy();
+    private static ChatProxy theChP = new ChatProxy();
 
     public static ChatProxy getInstance() {
-        return theCP;
+        return theChP;
     }
 
-    private ChatProxy() {
-//        clientCommands = new HashMap<>();
-    }
+    private ChatProxy() {}
 
     @Override //creates a command and adds it to the gameCommands list
     public void addChat(Request clientRequest){

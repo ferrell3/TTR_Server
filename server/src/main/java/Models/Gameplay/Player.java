@@ -1,6 +1,7 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import Models.Cards.DestinationCard;
@@ -9,16 +10,23 @@ import Models.Cards.TrainCard;
 public class Player {
     private String color;
     private String name;
-    private int points;
-    private int turn;
-    private List<Route> claimedRoutes;
-    private List<TrainCard> hand;
-    private List<DestinationCard> destination_cards;
+    private boolean turn;
+    private int numTrains; //will be decremented when a route is claimed
+    private ArrayList<Route> claimedRoutes;
+    private ArrayList<TrainCard> hand;
+    private ArrayList<DestinationCard> destination_cards;
+    private ArrayList<DestinationCard> drawnDestCards;
+    private int longestPathSize;
+    private Score score;
+
 
     public Player() {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        drawnDestCards = new ArrayList<>();
+        numTrains = 45;
+        score = new Score();
     }
 
     public Player(String username){
@@ -26,10 +34,40 @@ public class Player {
         claimedRoutes = new ArrayList<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
+        drawnDestCards = new ArrayList<>();
+        numTrains = 45;
+        turn = false;
+        score = new Score();
     }
 
-    public void chooseDestCard(){
-        //TODO: decide how to implement this method
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
+    // Map of all cities in claimed routes without duplicates
+    public HashMap<String, Integer> getListClaimedRouteCities(){
+        ArrayList <String> cityList = new ArrayList<>();
+        HashMap<String, Integer> cities = new HashMap<>();
+
+        for(int i = 0; i < claimedRoutes.size(); i++){
+            cityList.add(claimedRoutes.get(i).getStartCity());
+            cityList.add(claimedRoutes.get(i).getEndCity());
+        }
+
+        int count = 0;
+        for(int i = 0; i < cityList.size(); i++){
+
+            if(!cities.containsKey(cityList.get(i))){
+                cities.put(cityList.get(i), count);
+                count++;
+            }
+        }
+
+        return cities;
     }
 
     public String getColor() {
@@ -48,27 +86,19 @@ public class Player {
         this.name = name;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public int getTurn() {
+    public boolean isTurn() {
         return turn;
     }
 
-    public void setTurn(int turn) {
+    public void setTurn(boolean turn) {
         this.turn = turn;
     }
 
-    public List<Route> getClaimedRoutes() {
+    public ArrayList<Route> getClaimedRoutes() {
         return claimedRoutes;
     }
 
-    public void setClaimedRoutes(List<Route> claimedRoutes) {
+    public void setClaimedRoutes(ArrayList<Route> claimedRoutes) {
         this.claimedRoutes = claimedRoutes;
     }
 
@@ -76,15 +106,104 @@ public class Player {
         return hand;
     }
 
-    public void setHand(List<TrainCard> hand) {
+    // Check if user has enough train cards to claim a route
+    public boolean checkHand(Route route){
+        int routeLength = route.getLength();
+        String routeColor = route.getColor();
+
+        int count = 0;
+        for(int i = 0; i < hand.size(); i++){
+
+            if(hand.get(i).getColor().equals(routeColor)){
+                count++;
+
+            }else if(hand.get(i).getColor().equals("wild")){
+                count++;
+
+            }
+            if(count == routeLength){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Remove train cards from hand when claiming a route
+    public void removeTrainCards(Route route){
+        int routeLength = route.getLength();
+        String routeColor = route.getColor();
+        int count = 0;
+
+        for(int i = 0; i < hand.size(); i++){
+
+            if(hand.get(i).getColor().equals(routeColor)){
+                hand.remove(i);
+                count++;
+                i--;
+
+            }else if(hand.get(i).getColor().equals("wild")){
+                hand.remove(i);
+                count++;
+                i--;
+            }
+
+            if(routeLength == count){
+                break;
+            }
+        }
+
+    }
+
+    // Adds a claimed route to the player's array of claimed routes
+    public void addClaimedRoute(Route route){
+        claimedRoutes.add(route);
+    }
+
+    public void setHand(ArrayList<TrainCard> hand) {
         this.hand = hand;
     }
 
-    public List<DestinationCard> getDestination_cards() {
+    public ArrayList<DestinationCard> getDestination_cards() {
         return destination_cards;
     }
 
-    public void setDestination_cards(List<DestinationCard> destination_cards) {
+    public void setDestination_cards(ArrayList<DestinationCard> destination_cards) {
         this.destination_cards = destination_cards;
+    }
+
+    public int getNumTrains() {
+        return numTrains;
+    }
+
+    public void setNumTrains(int numTrains) {
+        this.numTrains = numTrains;
+    }
+
+    public void discardDestCards(ArrayList<DestinationCard> cards)
+    {
+        destination_cards.removeAll(cards);
+        drawnDestCards.clear();
+    }
+
+    public ArrayList<DestinationCard> getDrawnDestCards() {
+        return drawnDestCards;
+    }
+
+    public void setDrawnDestCards(ArrayList<DestinationCard> drawnDestCards) {
+        this.drawnDestCards = drawnDestCards;
+    }
+
+    public void drawDestCards(ArrayList<DestinationCard> destCards) {
+        destination_cards.addAll(destCards);
+        drawnDestCards.addAll(destCards);
+    }
+
+    public int getLongestPathSize() {
+        return longestPathSize;
+    }
+
+    public void setLongestPathSize(int longestPathSize) {
+        this.longestPathSize = longestPathSize;
     }
 }

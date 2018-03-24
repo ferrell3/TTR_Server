@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import Interfaces.ICommand;
 import Services.ChatServices;
 import Services.ClientProxy;
-import Services.GameServices;
+import Services.GamePlayServices;
 import Services.LobbyServices;
 import Services.UserServices;
 
@@ -42,9 +42,9 @@ public class Command implements ICommand {
             {
                 result = (Result) method.invoke(ChatServices.getInstance(), _paramValues);
             }
-            else if(_className.equals("Interfaces.IGame"))
+            else if(_className.equals("Interfaces.IGamePlay"))
             {
-                result = (Result) method.invoke(GameServices.getInstance(), _paramValues);
+                result = (Result) method.invoke(GamePlayServices.getInstance(), _paramValues);
             }
             else
             {

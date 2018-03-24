@@ -4,10 +4,6 @@ import Models.Command;
 import Models.Request;
 import Models.Result;
 
-/**
- * Created by ferrell3 on 2/6/18.
- */
-
 public class TestClientUI {
     public static void main(String[] args) {
 //        Scanner in = new Scanner(System.in);
@@ -17,7 +13,7 @@ public class TestClientUI {
         loginRequest.setUsername("jordan");
         loginRequest.setPassword("jf");
         Command loginCommand = new Command("Interfaces.IServerUser", "login",
-                new String[]{ "Models.Request" }, new Request[]{ loginRequest });
+                new String[]{ "Models.LobbyRequest" }, new Request[]{ loginRequest });
 
 
         Result result = TestClientCommunicator.getInstance().sendCommand(loginCommand);
@@ -115,7 +111,7 @@ public class TestClientUI {
 
         if (result3.isSuccessful())
         {
-            System.out.println("Join successful!");
+            System.out.println("join successful!");
         }
         else
         {
@@ -167,61 +163,48 @@ public class TestClientUI {
         }
         System.out.println();
 
-//        Result joinResult = ClientCommunicator.getInstance().sendCommand(joinCmd);
+        //  CHAT
+        Request chatRequest2 = new Request();
+        chatRequest2.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        chatRequest2.setGameId("Jordan's Game");
+        chatRequest2.setChatMessage("This is test two!");
+        Command chatCmd2 = new Command("Interfaces.IChat", "addChat",
+                new String[]{ "Models.Request" }, new Request[]{ chatRequest2 });
 
-//        System.out.println();
+        Result chatResult2 = TestClientCommunicator.getInstance().sendCommand(chatCmd2);
+
+        if (chatResult2.isSuccessful())
+        {
+            System.out.println("Chat successfully added!");
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(chatResult2.getErrorMsg());
+        }
+        System.out.println();
 
 
-//        temp = Client.getInstance().getCommandNum();
-//        joinRequest.setCommandNum(temp);
-//        joinGame(joinRequest);
-        //END JOIN GAME TEST
 
-//        while (true)
-//        {
-//            System.out.println("Welcome to Phase 0.5! Prepare to have your strings processed! (Enter Q to quit)");
-//            System.out.print("Enter a method to process: ");
-//            String type = in.nextLine().toLowerCase().trim();
-//            if(type.equals("q")) { break; }
-////            else if(!type.equals("parseinteger")
-////                    && !type.equals("trim")
-////                    && !type.equals("tolowercase"))
-////            {
-////                System.out.println("Sorry, that's not a valid suffix. Valid options include: toLowerCase, trim, and parseInteger.");
-////            }
-//            else
-//            {
-//                if(type.equals("parseinteger") || type.equals("parse")){
-//                    type = "parseInteger";
-//                }
-//                else if(type.equals("tolowercase") || type.equals("lower"))
-//                {
-//                    type = "toLowerCase";
-//                }
-//                System.out.print("Enter the string: ");
-//
-//                String input = in.nextLine();
-//                if(input.toLowerCase().equals("q")) { break; }
-//
-//                Command command = new Command("Interfaces.IStringProcessor", type,
-//                        new String[]{ "Models.Request" }, new Request[]{new Request(input)});
-//
-////                GenericCommand move = new GenericCommand("VideoGame", "move",
-////                        new Class<?>[]{ int.class, Request.class },
-////                        new Object[] { 3 , new Location(75, 12) });
-//
-//                Result result = TestClientCommunicator.getInstance().sendCommand(command);
-//
-//                if (result.isSuccessful())
-//                {
-//                    System.out.println(result.getData());
-//                }
-//                else
-//                {
-//                    System.out.println(result.getErrorMsg());
-//                }
-//                System.out.println();
-//            }
-//        }
+        //  updateClient
+        Request updateRequest = new Request();
+        updateRequest.setAuthToken("a1fb6d30-51e7-4669-b944-120989aefb06");
+        updateRequest.setGameId("Jordan's Game");
+        updateRequest.setCommandNum(0);
+        Command updateCMD = new Command("Interfaces.IGamePlay", "updateClient",
+                new String[]{ "Models.Request" }, new Request[]{ updateRequest });
+
+        Result updateResult = TestClientCommunicator.getInstance().sendCommand(updateCMD);
+
+        if (updateResult.isSuccessful())
+        {
+            System.out.println("updateClient successfully added!");
+        }
+        else
+        {
+            System.out.println("Error:");
+            System.out.println(updateResult.getErrorMsg());
+        }
+        System.out.println();
     }
 }

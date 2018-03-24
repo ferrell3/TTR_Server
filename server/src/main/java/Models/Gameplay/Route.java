@@ -4,11 +4,32 @@ public class Route {
     private String owner;
     private int points;
     private int length;
-    private String name;
-    private City startCity;
-    private City endCity;
+//    private String name;
+    private String start;
+    private String end;
+    private String color;
+    private int routeNumber;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+
 
     public Route() {}
+
+    public Route(String startPt, String endPt, int edgeWeight){
+        start = startPt;
+        end = endPt;
+        length = edgeWeight;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public String getOwner() {
         return owner;
@@ -34,27 +55,69 @@ public class Route {
         this.length = length;
     }
 
-    public String getName() {
-        return name;
+    public String getName()
+    {
+        return start + " - " + end;
+//        return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+
+    public String getStartCity() {
+        return start;
     }
 
-    public City getStartCity() {
-        return startCity;
+    public void setStartCity(String startCity) {
+        this.start = startCity;
     }
 
-    public void setStartCity(City startCity) {
-        this.startCity = startCity;
+    public String getEndCity() {
+        return end;
     }
 
-    public City getEndCity() {
-        return endCity;
+    public void setEndCity(String endCity) {
+        this.end = endCity;
     }
 
-    public void setEndCity(City endCity) {
-        this.endCity = endCity;
+    public int getRouteNumber() {
+        return routeNumber;
+    }
+
+    public void setRouteNumber(int routeNumber) {
+        this.routeNumber = routeNumber;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
+    }
+
+    public int getEndX() {
+        return endX;
+    }
+
+    public void setEndX(int endX) {
+        this.endX = endX;
+    }
+
+    public int getEndY() {
+        return endY;
+    }
+
+    public void setEndY(int endY) {
+        this.endY = endY;
     }
 }

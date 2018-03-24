@@ -1,7 +1,6 @@
 package Services;
 
 import java.util.ArrayList;
-
 import Interfaces.ILobby;
 import Models.Command;
 import Models.Gameplay.Game;
@@ -10,16 +9,36 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
+/**
+ * LobbyServices implements the functionality in the game lobby.
+ * These methods are executed by the command object when the client sends a request
+ * to the server.
+ */
 public class LobbyServices implements ILobby {
 
-    private static LobbyServices theGS = new LobbyServices();
+    private static LobbyServices theOne = new LobbyServices();
 
-    public static LobbyServices getInstance() {
-        return theGS;
-    }
+    /**
+     * Returns the only instance of this class
+     */
+    public static LobbyServices getInstance() { return theOne; }
 
     private LobbyServices() {}
 
+    /**
+     * Creates a new game and adds the client as a player and returns a result object containing a
+     * list of commands for the client
+     *
+     * @param request A request object to transfer the necessary data to the server
+     *                to fulfill this request to create and join a new game.
+     *
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     *
+     * @post result.getUpdateCommands() != null
+     * @post result.getUpdateCommands().size >= 2 and contains at least the createGame and joinGame commands
+     */
     @Override
     public Result createGame(Request request){ //(String authToken, String gameId){
         String authToken = request.getAuthToken();
@@ -56,16 +75,11 @@ public class LobbyServices implements ILobby {
                 //if it doesn't exist yet, create it
                 Database.getInstance().getGames().put(gameId, new Game(gameId));
 
-                //add the creator to the game
-                //add command for other clients
+                //add commands
                 request.setUsername(username);
                 ClientProxy.getInstance().createGame(request);
-                result = updateClient(request);
                 System.out.println(username + " created new game: "+ gameId);
-                joinGame(request);
-
-
-
+                result = joinGame(request);
             }
             else
             {
@@ -83,15 +97,24 @@ public class LobbyServices implements ILobby {
         return result;
     }
 
+    /**
+     * Removes the client from any other game and adds them to the requested game and returns a
+     * result object containing a list of commands for the client
+     *
+     * @param request A request object to transfer the necessary data to the server
+     *                to fulfill this request to join the specified game.
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     *
+     * @post result.getUpdateCommands() != null
+     * @post result.getUpdateCommands().size >= 1 and contains at least the joinGame command
+     */
     @Override
     public Result joinGame(Request request) { //(String authToken, String gameId);
         String authToken = request.getAuthToken();
         String gameId = request.getGameId();
         Result result = new Result();
-
-        //revisit what should happen when attempting to re-join a game?
-        //If it goes to a new screen, do that again, basically this would be how to get back to the game screen
-        //if it stays in the lobby screen, print a message saying "you are already in that game"
 
         //check if requesting client is an active (logged in) client
         if(Database.getInstance().getClients().contains(authToken))
@@ -99,7 +122,7 @@ public class LobbyServices implements ILobby {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
             {
-                Game currentGame = Database.getInstance().getGames().get(gameId);
+                Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
                 Player player = new Player(username);
 
@@ -115,7 +138,7 @@ public class LobbyServices implements ILobby {
                     result.setErrorMsg("You are already in that game.");
                     System.out.println("NOTE: in joinGame() -- Requesting user already in requested game");
                 }
-                else //if(Database.getInstance().findClientGame(username).equals("")) //!currentGame.getPlayers().contains(username)) {
+                else
                 {
                     // requesting client's current game
                     String prevGame = Database.getInstance().findClientGame(username);
@@ -153,6 +176,19 @@ public class LobbyServices implements ILobby {
         return result;
     }
 
+    /**
+     * Removes the player from their current game and returns a result object containing a list of
+     * commands for the client
+     *
+     * @param request A request object to transfer the necessary data to the server
+     *                to fulfill this request to leave the specified game.
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     *
+     * @post result.getUpdateCommands() != null
+     * @post result.getUpdateCommands().size >= 1 and contains at least the leaveGame command
+     */
     @Override
     public Result leaveGame(Request request) {
         String authToken = request.getAuthToken();
@@ -164,7 +200,7 @@ public class LobbyServices implements ILobby {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
             {
-                Game currentGame = Database.getInstance().getGames().get(gameId);
+                Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
                 //check if user is in that game
                 if(Database.getInstance().findClientGame(username).equals(gameId))
@@ -199,6 +235,19 @@ public class LobbyServices implements ILobby {
         return result;
     }
 
+    /**
+     * Starts a game, calls setupGame() in the GamePlayServices and returns a result object
+     * containing a list of commands for the client
+     *
+     * @param request A request object to transfer the necessary data to the server
+     *                to fulfill this request to start the specified game.
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getGameId() != null
+     *
+     * @post result.getUpdateCommands() != null
+     * @post result.getUpdateCommands().size >= 1 and contains at least the startGame and setupGame commands
+     */
     @Override
     public Result startGame(Request request) { //(String authToken, String gameId);
         String authToken = request.getAuthToken();
@@ -211,7 +260,7 @@ public class LobbyServices implements ILobby {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
             {
-                Game currentGame = Database.getInstance().getGames().get(gameId);
+                Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
 
                 // Check if player is not in the current game
@@ -221,48 +270,60 @@ public class LobbyServices implements ILobby {
                     if(!currentGame.isActive())
                     {
                         // Add game to activeGame hashMap
-                        Game activeGame = Database.getInstance().getGames().get(gameId);
+                        Game activeGame = Database.getInstance().getGameById(gameId);
                         activeGame.setActive(true);
                         Database.getInstance().getGames().put(gameId, activeGame);
 
                         ClientProxy.getInstance().startGame(request);
-                        result = updateClient(request);
-                        System.out.println(gameId+ " started.");
-
 
                         // setupGame and create cmdObjects (player order, color, and cards)
-                        GameServices.getInstance().setupGame(request);
+                        GamePlayServices.getInstance().setupGame(request);
+
+                        result = updateClient(request);
+                        System.out.println(gameId + " started.");
                     }
                     else
                     {
-                        result.setSuccess(false);
                         result.setErrorMsg("That game is already started.");
                         System.out.println("ERROR: in startGame() -- Game is already started");
                     }
                 }
                 else
                 {
-                    result.setSuccess(false);
                     result.setErrorMsg("You cannot start that, you are not in that game.");
                     System.out.println("ERROR: in startGame() -- Requesting user is not in the requested game");
                 }
             }
             else
             {
-                result.setSuccess(false);
                 result.setErrorMsg("The requested game ID doesn't exist.");
                 System.out.println("ERROR: in startGame() -- Game doesn't exist");
             }
         }
         else
         {
-            result.setSuccess(false);
             result.setErrorMsg("Invalid authorization token.");
             System.out.println("ERROR: in startGame() -- Invalid auth token");
         }
         return result;
     }
 
+    /**
+     * Responds to the client's poller and returns a result object containing a list of commands
+     * that the client has not yet received
+     *
+     * @param request A request object to transfer the necessary data to the server
+     *                to fulfill this request.
+     *
+     * @pre request != null
+     * @pre request.getAuthToken() != null
+     * @pre request.getCommandNum() != null
+     * @pre request.getCommandNum() < Database.getMasterCommandList().size();
+     *
+     * @post result != null
+     * @post result.getUpdateCommands() != null
+     * @post result.getUpdateCommands().size() >= 0
+     */
     @Override //polling response
     public Result updateClient(Request request) { //(String authToken);
         String authToken = request.getAuthToken();
@@ -279,12 +340,11 @@ public class LobbyServices implements ILobby {
             }
             result.setSuccess(true);
             result.setUpdateCommands(responseCommands);
-//            System.out.println("updateClient request responded to.");
+            //System.out.println("updateClient request responded to.");
         }
         else
         {
-            result.setSuccess(false);
-            result.setErrorMsg("Invalid authorization token.");
+            result.setErrorMsg("ERROR: in updateClientLobby() -- Invalid auth token");
         }
         return result;
     }

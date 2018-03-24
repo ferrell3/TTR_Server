@@ -6,16 +6,12 @@ import Models.Request;
 import Models.Result;
 import Server.Database;
 
-/**
- * Created by kiphacking on 3/2/18.
- */
-
 public class ChatServices implements IChat{
 
-    private static ChatServices theCS = new ChatServices();
+    private static ChatServices theOne = new ChatServices();
 
     public static ChatServices getInstance() {
-        return theCS;
+        return theOne;
     }
 
     private ChatServices() {}
@@ -47,13 +43,18 @@ public class ChatServices implements IChat{
                 // Else: game exists, add chat to database and create cmd object
                 else{
                     // Populate the game with the chat strings
-                    Database.getInstance().getGames().get(gameId).addChatMessage(chat.displayChat());
+                    Database.getInstance().getGameById(gameId).addChatMessage(chat.displayChat());
 
-                    // Create cmdOject for chat object
+                    // Create cmdObject for chat object
                     ChatProxy.getInstance().addChat(request);
 
                     result.setSuccess(true);
                     System.out.println(username + " added chat: " + "\"" + chat.displayChat() +"\"");
+
+                    // TEST OF GAME HISTORY
+                    String gameMessage = username + " sent a chat.";
+                    request.setAction(gameMessage);
+                    GamePlayServices.getInstance().addGameHistory(request);
                 }
             } else {
                 result.setSuccess(false);
@@ -62,7 +63,7 @@ public class ChatServices implements IChat{
             }
             return result;
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             result.setSuccess(false);
             result.setErrorMsg("ERROR: addChat method failed");
             return result;

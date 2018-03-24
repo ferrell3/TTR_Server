@@ -7,19 +7,18 @@ import Models.Request;
 import Models.Result;
 import Models.User;
 import Server.Database;
+import TestClient.TestClientServices;
 
 public class UserServices implements IServerUser {
 
-    private static UserServices theUS = new UserServices();
+    private static UserServices theOne = new UserServices();
 
     public static UserServices getInstance() {
-        return theUS;
+        return theOne;
     }
 
     private UserServices() {}
 
-
-    //TODO: make sure the user is added to the client list when logged in
     //Pass in username and password
     //Checks if user exists in database
     //Checks given password against existing password
@@ -37,6 +36,7 @@ public class UserServices implements IServerUser {
             {
                 Database.getInstance().getClients().add(user.getAuthToken());
                 request.setAuthToken(user.getAuthToken());
+                TestClientServices.getInstance().createGame();
                 response = LobbyServices.getInstance().updateClient(request);
 
                 response.setAuthToken(user.getAuthToken());
@@ -94,7 +94,7 @@ public class UserServices implements IServerUser {
         return response;
     }
 
-    public String randomString()
+    private String randomString()
     {
         return UUID.randomUUID().toString();
     }

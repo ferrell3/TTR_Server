@@ -1,153 +1,153 @@
 { "data":[	
 		{
-			"start": "city0",
-			"end": "city1",
-			"points": 10
-		},
-		{
-			"start": "city1",
-			"end": "city2",
-			"points": 15
-		},
-		{
-			"start": "city2",
-			"end": "city3",
-			"points": 20
-		},
-		{
-			"start": "city3",
-			"end": "city4",
-			"points": 25
-		},
-		{
-			"start": "city4",
-			"end": "city5",
+			"start": "Hellholt",
+			"end": "Winterfell",
 			"points": 30
 		},
 		{
-			"start": "city5",
-			"end": "city6",
+			"start": "Sunspeare",
+			"end": "Flints Finger",
 			"points": 25
 		},
 		{
-			"start": "city6",
-			"end": "city7",
+			"start": "Old Town",
+			"end": "Widows Watch",
+			"points": 30
+		},
+		{
+			"start": "Star Fall",
+			"end": "Runestone",
+			"points": 30
+		},
+		{
+			"start": "Green Stone",
+			"end": "Salt Pans",
+			"points": 30
+		},
+		{
+			"start": "High Garden",
+			"end": "Winterfell",
+			"points": 25
+		},
+		{
+			"start": "Old Oak",
+			"end": "Winterfell",
+			"points": 25
+		},
+		{
+			"start": "Old Archer",
+			"end": "The Tor",
 			"points": 20
 		},
 		{
-			"start": "city7",
-			"end": "city8",
+			"start": "Kings Landing",
+			"end": "High Garden",
+			"points": 6
+		},
+				{
+			"start": "Feast Fires",
+			"end": "Bloody Gate",
+			"points": 8
+		},
+		{
+			"start": "Summer Hall",
+			"end": "Sunspeare",
+			"points": 8
+		},
+		{
+			"start": "The Eyrie",
+			"end": "Bloody Gate",
 			"points": 15
 		},
 		{
-			"start": "city8",
-			"end": "city9",
-			"points": 10
+			"start": "The Crag",
+			"end": "Green Stone",
+			"points": 15
+		},
+		{
+			"start": "Kings Landing",
+			"end": "The Twins",
+			"points": 15
+		},
+		{
+			"start": "Feast Fires",
+			"end": "White Harbor",
+			"points": 15
+		},
+		{
+			"start": "Summer Hall",
+			"end": "Longbow Hall",
+			"points": 12
+		},
+		{
+			"start": "Longbow Hall",
+			"end": "Runestone",
+			"points": 12
 		},
 				{
-			"start": "city9",
-			"end": "city10",
+			"start": "The Tor",
+			"end": "River Run",
+			"points": 10
+		},
+		{
+			"start": "Star Fall",
+			"end": "Summer Hall",
+			"points": 6
+		},
+		{
+			"start": "Winterfell",
+			"end": "The Twins",
+			"points": 6
+		},
+		{
+			"start": "Old Stones",
+			"end": "Kings Landing",
+			"points": 8
+		},
+		{
+			"start": "The Crag",
+			"end": "Old Oak",
 			"points": 5
 		},
 		{
-			"start": "city10",
-			"end": "city11",
-			"points": 10
+			"start": "Kings Landing",
+			"end": "Green Stone",
+			"points": 6
 		},
 		{
-			"start": "city11",
-			"end": "city12",
-			"points": 15
-		},
-		{
-			"start": "city12",
-			"end": "city13",
-			"points": 20
-		},
-		{
-			"start": "city13",
-			"end": "city14",
-			"points": 25
-		},
-		{
-			"start": "city14",
-			"end": "city15",
-			"points": 30
-		},
-		{
-			"start": "city15",
-			"end": "city16",
-			"points": 35
-		},
-		{
-			"start": "city16",
-			"end": "city17",
-			"points": 30
-		},
-				{
-			"start": "city17",
-			"end": "city18",
-			"points": 25
-		},
-		{
-			"start": "city18",
-			"end": "city19",
-			"points": 20
-		},
-		{
-			"start": "city19",
-			"end": "city20",
-			"points": 15
-		},
-		{
-			"start": "city20",
-			"end": "city21",
-			"points": 10
-		},
-		{
-			"start": "city21",
-			"end": "city22",
+			"start": "Old Archer",
+			"end": "Widows Watch",
 			"points": 5
 		},
 		{
-			"start": "city22",
-			"end": "city23",
+			"start": "Sharp Point",
+			"end": "Old Stones",
+			"points": 6
+		},
+				{
+			"start": "Summer Hall",
+			"end": "Kings Landing",
+			"points": 5
+		},
+		{
+			"start": "Runestone",
+			"end": "Flints Finger",
+			"points": 5
+		},
+		{
+			"start": "Wyl",
+			"end": "Old Oak",
 			"points": 10
 		},
 		{
-			"start": "city23",
-			"end": "city24",
-			"points": 15
+			"start": "Green Stone",
+			"end": "Sharp Point",
+			"points": 10
 		},
 		{
-			"start": "city24",
-			"end": "city25",
-			"points": 20
-		},
-				{
-			"start": "city25",
-			"end": "city26",
-			"points": 25
-		},
-		{
-			"start": "city26",
-			"end": "city27",
-			"points": 30
-		},
-		{
-			"start": "city27",
-			"end": "city28",
-			"points": 35
-		},
-		{
-			"start": "city28",
-			"end": "city2",
-			"points": 30
-		},
-		{
-			"start": "city29",
-			"end": "city30",
-			"points": 25
+			"start": "Salt Pans",
+			"end": "Bloody Gate",
+			"points": 10
 		}
 	] 
 }
