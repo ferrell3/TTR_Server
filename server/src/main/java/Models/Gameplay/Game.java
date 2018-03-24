@@ -106,10 +106,9 @@ public class Game {
         }
     }
 
-    public void removeClaimedRoute(){
+    public void removeClaimedRoute(Route route){
+        routesMap.remove(route.getRouteNumber());
 
-
-        //TODO add help function
     }
 
     public TrainDeck getTrainDeck() {
