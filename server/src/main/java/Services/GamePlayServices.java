@@ -497,7 +497,7 @@ public class GamePlayServices implements IGamePlay {
                         // Remove player's used train cards for claimed route
                         Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(route);
 
-                        // Add game to player's claimed route
+                        // Add to game the player's claimed route
                         Database.getInstance().getGameById(gameId).getPlayer(username).addClaimedRoute(route);
 
                         // Remove the route from game's available routes
@@ -525,6 +525,7 @@ public class GamePlayServices implements IGamePlay {
 
                         // TODO add command object
                         // Add cmdObject that contains route object for client
+                        GamePlayProxy.getInstance().claimRoute(request);
 
 
                         result.setSuccess(true);
