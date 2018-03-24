@@ -533,11 +533,13 @@ public class GamePlayServices implements IGamePlay {
 
                     }else{
                         System.out.println("ERROR: in claimRoute() -- not enough train cards");
+                        result.setErrorMsg("ERROR: in claimRoute() -- not enough train cards");
                     }
 
                 }else {
 
                     System.out.println("ERROR: in claimRoute() -- route already claimed");
+                    result.setErrorMsg("ERROR: in claimRoute() -- route already claimed");
                 }
 
             }
@@ -545,6 +547,7 @@ public class GamePlayServices implements IGamePlay {
         else
         {
             System.out.println("ERROR: in claimRoute() -- Invalid auth token");
+            result.setErrorMsg("ERROR: in claimRoute() -- Invalid auth token");
         }
         return result;
 
