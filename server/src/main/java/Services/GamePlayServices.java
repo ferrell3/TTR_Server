@@ -470,7 +470,7 @@ public class GamePlayServices implements IGamePlay {
 
     @Override
     public Result claimRoute(Request request) {
-        //TODO implement claim route (See steps below)
+        //TODO implement claim route (See uncompleted To-Do's below)
 
         Result result = new Result();
         String gameId = request.getGameId();
@@ -501,15 +501,34 @@ public class GamePlayServices implements IGamePlay {
                         Database.getInstance().getGameById(gameId).getPlayer(username).addClaimedRoute(route);
 
                         // Remove the route from game's available routes
+                        Database.getInstance().getGameById(gameId).removeClaimedRoute(route);
 
                         // Set user's name to route's owner
+                        route.setOwner(username);
 
                         // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
+                        Database.getInstance().getGameById(gameId).getPlayer(username).getScore().addRoutePoints(route.getLength());
+
                         // Decrement number of train cars for player
+                        Database.getInstance().getGameById(gameId).getPlayer(username).decrementNumTrains(route.getLength());
 
                         // check for "last round" if train cars are less than 3
+                        int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
+                        if(numTrains < 3){
+                            //TODO initiate last round
 
-                        //RESPONSE: send route back to user
+                        }
+
+                        // Add game history
+                        request.setAction(route.getStartCity()+" to "+route.getEndCity()+" claimed by "+username);
+                        addGameHistory(request);
+
+                        // TODO add command object
+                        // Add cmdObject that contains route object for client
+
+
+                        result.setSuccess(true);
+                        System.out.println("claimRoute successful: "+route.getStartCity()+" to "+route.getEndCity()+" claimed by "+username);
 
                     }else{
                         System.out.println("ERROR: in claimRoute() -- not enough train cards");
@@ -520,36 +539,6 @@ public class GamePlayServices implements IGamePlay {
                     System.out.println("ERROR: in claimRoute() -- route already claimed");
                 }
 
-
-
-
-
-
-
-
-
-
-                // Deal card from Game object
-                ArrayList <DestinationCard> dealDest = new ArrayList<>();
-
-                // Deal three destination cards
-                for (int i = 0; i < 3; i++)
-                {
-                    dealDest.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
-                }
-                Database.getInstance().getGameById(gameId).getPlayer(username).drawDestCards(dealDest);
-                request.setDestCards(dealDest);
-
-                // Create cmdObject for drawDestCards
-                GamePlayProxy.getInstance().drawDestCards(request);
-
-                // Add game history
-                String dealCardHistory = username + " drew three destination cards";
-                request.setAction(dealCardHistory);
-                addGameHistory(request);
-
-                result.setSuccess(true);
-                System.out.println("claimRoute successful for game: " + gameId+" Username: "+ username);
             }
         }
         else
