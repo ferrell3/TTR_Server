@@ -23,7 +23,7 @@ public class DataHandler {
 
         try{
             JsonReader dcReader = new JsonReader(new FileReader("destinationCards.json"));
-            JsonReader rtReader = new JsonReader(new FileReader("OrigTTR_Routes.json"));
+            JsonReader rtReader = new JsonReader(new FileReader("GOT_TTR_Routes.json"));
             dcData = gson.fromJson(dcReader, DestinationCardData.class);
             rtData = gson.fromJson(rtReader, RouteData.class);
             System.out.println("Destination cards and routes successfully loaded.");
