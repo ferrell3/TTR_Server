@@ -26,9 +26,15 @@ public class TestClientServices {
             newReq.setGameId("gameTEST");
             LobbyServices.getInstance().createGame(newReq);
 
-//            newReq.setAuthToken("82f90744-ef61-4298-84ce-3070dfc25137"); //finn
             newReq.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b"); //kip
             LobbyServices.getInstance().joinGame(newReq);
+
+//            newReq.setAuthToken("82f90744-ef61-4298-84ce-3070dfc25137"); //finn
+//            LobbyServices.getInstance().joinGame(newReq);
+//
+//            newReq.setAuthToken("01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e"); //brian
+//            LobbyServices.getInstance().joinGame(newReq);
+
         }
     }
 }

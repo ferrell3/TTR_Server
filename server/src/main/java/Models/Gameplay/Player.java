@@ -18,6 +18,7 @@ public class Player {
     private ArrayList<DestinationCard> drawnDestCards;
     private int longestPathSize;
     private Score score;
+    private boolean lastRound;
 
 
     public Player() {
@@ -151,5 +152,13 @@ public class Player {
 
     public void setLongestPathSize(int longestPathSize) {
         this.longestPathSize = longestPathSize;
+    }
+
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean lastRound) {
+        this.lastRound = lastRound;
     }
 }

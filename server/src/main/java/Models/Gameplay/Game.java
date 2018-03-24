@@ -1,7 +1,6 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Models.Cards.DestinationCard;
 import Models.Cards.DestinationDeck;
@@ -20,6 +19,7 @@ public class Game {
     private DestinationDeck destinationDeck;
     private ArrayList<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
+    private int lastRoundCount = 0;
 
     private GameHistory history;
 
@@ -186,5 +186,13 @@ public class Game {
             }
         }
         return null;
+    }
+
+    public int getLastRoundCount() {
+        return lastRoundCount;
+    }
+
+    public void incLastRoundCount() {
+        lastRoundCount++;
     }
 }

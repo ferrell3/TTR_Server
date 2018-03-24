@@ -489,8 +489,21 @@ public class GamePlayServices implements IGamePlay {
         String activeUser = "";
         for(int i = 1; i < Database.getInstance().getGamePlayers(gameId).size(); i++)
         {
+
             if (Database.getInstance().getGamePlayers(gameId).get(i-1).isTurn())
             {
+                if(Database.getInstance().getGamePlayers(gameId).get(i-1).isLastRound())
+                {
+                    Database.getInstance().getGameById(gameId).incLastRoundCount();
+                }
+                if(Database.getInstance().getGameById(gameId).getLastRoundCount() == Database.getInstance().getGamePlayers(gameId).size())
+                {
+                    //GAME OVER
+                }
+                //increment game.lastRoundCount
+                //set a boolean to prompt an action after the for loop is done executing:
+
+
                 Database.getInstance().getGamePlayers(gameId).get(i-1).setTurn(false);
                 Database.getInstance().getGamePlayers(gameId).get(i).setTurn(true);
                 activeUser = Database.getInstance().getGamePlayers(gameId).get(i).getName();
@@ -505,7 +518,10 @@ public class GamePlayServices implements IGamePlay {
                     activeUser = Database.getInstance().getGamePlayers(gameId).get(0).getName();
                 }
             }
+
         }
+
+
         request.setUsername(activeUser);
         GamePlayProxy.getInstance().endTurn(request);
         request.setAction("It's " + activeUser + "\'s turn.");
