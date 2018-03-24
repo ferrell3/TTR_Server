@@ -497,14 +497,15 @@ public class GamePlayServices implements IGamePlay {
                         // Remove player's used train cards for claimed route
                         Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(route);
 
+                        // Set user's name to route's owner
+                        route.setOwner(username);
+
                         // Add to game the player's claimed route
                         Database.getInstance().getGameById(gameId).getPlayer(username).addClaimedRoute(route);
 
                         // Remove the route from game's available routes
                         Database.getInstance().getGameById(gameId).removeClaimedRoute(route);
 
-                        // Set user's name to route's owner
-                        route.setOwner(username);
 
                         // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
                         Database.getInstance().getGameById(gameId).getPlayer(username).getScore().addRoutePoints(route.getLength());

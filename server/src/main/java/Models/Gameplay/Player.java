@@ -113,6 +113,9 @@ public class Player {
         String routeColor = route.getColor();
 
         int count = 0;
+
+        //
+
         for(int i = 0; i < hand.size(); i++){
 
             if(hand.get(i).getColor().equals(routeColor)){
@@ -122,7 +125,11 @@ public class Player {
                 count++;
 
             }
-            if(count == routeLength){
+            else if (routeColor.equals("wild"))
+            {
+                count++;
+            }
+            if(count >= routeLength){
                 return true;
             }
         }
@@ -144,6 +151,12 @@ public class Player {
                 i--;
 
             }else if(hand.get(i).getColor().equals("wild")){
+                hand.remove(i);
+                count++;
+                i--;
+            }
+            else if(routeColor.equals("wild"))
+            {
                 hand.remove(i);
                 count++;
                 i--;
