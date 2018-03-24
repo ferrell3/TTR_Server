@@ -12,6 +12,7 @@ import Models.Cards.TrainCard;
 import Models.Command;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
+import Models.Gameplay.Route;
 import Models.Request;
 import Models.Result;
 import Server.Database;
@@ -470,17 +471,93 @@ public class GamePlayServices implements IGamePlay {
     @Override
     public Result claimRoute(Request request) {
         //TODO implement claim route (See steps below)
-        // Check if route is free (game.routes)
-        // Check that they have enough train cards/correct color
-        // Add game to player's claimed route
-        // Remove player's used train cards
-        // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
-        // Decrement number of train cars for player
 
-        // check for "last round" if train cars are less than 3
+        Result result = new Result();
+        String gameId = request.getGameId();
+        String authToken = request.getAuthToken();
+        String username = Database.getInstance().getUsername(authToken);
+        Route route = request.getRoute();
+        request.setUsername(username);
+
+        // Check if requesting client is an active (logged in) client
+        if (Database.getInstance().getClients().contains(authToken))
+        {
+            // Check if game doesn't exist, return error
+            if (!Database.getInstance().getGames().containsKey(gameId))
+            {
+                System.out.println("ERROR: in claimRoute() -- Empty gameID.");
+            }
+            else
+            {
+                // Check if route is free (game.routes)
+                if(Database.getInstance().getGameById(gameId).containsRoute(route)){
+                    // Check that they have enough train cards/correct color
+                    if(Database.getInstance().getGameById(gameId).getPlayer(username).checkHand(route)){
+
+                        // Remove player's used train cards for claimed route
+                        Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(route);
+
+                        // Add game to player's claimed route
+                        Database.getInstance().getGameById(gameId).getPlayer(username).addClaimedRoute(route);
+
+                        // Remove the route from game's available routes
+
+                        // Set user's name to route's owner
+
+                        // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
+                        // Decrement number of train cars for player
+
+                        // check for "last round" if train cars are less than 3
+
+                        //RESPONSE: send route back to user
+
+                    }else{
+                        System.out.println("ERROR: in claimRoute() -- not enough train cards");
+                    }
+
+                }else {
+
+                    System.out.println("ERROR: in claimRoute() -- route already claimed");
+                }
 
 
-        return null;
+
+
+
+
+
+
+
+
+                // Deal card from Game object
+                ArrayList <DestinationCard> dealDest = new ArrayList<>();
+
+                // Deal three destination cards
+                for (int i = 0; i < 3; i++)
+                {
+                    dealDest.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
+                }
+                Database.getInstance().getGameById(gameId).getPlayer(username).drawDestCards(dealDest);
+                request.setDestCards(dealDest);
+
+                // Create cmdObject for drawDestCards
+                GamePlayProxy.getInstance().drawDestCards(request);
+
+                // Add game history
+                String dealCardHistory = username + " drew three destination cards";
+                request.setAction(dealCardHistory);
+                addGameHistory(request);
+
+                result.setSuccess(true);
+                System.out.println("claimRoute successful for game: " + gameId+" Username: "+ username);
+            }
+        }
+        else
+        {
+            System.out.println("ERROR: in claimRoute() -- Invalid auth token");
+        }
+        return result;
+
     }
 
     @Override

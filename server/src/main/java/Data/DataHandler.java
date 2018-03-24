@@ -6,6 +6,7 @@ import com.google.gson.stream.JsonReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import Models.Cards.DestinationCard;
 import Models.Gameplay.Route;
@@ -13,8 +14,12 @@ import Models.Gameplay.Route;
 public class DataHandler {
     private DestinationCardData dcData;
     private RouteData rtData;
+    private HashMap<Integer, Route> routeMap;
 
-    public DataHandler() { loadData(); }
+    public DataHandler() {
+        routeMap = new HashMap<>();
+        loadData();
+    }
 
     private void loadData() {
         dcData = new DestinationCardData();
@@ -31,14 +36,22 @@ public class DataHandler {
             System.out.println(e.getMessage());
             System.out.println("Destination cards and routes not loaded.");
         }
+        initRouteMap();
     }
 
     public ArrayList<DestinationCard> getDestinationCards(){
         return new ArrayList<>(Arrays.asList(dcData.data));
     }
 
-    public ArrayList<Route> getRoutes() {
-        return new ArrayList<>(Arrays.asList(rtData.data));
+    private void initRouteMap(){
+        for(int i = 0; i < rtData.data.length; i++)
+        {
+            routeMap.put(i, rtData.data[i]);
+        }
+    }
+
+    public HashMap<Integer, Route> getRoutes() {
+        return routeMap;
     }
 
 }
