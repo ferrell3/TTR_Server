@@ -36,6 +36,7 @@ public class UserServices implements IServerUser {
             {
                 Database.getInstance().getClients().add(user.getAuthToken());
                 request.setAuthToken(user.getAuthToken());
+                //TODO: remove this TestClientServices line
                 TestClientServices.getInstance().createGame();
                 response = LobbyServices.getInstance().updateClient(request);
 

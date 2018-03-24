@@ -20,6 +20,7 @@ public class Game {
     private ArrayList<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
     private HashMap<Integer, Route> routesMap; // Map of unclaimed routes
+    private int lastRoundCount = 0;
 
     private GameHistory history;
 
@@ -198,5 +199,13 @@ public class Game {
 
     public HashMap<Integer, Route> getRoutesMap() {
         return routesMap;
+    }
+
+    public int getLastRoundCount() {
+        return lastRoundCount;
+    }
+
+    public void incLastRoundCount() {
+        lastRoundCount++;
     }
 }
