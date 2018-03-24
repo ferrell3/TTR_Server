@@ -1,7 +1,7 @@
 package Models.Gameplay;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import Models.Cards.DestinationCard;
 import Models.Cards.DestinationDeck;
@@ -15,11 +15,11 @@ public class Game {
     private ArrayList<Player> players; //list of players' usernames
     private ArrayList<String> playerNames;
     private ArrayList<String> chats;  //List of all chats (format of "username: msg" )
-    private ArrayList<Route> routes;
     private TrainDeck trainDeck;
     private DestinationDeck destinationDeck;
     private ArrayList<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
+    private HashMap<Integer, Route> routesMap; // Map of unclaimed routes
 
     private GameHistory history;
 
@@ -30,7 +30,7 @@ public class Game {
         destinationDeck = new DestinationDeck();
         playerNames = new ArrayList<>();
         history = new GameHistory();
-        routes = Database.getInstance().getRoutes();
+        routesMap = Database.getInstance().getRoutes();
     }
 
     //constructor allowing to instantiate new game with given id
@@ -42,8 +42,8 @@ public class Game {
         destinationDeck = new DestinationDeck();
         playerNames = new ArrayList<>();
         history = new GameHistory();
-        routes = Database.getInstance().getRoutes();
         faceUpCards = new ArrayList<>();
+        routesMap = Database.getInstance().getRoutes();
     }
 
     public void addChatMessage(String message){
@@ -95,12 +95,20 @@ public class Game {
         this.chats = chat;
     }
 
-    public ArrayList<Route> getRoutes() {
-        return routes;
+    public boolean containsRoute(Route route){
+
+        if(routesMap.containsKey(route.getRouteNumber())){
+
+            return true;
+        }else {
+            return false;
+        }
     }
 
-    public void setRoutes(ArrayList<Route> routes) {
-        this.routes = routes;
+    public void removeClaimedRoute(){
+
+
+        //TODO add help function
     }
 
     public TrainDeck getTrainDeck() {
@@ -186,5 +194,9 @@ public class Game {
             }
         }
         return null;
+    }
+
+    public HashMap<Integer, Route> getRoutesMap() {
+        return routesMap;
     }
 }

@@ -2,13 +2,11 @@ package Server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import Data.DataHandler;
-import Models.Command;
 import Models.Cards.DestinationCard;
+import Models.Command;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import Models.Gameplay.Route;
@@ -145,7 +143,7 @@ public class Database {
         games.get(gameId).getHistory().addAction(msg);
     }
 
-    public ArrayList<Route> getRoutes() {
+    public HashMap<Integer, Route> getRoutes() {
         return dataHandler.getRoutes();
     }
 }

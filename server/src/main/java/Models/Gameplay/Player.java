@@ -106,6 +106,60 @@ public class Player {
         return hand;
     }
 
+    // Check if user has enough train cards to claim a route
+    public boolean checkHand(Route route){
+        int routeLength = route.getLength();
+        String routeColor = route.getColor();
+
+        int count = 0;
+        for(int i = 0; i < hand.size(); i++){
+
+            if(hand.get(i).getColor().equals(routeColor)){
+                count++;
+
+            }else if(hand.get(i).getColor().equals("wild")){
+                count++;
+
+            }
+            if(count == routeLength){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Remove train cards from hand when claiming a route
+    public void removeTrainCards(Route route){
+        int routeLength = route.getLength();
+        String routeColor = route.getColor();
+        int count = 0;
+
+        for(int i = 0; i < hand.size(); i++){
+
+            if(hand.get(i).getColor().equals(routeColor)){
+                hand.remove(i);
+                count++;
+                i--;
+
+            }else if(hand.get(i).getColor().equals("wild")){
+                hand.remove(i);
+                count++;
+                i--;
+            }
+
+            if(routeLength == count){
+                break;
+            }
+        }
+
+    }
+
+    // Adds a claimed route to the player's array of claimed routes
+    public void addClaimedRoute(Route route){
+        claimedRoutes.add(route);
+    }
+
     public void setHand(ArrayList<TrainCard> hand) {
         this.hand = hand;
     }
