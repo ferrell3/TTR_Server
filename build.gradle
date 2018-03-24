@@ -5,6 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
+        'com.google.code.gson:gson:2.6'
         classpath 'com.android.tools.build:gradle:2.2.3'
 
         // NOTE: Do not place your application dependencies here; they belong

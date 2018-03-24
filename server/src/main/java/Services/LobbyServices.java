@@ -41,6 +41,18 @@ public class LobbyServices implements ILobby {
             {
                 String username = Database.getInstance().getUsername(authToken);
 
+                //see if the user is already a part of another game
+                for (String i: Database.getInstance().getGames().keySet()){
+                    for(int j=0; j<Database.getInstance().getGames().get(i).getPlayers().size(); j++) {
+                        Player player = Database.getInstance().getGames().get(i).getPlayers().get(j);
+                        if (player.getName().equals(request.getUsername()))
+                        {
+                            Database.getInstance().getGames().get(i).getPlayers().remove(player);
+                            break;
+                        }
+                    }
+                }
+
                 //if it doesn't exist yet, create it
                 Database.getInstance().getGames().put(gameId, new Game(gameId));
 
