@@ -20,7 +20,8 @@ public class Game {
     private ArrayList<TrainCard> faceUpCards;
     private boolean active = false;    //Has the game started
     private HashMap<Integer, Route> routesMap; // Map of unclaimed routes
-    private int lastRoundCount = 0;
+    private int lastRoundCount;
+    private boolean lastRound = false;
 
     private GameHistory history;
 
@@ -204,7 +205,18 @@ public class Game {
         return lastRoundCount;
     }
 
-    public void incLastRoundCount() {
-        lastRoundCount++;
+    public void decLastRoundCount() {
+        lastRoundCount--;
+    }
+
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean lastRound) {
+        this.lastRound = lastRound;
+    }
+    public void setLastRoundCount(int lastRoundCount) {
+        this.lastRoundCount = lastRoundCount;
     }
 }

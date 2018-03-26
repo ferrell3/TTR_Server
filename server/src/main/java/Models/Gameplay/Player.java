@@ -19,6 +19,7 @@ public class Player {
     private int longestPathSize;
     private Score score;
     private boolean lastRound;
+    private int playerRank;
 
 
     public Player() {
@@ -43,6 +44,10 @@ public class Player {
 
     public Score getScore() {
         return score;
+    }
+    public int getTotalScore(){
+
+        return score.getTotal();
     }
 
     public void setScore(Score score) {
@@ -218,5 +223,13 @@ public class Player {
 
     public void setLastRound(boolean lastRound) {
         this.lastRound = lastRound;
+    }
+
+    public int getPlayerRank() {
+        return playerRank;
+    }
+
+    public void setPlayerRank(int playerRank) {
+        this.playerRank = playerRank;
     }
 }

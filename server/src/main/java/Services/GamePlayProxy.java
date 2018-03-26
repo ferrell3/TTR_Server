@@ -77,6 +77,12 @@ class GamePlayProxy implements IGamePlay {
     }
 
     @Override
+    public Result endGame(Request clientRequest) {
+        createCommand("endGame", clientRequest);
+        return null;
+    }
+
+    @Override
     public void dealFaceUpCards(Request clientRequest) {
         createCommand("shuffleFaceUp", clientRequest);
     }
