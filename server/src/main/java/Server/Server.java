@@ -8,8 +8,14 @@ public class Server {
     private static final int MAX_WAITING_CONNECTIONS = 12;
 
     public static void main(String[] args) {
-        String portNumber = "8888";
+        String portNumber = "";
+        if(args.length == 0){
+            portNumber = "8888";
+        }else{
+            portNumber = args[0];
+        }
         new Server().init(portNumber);
+
     }
 
     private void init(String portNumber) {
