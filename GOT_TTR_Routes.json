@@ -332,12 +332,12 @@
     },
     {
       "start": "Longbow Hall",
-      "startX": 1023,
-      "startY": 610,
-      "color": "wild",
+      "startX": 1080,
+      "startY": 862,
       "end": "Old Archer",
-      "endX": 1014,
-      "endY": 563,
+      "endX": 1040,
+      "endY": 620,
+      "color": "wild",
       "length": 6
 
     },
