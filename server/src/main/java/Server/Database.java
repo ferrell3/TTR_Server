@@ -136,6 +136,7 @@ public class Database {
             gameCommands.put(gameId, commands);
 
         }
+
     }
 
     public void addGameHistory(String gameId, String msg){

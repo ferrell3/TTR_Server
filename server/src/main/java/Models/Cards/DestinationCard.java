@@ -30,4 +30,8 @@ public class DestinationCard {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public boolean isEqual(DestinationCard that) {
+        return start.equals(that.start) && end.equals(that.end) && (points == that.points);
+    }
 }
