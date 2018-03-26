@@ -1,6 +1,8 @@
 package Services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -517,6 +519,9 @@ public class GamePlayServices implements IGamePlay {
                         int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
                         if(numTrains < 3){
                             //TODO initiate last round
+                            Database.getInstance().getGameById(gameId).setLastRound(true);
+                            // Set game object count to player size+1 (accounts for initiating player to have last round)
+                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size()+1);
 
                         }
 
@@ -524,7 +529,6 @@ public class GamePlayServices implements IGamePlay {
                         request.setAction(route.getStartCity()+" to "+route.getEndCity()+" claimed by "+username);
                         addGameHistory(request);
 
-                        // TODO add command object
                         // Add cmdObject that contains route object for client
                         GamePlayProxy.getInstance().claimRoute(request);
 
@@ -563,13 +567,24 @@ public class GamePlayServices implements IGamePlay {
 
             if (Database.getInstance().getGamePlayers(gameId).get(i-1).isTurn())
             {
-                if(Database.getInstance().getGamePlayers(gameId).get(i-1).isLastRound())
-                {
-                    Database.getInstance().getGameById(gameId).incLastRoundCount();
-                }
-                if(Database.getInstance().getGameById(gameId).getLastRoundCount() == Database.getInstance().getGamePlayers(gameId).size())
-                {
-                    //GAME OVER
+                // Check if game object's lastRound is set to true
+                if(Database.getInstance().getGameById(gameId).isLastRound()){
+
+                    // Initiate game over
+                    if(Database.getInstance().getGameById(gameId).getLastRoundCount() == 0){
+                        endGame(request);
+                    }
+                    else{
+                        Database.getInstance().getGameById(gameId).decLastRoundCount();
+                    }
+
+
+//                    if (Database.getInstance().getGamePlayers(gameId).get(i - 1).isLastRound()) {
+//                        Database.getInstance().getGameById(gameId).incLastRoundCount();
+//                    }
+//                    if (Database.getInstance().getGameById(gameId).getLastRoundCount() == Database.getInstance().getGamePlayers(gameId).size()) {
+//                        //GAME OVER
+//                    }
                 }
                 //increment game.lastRoundCount
                 //set a boolean to prompt an action after the for loop is done executing:
@@ -597,6 +612,42 @@ public class GamePlayServices implements IGamePlay {
         GamePlayProxy.getInstance().endTurn(request);
         request.setAction("It's " + activeUser + "\'s turn.");
         addGameHistory(request);
+    }
+
+    //This function packages up the game information and sends it to the Clients to execute:
+    public Result endGame(Request argRequest){
+        Request request = new Request();
+        Result result = new Result();
+        String gameId = argRequest.getGameId();
+
+
+        // calculate the longest route winner
+        calculateLongestRoute(gameId);
+
+        // calculate the destination card points
+        calculateDestCard(gameId);
+
+        // Determine winner and rank players by total score
+        ArrayList<Player> playerList = Database.getInstance().getGameById(gameId).getPlayers();
+        // Sort arrayList of players by total score
+        Collections.sort(playerList, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getTotalScore() - p2.getTotalScore();
+            }
+        });
+        // set playerRank using sorted playerList
+        for(int i = 0; i < playerList.size(); i++){
+            Database.getInstance().getGameById(gameId).getPlayer(playerList.get(i).getName()).setPlayerRank(i+1);
+        }
+
+        // set the correct game object to send back to client
+        request.setGame(Database.getInstance().getGameById(gameId));
+
+        // set command object to send back to client
+        GamePlayProxy.getInstance().endGame(request);
+
+        return result;
     }
 
     // Calculates longest route winner for a game
