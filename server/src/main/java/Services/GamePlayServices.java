@@ -1,6 +1,8 @@
 package Services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -624,9 +626,20 @@ public class GamePlayServices implements IGamePlay {
         // calculate the destination card points
         calculateDestCard(gameId);
 
+        // Determine winner and rank players by total score
         ArrayList<Player> playerList = Database.getInstance().getGameById(gameId).getPlayers();
+        // Sort arrayList of players by total score
+        Collections.sort(playerList, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return p1.getTotalScore() - p2.getTotalScore();
+            }
+        });
+        // set playerRank using sorted playerList
+        for(int i = 0; i < playerList.size(); i++){
+            Database.getInstance().getGameById(gameId).getPlayer(playerList.get(i).getName()).setPlayerRank(i+1);
+        }
 
-        //TODO calculate rank of winners
         // set the correct game object to send back to client
         request.setGame(Database.getInstance().getGameById(gameId));
 
