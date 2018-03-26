@@ -3,6 +3,7 @@ package Models.Gameplay;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Models.Cards.DestinationCard;
 import Models.Cards.TrainCard;
@@ -11,8 +12,9 @@ public class Player {
     private String color;
     private String name;
     private boolean turn;
-    private int numTrains; //will be decremented when a route is claimed
-    private ArrayList<Route> claimedRoutes;
+    private int numTrains; //will be decremented when a route is claimedRouteList
+    private ArrayList<Route> claimedRouteList;
+    private Map<Integer, Route> claimedRoutes;
     private ArrayList<TrainCard> hand;
     private ArrayList<DestinationCard> destination_cards;
     private ArrayList<DestinationCard> drawnDestCards;
@@ -23,21 +25,23 @@ public class Player {
 
 
     public Player() {
-        claimedRoutes = new ArrayList<>();
+        claimedRouteList = new ArrayList<>();
+        claimedRoutes = new HashMap<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-        numTrains = 3; //45;
+        numTrains = 15;
         score = new Score();
     }
 
     public Player(String username){
         name = username;
-        claimedRoutes = new ArrayList<>();
+        claimedRouteList = new ArrayList<>();
+        claimedRoutes = new HashMap<>();
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-        numTrains = 3; //45;
+        numTrains = 15;
         turn = false;
         score = new Score();
     }
@@ -54,14 +58,14 @@ public class Player {
         this.score = score;
     }
 
-    // Map of all cities in claimed routes without duplicates
+    // Map of all cities in claimedRouteList routes without duplicates
     public HashMap<String, Integer> getListClaimedRouteCities(){
         ArrayList <String> cityList = new ArrayList<>();
         HashMap<String, Integer> cities = new HashMap<>();
 
-        for(int i = 0; i < claimedRoutes.size(); i++){
-            cityList.add(claimedRoutes.get(i).getStartCity());
-            cityList.add(claimedRoutes.get(i).getEndCity());
+        for(int i = 0; i < claimedRouteList.size(); i++){
+            cityList.add(claimedRouteList.get(i).getStartCity());
+            cityList.add(claimedRouteList.get(i).getEndCity());
         }
 
         int count = 0;
@@ -100,12 +104,12 @@ public class Player {
         this.turn = turn;
     }
 
-    public ArrayList<Route> getClaimedRoutes() {
-        return claimedRoutes;
+    public ArrayList<Route> getClaimedRouteList() {
+        return claimedRouteList;
     }
 
-    public void setClaimedRoutes(ArrayList<Route> claimedRoutes) {
-        this.claimedRoutes = claimedRoutes;
+    public void setClaimedRouteList(ArrayList<Route> claimedRouteList) {
+        this.claimedRouteList = claimedRouteList;
     }
 
     public List<TrainCard> getHand() {
@@ -183,9 +187,10 @@ public class Player {
 
     }
 
-    // Adds a claimed route to the player's array of claimed routes
+    // Adds a claimedRouteList route to the player's array of claimedRouteList routes
     public void addClaimedRoute(Route route){
-        claimedRoutes.add(route);
+        claimedRouteList.add(route);
+        claimedRoutes.put(route.getRouteNumber(), route);
     }
 
     public void setHand(ArrayList<TrainCard> hand) {
@@ -214,7 +219,17 @@ public class Player {
 
     public void discardDestCards(ArrayList<DestinationCard> cards)
     {
-        destination_cards.removeAll(cards);
+        for(DestinationCard discard : cards)
+        {
+            for(DestinationCard card : destination_cards)
+            {
+                if(discard.isEqual(card))
+                {
+                    destination_cards.remove(card);
+                    break;
+                }
+            }
+        }
         drawnDestCards.clear();
     }
 

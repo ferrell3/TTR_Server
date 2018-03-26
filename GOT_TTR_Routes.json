@@ -107,7 +107,7 @@
       "end": "High Garden",
       "endX": 519,
       "endY": 1635,
-      "color": "blue",
+      "color": "orange",
       "length": 4
     },
     {
@@ -147,7 +147,7 @@
       "end": "Old Oak",
       "endX": 240,
       "endY": 1455,
-      "color": "blue",
+      "color": "purple",
       "length": 6
     },
     {
@@ -167,7 +167,7 @@
       "end": "Bonzegate",
       "endX": 1008,
       "endY": 1492,
-      "color": "blue",
+      "color": "purple",
       "length": 3
     },
     {
@@ -237,7 +237,7 @@
       "end": "River Run",
       "endX": 482,
       "endY": 1226,
-      "color": "blue",
+      "color": "purple",
       "length": 4
     },
     {
@@ -312,8 +312,8 @@
     },
     {
       "start": "Sharp Point",
-      "startX": 920,
-      "startY": 1060,
+      "startX": 1244,
+      "startY": 1181,
       "end": "Longbow Hall",
       "endX": 1069,
       "endY": 907,
@@ -322,8 +322,8 @@
     },
     {
       "start": "Old Archer",
-      "startX": 920,
-      "startY": 1060,
+      "startX": 1098,
+      "startY": 563,
       "end": "Longbow Hall",
       "endX": 1069,
       "endY": 907,
@@ -332,8 +332,8 @@
     },
     {
       "start": "Old Archer",
-      "startX": 920,
-      "startY": 1060,
+      "startX": 1098,
+      "startY": 563,
       "end": "Longbow Hall",
       "endX": 1069,
       "endY": 907,
@@ -377,7 +377,7 @@
       "end": "Torrhens Square",
       "endX": 254,
       "endY": 652,
-      "color": "blue",
+      "color": "purple",
       "length": 2
     },
     {
@@ -451,9 +451,9 @@
       "length": 5
     },
     {
-      "start": "Salt Pans",
-      "startX": 185,
-      "startY": 473,
+      "start": "Runestone",
+      "endX": 543,
+      "endY": 477,
       "end": "Winterfell",
       "endX": 627,
       "endY": 230,

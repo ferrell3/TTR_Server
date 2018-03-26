@@ -74,6 +74,7 @@ public class GamePlayServices implements IGamePlay {
                     // Add game history
                     String startGame = gameId + " started!";
                     Database.getInstance().getGameById(gameId).getHistory().addAction(startGame);
+                    Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size());
 
                     // setPlayerColor, assignPlayerOrder, and dealCards for each player object
                     setupPlayer(gameId);
@@ -521,12 +522,11 @@ public class GamePlayServices implements IGamePlay {
 
                         // check for "last round" if train cars are less than 3
                         int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
-                        if(numTrains < 3){
+                        if(numTrains < 3 && Database.getInstance().getGameById(gameId).isLastRound() == false ){
                             //TODO initiate last round
                             Database.getInstance().getGameById(gameId).setLastRound(true);
                             // Set game object count to player size+1 (accounts for initiating player to have last round)
-                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size()+1);
-
+//                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size());
                         }
 
                         // Add game history
@@ -581,14 +581,6 @@ public class GamePlayServices implements IGamePlay {
                     else{
                         Database.getInstance().getGameById(gameId).decLastRoundCount();
                     }
-
-
-//                    if (Database.getInstance().getGamePlayers(gameId).get(i - 1).isLastRound()) {
-//                        Database.getInstance().getGameById(gameId).incLastRoundCount();
-//                    }
-//                    if (Database.getInstance().getGameById(gameId).getLastRoundCount() == Database.getInstance().getGamePlayers(gameId).size()) {
-//                        //GAME OVER
-//                    }
                 }
                 //increment game.lastRoundCount
                 //set a boolean to prompt an action after the for loop is done executing:
@@ -603,6 +595,16 @@ public class GamePlayServices implements IGamePlay {
             {
                 if(Database.getInstance().getGamePlayers(gameId).get(i).isTurn())
                 {
+                    if(Database.getInstance().getGameById(gameId).isLastRound()){
+
+                        // Initiate game over
+                        if(Database.getInstance().getGameById(gameId).getLastRoundCount() == 0){
+                            endGame(request);
+                        }
+                        else{
+                            Database.getInstance().getGameById(gameId).decLastRoundCount();
+                        }
+                    }
                     Database.getInstance().getGamePlayers(gameId).get(i).setTurn(false);
                     Database.getInstance().getGamePlayers(gameId).get(0).setTurn(true);
                     activeUser = Database.getInstance().getGamePlayers(gameId).get(0).getName();
@@ -620,7 +622,7 @@ public class GamePlayServices implements IGamePlay {
 
     //This function packages up the game information and sends it to the Clients to execute:
     public Result endGame(Request argRequest){
-        Request request = new Request();
+//        Request request = new Request();
         Result result = new Result();
         String gameId = argRequest.getGameId();
 
@@ -637,6 +639,10 @@ public class GamePlayServices implements IGamePlay {
         Collections.sort(playerList, new Comparator<Player>() {
             @Override
             public int compare(Player p1, Player p2) {
+                if(p1.getTotalScore() < 0)
+                {
+                    return p2.getTotalScore() - p1.getTotalScore();
+                }
                 return p1.getTotalScore() - p2.getTotalScore();
             }
         });
@@ -646,10 +652,10 @@ public class GamePlayServices implements IGamePlay {
         }
 
         // set the correct game object to send back to client
-        request.setGame(Database.getInstance().getGameById(gameId));
-
+        argRequest.setGame(Database.getInstance().getGameById(gameId));
+//        request.setGameId(gameId);
         // set command object to send back to client
-        GamePlayProxy.getInstance().endGame(request);
+        GamePlayProxy.getInstance().endGame(argRequest);
 
         return result;
     }
@@ -751,11 +757,11 @@ public class GamePlayServices implements IGamePlay {
 //        player3.setName("Finn");
 //
 //        ArrayList<Route> routes = new ArrayList<>(Arrays.asList(route1,route2,route3,route4,route5,route6,route7,route8,route9));
-//        player.setClaimedRoutes(routes);
-//        player3.setClaimedRoutes(routes);
+//        player.setClaimedRouteList(routes);
+//        player3.setClaimedRouteList(routes);
 //
 //        ArrayList<Route> routes2 = new ArrayList<>(Arrays.asList(route1,route5));
-//        player2.setClaimedRoutes(routes2);
+//        player2.setClaimedRouteList(routes2);
 //
 //        DestinationCard destCard = new DestinationCard();
 //        destCard.setCity1("Seattle");
