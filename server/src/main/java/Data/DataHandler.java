@@ -46,7 +46,9 @@ public class DataHandler {
     private void initRouteMap(){
         for(int i = 0; i < rtData.data.length; i++)
         {
-            routeMap.put(i, rtData.data[i]);
+            Route rt = rtData.data[i];
+            rt.setRouteNumber(i);
+            routeMap.put(i, rt);
         }
     }
 
