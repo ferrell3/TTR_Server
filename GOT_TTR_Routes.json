@@ -172,21 +172,21 @@
     },
     {
       "start": "Storms End",
-      "startX": 1118,
-      "startY": 1572,
+      "startX": 1076,
+      "startY": 1555,
       "end": "Bonzegate",
-      "endX": 1008,
-      "endY": 1492,
+      "endX": 1003,
+      "endY": 1522,
       "color": "wild",
       "length": 1
     },
     {
       "start": "Storms End",
-      "startX": 1118,
-      "startY": 1572,
+      "startX": 1114,
+      "startY": 1530,
       "end": "Bonzegate",
-      "endX": 1008,
-      "endY": 1492,
+      "endX": 1060,
+      "endY": 1482,
       "color": "wild",
       "length": 1
     },
@@ -335,8 +335,8 @@
       "startX": 1080,
       "startY": 862,
       "end": "Old Archer",
-      "endX": 1040,
-      "endY": 620,
+      "endX": 1124,
+      "endY": 618,
       "color": "wild",
       "length": 6
 
