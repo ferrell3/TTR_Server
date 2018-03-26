@@ -452,8 +452,8 @@
     },
     {
       "start": "Runestone",
-      "endX": 543,
-      "endY": 477,
+      "starX": 543,
+      "startY": 477,
       "end": "Winterfell",
       "endX": 627,
       "endY": 230,
@@ -472,8 +472,8 @@
     },
     {
       "start": "Old Archer",
-      "startX": 920,
-      "startY": 1060,
+      "startX": 1098,
+      "startY": 563,
       "end": "The Eyrie",
       "endX": 1038,
       "endY": 374,
