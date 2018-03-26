@@ -61,7 +61,7 @@
       "length": 6
     },
     {
-      "start": "The Thor",
+      "start": "The Tor",
       "startX": 788,
       "startY": 1865,
       "end": "Wyl",
@@ -71,7 +71,7 @@
       "length": 1
     },
     {
-      "start": "The Thor",
+      "start": "The Tor",
       "startX": 788,
       "startY": 1865,
       "end": "Hellholt",
@@ -511,9 +511,9 @@
       "length": 1
     },
     {
-      "start": "White Harbor",
-      "startX": 1153,
-      "startY": 329,
+      "start": "Widows Watch",
+      "startX": 1035,
+      "startY": 226,
       "end": "The Eyrie",
       "endX": 1038,
       "endY": 374,
