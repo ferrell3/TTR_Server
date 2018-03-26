@@ -2,7 +2,7 @@ package Models.Gameplay;
 
 public class Route {
     private String owner;
-    private int points;
+    private int points = 0;
     private int length;
 //    private String name;
     private String start;
@@ -21,6 +21,30 @@ public class Route {
         start = startPt;
         end = endPt;
         length = edgeWeight;
+    }
+
+    public void addRoutePoints() {
+        switch (length){
+            case 1:
+                points += 1;
+                break;
+            case 2:
+                points += 2;
+                break;
+            case 3:
+                points += 4;
+                break;
+            case 4:
+                points += 7;
+                break;
+            case 5:
+                points += 10;
+                break;
+            case 6:
+                points += 15;
+                break;
+        }
+
     }
 
     public String getColor() {
