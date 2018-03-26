@@ -69,8 +69,8 @@ public class Score {
                 break;
         }
 
-        this.routePoints += routePoints;
-        this.total += routePoints;
+//        this.routePoints += routePoints;
+//        this.total += routePoints;
     }
 
     public void addPosDestPoints(int posDestPoints) {
