@@ -253,6 +253,7 @@ public class LongestPath {
 
         // Create AdjacencyMatrix from claimed routes
         ArrayList<Route> claimedRoutes = player.getClaimedRoutes();
+        if(claimedRoutes.isEmpty()) { return 0; }
         for(int i = 0; i < claimedRoutes.size(); i++){
             g.addEdge(cities.get(claimedRoutes.get(i).getStartCity()),cities.get(claimedRoutes.get(i).getEndCity()),(claimedRoutes.get(i).getLength() * -1));
 

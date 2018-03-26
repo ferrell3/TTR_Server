@@ -74,6 +74,7 @@ public class GamePlayServices implements IGamePlay {
                     // Add game history
                     String startGame = gameId + " started!";
                     Database.getInstance().getGameById(gameId).getHistory().addAction(startGame);
+                    Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size());
 
                     // setPlayerColor, assignPlayerOrder, and dealCards for each player object
                     setupPlayer(gameId);
@@ -518,12 +519,11 @@ public class GamePlayServices implements IGamePlay {
 
                         // check for "last round" if train cars are less than 3
                         int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
-                        if(numTrains < 3){
+                        if(numTrains < 3 && Database.getInstance().getGameById(gameId).isLastRound() == false ){
                             //TODO initiate last round
                             Database.getInstance().getGameById(gameId).setLastRound(true);
                             // Set game object count to player size+1 (accounts for initiating player to have last round)
-                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size()+1);
-
+//                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size());
                         }
 
                         // Add game history
@@ -578,14 +578,6 @@ public class GamePlayServices implements IGamePlay {
                     else{
                         Database.getInstance().getGameById(gameId).decLastRoundCount();
                     }
-
-
-//                    if (Database.getInstance().getGamePlayers(gameId).get(i - 1).isLastRound()) {
-//                        Database.getInstance().getGameById(gameId).incLastRoundCount();
-//                    }
-//                    if (Database.getInstance().getGameById(gameId).getLastRoundCount() == Database.getInstance().getGamePlayers(gameId).size()) {
-//                        //GAME OVER
-//                    }
                 }
                 //increment game.lastRoundCount
                 //set a boolean to prompt an action after the for loop is done executing:
