@@ -32,20 +32,20 @@
     },
     {
       "start": "Sunspeare",
-      "startX": 1217,
-      "startY": 1935,
+      "startX": 1183,
+      "startY": 1910,
       "end": "Green Stone",
-      "endX": 1153,
-      "endY": 1760,
+      "endX": 1140,
+      "endY": 1786,
       "color": "wild",
       "length": 4
     },
     {
       "start": "Sunspeare",
-      "startX": 1217,
-      "startY": 1935,
+      "startX": 1230,
+      "startY": 1901,
       "end": "Green Stone",
-      "endX": 1153,
+      "endX": 1180,
       "endY": 1760,
       "color": "black",
       "length": 4
@@ -325,8 +325,8 @@
       "startX": 1082,
       "startY": 563,
       "end": "Longbow Hall",
-      "endX": 1053,
-      "endY": 907,
+      "endX": 1029,
+      "endY": 858,
       "color": "blue",
       "length": 6
     },
