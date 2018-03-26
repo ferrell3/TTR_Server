@@ -496,6 +496,9 @@ public class GamePlayServices implements IGamePlay {
                     // Check that they have enough train cards/correct color
                     if(Database.getInstance().getGameById(gameId).getPlayer(username).checkHand(route)){
 
+                        // Set user's name to route's owner
+                        route.setOwner(username);
+
                         // Remove player's used train cards for claimed route
                         Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(route);
 
@@ -507,7 +510,6 @@ public class GamePlayServices implements IGamePlay {
 
                         // Remove the route from game's available routes
                         Database.getInstance().getGameById(gameId).removeClaimedRoute(route);
-
 
                         // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
                         Database.getInstance().getGameById(gameId).getPlayer(username).getScore().addRoutePoints(route.getLength());

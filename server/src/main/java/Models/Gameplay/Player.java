@@ -129,6 +129,9 @@ public class Player {
             }else if(hand.get(i).getColor().equals("wild")){
                 count++;
 
+            }else if(routeColor.equals("wild")){
+                count++;
+
             }
             else if (routeColor.equals("wild"))
             {
@@ -159,6 +162,12 @@ public class Player {
                 hand.remove(i);
                 count++;
                 i--;
+            }else if(routeColor.equals("wild")){
+                //TODO remove only cards of same color
+                hand.remove(i);
+                count++;
+                i--;
+
             }
             else if(routeColor.equals("wild"))
             {
