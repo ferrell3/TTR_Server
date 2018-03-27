@@ -2,7 +2,6 @@ package Models.Gameplay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Models.Cards.DestinationCard;
@@ -112,28 +111,64 @@ public class Player {
         this.claimedRouteList = claimedRouteList;
     }
 
-    public List<TrainCard> getHand() {
+    public ArrayList<TrainCard> getHand() {
         return hand;
     }
 
     // Check if user has enough train cards to claim a route
-    public boolean checkHand(Route route){
+    public boolean checkHand(Route route, ArrayList<TrainCard> trainCards){
         int routeLength = route.getLength();
         String routeColor = route.getColor();
+        int numCards = trainCards.size();
 
-        int count = 0;
-        for(int i = 0; i < hand.size(); i++){
+        // Check that player has sent right number of cards
+        if(routeLength != numCards){
+            return false;
+        }
 
-            if(hand.get(i).getColor().equals(routeColor)){
-                count++;
+        // Check if the route is wild or not (else)
+        if(routeColor.equals("wild")){
+            String wildRouteColor = "default";
 
-            }else if(hand.get(i).getColor().equals("wild")){
-                count++;
+            // Find other colors than wild
+            for(int i = 0; i < trainCards.size(); i++){
 
-            }else if(routeColor.equals("wild")){
-                count++;
-
+                // Check if color is NOT wild
+                if(!trainCards.get(i).getColor().equals("wild")){
+                    wildRouteColor = trainCards.get(i).getColor();
+                    break;
+                }
             }
+
+            // Must contain only wild cards
+            if(wildRouteColor.equals("default")){
+                return true;
+            }
+
+            int count = 0;
+            for(int i = 0; i < trainCards.size(); i++){
+
+                // if the train card equals same wildRouteColor OR wild
+                if(trainCards.get(i).getColor().equals(wildRouteColor) || trainCards.get(i).getColor().equals("wild")){
+                    count++;
+                }
+            }
+
+            if(count == routeLength){
+                return true;
+            }
+
+
+        }else{
+            int count = 0;
+            for(int i = 0; i < trainCards.size(); i++){
+
+                // if the train card equals same color OR wild
+                if(trainCards.get(i).getColor().equals(routeColor) || trainCards.get(i).getColor().equals("wild")){
+                    count++;
+                }
+            }
+
             if(count == routeLength){
                 return true;
             }
@@ -143,32 +178,16 @@ public class Player {
     }
 
     // Remove train cards from hand when claiming a route
-    public void removeTrainCards(Route route){
-        int routeLength = route.getLength();
-        String routeColor = route.getColor();
-        int count = 0;
+    public void removeTrainCards(ArrayList<TrainCard> trainCards){
 
-        for(int i = 0; i < hand.size(); i++){
+        for(int i = 0; i < trainCards.size(); i++){
 
-            if(hand.get(i).getColor().equals(routeColor)){
-                hand.remove(i);
-                count++;
-                i--;
-
-            }else if(hand.get(i).getColor().equals("wild")){
-                hand.remove(i);
-                count++;
-                i--;
-            }else if(routeColor.equals("wild")){
-                //TODO remove only cards of same color
-                hand.remove(i);
-                count++;
-                i--;
-
-            }
-
-            if(routeLength == count){
-                break;
+            for(int j = 0; j < hand.size(); j++){
+                // If train card matches hand remove from deck
+                if(trainCards.get(i).getColor().equals(hand.get(j).getColor())){
+                    hand.remove(j);
+                    break;
+                }
             }
         }
 
