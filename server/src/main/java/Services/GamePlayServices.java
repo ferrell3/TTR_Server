@@ -480,6 +480,7 @@ public class GamePlayServices implements IGamePlay {
         String authToken = request.getAuthToken();
         String username = Database.getInstance().getUsername(authToken);
         Route route = request.getRoute();
+        ArrayList<TrainCard> trainCards = request.getTrainCards();
         request.setUsername(username);
 
         // Check if requesting client is an active (logged in) client
@@ -495,7 +496,7 @@ public class GamePlayServices implements IGamePlay {
                 // Check if route is free (game.routes)
                 if(Database.getInstance().getGameById(gameId).containsRoute(route)){
                     // Check that they have enough train cards/correct color
-                    if(Database.getInstance().getGameById(gameId).getPlayer(username).checkHand(route)){
+                    if(Database.getInstance().getGameById(gameId).getPlayer(username).checkHand(route, trainCards)){
 
                         // Set user's name to route's owner
                         route.setOwner(username);
@@ -503,7 +504,10 @@ public class GamePlayServices implements IGamePlay {
                         route.addRoutePoints();
 
                         // Remove player's used train cards for claimed route
-                        Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(route);
+                        Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(trainCards);
+
+                        // Update request with current hand
+                        request.setTrainCards(Database.getInstance().getGameById(gameId).getPlayer(username).getHand());
 
                         // Set user's name to route's owner
                         route.setOwner(username);
@@ -523,7 +527,7 @@ public class GamePlayServices implements IGamePlay {
                         // check for "last round" if train cars are less than 3
                         int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
                         if(numTrains < 3 && Database.getInstance().getGameById(gameId).isLastRound() == false ){
-                            //TODO initiate last round
+                            // Initiate last round
                             Database.getInstance().getGameById(gameId).setLastRound(true);
                             // Set game object count to player size+1 (accounts for initiating player to have last round)
 //                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size());
@@ -734,65 +738,112 @@ public class GamePlayServices implements IGamePlay {
 
 //    public static void main (String[] args)
 //    {
-//        // Testing of calculateDestCard and calculateLongestRoute
-//        Game game = new Game();
+//        Route route1 = new Route("Seattle", "SF",5);
+//        route1.setColor("red");
+//
+//        ArrayList <TrainCard> trainCards = new ArrayList<>();
+//        TrainCard card1 = new TrainCard("wild");
+//        TrainCard card2 = new TrainCard("wild");
+//        TrainCard card3 = new TrainCard("red");
+//        TrainCard card4 = new TrainCard("red");
+//        TrainCard card5 = new TrainCard("red");
+//        TrainCard card6 = new TrainCard("blue");
+//
+//        ArrayList <TrainCard> playersHand = new ArrayList<>();
+//
+//
+//        trainCards.add(card1);  // Wild
+//        trainCards.add(card4);  // red
+//        trainCards.add(card4);  // red
+//        trainCards.add(card1);  // Wild
+//        trainCards.add(card4);  // red
+////        trainCards.add(card1);
+////        trainCards.add(card2);
+////        trainCards.add(card3);
+//        playersHand.add(card6);
+//        playersHand.add(card1);
+//        playersHand.add(card1);
+//        playersHand.add(card1);
+//        playersHand.add(card3);
+//        playersHand.add(card3);
+//        playersHand.add(card3);
+//        playersHand.add(card3);
+//        playersHand.add(card3);
+//        playersHand.add(card3);
+//        playersHand.add(card6);
+//        playersHand.add(card6);
+//
 //
 //        Player player = new Player();
 //        player.setName("Kip");
-//        Route route1 = new Route("Seattle", "SF",4);
-//        Route route2 = new Route("Seattle", "Portland",2);
-//        Route route3 = new Route("Seattle", "SLC",3);
-//        Route route4 = new Route("Portland", "SF",5);
-//        Route route5 = new Route("Portland", "DC",6);
-//        Route route6 = new Route("SF", "Langley",2);
-//        Route route7 = new Route("SLC", "Langley",2);
-//        Route route8 = new Route("Langley", "DC",6);
+//        player.setHand(playersHand);
 //
-//        Route route9 = new Route("Dig", "pirate",6);
+//        player.removeTrainCards(trainCards);
 //
-//        Player player2 = new Player();
-//        player2.setName("Jordan");
-//
-//        Player player3 = new Player();
-//        player3.setName("Finn");
-//
-//        ArrayList<Route> routes = new ArrayList<>(Arrays.asList(route1,route2,route3,route4,route5,route6,route7,route8,route9));
-//        player.setClaimedRouteList(routes);
-//        player3.setClaimedRouteList(routes);
-//
-//        ArrayList<Route> routes2 = new ArrayList<>(Arrays.asList(route1,route5));
-//        player2.setClaimedRouteList(routes2);
-//
-//        DestinationCard destCard = new DestinationCard();
-//        destCard.setCity1("Seattle");
-//        destCard.setCity2("SF");
-//        destCard.setPoints(7);
-//
-//        DestinationCard destCard2 = new DestinationCard();
-//        destCard2.setCity1("Seattle");
-//        destCard2.setCity2("Dig");
-//        destCard2.setPoints(5);
-//
-//        ArrayList<DestinationCard> destinationCards = new ArrayList<>();
-//        destinationCards.add(destCard);
-//        destinationCards.add(destCard);
-//
-//        ArrayList<DestinationCard> destinationCards2 = new ArrayList<>();
-//        destinationCards2.add(destCard2);
-//        destinationCards2.add(destCard);
+//        for(int i = 0; i < player.getHand().size(); i++){
+//            System.out.println(player.getHand().get(i).getColor());
+//        }
 //
 //
-//        player.setDestination_cards(destinationCards);
-//        player2.setDestination_cards(destinationCards);
-//        player3.setDestination_cards(destinationCards2);
-//
-//        game.addPlayer(player);
-//        game.addPlayer(player2);
-//        game.addPlayer(player3);
-//
-//
-//
-//        GamePlayServices.getInstance().calculateDestCard(game);
+//        // Testing of calculateDestCard and calculateLongestRoute
+////        Game game = new Game();
+////
+////        Player player = new Player();
+////        player.setName("Kip");
+////        Route route1 = new Route("Seattle", "SF",4);
+////        Route route2 = new Route("Seattle", "Portland",2);
+////        Route route3 = new Route("Seattle", "SLC",3);
+////        Route route4 = new Route("Portland", "SF",5);
+////        Route route5 = new Route("Portland", "DC",6);
+////        Route route6 = new Route("SF", "Langley",2);
+////        Route route7 = new Route("SLC", "Langley",2);
+////        Route route8 = new Route("Langley", "DC",6);
+////
+////        Route route9 = new Route("Dig", "pirate",6);
+////
+////        Player player2 = new Player();
+////        player2.setName("Jordan");
+////
+////        Player player3 = new Player();
+////        player3.setName("Finn");
+////
+////        ArrayList<Route> routes = new ArrayList<>(Arrays.asList(route1,route2,route3,route4,route5,route6,route7,route8,route9));
+////        player.setClaimedRouteList(routes);
+////        player3.setClaimedRouteList(routes);
+////
+////        ArrayList<Route> routes2 = new ArrayList<>(Arrays.asList(route1,route5));
+////        player2.setClaimedRouteList(routes2);
+////
+////        DestinationCard destCard = new DestinationCard();
+////        destCard.setCity1("Seattle");
+////        destCard.setCity2("SF");
+////        destCard.setPoints(7);
+////
+////        DestinationCard destCard2 = new DestinationCard();
+////        destCard2.setCity1("Seattle");
+////        destCard2.setCity2("Dig");
+////        destCard2.setPoints(5);
+////
+////        ArrayList<DestinationCard> destinationCards = new ArrayList<>();
+////        destinationCards.add(destCard);
+////        destinationCards.add(destCard);
+////
+////        ArrayList<DestinationCard> destinationCards2 = new ArrayList<>();
+////        destinationCards2.add(destCard2);
+////        destinationCards2.add(destCard);
+////
+////
+////        player.setDestination_cards(destinationCards);
+////        player2.setDestination_cards(destinationCards);
+////        player3.setDestination_cards(destinationCards2);
+////
+////        game.addPlayer(player);
+////        game.addPlayer(player2);
+////        game.addPlayer(player3);
+////
+////
+////
+////        GamePlayServices.getInstance().calculateDestCard(game);
 ////        boolean temp = LongestPath.calcDestCard(player, destCard);
 ////
 ////        System.out.println(temp);
