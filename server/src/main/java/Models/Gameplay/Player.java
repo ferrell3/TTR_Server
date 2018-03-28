@@ -119,7 +119,32 @@ public class Player {
         return hand;
     }
 
-    // Check if user has enough train cards to claim a route
+    // Verify that the cards sent match the player's hand
+    public boolean verifyHand(ArrayList<TrainCard> trainCards){
+        ArrayList<TrainCard> handCards = hand;
+        int count = 0;
+
+        // Check each card sent to server
+        for(int i = 0; i < trainCards.size(); i++){
+
+            for(int j = 0; j < handCards.size(); j++){
+
+                // If cards match remove from temp hand (handCards)
+                if(trainCards.get(i).getColor().equals(handCards.get(j).getColor())){
+                    count++;
+                    handCards.remove(j);
+                    break;
+                }
+
+            }
+        }
+
+        // If count matches the train cards then true, else false
+        return count == trainCards.size();
+
+    }
+
+    // Check if user has enough/correct train cards to claim a route
     public boolean checkHand(Route route, ArrayList<TrainCard> trainCards){
         int routeLength = route.getLength();
         String routeColor = route.getColor();
