@@ -262,6 +262,10 @@ public class GamePlayServices implements IGamePlay {
         request.setUsername(username);
         ArrayList<TrainCard> cards = new ArrayList<>();
         cards.add(Database.getInstance().getGameById(gameId).drawTrainCard());
+
+        // Add train card to player's hand (train cards) in database
+        Database.getInstance().getGameById(gameId).getPlayer(username).addTrainCardToHand(cards.get(0));
+
         request.setTrainCards(cards);
         GamePlayProxy.getInstance().drawTrainCard(request);
         Result result = updateClient(request);
@@ -383,7 +387,7 @@ public class GamePlayServices implements IGamePlay {
                 result.setSuccess(true);
                 result.setUpdateCommands(responseCommands);
 
-                System.out.println("updateClient successful for " + username + " in game: " + gameId);
+//                System.out.println("updateClient successful for " + username + " in game: " + gameId);
             }
         }
         else
@@ -495,58 +499,64 @@ public class GamePlayServices implements IGamePlay {
             {
                 // Check if route is free (game.routes)
                 if(Database.getInstance().getGameById(gameId).containsRoute(route)){
+
                     // Check that they have enough train cards/correct color
                     if(Database.getInstance().getGameById(gameId).getPlayer(username).checkHand(route, trainCards)){
 
-                        // Set user's name to route's owner
-                        route.setOwner(username);
-                        // Set route's points
-                        route.addRoutePoints();
+                        // Verify that player's hand contains cards that were sent
+                        if(Database.getInstance().getGameById(gameId).getPlayer(username).verifyHand(trainCards)) {
 
-                        // Remove player's used train cards for claimed route
-                        Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(trainCards);
+                            // Set user's name to route's owner
+                            route.setOwner(username);
+                            // Set route's points
+                            route.addRoutePoints();
 
-                        // Update request with current hand
-                        request.setTrainCards(Database.getInstance().getGameById(gameId).getPlayer(username).getHand());
+                            // Remove player's used train cards for claimed route
+                            Database.getInstance().getGameById(gameId).getPlayer(username).removeTrainCards(trainCards);
 
-                        // Set user's name to route's owner
-                        route.setOwner(username);
+                            // Update request with current hand
+                            request.setTrainCards(Database.getInstance().getGameById(gameId).getPlayer(username).getHand());
 
-                        // Add to game the player's claimed route
-                        Database.getInstance().getGameById(gameId).getPlayer(username).addClaimedRoute(route);
+                            // Add to game the player's claimed route
+                            Database.getInstance().getGameById(gameId).getPlayer(username).addClaimedRoute(route);
 
-                        // Remove the route from game's available routes
-                        Database.getInstance().getGameById(gameId).removeClaimedRoute(route);
+                            // Remove the route from game's available routes
+                            Database.getInstance().getGameById(gameId).removeClaimedRoute(route);
 
-                        // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
-                        Database.getInstance().getGameById(gameId).getPlayer(username).getScore().addRoutePoints(route.getLength());
+                            // increment player's score (Pass player's score.addRoutePoints the length it calculates score based off length)
+                            Database.getInstance().getGameById(gameId).getPlayer(username).getScore().addRoutePoints(route.getLength());
 
-                        // Decrement number of train cars for player
-                        Database.getInstance().getGameById(gameId).getPlayer(username).decrementNumTrains(route.getLength());
+                            // Decrement number of train cars for player
+                            Database.getInstance().getGameById(gameId).getPlayer(username).decrementNumTrains(route.getLength());
 
-                        // check for "last round" if train cars are less than 3
-                        int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
-                        if(numTrains < 3 && Database.getInstance().getGameById(gameId).isLastRound() == false ){
-                            // Initiate last round
-                            Database.getInstance().getGameById(gameId).setLastRound(true);
-                            // Set game object count to player size+1 (accounts for initiating player to have last round)
+                            // check for "last round" if train cars are less than 3
+                            int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
+                            if (numTrains < 3 && Database.getInstance().getGameById(gameId).isLastRound() == false) {
+                                // Initiate last round
+                                Database.getInstance().getGameById(gameId).setLastRound(true);
+                                // Set game object count to player size+1 (accounts for initiating player to have last round)
 //                            Database.getInstance().getGameById(gameId).setLastRoundCount(Database.getInstance().getGamePlayers(gameId).size());
+                            }
+
+                            // Add game history
+                            request.setAction(route.getStartCity() + " to " + route.getEndCity() + " claimed by " + username);
+                            addGameHistory(request);
+
+                            // Add cmdObject that contains route object for client
+                            GamePlayProxy.getInstance().claimRoute(request);
+
+
+                            result.setSuccess(true);
+                            System.out.println("claimRoute successful: " + route.getStartCity() + " to " + route.getEndCity() + " claimed by " + username);
+                        }
+                        else{
+                            System.out.println("ERROR: in claimRoute() -- train cards sent don't match player's current hand");
+                            result.setErrorMsg("ERROR: in claimRoute() -- train cards sent don't match player's current hand");
                         }
 
-                        // Add game history
-                        request.setAction(route.getStartCity()+" to "+route.getEndCity()+" claimed by "+username);
-                        addGameHistory(request);
-
-                        // Add cmdObject that contains route object for client
-                        GamePlayProxy.getInstance().claimRoute(request);
-
-
-                        result.setSuccess(true);
-                        System.out.println("claimRoute successful: "+route.getStartCity()+" to "+route.getEndCity()+" claimed by "+username);
-
                     }else{
-                        System.out.println("ERROR: in claimRoute() -- not enough train cards");
-                        result.setErrorMsg("ERROR: in claimRoute() -- not enough train cards");
+                        System.out.println("ERROR: in claimRoute() -- not enough train cards or incorrect color");
+                        result.setErrorMsg("ERROR: in claimRoute() -- not enough train cards or incorrect color");
                     }
 
                 }else {
