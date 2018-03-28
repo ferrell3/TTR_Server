@@ -262,6 +262,10 @@ public class GamePlayServices implements IGamePlay {
         request.setUsername(username);
         ArrayList<TrainCard> cards = new ArrayList<>();
         cards.add(Database.getInstance().getGameById(gameId).drawTrainCard());
+
+        // Add train card to player's hand (train cards) in database
+        Database.getInstance().getGameById(gameId).getPlayer(username).addTrainCardToHand(cards.get(0));
+
         request.setTrainCards(cards);
         GamePlayProxy.getInstance().drawTrainCard(request);
         Result result = updateClient(request);

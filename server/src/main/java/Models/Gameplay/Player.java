@@ -111,6 +111,10 @@ public class Player {
         this.claimedRouteList = claimedRouteList;
     }
 
+    public void addTrainCardToHand(TrainCard trainCard){
+        this.hand.add(trainCard);
+
+    }
     public ArrayList<TrainCard> getHand() {
         return hand;
     }
