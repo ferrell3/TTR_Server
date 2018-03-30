@@ -147,4 +147,6 @@ public class Database {
     public HashMap<Integer, Route> getRoutes() {
         return dataHandler.getRoutes();
     }
+
+    public HashMap<Integer, Route> getDoubleRoutes() { return dataHandler.getDoubleRouteMap(); }
 }

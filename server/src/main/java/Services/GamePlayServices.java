@@ -79,6 +79,12 @@ public class GamePlayServices implements IGamePlay {
                     // setPlayerColor, assignPlayerOrder, and dealCards for each player object
                     setupPlayer(gameId);
                     dealCards(gameId);
+
+                    // Check if greater than 3 players. If so add double routes
+                    if(Database.getInstance().getGamePlayers(gameId).size() > 3){
+                        Database.getInstance().getGameById(gameId).setDoubleRoutes();
+                    }
+
                     request.setGame(Database.getInstance().getGameById(gameId));
                     // Create cmdObject for setupGame by passing entire game object
                     GamePlayProxy.getInstance().setupGame(request);
