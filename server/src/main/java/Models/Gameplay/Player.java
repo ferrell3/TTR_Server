@@ -29,7 +29,7 @@ public class Player {
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-        numTrains = 15;
+        numTrains = 25;
         score = new Score();
     }
 
@@ -40,7 +40,7 @@ public class Player {
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-        numTrains = 15;
+        numTrains = 25;
         turn = false;
         score = new Score();
     }

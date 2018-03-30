@@ -655,9 +655,9 @@ public class GamePlayServices implements IGamePlay {
             public int compare(Player p1, Player p2) {
                 if(p1.getTotalScore() < 0)
                 {
-                    return p2.getTotalScore() - p1.getTotalScore();
+                    return p1.getTotalScore() - p2.getTotalScore();
                 }
-                return p1.getTotalScore() - p2.getTotalScore();
+                return p2.getTotalScore() - p1.getTotalScore();
             }
         });
         // set playerRank using sorted playerList
