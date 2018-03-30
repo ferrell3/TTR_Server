@@ -1,5 +1,6 @@
 package TestClient;
 
+import Models.Cards.TrainCard;
 import Models.Request;
 import Server.Database;
 import Services.LobbyServices;
@@ -28,6 +29,15 @@ public class TestClientServices {
 
             newReq.setAuthToken("1fee61ae-d871-4548-8fba-a775dab78f8b"); //kip
             LobbyServices.getInstance().joinGame(newReq);
+            LobbyServices.getInstance().startGame(newReq);
+
+            TrainCard trainCardWild = new TrainCard("wild");
+            for(int i = 0; i < 30; i++){
+                Database.getInstance().getGameById("gameTEST").getPlayer("kip").addTrainCardToHand(trainCardWild);
+                Database.getInstance().getGameById("gameTEST").getPlayer("jordan").addTrainCardToHand(trainCardWild);
+            }
+
+
 
 //            newReq.setAuthToken("82f90744-ef61-4298-84ce-3070dfc25137"); //finn
 //            LobbyServices.getInstance().joinGame(newReq);

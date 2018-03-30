@@ -121,7 +121,8 @@ public class Player {
 
     // Verify that the cards sent match the player's hand
     public boolean verifyHand(ArrayList<TrainCard> trainCards){
-        ArrayList<TrainCard> handCards = hand;
+        ArrayList <TrainCard> handCards = new ArrayList<>();
+        handCards.addAll(hand);
         int count = 0;
 
         // Check each card sent to server
