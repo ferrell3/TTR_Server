@@ -36,8 +36,10 @@ public class UserServices implements IServerUser {
             {
                 Database.getInstance().getClients().add(user.getAuthToken());
                 request.setAuthToken(user.getAuthToken());
+                Database.getInstance().storeJsonUsers();
+
                 //TODO: remove this TestClientServices line
-                TestClientServices.getInstance().createGame();
+//                TestClientServices.getInstance().createGame();
                 response = LobbyServices.getInstance().updateClient(request);
 
                 response.setAuthToken(user.getAuthToken());
@@ -78,6 +80,8 @@ public class UserServices implements IServerUser {
             Database.getInstance().getUsers().put(username, user); //for login purposes
             Database.getInstance().getUsers().put(authToken, user); //for authentication purposes
             Database.getInstance().getClients().add(authToken);
+
+            Database.getInstance().storeJsonUsers();
 
             request.setAuthToken(user.getAuthToken());
             response = LobbyServices.getInstance().updateClient(request);

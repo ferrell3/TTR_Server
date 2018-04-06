@@ -1,5 +1,15 @@
 package Server;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +21,7 @@ import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.User;
+import TestClient.TestClientServices;
 
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
@@ -20,6 +31,8 @@ public class Database {
 //    private ArrayList <Route> routes;
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
     private DataHandler dataHandler;
+    private int cmdCount;
+    private int delta = 20;
 
     private static Database theDB = new Database();
 
@@ -35,6 +48,7 @@ public class Database {
 //        routes = new ArrayList<>();
         dataHandler = new DataHandler();
         gameCommands = new HashMap<>();
+        cmdCount = 0;
     }
 
     void loadTeam() {
@@ -58,6 +72,12 @@ public class Database {
         clients.add(u2.getAuthToken());
         clients.add(u3.getAuthToken());
         clients.add(u4.getAuthToken());
+
+        storeJsonUsers();
+
+        TestClientServices.getInstance().createGame();
+        storeJsonCMDs("lobby");
+        storeJsonCMDs("game");
     }
 
     public HashMap<String, ArrayList<Command>> getAllGameCommands() {
@@ -122,6 +142,7 @@ public class Database {
 
     public void setMasterCommandList(ArrayList<Command> masterCommandList) {
         this.masterCommandList = masterCommandList;
+        storeJsonCMDs("lobby");
     }
 
     public void addGameCommand(String gameId, Command command){
@@ -134,9 +155,31 @@ public class Database {
             ArrayList <Command> commands = new ArrayList<>();
             commands.add(command);
             gameCommands.put(gameId, commands);
-
         }
 
+        storeJsonCMDs("game");
+
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        String jsonStr = gson.toJson(gameCommands);
+//        String jsonGame = gson.toJson(games);
+////        System.out.println(jsonStr);
+//
+//        try
+//        {
+//            PrintWriter out = new PrintWriter(new FileWriter("jsonCMDs.json"));
+//            out.print(jsonStr);
+//            out.close();
+//
+//            PrintWriter gameOut = new PrintWriter(new FileWriter("jsonGames.json"));
+//            gameOut.print(jsonGame);
+//            gameOut.close();
+//
+////            JsonReader cmdReader = new JsonReader(new FileReader("jsonCMDs.json"));
+////            gameCommands = gson.fromJson(cmdReader, HashMap.class);
+//        }catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 
     public void addGameHistory(String gameId, String msg){
@@ -146,5 +189,135 @@ public class Database {
 
     public HashMap<Integer, Route> getRoutes() {
         return dataHandler.getRoutes();
+    }
+
+
+
+    void loadJSONdatabase() {
+        loadJsonUsers();
+        loadJsonGames();
+        loadJsonCMDs();
+    }
+
+    public void storeJsonCMDs(String type) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String filename = "";
+        String jsonStr = "";
+        if(type.equals("lobby"))
+        {
+            jsonStr = gson.toJson(masterCommandList);
+            filename = "lobbyCommands.json";
+        }
+        else if(type.equals("game"))
+        {
+            jsonStr = gson.toJson(gameCommands);
+            filename = "gameCommands.json";
+        }
+
+        try
+        {
+            PrintWriter out = new PrintWriter(new FileWriter(filename));
+            out.print(jsonStr);
+            out.close();
+
+//            JsonReader cmdReader = new JsonReader(new FileReader("jsonCMDs.json"));
+//            gameCommands = gson.fromJson(cmdReader, HashMap.class);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return;
+        }
+        cmdCount++;
+        if(cmdCount == delta)
+        {
+            storeJsonGames();
+        }
+    }
+
+    public void loadJsonCMDs() {
+        Gson gson = new GsonBuilder().create();
+        Type typeGame = new TypeToken<HashMap<String, ArrayList<Command>>>(){}.getType();
+        Type typeLobby = new TypeToken<ArrayList<Command>>(){}.getType();
+        try
+        {
+            JsonReader cmdReader = new JsonReader(new FileReader("lobbyCommands.json"));
+            masterCommandList = gson.fromJson(cmdReader, typeLobby);
+
+            cmdReader = new JsonReader(new FileReader("gameCommands.json"));
+            gameCommands = gson.fromJson(cmdReader, typeGame);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void storeJsonGames() { //stores entire hashmap of games
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonGames = gson.toJson(games);
+        try
+        {
+            PrintWriter out = new PrintWriter(new FileWriter("games.json"));
+            out.print(jsonGames);
+            out.close();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadJsonGames() {
+        Gson gson = new GsonBuilder().create();
+        Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
+        try
+        {
+            JsonReader reader = new JsonReader(new FileReader("games.json"));
+            games = gson.fromJson(reader, type);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void storeJsonUsers() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonUsers = gson.toJson(users);
+        String jsonTokens = gson.toJson(clients);
+        try
+        {
+            PrintWriter out = new PrintWriter(new FileWriter("users.json"));
+            out.print(jsonUsers);
+            out.close();
+
+            //if we restart the server, do we restart the clients too? If so, we don't need this
+            //because the clients will have to re-login and thus they will be added to clients
+            //but all the game info will be saved so they can jump right back into it either way
+            out = new PrintWriter(new FileWriter("activeClients.json"));
+            out.print(jsonTokens);
+            out.close();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadJsonUsers() {
+        Gson gson = new GsonBuilder().create();
+        Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
+        Type typeClients = new TypeToken<ArrayList<String>>(){}.getType();
+
+        try
+        {
+            JsonReader reader = new JsonReader(new FileReader("users.json"));
+            users = gson.fromJson(reader, typeUser);
+
+            reader = new JsonReader(new FileReader("activeClients.json"));
+            clients = gson.fromJson(reader, typeClients);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

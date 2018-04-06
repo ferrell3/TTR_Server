@@ -19,6 +19,10 @@ public class DestinationDeck {
     }
 
     public DestinationCard draw() {
+        if(deck.isEmpty())
+        {
+            return null;
+        }
         return deck.remove(0);
     }
 

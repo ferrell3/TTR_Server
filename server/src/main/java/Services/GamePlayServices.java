@@ -200,6 +200,8 @@ public class GamePlayServices implements IGamePlay {
     }
 
     private void locomotiveCheck(String gameId) {
+        //TODO: Does not reshuffle on the second time
+        //check if the server properly updates the player's hand on the server too
         int locoCount = 0;
         for(TrainCard card : Database.getInstance().getGameById(gameId).getFaceUpCards())
         {
@@ -375,14 +377,17 @@ public class GamePlayServices implements IGamePlay {
             // Check if game doesn't exist, return error
             if (!Database.getInstance().getGames().containsKey(gameId))
             {
-                System.out.println("ERROR: in updateClient() -- Empty gameID.");
+                System.out.println("ERROR: in updateClient() -- Invalid gameID.");
             }
             else
             {
                 ArrayList <Command> responseCommands = new ArrayList<>();
-                for (int i = commandNum; i < Database.getInstance().getGameCommands(gameId).size(); i++)
+                if(Database.getInstance().getGameCommands(gameId) != null)
                 {
-                    responseCommands.add(Database.getInstance().getGameCommands(gameId).get(i));
+                    for (int i = commandNum; i < Database.getInstance().getGameCommands(gameId).size(); i++)
+                    {
+                        responseCommands.add(Database.getInstance().getGameCommands(gameId).get(i));
+                    }
                 }
                 result.setSuccess(true);
                 result.setUpdateCommands(responseCommands);
@@ -449,7 +454,12 @@ public class GamePlayServices implements IGamePlay {
                 ArrayList <DestinationCard> dealDest = new ArrayList<>();
 
                 // Deal three destination cards
-                for (int i = 0; i < 3; i++)
+                int numDestCards = 3;
+                if(Database.getInstance().getGameById(gameId).getDestinationDeck().size() < 3)
+                {
+                    numDestCards = Database.getInstance().getGameById(gameId).getDestinationDeck().size();
+                }
+                for (int i = 0; i < numDestCards; i++)
                 {
                     dealDest.add(Database.getInstance().getGameById(gameId).drawDestinationCard());
                 }
@@ -460,7 +470,7 @@ public class GamePlayServices implements IGamePlay {
                 GamePlayProxy.getInstance().drawDestCards(request);
 
                 // Add game history
-                String dealCardHistory = username + " drew three destination cards";
+                String dealCardHistory = username + " drew " + numDestCards + " destination cards";
                 request.setAction(dealCardHistory);
                 addGameHistory(request);
 
