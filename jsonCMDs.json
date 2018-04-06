@@ -1,0 +1,54 @@
+{
+  "gameTEST": [
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "discardDestCards",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "a1fb6d30-51e7-4669-b944-120989aefb06",
+          "gameId": "gameTEST",
+          "commandNum": 0,
+          "action": "jordan discarded 1 destination card.",
+          "discardDest": [
+            {
+              "start": "Old Town",
+              "end": "Widows Watch",
+              "points": 30
+            }
+          ],
+          "gameCMDNum": 0,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "a1fb6d30-51e7-4669-b944-120989aefb06",
+          "gameId": "gameTEST",
+          "commandNum": 0,
+          "action": "jordan discarded 1 destination card.",
+          "discardDest": [
+            {
+              "start": "Old Town",
+              "end": "Widows Watch",
+              "points": 30
+            }
+          ],
+          "gameCMDNum": 0,
+          "cardIndex": 0
+        }
+      ]
+    }
+  ]
+}

@@ -63,6 +63,9 @@ public class LobbyServices implements ILobby {
                 //if it doesn't exist yet, create it
                 Database.getInstance().getGames().put(gameId, new Game(gameId));
 
+                //Store games after a new game is created
+                Database.getInstance().storeJsonGames();
+
                 //add commands
                 request.setUsername(username);
                 ClientProxy.getInstance().createGame(request);
@@ -142,6 +145,7 @@ public class LobbyServices implements ILobby {
                     currentGame.addPlayer(player);
 
                     Database.getInstance().getGames().put(gameId, currentGame);
+                    Database.getInstance().storeJsonGames();
                     request.setUsername(username);
                     ClientProxy.getInstance().joinGame(request);
                     result = updateClient(request);
@@ -261,11 +265,13 @@ public class LobbyServices implements ILobby {
                         Game activeGame = Database.getInstance().getGameById(gameId);
                         activeGame.setActive(true);
                         Database.getInstance().getGames().put(gameId, activeGame);
-
                         ClientProxy.getInstance().startGame(request);
 
                         // setupGame and create cmdObjects (player order, color, and cards)
                         GamePlayServices.getInstance().setupGame(request);
+
+                        //store games whenever a game is started
+                        Database.getInstance().storeJsonGames();
 
                         result = updateClient(request);
                         System.out.println(gameId + " started.");

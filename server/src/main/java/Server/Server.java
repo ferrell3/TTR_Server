@@ -24,7 +24,8 @@ public class Server {
         System.out.println("Initializing HTTP server on port " + portNumber);
 
         //loads database with team hard coded users
-        Database.getInstance().loadTeam();
+//        Database.getInstance().loadTeam();
+        Database.getInstance().loadJSONdatabase();
 
         try {
             server = HttpServer.create(new InetSocketAddress(Integer.parseInt(portNumber)), MAX_WAITING_CONNECTIONS);
