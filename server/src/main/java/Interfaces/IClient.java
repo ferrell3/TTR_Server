@@ -7,4 +7,6 @@ public interface IClient {
     void joinGame(Request request); //(String username, String gameId);
     void leaveGame(Request request); //String username, String gameId);
     void startGame(Request request); //(String gameId);
+    void rejoinGame(Request request);
+    void removeGame(Request request);
 }

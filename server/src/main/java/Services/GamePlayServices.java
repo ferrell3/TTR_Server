@@ -687,6 +687,12 @@ public class GamePlayServices implements IGamePlay {
         // set command object to send back to client
         GamePlayProxy.getInstance().endGame(argRequest);
 
+
+        Database.getInstance().getGames().remove(gameId);
+        Request req = new Request();
+        req.setGameId(gameId);
+        ClientProxy.getInstance().removeGame(req);
+
         return result;
     }
 

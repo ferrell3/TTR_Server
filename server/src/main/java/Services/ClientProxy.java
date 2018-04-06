@@ -74,4 +74,26 @@ public class ClientProxy implements IClient {
         temp.add(command);
         Database.getInstance().setMasterCommandList(temp);
     }
+
+    @Override
+    public void rejoinGame(Request clientRequest) {
+        Command command = new Command("Interfaces.ILobby", "rejoinGame",
+                new String[]{ "Models.Request" }, new Request[]{ clientRequest });
+
+        //update master command list in database - for all clients to access:
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
+    }
+
+    @Override
+    public void removeGame(Request clientRequest) {
+        Command command = new Command("Interfaces.ILobby", "removeGame",
+                new String[]{ "Models.Request" }, new Request[]{ clientRequest });
+
+        //update master command list in database - for all clients to access:
+        ArrayList<Command> temp = Database.getInstance().getMasterCommandList();
+        temp.add(command);
+        Database.getInstance().setMasterCommandList(temp);
+    }
 }

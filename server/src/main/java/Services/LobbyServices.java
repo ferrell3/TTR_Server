@@ -255,7 +255,7 @@ public class LobbyServices implements ILobby {
                 Game currentGame = Database.getInstance().getGameById(gameId);
                 String username = Database.getInstance().getUsername(authToken);
 
-                // Check if player is not in the current game
+                // Check if player is in the current game
                 if(currentGame.getPlayerNames().contains(username))
                 {
                     // Check if game is in activeGame list
@@ -298,6 +298,56 @@ public class LobbyServices implements ILobby {
         {
             result.setErrorMsg("Invalid authorization token.");
             System.out.println("ERROR: in startGame() -- Invalid auth token");
+        }
+        return result;
+    }
+
+    @Override
+    public Result rejoinGame(Request request) { //(String authToken, String gameId);
+        String authToken = request.getAuthToken();
+        String gameId = request.getGameId();
+        Result result = new Result();
+
+        //check if requesting client is an active (logged in) client
+        if(Database.getInstance().getClients().contains(authToken))
+        {
+            //check if gameId exists
+            if(Database.getInstance().getGames().containsKey(gameId))
+            {
+                Game currentGame = Database.getInstance().getGameById(gameId);
+                String username = Database.getInstance().getUsername(authToken);
+
+                // Check if player is in the requested game
+                if(currentGame.getPlayerNames().contains(username))
+                {
+                    if(currentGame.isActive())
+                    {
+                        ClientProxy.getInstance().rejoinGame(request);
+                        result = updateClient(request);
+                        System.out.println(gameId + " rejoined.");
+                    }
+                    else
+                    {
+                        result.setErrorMsg("That game is not active.");
+                        System.out.println("ERROR: in rejoinGame() -- Game is not started");
+                    }
+                }
+                else
+                {
+                    result.setErrorMsg("You cannot rejoin that game, you were never in that game.");
+                    System.out.println("ERROR: in rejoinGame() -- Requesting user is not in the requested game");
+                }
+            }
+            else
+            {
+                result.setErrorMsg("The requested game ID doesn't exist.");
+                System.out.println("ERROR: in rejoinGame() -- Game doesn't exist");
+            }
+        }
+        else
+        {
+            result.setErrorMsg("Invalid authorization token.");
+            System.out.println("ERROR: in rejoinGame() -- Invalid auth token");
         }
         return result;
     }

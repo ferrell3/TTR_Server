@@ -5,13 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import Data.DataHandler;
@@ -26,13 +26,14 @@ import TestClient.TestClientServices;
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
     private HashMap<String, Game> games; //Key: gameId, Value: game object
-    private ArrayList<String> clients; //List of active clients //For use with commands and polling mostly
+//    private ArrayList<String> clients; //List of active clients //For use with commands and polling mostly
+    private HashSet<String> clients;
     private ArrayList <Command> masterCommandList;
 //    private ArrayList <Route> routes;
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
     private DataHandler dataHandler;
     private int cmdCount;
-    private int delta = 20;
+    private int delta = 1;
 
     private static Database theDB = new Database();
 
@@ -43,7 +44,8 @@ public class Database {
     private Database() {
         users = new HashMap<>();
         games = new HashMap<>();
-        clients = new ArrayList<>();
+//        clients = new ArrayList<>();
+        clients = new HashSet<>();
         masterCommandList = new ArrayList<>();
 //        routes = new ArrayList<>();
         dataHandler = new DataHandler();
@@ -132,7 +134,7 @@ public class Database {
         return users.get(username);
     }
 
-    public ArrayList<String> getClients() {
+    public HashSet<String> getClients() {
         return clients;
     }
 
@@ -233,6 +235,7 @@ public class Database {
         if(cmdCount == delta)
         {
             storeJsonGames();
+            cmdCount = 0;
         }
     }
 
@@ -307,7 +310,7 @@ public class Database {
     public void loadJsonUsers() {
         Gson gson = new GsonBuilder().create();
         Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
-        Type typeClients = new TypeToken<ArrayList<String>>(){}.getType();
+        Type typeClients = new TypeToken<HashSet<String>>(){}.getType();
 
         try
         {
@@ -316,6 +319,61 @@ public class Database {
 
             reader = new JsonReader(new FileReader("activeClients.json"));
             clients = gson.fromJson(reader, typeClients);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void clearJsonData() {
+        clearUsers();
+        clearGames();
+        clearCommands();
+    }
+
+    private void clearUsers() {
+        try
+        {
+            PrintWriter out = new PrintWriter(new FileWriter("users.json"));
+            out.print("{}");
+            out.close();
+
+            out = new PrintWriter(new FileWriter("activeClients.json"));
+            out.print("{}");
+            out.close();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearGames() {
+        try
+        {
+            PrintWriter out = new PrintWriter(new FileWriter("games.json"));
+            out.print("{}");
+            out.close();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearCommands() {
+        try
+        {
+            PrintWriter out = new PrintWriter(new FileWriter("gameCommands.json"));
+            out.print("{}");
+            out.close();
+
+            out = new PrintWriter(new FileWriter("lobbyCommands.json"));
+            out.print("{}");
+            out.close();
+
 
         }catch (Exception e)
         {
