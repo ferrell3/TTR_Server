@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import DAOs.JsonGameDAO;
+import DAOs.JsonUserDAO;
 import Data.DataHandler;
 import Models.Cards.DestinationCard;
 import Models.Command;
@@ -75,11 +77,11 @@ public class Database {
         clients.add(u3.getAuthToken());
         clients.add(u4.getAuthToken());
 
-        storeJsonUsers();
-
+//        storeJsonUsers();
+//
         TestClientServices.getInstance().createGame();
-        storeJsonCMDs("lobby");
-        storeJsonCMDs("game");
+//        storeJsonCMDs("lobby");
+//        storeJsonCMDs("game");
     }
 
     public HashMap<String, ArrayList<Command>> getAllGameCommands() {
@@ -90,8 +92,16 @@ public class Database {
         return gameCommands.get(gameId);
     }
 
+    public void setGameCommands(HashMap<String, ArrayList<Command>> gameCommands) {
+        this.gameCommands = gameCommands;
+    }
+
     public HashMap<String, User> getUsers() {
         return users;
+    }
+
+    public void setUsers(HashMap<String, User> users) {
+        this.users = users;
     }
 
     public ArrayList<DestinationCard> getDestinationCards() {
@@ -100,6 +110,10 @@ public class Database {
 
     public Map<String, Game> getGames() {
         return games;
+    }
+
+    public void setGames(HashMap<String, Game> games) {
+        this.games = games;
     }
 
     public Game getGameById(String id){
@@ -136,6 +150,10 @@ public class Database {
 
     public HashSet<String> getClients() {
         return clients;
+    }
+
+    public void setClients(HashSet<String> clients) {
+        this.clients = clients;
     }
 
     public ArrayList<Command> getMasterCommandList() {
@@ -258,72 +276,81 @@ public class Database {
     }
 
     public void storeJsonGames() { //stores entire hashmap of games
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonGames = gson.toJson(games);
-        try
-        {
-            PrintWriter out = new PrintWriter(new FileWriter("games.json"));
-            out.print(jsonGames);
-            out.close();
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        JsonGameDAO jgDAO = new JsonGameDAO();
+        jgDAO.setGames(games);
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        String jsonGames = gson.toJson(games);
+//        try
+//        {
+//            PrintWriter out = new PrintWriter(new FileWriter("games.json"));
+//            out.print(jsonGames);
+//            out.close();
+//        }catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 
     public void loadJsonGames() {
-        Gson gson = new GsonBuilder().create();
-        Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
-        try
-        {
-            JsonReader reader = new JsonReader(new FileReader("games.json"));
-            games = gson.fromJson(reader, type);
+        JsonGameDAO jgDAO = new JsonGameDAO();
+        games = jgDAO.getGames();
 
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        Gson gson = new GsonBuilder().create();
+//        Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
+//        try
+//        {
+//            JsonReader reader = new JsonReader(new FileReader("games.json"));
+//            games = gson.fromJson(reader, type);
+//
+//        }catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 
     public void storeJsonUsers() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonUsers = gson.toJson(users);
-        String jsonTokens = gson.toJson(clients);
-        try
-        {
-            PrintWriter out = new PrintWriter(new FileWriter("users.json"));
-            out.print(jsonUsers);
-            out.close();
-
-            //if we restart the server, do we restart the clients too? If so, we don't need this
-            //because the clients will have to re-login and thus they will be added to clients
-            //but all the game info will be saved so they can jump right back into it either way
-            out = new PrintWriter(new FileWriter("activeClients.json"));
-            out.print(jsonTokens);
-            out.close();
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        JsonUserDAO juDAO = new JsonUserDAO();
+        juDAO.setUsers(users);
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        String jsonUsers = gson.toJson(users);
+//        String jsonTokens = gson.toJson(clients);
+//        try
+//        {
+//            PrintWriter out = new PrintWriter(new FileWriter("users.json"));
+//            out.print(jsonUsers);
+//            out.close();
+//
+//            //if we restart the server, do we restart the clients too? If so, we don't need this
+//            //because the clients will have to re-login and thus they will be added to clients
+//            //but all the game info will be saved so they can jump right back into it either way
+//            out = new PrintWriter(new FileWriter("activeClients.json"));
+//            out.print(jsonTokens);
+//            out.close();
+//        }catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 
     public void loadJsonUsers() {
-        Gson gson = new GsonBuilder().create();
-        Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
-        Type typeClients = new TypeToken<HashSet<String>>(){}.getType();
-
-        try
-        {
-            JsonReader reader = new JsonReader(new FileReader("users.json"));
-            users = gson.fromJson(reader, typeUser);
-
-            reader = new JsonReader(new FileReader("activeClients.json"));
-            clients = gson.fromJson(reader, typeClients);
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        JsonUserDAO juDAO = new JsonUserDAO();
+        users = juDAO.getUsers();
+//        Gson gson = new GsonBuilder().create();
+//        Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
+//        Type typeClients = new TypeToken<HashSet<String>>(){}.getType();
+//
+//        try
+//        {
+//            JsonReader reader = new JsonReader(new FileReader("users.json"));
+//            users = gson.fromJson(reader, typeUser);
+//
+//            reader = new JsonReader(new FileReader("activeClients.json"));
+//            clients = gson.fromJson(reader, typeClients);
+//
+//        }catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 
 

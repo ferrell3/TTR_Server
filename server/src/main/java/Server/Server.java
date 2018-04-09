@@ -8,11 +8,16 @@ public class Server {
     private static final int MAX_WAITING_CONNECTIONS = 12;
 
     public static void main(String[] args) {
-        String portNumber = "";
-        if(args.length == 0){
-            portNumber = "8888";
-        }else{
+        String portNumber = "8888";
+        //do we want a default database too?
+        String dbType;
+        if(args.length < 0)
+        {
             portNumber = args[0];
+        }
+        if(args.length < 1)
+        {
+            dbType = args[1];
         }
         new Server().init(portNumber);
 
