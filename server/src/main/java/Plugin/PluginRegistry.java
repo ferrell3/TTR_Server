@@ -1,6 +1,6 @@
 package Plugin;
 
-import com.sun.tools.internal.ws.wscompile.Plugin;
+//import com.sun.tools.internal.ws.wscompile.Plugin;
 
 import Interfaces.IPluginDescriptor;
 
@@ -14,7 +14,7 @@ public class PluginRegistry {
         return  null;
     }
 
-    public Plugin createPlugin(PluginDescriptor descriptor)
+    public PluginDescriptor createPlugin(PluginDescriptor descriptor)
     {
         return null;
     }
