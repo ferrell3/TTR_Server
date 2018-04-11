@@ -3,18 +3,79 @@
     "id": "Test",
     "players": [
       {
+        "color": "red",
         "name": "jordan",
-        "turn": false,
-        "numTrains": 15,
-        "claimedRouteList": [],
-        "claimedRoutes": {},
-        "hand": [],
-        "destination_cards": [],
+        "turn": true,
+        "numTrains": 13,
+        "claimedRouteList": [
+          {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Widows Watch",
+            "end": "The Eyrie",
+            "color": "wild",
+            "routeNumber": 51,
+            "startX": 1035,
+            "startY": 226,
+            "endX": 1038,
+            "endY": 374,
+            "doubleRoute": false
+          }
+        ],
+        "claimedRoutes": {
+          "51": {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Widows Watch",
+            "end": "The Eyrie",
+            "color": "wild",
+            "routeNumber": 51,
+            "startX": 1035,
+            "startY": 226,
+            "endX": 1038,
+            "endY": 374,
+            "doubleRoute": false
+          }
+        },
+        "hand": [
+          {
+            "color": "blue"
+          },
+          {
+            "color": "green"
+          },
+          {
+            "color": "red"
+          },
+          {
+            "color": "purple"
+          },
+          {
+            "color": "purple"
+          },
+          {
+            "color": "blue"
+          }
+        ],
+        "destination_cards": [
+          {
+            "start": "Winterfell",
+            "end": "The Twins",
+            "points": 6
+          },
+          {
+            "start": "Kings Landing",
+            "end": "The Twins",
+            "points": 15
+          }
+        ],
         "drawnDestCards": [],
         "longestPathSize": 0,
         "score": {
-          "total": 0,
-          "routePoints": 0,
+          "total": 2,
+          "routePoints": 2,
           "posDestPoints": 0,
           "negDestPoints": 0,
           "longestRoad": 0
@@ -23,18 +84,76 @@
         "playerRank": 0
       },
       {
+        "color": "green",
         "name": "kip",
         "turn": false,
-        "numTrains": 15,
-        "claimedRouteList": [],
-        "claimedRoutes": {},
-        "hand": [],
-        "destination_cards": [],
+        "numTrains": 12,
+        "claimedRouteList": [
+          {
+            "owner": "kip",
+            "points": 4,
+            "length": 3,
+            "start": "The Crag",
+            "end": "Feast Fires",
+            "color": "yellow",
+            "routeNumber": 27,
+            "startX": 349,
+            "startY": 1108,
+            "endX": 250,
+            "endY": 1283,
+            "doubleRoute": false
+          }
+        ],
+        "claimedRoutes": {
+          "27": {
+            "owner": "kip",
+            "points": 4,
+            "length": 3,
+            "start": "The Crag",
+            "end": "Feast Fires",
+            "color": "yellow",
+            "routeNumber": 27,
+            "startX": 349,
+            "startY": 1108,
+            "endX": 250,
+            "endY": 1283,
+            "doubleRoute": false
+          }
+        },
+        "hand": [
+          {
+            "color": "white"
+          },
+          {
+            "color": "blue"
+          },
+          {
+            "color": "red"
+          },
+          {
+            "color": "white"
+          },
+          {
+            "color": "red"
+          }
+        ],
+        "destination_cards": [
+          {
+            "start": "Old Archer",
+            "end": "Widows Watch",
+            "points": 5
+          },
+          {
+            "start": "Summer Hall",
+            "end": "Kings Landing",
+            "points": 5
+          }
+        ],
         "drawnDestCards": [],
         "longestPathSize": 0,
         "score": {
-          "total": 0,
-          "routePoints": 0,
+          "total": 4,
+          "routePoints": 4,
           "posDestPoints": 0,
           "negDestPoints": 0,
           "longestRoad": 0
@@ -47,7 +166,10 @@
       "jordan",
       "kip"
     ],
-    "chats": [],
+    "chats": [
+      "kip: omg Jordan you are so much cooler than me",
+      "jordan: Yeah I know."
+    ],
     "trainDeck": {
       "trainTypes": [
         "purple",
@@ -61,69 +183,6 @@
         "wild"
       ],
       "deck": [
-        {
-          "color": "blue"
-        },
-        {
-          "color": "red"
-        },
-        {
-          "color": "green"
-        },
-        {
-          "color": "red"
-        },
-        {
-          "color": "white"
-        },
-        {
-          "color": "blue"
-        },
-        {
-          "color": "yellow"
-        },
-        {
-          "color": "yellow"
-        },
-        {
-          "color": "green"
-        },
-        {
-          "color": "purple"
-        },
-        {
-          "color": "red"
-        },
-        {
-          "color": "yellow"
-        },
-        {
-          "color": "white"
-        },
-        {
-          "color": "blue"
-        },
-        {
-          "color": "red"
-        },
-        {
-          "color": "red"
-        },
-        {
-          "color": "purple"
-        },
-        {
-          "color": "red"
-        },
-        {
-          "color": "green"
-        },
-        {
-          "color": "green"
-        },
-        {
-          "color": "blue"
-        },
         {
           "color": "yellow"
         },
@@ -397,36 +456,6 @@
       "size": 0,
       "deck": [
         {
-          "start": "Winterfell",
-          "end": "The Twins",
-          "points": 6
-        },
-        {
-          "start": "Old Archer",
-          "end": "The Tor",
-          "points": 20
-        },
-        {
-          "start": "Kings Landing",
-          "end": "The Twins",
-          "points": 15
-        },
-        {
-          "start": "Feast Fires",
-          "end": "White Harbor",
-          "points": 15
-        },
-        {
-          "start": "Old Archer",
-          "end": "Widows Watch",
-          "points": 5
-        },
-        {
-          "start": "Summer Hall",
-          "end": "Kings Landing",
-          "points": 5
-        },
-        {
           "start": "Old Oak",
           "end": "Winterfell",
           "points": 25
@@ -545,11 +574,37 @@
           "start": "The Crag",
           "end": "Old Oak",
           "points": 5
+        },
+        {
+          "start": "Old Archer",
+          "end": "The Tor",
+          "points": 20
+        },
+        {
+          "start": "Feast Fires",
+          "end": "White Harbor",
+          "points": 15
         }
       ]
     },
-    "faceUpCards": [],
-    "active": false,
+    "faceUpCards": [
+      {
+        "color": "green"
+      },
+      {
+        "color": "blue"
+      },
+      {
+        "color": "red"
+      },
+      {
+        "color": "green"
+      },
+      {
+        "color": "green"
+      }
+    ],
+    "active": true,
     "routesMap": {
       "0": {
         "points": 0,
@@ -561,7 +616,8 @@
         "startX": 249,
         "startY": 1775,
         "endX": 449,
-        "endY": 1895
+        "endY": 1895,
+        "doubleRoute": false
       },
       "1": {
         "points": 0,
@@ -573,7 +629,8 @@
         "startX": 449,
         "startY": 1895,
         "endX": 793,
-        "endY": 2030
+        "endY": 2030,
+        "doubleRoute": false
       },
       "2": {
         "points": 0,
@@ -585,7 +642,8 @@
         "startX": 793,
         "startY": 2030,
         "endX": 1217,
-        "endY": 1935
+        "endY": 1935,
+        "doubleRoute": false
       },
       "3": {
         "points": 0,
@@ -597,7 +655,8 @@
         "startX": 1183,
         "startY": 1910,
         "endX": 1140,
-        "endY": 1786
+        "endY": 1786,
+        "doubleRoute": false
       },
       "4": {
         "points": 0,
@@ -609,7 +668,8 @@
         "startX": 1230,
         "startY": 1901,
         "endX": 1180,
-        "endY": 1760
+        "endY": 1760,
+        "doubleRoute": false
       },
       "5": {
         "points": 0,
@@ -621,7 +681,8 @@
         "startX": 1153,
         "startY": 1760,
         "endX": 700,
-        "endY": 1755
+        "endY": 1755,
+        "doubleRoute": false
       },
       "6": {
         "points": 0,
@@ -633,7 +694,8 @@
         "startX": 788,
         "startY": 1865,
         "endX": 700,
-        "endY": 1755
+        "endY": 1755,
+        "doubleRoute": false
       },
       "7": {
         "points": 0,
@@ -645,7 +707,8 @@
         "startX": 788,
         "startY": 1865,
         "endX": 793,
-        "endY": 2030
+        "endY": 2030,
+        "doubleRoute": false
       },
       "8": {
         "points": 0,
@@ -657,7 +720,8 @@
         "startX": 444,
         "startY": 1900,
         "endX": 700,
-        "endY": 1755
+        "endY": 1755,
+        "doubleRoute": false
       },
       "9": {
         "points": 0,
@@ -669,7 +733,8 @@
         "startX": 444,
         "startY": 1900,
         "endX": 519,
-        "endY": 1635
+        "endY": 1635,
+        "doubleRoute": false
       },
       "10": {
         "points": 0,
@@ -681,7 +746,8 @@
         "startX": 245,
         "startY": 1775,
         "endX": 519,
-        "endY": 1635
+        "endY": 1635,
+        "doubleRoute": false
       },
       "11": {
         "points": 0,
@@ -693,7 +759,8 @@
         "startX": 699,
         "startY": 1755,
         "endX": 838,
-        "endY": 1620
+        "endY": 1620,
+        "doubleRoute": false
       },
       "12": {
         "points": 0,
@@ -705,7 +772,8 @@
         "startX": 519,
         "startY": 1630,
         "endX": 838,
-        "endY": 1620
+        "endY": 1620,
+        "doubleRoute": false
       },
       "13": {
         "points": 0,
@@ -717,7 +785,8 @@
         "startX": 699,
         "startY": 1755,
         "endX": 838,
-        "endY": 1620
+        "endY": 1620,
+        "doubleRoute": false
       },
       "14": {
         "points": 0,
@@ -729,7 +798,8 @@
         "startX": 245,
         "startY": 1780,
         "endX": 240,
-        "endY": 1455
+        "endY": 1455,
+        "doubleRoute": false
       },
       "15": {
         "points": 0,
@@ -741,7 +811,8 @@
         "startX": 475,
         "startY": 1454,
         "endX": 524,
-        "endY": 1637
+        "endY": 1637,
+        "doubleRoute": false
       },
       "16": {
         "points": 0,
@@ -753,7 +824,8 @@
         "startX": 835,
         "startY": 1612,
         "endX": 1008,
-        "endY": 1492
+        "endY": 1492,
+        "doubleRoute": false
       },
       "17": {
         "points": 0,
@@ -765,7 +837,8 @@
         "startX": 1076,
         "startY": 1555,
         "endX": 1003,
-        "endY": 1522
+        "endY": 1522,
+        "doubleRoute": false
       },
       "18": {
         "points": 0,
@@ -777,7 +850,8 @@
         "startX": 1114,
         "startY": 1530,
         "endX": 1060,
-        "endY": 1482
+        "endY": 1482,
+        "doubleRoute": false
       },
       "19": {
         "points": 0,
@@ -789,7 +863,8 @@
         "startX": 1118,
         "startY": 1572,
         "endX": 1160,
-        "endY": 1766
+        "endY": 1766,
+        "doubleRoute": false
       },
       "20": {
         "points": 0,
@@ -801,7 +876,8 @@
         "startX": 867,
         "startY": 1268,
         "endX": 1008,
-        "endY": 1492
+        "endY": 1492,
+        "doubleRoute": false
       },
       "21": {
         "points": 0,
@@ -813,7 +889,8 @@
         "startX": 475,
         "startY": 1454,
         "endX": 867,
-        "endY": 1268
+        "endY": 1268,
+        "doubleRoute": false
       },
       "22": {
         "points": 0,
@@ -825,7 +902,8 @@
         "startX": 1244,
         "startY": 1181,
         "endX": 867,
-        "endY": 1268
+        "endY": 1268,
+        "doubleRoute": false
       },
       "23": {
         "points": 0,
@@ -837,7 +915,8 @@
         "startX": 475,
         "startY": 1454,
         "endX": 482,
-        "endY": 1226
+        "endY": 1226,
+        "doubleRoute": false
       },
       "24": {
         "points": 0,
@@ -849,7 +928,8 @@
         "startX": 243,
         "startY": 1451,
         "endX": 482,
-        "endY": 1226
+        "endY": 1226,
+        "doubleRoute": false
       },
       "25": {
         "points": 0,
@@ -861,7 +941,8 @@
         "startX": 243,
         "startY": 1451,
         "endX": 250,
-        "endY": 1283
+        "endY": 1283,
+        "doubleRoute": false
       },
       "26": {
         "points": 0,
@@ -873,19 +954,8 @@
         "startX": 863,
         "startY": 1268,
         "endX": 482,
-        "endY": 1226
-      },
-      "27": {
-        "points": 0,
-        "length": 3,
-        "start": "The Crag",
-        "end": "Feast Fires",
-        "color": "yellow",
-        "routeNumber": 27,
-        "startX": 349,
-        "startY": 1108,
-        "endX": 250,
-        "endY": 1283
+        "endY": 1226,
+        "doubleRoute": false
       },
       "28": {
         "points": 0,
@@ -897,7 +967,8 @@
         "startX": 349,
         "startY": 1108,
         "endX": 482,
-        "endY": 1226
+        "endY": 1226,
+        "doubleRoute": false
       },
       "29": {
         "points": 0,
@@ -909,7 +980,8 @@
         "startX": 920,
         "startY": 1060,
         "endX": 482,
-        "endY": 1226
+        "endY": 1226,
+        "doubleRoute": false
       },
       "30": {
         "points": 0,
@@ -921,7 +993,8 @@
         "startX": 920,
         "startY": 1060,
         "endX": 1069,
-        "endY": 907
+        "endY": 907,
+        "doubleRoute": false
       },
       "31": {
         "points": 0,
@@ -933,7 +1006,8 @@
         "startX": 1244,
         "startY": 1181,
         "endX": 1069,
-        "endY": 907
+        "endY": 907,
+        "doubleRoute": false
       },
       "32": {
         "points": 0,
@@ -945,7 +1019,8 @@
         "startX": 1082,
         "startY": 563,
         "endX": 1029,
-        "endY": 858
+        "endY": 858,
+        "doubleRoute": false
       },
       "33": {
         "points": 0,
@@ -957,7 +1032,8 @@
         "startX": 1080,
         "startY": 862,
         "endX": 1124,
-        "endY": 618
+        "endY": 618,
+        "doubleRoute": false
       },
       "34": {
         "points": 0,
@@ -969,7 +1045,8 @@
         "startX": 620,
         "startY": 975,
         "endX": 1069,
-        "endY": 907
+        "endY": 907,
+        "doubleRoute": false
       },
       "35": {
         "points": 0,
@@ -981,7 +1058,8 @@
         "startX": 620,
         "startY": 975,
         "endX": 353,
-        "endY": 1118
+        "endY": 1118,
+        "doubleRoute": false
       },
       "36": {
         "points": 0,
@@ -993,7 +1071,8 @@
         "startX": 265,
         "startY": 808,
         "endX": 353,
-        "endY": 1118
+        "endY": 1118,
+        "doubleRoute": false
       },
       "37": {
         "points": 0,
@@ -1005,7 +1084,8 @@
         "startX": 265,
         "startY": 808,
         "endX": 254,
-        "endY": 652
+        "endY": 652,
+        "doubleRoute": false
       },
       "38": {
         "points": 0,
@@ -1017,7 +1097,8 @@
         "startX": 669,
         "startY": 663,
         "endX": 254,
-        "endY": 652
+        "endY": 652,
+        "doubleRoute": false
       },
       "39": {
         "points": 0,
@@ -1029,7 +1110,8 @@
         "startX": 669,
         "startY": 663,
         "endX": 620,
-        "endY": 975
+        "endY": 975,
+        "doubleRoute": false
       },
       "40": {
         "points": 0,
@@ -1041,7 +1123,8 @@
         "startX": 669,
         "startY": 663,
         "endX": 543,
-        "endY": 477
+        "endY": 477,
+        "doubleRoute": false
       },
       "41": {
         "points": 0,
@@ -1053,7 +1136,8 @@
         "startX": 258,
         "startY": 648,
         "endX": 543,
-        "endY": 477
+        "endY": 477,
+        "doubleRoute": false
       },
       "42": {
         "points": 0,
@@ -1065,7 +1149,8 @@
         "startX": 258,
         "startY": 648,
         "endX": 185,
-        "endY": 473
+        "endY": 473,
+        "doubleRoute": false
       },
       "43": {
         "points": 0,
@@ -1077,7 +1162,8 @@
         "startX": 330,
         "startY": 344,
         "endX": 185,
-        "endY": 473
+        "endY": 473,
+        "doubleRoute": false
       },
       "44": {
         "points": 0,
@@ -1089,7 +1175,8 @@
         "startX": 330,
         "startY": 344,
         "endX": 627,
-        "endY": 230
+        "endY": 230,
+        "doubleRoute": false
       },
       "45": {
         "points": 0,
@@ -1101,7 +1188,8 @@
         "startX": 530,
         "startY": 470,
         "endX": 627,
-        "endY": 230
+        "endY": 230,
+        "doubleRoute": false
       },
       "46": {
         "points": 0,
@@ -1113,7 +1201,8 @@
         "startX": 1038,
         "startY": 226,
         "endX": 627,
-        "endY": 230
+        "endY": 230,
+        "doubleRoute": false
       },
       "47": {
         "points": 0,
@@ -1125,7 +1214,8 @@
         "startX": 1098,
         "startY": 563,
         "endX": 1038,
-        "endY": 374
+        "endY": 374,
+        "doubleRoute": false
       },
       "48": {
         "points": 0,
@@ -1137,7 +1227,8 @@
         "startX": 540,
         "startY": 473,
         "endX": 1038,
-        "endY": 374
+        "endY": 374,
+        "doubleRoute": false
       },
       "49": {
         "points": 0,
@@ -1149,7 +1240,8 @@
         "startX": 1153,
         "startY": 329,
         "endX": 1038,
-        "endY": 374
+        "endY": 374,
+        "doubleRoute": false
       },
       "50": {
         "points": 0,
@@ -1161,25 +1253,38 @@
         "startX": 1153,
         "startY": 329,
         "endX": 1035,
-        "endY": 226
-      },
-      "51": {
-        "points": 0,
-        "length": 2,
-        "start": "Widows Watch",
-        "end": "The Eyrie",
-        "color": "wild",
-        "routeNumber": 51,
-        "startX": 1035,
-        "startY": 226,
-        "endX": 1038,
-        "endY": 374
+        "endY": 226,
+        "doubleRoute": false
       }
     },
-    "lastRoundCount": 0,
+    "lastRoundCount": 2,
     "lastRound": false,
     "history": {
-      "gameActions": []
+      "gameActions": [
+        "Test started!",
+        "jordan is assigned the color red.",
+        "kip is assigned the color green.",
+        "jordan discarded 1 destination card.",
+        "Widows Watch to The Eyrie claimed by jordan",
+        "It\u0027s kip\u0027s turn.",
+        "kip discarded 1 destination card.",
+        "kip took a face up train card.",
+        "kip took a face up train card.",
+        "It\u0027s jordan\u0027s turn.",
+        "jordan drew a train card.",
+        "jordan drew a train card.",
+        "It\u0027s kip\u0027s turn.",
+        "The Crag to Feast Fires claimed by kip",
+        "It\u0027s jordan\u0027s turn.",
+        "kip sent a chat.",
+        "jordan sent a chat.",
+        "jordan took a face up train card.",
+        "jordan took a face up train card.",
+        "It\u0027s kip\u0027s turn.",
+        "kip took a face up train card.",
+        "kip took a face up train card.",
+        "It\u0027s jordan\u0027s turn."
+      ]
     }
   }
 }

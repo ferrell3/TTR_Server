@@ -13,4 +13,6 @@ public interface UserDAO {
     void setUsers(HashMap<String, User> users);
     void addUser(User user);
     void removeUser(User user);
+    void storeUsers();
+    void loadUsers();
 }

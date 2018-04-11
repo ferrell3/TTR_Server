@@ -25,4 +25,14 @@ public class SqlUserDAO implements UserDAO {
     public void removeUser(User user) {
 
     }
+
+    @Override
+    public void storeUsers() {
+
+    }
+
+    @Override
+    public void loadUsers() {
+
+    }
 }

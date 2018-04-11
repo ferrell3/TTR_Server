@@ -30,7 +30,7 @@ public class Server {
 
         //loads database with team hard coded users
 //        Database.getInstance().loadTeam();
-//        Database.getInstance().loadJSONdatabase();
+        Database.getInstance().loadJSONdatabase();
 
         try {
             server = HttpServer.create(new InetSocketAddress(Integer.parseInt(portNumber)), MAX_WAITING_CONNECTIONS);

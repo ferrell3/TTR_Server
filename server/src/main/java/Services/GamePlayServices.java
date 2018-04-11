@@ -493,8 +493,6 @@ public class GamePlayServices implements IGamePlay {
 
     @Override
     public Result claimRoute(Request request) {
-        //TODO implement claim route (See uncompleted To-Do's below)
-
         Result result = new Result();
         String gameId = request.getGameId();
         String authToken = request.getAuthToken();
@@ -547,7 +545,7 @@ public class GamePlayServices implements IGamePlay {
 
                             // check for "last round" if train cars are less than 3
                             int numTrains = Database.getInstance().getGameById(gameId).getPlayer(username).getNumTrains();
-                            if (numTrains < 3 && Database.getInstance().getGameById(gameId).isLastRound() == false) {
+                            if (numTrains < 3 && !Database.getInstance().getGameById(gameId).isLastRound()) {
                                 // Initiate last round
                                 Database.getInstance().getGameById(gameId).setLastRound(true);
                                 // Set game object count to player size+1 (accounts for initiating player to have last round)
@@ -765,10 +763,6 @@ public class GamePlayServices implements IGamePlay {
 
         }
 
-    }
-
-    public Result rejoinGame(Request request){
-        return null;
     }
 
 

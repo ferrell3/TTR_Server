@@ -16,10 +16,6 @@ import Interfaces.UserDAO;
 import Models.User;
 import Server.Database;
 
-/**
- * Created by ferrell3 on 4/9/18.
- */
-
 public class JsonUserDAO implements UserDAO {
 
 //    private HashMap<String, User> jsonUsers = new HashMap<>();
@@ -76,7 +72,8 @@ public class JsonUserDAO implements UserDAO {
     @Override
     public void removeUser(User user) {}
 
-    public void storeJsonUsers() {
+    @Override
+    public void storeUsers() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonUsers = gson.toJson(Database.getInstance().getUsers());
         String jsonTokens = gson.toJson(Database.getInstance().getClients());
@@ -98,7 +95,8 @@ public class JsonUserDAO implements UserDAO {
         }
     }
 
-    public void loadJsonUsers() {
+    @Override
+    public void loadUsers() {
         Gson gson = new GsonBuilder().create();
         Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
         Type typeClients = new TypeToken<HashSet<String>>(){}.getType();

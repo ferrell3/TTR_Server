@@ -13,4 +13,6 @@ public interface GameDAO {
     void setGames(HashMap<String, Game> games);
     void addGame(Game game);
     void removeGame(Game game);
+    void loadGames();
+    void storeGames();
 }

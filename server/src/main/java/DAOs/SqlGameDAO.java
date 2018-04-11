@@ -25,4 +25,14 @@ public class SqlGameDAO implements GameDAO {
     public void removeGame(Game game) {
 
     }
+
+    @Override
+    public void loadGames() { //directly into the database (i.e. Database.getInstance().setGames(...);
+
+    }
+
+    @Override
+    public void storeGames() {
+
+    }
 }

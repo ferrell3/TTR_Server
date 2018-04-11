@@ -1,18 +1,19 @@
 package DAOs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Interfaces.CommandDAO;
 import Models.Command;
 
 public class SqlCommandDAO implements CommandDAO {
     @Override
-    public ArrayList<Command> getGameCommands() {
+    public HashMap<String, ArrayList<Command>> getGameCommands() {
         return null;
     }
 
     @Override
-    public void setGameCommands(ArrayList<Command> commands) {
+    public void setGameCommands(HashMap<String, ArrayList<Command>> commands) {
 
     }
 
@@ -23,6 +24,21 @@ public class SqlCommandDAO implements CommandDAO {
 
     @Override
     public void removeCommand(Command cmd) {
+
+    }
+
+    @Override
+    public void storeGameCommands() {
+
+    }
+
+    @Override
+    public void loadCommands() {
+
+    }
+
+    @Override
+    public void storeLobbyCommands() {
 
     }
 }

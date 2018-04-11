@@ -15,10 +15,6 @@ import Interfaces.GameDAO;
 import Models.Gameplay.Game;
 import Server.Database;
 
-/**
- * Created by ferrell3 on 4/9/18.
- */
-
 public class JsonGameDAO implements GameDAO {
     @Override
     public HashMap<String, Game> getGames() { //load games from json files
@@ -60,7 +56,8 @@ public class JsonGameDAO implements GameDAO {
     public void removeGame(Game game) {
     }
 
-    public void storeJsonGames() { //stores entire hashmap of games
+    @Override
+    public void storeGames() { //stores entire hashmap of games
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonGames = gson.toJson(Database.getInstance().getGames());
         try
@@ -74,7 +71,8 @@ public class JsonGameDAO implements GameDAO {
         }
     }
 
-    public void loadJsonGames() {
+    @Override
+    public void loadGames() {
         Gson gson = new GsonBuilder().create();
         Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
         try

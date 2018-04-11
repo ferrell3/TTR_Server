@@ -1,19 +1,13 @@
 package Server;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import DAOs.JsonCommandDAO;
 import DAOs.JsonGameDAO;
 import DAOs.JsonUserDAO;
 import Data.DataHandler;
@@ -78,7 +72,6 @@ public class Database {
         clients.add(u4.getAuthToken());
 
 //        storeJsonUsers();
-//
         TestClientServices.getInstance().createGame();
 //        storeJsonCMDs("lobby");
 //        storeJsonCMDs("game");
@@ -178,28 +171,6 @@ public class Database {
         }
 
         storeJsonCMDs("game");
-
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        String jsonStr = gson.toJson(gameCommands);
-//        String jsonGame = gson.toJson(games);
-////        System.out.println(jsonStr);
-//
-//        try
-//        {
-//            PrintWriter out = new PrintWriter(new FileWriter("jsonCMDs.json"));
-//            out.print(jsonStr);
-//            out.close();
-//
-//            PrintWriter gameOut = new PrintWriter(new FileWriter("jsonGames.json"));
-//            gameOut.print(jsonGame);
-//            gameOut.close();
-//
-////            JsonReader cmdReader = new JsonReader(new FileReader("jsonCMDs.json"));
-////            gameCommands = gson.fromJson(cmdReader, HashMap.class);
-//        }catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
     }
 
     public void addGameHistory(String gameId, String msg){
@@ -216,38 +187,28 @@ public class Database {
 
 
     void loadJSONdatabase() {
-        loadJsonUsers();
-        loadJsonGames();
-        loadJsonCMDs();
+        JsonUserDAO juDAO = new JsonUserDAO();
+        JsonCommandDAO jcDAO = new JsonCommandDAO();
+        JsonGameDAO jgDAO = new JsonGameDAO();
+
+        jgDAO.loadGames();
+        jcDAO.loadCommands();
+        juDAO.loadUsers();
+
+//        loadJsonUsers();
+//        loadJsonGames();
+//        loadJsonCMDs();
     }
 
     public void storeJsonCMDs(String type) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String filename = "";
-        String jsonStr = "";
+        JsonCommandDAO jcDAO = new JsonCommandDAO();
         if(type.equals("lobby"))
         {
-            jsonStr = gson.toJson(masterCommandList);
-            filename = "lobbyCommands.json";
+            jcDAO.storeLobbyCommands();
         }
         else if(type.equals("game"))
         {
-            jsonStr = gson.toJson(gameCommands);
-            filename = "gameCommands.json";
-        }
-
-        try
-        {
-            PrintWriter out = new PrintWriter(new FileWriter(filename));
-            out.print(jsonStr);
-            out.close();
-
-//            JsonReader cmdReader = new JsonReader(new FileReader("jsonCMDs.json"));
-//            gameCommands = gson.fromJson(cmdReader, HashMap.class);
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-            return;
+            jcDAO.storeGameCommands();
         }
         cmdCount++;
         if(cmdCount == delta)
@@ -257,100 +218,16 @@ public class Database {
         }
     }
 
-    public void loadJsonCMDs() {
-        Gson gson = new GsonBuilder().create();
-        Type typeGame = new TypeToken<HashMap<String, ArrayList<Command>>>(){}.getType();
-        Type typeLobby = new TypeToken<ArrayList<Command>>(){}.getType();
-        try
-        {
-            JsonReader cmdReader = new JsonReader(new FileReader("lobbyCommands.json"));
-            masterCommandList = gson.fromJson(cmdReader, typeLobby);
-
-            cmdReader = new JsonReader(new FileReader("gameCommands.json"));
-            gameCommands = gson.fromJson(cmdReader, typeGame);
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     public void storeJsonGames() { //stores entire hashmap of games
         JsonGameDAO jgDAO = new JsonGameDAO();
-        jgDAO.setGames(games);
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        String jsonGames = gson.toJson(games);
-//        try
-//        {
-//            PrintWriter out = new PrintWriter(new FileWriter("games.json"));
-//            out.print(jsonGames);
-//            out.close();
-//        }catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-    }
-
-    public void loadJsonGames() {
-        JsonGameDAO jgDAO = new JsonGameDAO();
-        games = jgDAO.getGames();
-
-//        Gson gson = new GsonBuilder().create();
-//        Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
-//        try
-//        {
-//            JsonReader reader = new JsonReader(new FileReader("games.json"));
-//            games = gson.fromJson(reader, type);
-//
-//        }catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
+//        jgDAO.setGames(games);
+        jgDAO.storeGames();
     }
 
     public void storeJsonUsers() {
         JsonUserDAO juDAO = new JsonUserDAO();
-        juDAO.setUsers(users);
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        String jsonUsers = gson.toJson(users);
-//        String jsonTokens = gson.toJson(clients);
-//        try
-//        {
-//            PrintWriter out = new PrintWriter(new FileWriter("users.json"));
-//            out.print(jsonUsers);
-//            out.close();
-//
-//            //if we restart the server, do we restart the clients too? If so, we don't need this
-//            //because the clients will have to re-login and thus they will be added to clients
-//            //but all the game info will be saved so they can jump right back into it either way
-//            out = new PrintWriter(new FileWriter("activeClients.json"));
-//            out.print(jsonTokens);
-//            out.close();
-//        }catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-    }
-
-    public void loadJsonUsers() {
-        JsonUserDAO juDAO = new JsonUserDAO();
-        users = juDAO.getUsers();
-//        Gson gson = new GsonBuilder().create();
-//        Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
-//        Type typeClients = new TypeToken<HashSet<String>>(){}.getType();
-//
-//        try
-//        {
-//            JsonReader reader = new JsonReader(new FileReader("users.json"));
-//            users = gson.fromJson(reader, typeUser);
-//
-//            reader = new JsonReader(new FileReader("activeClients.json"));
-//            clients = gson.fromJson(reader, typeClients);
-//
-//        }catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
+//        juDAO.setUsers(users);
+        juDAO.storeUsers();
     }
 
 

@@ -16,5 +16,4 @@ public interface IGamePlay {
     void endTurn(Request request);
     Result endGame(Request request);
     void dealFaceUpCards(Request request);
-    Result rejoinGame(Request request);
 }

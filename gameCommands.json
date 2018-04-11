@@ -1,1 +1,990 @@
-{}
+{
+  "Test": [
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "discardDestCards",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan discarded 1 destination card.",
+          "discardDest": [
+            {
+              "start": "Old Archer",
+              "end": "The Tor",
+              "points": 20
+            }
+          ],
+          "gameCMDNum": 0,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan discarded 1 destination card.",
+          "discardDest": [
+            {
+              "start": "Old Archer",
+              "end": "The Tor",
+              "points": 20
+            }
+          ],
+          "gameCMDNum": 0,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "Widows Watch to The Eyrie claimed by jordan",
+          "trainCards": [
+            {
+              "color": "blue"
+            },
+            {
+              "color": "green"
+            },
+            {
+              "color": "red"
+            },
+            {
+              "color": "purple"
+            }
+          ],
+          "gameCMDNum": 2,
+          "cardIndex": 0,
+          "route": {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Widows Watch",
+            "end": "The Eyrie",
+            "color": "wild",
+            "routeNumber": 51,
+            "startX": 1035,
+            "startY": 226,
+            "endX": 1038,
+            "endY": 374,
+            "doubleRoute": false
+          }
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "claimRoute",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "Widows Watch to The Eyrie claimed by jordan",
+          "trainCards": [
+            {
+              "color": "blue"
+            },
+            {
+              "color": "green"
+            },
+            {
+              "color": "red"
+            },
+            {
+              "color": "purple"
+            }
+          ],
+          "gameCMDNum": 2,
+          "cardIndex": 0,
+          "route": {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Widows Watch",
+            "end": "The Eyrie",
+            "color": "wild",
+            "routeNumber": 51,
+            "startX": 1035,
+            "startY": 226,
+            "endX": 1038,
+            "endY": 374,
+            "doubleRoute": false
+          }
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 2,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 2,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "discardDestCards",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip discarded 1 destination card.",
+          "discardDest": [
+            {
+              "start": "Feast Fires",
+              "end": "White Harbor",
+              "points": 15
+            }
+          ],
+          "gameCMDNum": 6,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip discarded 1 destination card.",
+          "discardDest": [
+            {
+              "start": "Feast Fires",
+              "end": "White Harbor",
+              "points": 15
+            }
+          ],
+          "gameCMDNum": 6,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "takeFaceUpCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "yellow"
+            },
+            {
+              "color": "blue"
+            }
+          ],
+          "gameCMDNum": 8,
+          "cardIndex": 3
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "yellow"
+            },
+            {
+              "color": "blue"
+            }
+          ],
+          "gameCMDNum": 8,
+          "cardIndex": 3
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "takeFaceUpCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "red"
+            },
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 10,
+          "cardIndex": 2
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "red"
+            },
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 10,
+          "cardIndex": 2
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s jordan\u0027s turn.",
+          "gameCMDNum": 10,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s jordan\u0027s turn.",
+          "gameCMDNum": 10,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "drawTrainCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan drew a train card.",
+          "trainCards": [
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 14,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan drew a train card.",
+          "trainCards": [
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 14,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "drawTrainCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan drew a train card.",
+          "trainCards": [
+            {
+              "color": "purple"
+            }
+          ],
+          "gameCMDNum": 16,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan drew a train card.",
+          "trainCards": [
+            {
+              "color": "purple"
+            }
+          ],
+          "gameCMDNum": 16,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 16,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 16,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "The Crag to Feast Fires claimed by kip",
+          "trainCards": [
+            {
+              "color": "white"
+            },
+            {
+              "color": "blue"
+            },
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 20,
+          "cardIndex": 0,
+          "route": {
+            "owner": "kip",
+            "points": 4,
+            "length": 3,
+            "start": "The Crag",
+            "end": "Feast Fires",
+            "color": "yellow",
+            "routeNumber": 27,
+            "startX": 349,
+            "startY": 1108,
+            "endX": 250,
+            "endY": 1283,
+            "doubleRoute": false
+          }
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "claimRoute",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "The Crag to Feast Fires claimed by kip",
+          "trainCards": [
+            {
+              "color": "white"
+            },
+            {
+              "color": "blue"
+            },
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 20,
+          "cardIndex": 0,
+          "route": {
+            "owner": "kip",
+            "points": 4,
+            "length": 3,
+            "start": "The Crag",
+            "end": "Feast Fires",
+            "color": "yellow",
+            "routeNumber": 27,
+            "startX": 349,
+            "startY": 1108,
+            "endX": 250,
+            "endY": 1283,
+            "doubleRoute": false
+          }
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s jordan\u0027s turn.",
+          "gameCMDNum": 20,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s jordan\u0027s turn.",
+          "gameCMDNum": 20,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip sent a chat.",
+          "gameCMDNum": 24,
+          "cardIndex": 0,
+          "chat": {
+            "username": "kip",
+            "message": "omg Jordan you are so much cooler than me"
+          },
+          "chatMessage": "omg Jordan you are so much cooler than me"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip sent a chat.",
+          "gameCMDNum": 24,
+          "cardIndex": 0,
+          "chat": {
+            "username": "kip",
+            "message": "omg Jordan you are so much cooler than me"
+          },
+          "chatMessage": "omg Jordan you are so much cooler than me"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 26,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "Yeah I know."
+          },
+          "chatMessage": "Yeah I know."
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 26,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "Yeah I know."
+          },
+          "chatMessage": "Yeah I know."
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "takeFaceUpCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan took a face up train card.",
+          "trainCards": [
+            {
+              "color": "purple"
+            },
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 28,
+          "cardIndex": 1
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan took a face up train card.",
+          "trainCards": [
+            {
+              "color": "purple"
+            },
+            {
+              "color": "red"
+            }
+          ],
+          "gameCMDNum": 28,
+          "cardIndex": 1
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "takeFaceUpCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan took a face up train card.",
+          "trainCards": [
+            {
+              "color": "blue"
+            },
+            {
+              "color": "green"
+            }
+          ],
+          "gameCMDNum": 30,
+          "cardIndex": 3
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan took a face up train card.",
+          "trainCards": [
+            {
+              "color": "blue"
+            },
+            {
+              "color": "green"
+            }
+          ],
+          "gameCMDNum": 30,
+          "cardIndex": 3
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 30,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 30,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "takeFaceUpCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "white"
+            },
+            {
+              "color": "green"
+            }
+          ],
+          "gameCMDNum": 34,
+          "cardIndex": 4
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "white"
+            },
+            {
+              "color": "green"
+            }
+          ],
+          "gameCMDNum": 34,
+          "cardIndex": 4
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "takeFaceUpCard",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "red"
+            },
+            {
+              "color": "blue"
+            }
+          ],
+          "gameCMDNum": 36,
+          "cardIndex": 1
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "kip took a face up train card.",
+          "trainCards": [
+            {
+              "color": "red"
+            },
+            {
+              "color": "blue"
+            }
+          ],
+          "gameCMDNum": 36,
+          "cardIndex": 1
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s jordan\u0027s turn.",
+          "gameCMDNum": 36,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s jordan\u0027s turn.",
+          "gameCMDNum": 36,
+          "cardIndex": 0
+        }
+      ]
+    }
+  ]
+}
