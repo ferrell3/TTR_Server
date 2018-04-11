@@ -48,6 +48,11 @@ public class Game {
         routesMap = Database.getInstance().getRoutes();
     }
 
+    public void setDoubleRoutes(){
+
+        routesMap = Database.getInstance().getDoubleRoutes();
+    }
+
     public void addChatMessage(String message){
         chats.add(message);
     }

@@ -1,0 +1,50 @@
+[
+  {
+    "_className": "Interfaces.ILobby",
+    "_methodName": "createGame",
+    "_strParamTypes": [
+      "Models.Request"
+    ],
+    "_paramValues": [
+      {
+        "username": "jordan",
+        "gameId": "Test",
+        "commandNum": 0,
+        "gameCMDNum": 0,
+        "cardIndex": 0
+      }
+    ]
+  },
+  {
+    "_className": "Interfaces.ILobby",
+    "_methodName": "joinGame",
+    "_strParamTypes": [
+      "Models.Request"
+    ],
+    "_paramValues": [
+      {
+        "username": "jordan",
+        "gameId": "Test",
+        "commandNum": 0,
+        "gameCMDNum": 0,
+        "cardIndex": 0
+      }
+    ]
+  },
+  {
+    "_className": "Interfaces.ILobby",
+    "_methodName": "joinGame",
+    "_strParamTypes": [
+      "Models.Request"
+    ],
+    "_paramValues": [
+      {
+        "username": "kip",
+        "gameId": "Test",
+        "commandNum": 0,
+        "gameCMDNum": 0,
+        "cardIndex": 0
+      }
+    ]
+  }
+]

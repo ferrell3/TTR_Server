@@ -8,11 +8,16 @@ public class Server {
     private static final int MAX_WAITING_CONNECTIONS = 12;
 
     public static void main(String[] args) {
-        String portNumber = "";
-        if(args.length == 0){
-            portNumber = "8888";
-        }else{
+        String portNumber = "8888";
+        //do we want a default database too?
+        String dbType;
+        if(args.length < 0)
+        {
             portNumber = args[0];
+        }
+        if(args.length < 1)
+        {
+            dbType = args[1];
         }
         new Server().init(portNumber);
 
@@ -24,7 +29,8 @@ public class Server {
         System.out.println("Initializing HTTP server on port " + portNumber);
 
         //loads database with team hard coded users
-        Database.getInstance().loadTeam();
+//        Database.getInstance().loadTeam();
+        Database.getInstance().loadJSONdatabase();
 
         try {
             server = HttpServer.create(new InetSocketAddress(Integer.parseInt(portNumber)), MAX_WAITING_CONNECTIONS);

@@ -12,5 +12,7 @@ public interface ILobby {
 
     Result startGame(Request request); //(String authToken, String gameId);
 
+    Result rejoinGame(Request request);
+
     Result updateClient(Request request); //(String authToken);
 }

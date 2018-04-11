@@ -29,7 +29,7 @@ public class Player {
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-        numTrains = 15;
+        numTrains = 25;
         score = new Score();
     }
 
@@ -40,7 +40,7 @@ public class Player {
         hand = new ArrayList<>();
         destination_cards = new ArrayList<>();
         drawnDestCards = new ArrayList<>();
-        numTrains = 15;
+        numTrains = 25;
         turn = false;
         score = new Score();
     }
@@ -121,7 +121,8 @@ public class Player {
 
     // Verify that the cards sent match the player's hand
     public boolean verifyHand(ArrayList<TrainCard> trainCards){
-        ArrayList<TrainCard> handCards = hand;
+        ArrayList <TrainCard> handCards = new ArrayList<>();
+        handCards.addAll(hand);
         int count = 0;
 
         // Check each card sent to server

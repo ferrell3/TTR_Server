@@ -38,7 +38,19 @@
       "endX": 1140,
       "endY": 1786,
       "color": "wild",
-      "length": 4
+      "length": 4,
+      "doubleRoute": true
+    },
+    {
+      "start": "Sunspeare",
+      "startX": 1230,
+      "startY": 1901,
+      "end": "Green Stone",
+      "endX": 1180,
+      "endY": 1760,
+      "color": "black",
+      "length": 4,
+      "doubleRoute": true
     },
     {
       "start": "Green Stone",
@@ -168,7 +180,19 @@
       "endX": 1003,
       "endY": 1522,
       "color": "wild",
-      "length": 1
+      "length": 1,
+      "doubleRoute": true
+    },
+    {
+      "start": "Storms End",
+      "startX": 1114,
+      "startY": 1530,
+      "end": "Bonzegate",
+      "endX": 1060,
+      "endY": 1482,
+      "color": "wild",
+      "length": 1,
+      "doubleRoute": true
     },
     {
       "start": "Storms End",
@@ -302,13 +326,26 @@
     },
     {
       "start": "Old Archer",
+      "startX": 1082,
+      "startY": 563,
+      "end": "Longbow Hall",
+      "endX": 1029,
+      "endY": 858,
+      "color": "blue",
+      "length": 6,
+      "doubleRoute": true
+    },
+    {
+      "start": "Old Archer",
       "startX": 1124,
       "startY": 618,
       "end": "Longbow Hall",
       "endX": 1080,
       "endY": 862,
       "color": "wild",
-      "length": 6
+      "length": 6,
+      "doubleRoute": true
+
     },
     {
       "start": "Old Stones",
