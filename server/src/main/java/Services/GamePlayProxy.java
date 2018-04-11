@@ -95,5 +95,9 @@ class GamePlayProxy implements IGamePlay {
         Database.getInstance().addGameCommand(clientRequest.getGameId(), command);
     }
 
+    public Result rejoinGame(Request request){
+        return null;
+    }
+
 
 }

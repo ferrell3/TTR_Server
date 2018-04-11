@@ -767,6 +767,10 @@ public class GamePlayServices implements IGamePlay {
 
     }
 
+    public Result rejoinGame(Request request){
+        return null;
+    }
+
 
 //    public static void main (String[] args)
 //    {

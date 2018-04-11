@@ -11,11 +11,11 @@ public class Server {
         String portNumber = "8888";
         //do we want a default database too?
         String dbType;
-        if(args.length < 0)
+        if(args.length > 0)
         {
             portNumber = args[0];
         }
-        if(args.length < 1)
+        if(args.length > 1)
         {
             dbType = args[1];
         }
@@ -30,7 +30,7 @@ public class Server {
 
         //loads database with team hard coded users
 //        Database.getInstance().loadTeam();
-        Database.getInstance().loadJSONdatabase();
+//        Database.getInstance().loadJSONdatabase();
 
         try {
             server = HttpServer.create(new InetSocketAddress(Integer.parseInt(portNumber)), MAX_WAITING_CONNECTIONS);
