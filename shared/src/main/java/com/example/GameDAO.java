@@ -1,5 +1,6 @@
 package com.example;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 
@@ -15,7 +16,7 @@ public interface GameDAO {
 //    void loadGames();
 //    void storeGames();
 
-    void storeGames(String jsonStr);
-    String loadGames();
-    void clear();
+    void storeGames(String jsonStr) throws SQLException;
+    String loadGames() throws SQLException;
+    void clear() throws SQLException;
 }

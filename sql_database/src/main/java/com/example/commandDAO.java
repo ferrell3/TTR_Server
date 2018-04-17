@@ -32,8 +32,56 @@ public class commandDAO implements CommandDAO {
     public String creategCommandTable = "create Table if not exists gameCommandSql(\n" +
             "lCmdJson String not null,\n"+
             ");";
+
+
+
+    //Need to Finish Lobby Commands!
     @Override
-    public void storeLobbyCommands(String jsonStr) {
+    public void storeLobbyCommands(String jsonStr) throws SQLException {
+        Statement stmt = null;
+        connect = null;
+        try {
+            connect = DriverManager.getConnection(connectURL);
+            connect.setAutoCommit(false);
+            stmt = connect.createStatement();
+            stmt.execute("drop table if exists lobbyCommandSql");
+            stmt.execute(createlCommandTable);
+            connect.commit();
+            connect.close();
+        }
+        catch (Exception e) {
+            connect.rollback();
+            connect.close();
+            System.out.println("error in storeLobbyCommands : clear tables " + e);
+        }
+        try{
+            connect= DriverManager.getConnection(connectURL);
+            connect.setAutoCommit(false);
+            stmt = connect.createStatement();
+            stmt.execute(createlCommandTable);
+            connect.commit();
+            connect.close();
+        }catch (Exception e){
+            connect.rollback();
+            connect.close();
+            System.out.println("error in cmdDao.storeLobbyCommands() - sqlCommandDao: "+e);
+        }
+        connect = null;
+        PreparedStatement stmt2 = null;
+        try{
+            connect = DriverManager.getConnection(connectURL);
+            String sql = "insert into lobbyCommandSql (gCmdJson)VALUES(?)";
+            stmt2 = connect.prepareStatement(sql);
+            stmt2.setString(1, jsonStr);
+            stmt2.executeUpdate();
+        }
+        catch (Exception err){
+            System.out.println("error in cmdDao.storeLobbyCommands(): "+ err);
+        }
+        finally {
+            if (stmt != null){stmt.close();}
+            connect.close();
+        }
 
     }
 
@@ -99,7 +147,7 @@ public class commandDAO implements CommandDAO {
             rs = stmt.executeQuery();
             gameCmdJson =new String(rs.getString(1));
         }catch (Exception e){
-            System.out.println("Within UserDao "+e);
+            System.out.println("Within CommandDao "+e);
         }
         finally {
             if(rs != null){
@@ -115,9 +163,30 @@ public class commandDAO implements CommandDAO {
     }
 
     @Override
-    public String loadGameCommands() {
-        return null;
-        // same as above
+    public String loadGameCommands() throws SQLException {
+        PreparedStatement stmt = null;
+        String lobbyCmdJson= "";
+        ResultSet rs = null;
+        try {
+            connect=DriverManager.getConnection(connectURL);
+            String sql = "select lCmdJson from lobbyCommandSql";
+            stmt= connect.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            lobbyCmdJson =new String(rs.getString(1));
+        }catch (Exception e){
+            System.out.println("Within CommandDao "+e);
+        }
+        finally {
+            if(rs != null){
+                rs.close();
+            }
+            if(stmt != null){
+                stmt.close();
+            }
+            connect.close();
+        }
+        return lobbyCmdJson;
+        //pulls string from table
     }
 
     @Override

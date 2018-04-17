@@ -1,5 +1,6 @@
 package com.example;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -14,7 +15,7 @@ public interface UserDAO {
 //    void storeUsers();
 //    void loadUsers();
 
-    void storeUsers(String jsonUsers);
-    String loadUsers();
-    void clear();
+    void storeUsers(String jsonUsers) throws SQLException;
+    String loadUsers() throws SQLException;
+    void clear() throws SQLException;
 }

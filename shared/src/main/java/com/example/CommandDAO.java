@@ -21,9 +21,9 @@ public interface CommandDAO {
 //    void storeLobbyCommands();
 //    void loadCommands();
 
-    void storeLobbyCommands(String jsonStr);
+    void storeLobbyCommands(String jsonStr) throws SQLException;
     void storeGameCommands(String jsonStr) throws SQLException;
     String loadLobbyCommands() throws SQLException;
-    String loadGameCommands();
+    String loadGameCommands() throws SQLException;
     void clear() throws SQLException;
 }
