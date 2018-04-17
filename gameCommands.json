@@ -985,6 +985,134 @@
           "cardIndex": 0
         }
       ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "Flints Finger to Torrhens Square claimed by jordan",
+          "trainCards": [
+            {
+              "color": "blue"
+            },
+            {
+              "color": "green"
+            },
+            {
+              "color": "red"
+            },
+            {
+              "color": "blue"
+            }
+          ],
+          "gameCMDNum": 40,
+          "cardIndex": 0,
+          "route": {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Flints Finger",
+            "end": "Torrhens Square",
+            "color": "purple",
+            "routeNumber": 37,
+            "startX": 265,
+            "startY": 808,
+            "endX": 254,
+            "endY": 652,
+            "doubleRoute": false
+          }
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "claimRoute",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "jordan",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "Flints Finger to Torrhens Square claimed by jordan",
+          "trainCards": [
+            {
+              "color": "blue"
+            },
+            {
+              "color": "green"
+            },
+            {
+              "color": "red"
+            },
+            {
+              "color": "blue"
+            }
+          ],
+          "gameCMDNum": 40,
+          "cardIndex": 0,
+          "route": {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Flints Finger",
+            "end": "Torrhens Square",
+            "color": "purple",
+            "routeNumber": 37,
+            "startX": 265,
+            "startY": 808,
+            "endX": 254,
+            "endY": 652,
+            "doubleRoute": false
+          }
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "endTurn",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 40,
+          "cardIndex": 0
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "username": "kip",
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "It\u0027s kip\u0027s turn.",
+          "gameCMDNum": 40,
+          "cardIndex": 0
+        }
+      ]
     }
   ]
 }

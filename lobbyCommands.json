@@ -2733,5 +2733,39 @@
         "cardIndex": 0
       }
     ]
+  },
+  {
+    "_className": "Interfaces.ILobby",
+    "_methodName": "rejoinGame",
+    "_strParamTypes": [
+      "Models.Request"
+    ],
+    "_paramValues": [
+      {
+        "username": "jordan",
+        "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+        "gameId": "Test",
+        "commandNum": 12,
+        "gameCMDNum": 0,
+        "cardIndex": 0
+      }
+    ]
+  },
+  {
+    "_className": "Interfaces.ILobby",
+    "_methodName": "rejoinGame",
+    "_strParamTypes": [
+      "Models.Request"
+    ],
+    "_paramValues": [
+      {
+        "username": "kip",
+        "authToken": "ca566c7a-0b19-4f2a-b6ed-ba2fffda1275",
+        "gameId": "Test",
+        "commandNum": 13,
+        "gameCMDNum": 0,
+        "cardIndex": 0
+      }
+    ]
   }
 ]

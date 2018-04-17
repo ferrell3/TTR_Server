@@ -31,7 +31,7 @@ public class ChatServices implements IChat{
 
         try {
             // Check if requesting client is an active (logged in) client
-            if (Database.getInstance().getClients().contains(authToken)) {
+            if (Database.getInstance().getUsers().containsKey(authToken)) {
 
                 // Check if game doesn't exist, return error
                 if (!Database.getInstance().getGames().containsKey(gameId)) {

@@ -5,8 +5,8 @@
       {
         "color": "red",
         "name": "jordan",
-        "turn": true,
-        "numTrains": 13,
+        "turn": false,
+        "numTrains": 11,
         "claimedRouteList": [
           {
             "owner": "jordan",
@@ -20,6 +20,20 @@
             "startY": 226,
             "endX": 1038,
             "endY": 374,
+            "doubleRoute": false
+          },
+          {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Flints Finger",
+            "end": "Torrhens Square",
+            "color": "purple",
+            "routeNumber": 37,
+            "startX": 265,
+            "startY": 808,
+            "endX": 254,
+            "endY": 652,
             "doubleRoute": false
           }
         ],
@@ -37,6 +51,20 @@
             "endX": 1038,
             "endY": 374,
             "doubleRoute": false
+          },
+          "37": {
+            "owner": "jordan",
+            "points": 2,
+            "length": 2,
+            "start": "Flints Finger",
+            "end": "Torrhens Square",
+            "color": "purple",
+            "routeNumber": 37,
+            "startX": 265,
+            "startY": 808,
+            "endX": 254,
+            "endY": 652,
+            "doubleRoute": false
           }
         },
         "hand": [
@@ -48,12 +76,6 @@
           },
           {
             "color": "red"
-          },
-          {
-            "color": "purple"
-          },
-          {
-            "color": "purple"
           },
           {
             "color": "blue"
@@ -74,8 +96,8 @@
         "drawnDestCards": [],
         "longestPathSize": 0,
         "score": {
-          "total": 2,
-          "routePoints": 2,
+          "total": 4,
+          "routePoints": 4,
           "posDestPoints": 0,
           "negDestPoints": 0,
           "longestRoad": 0
@@ -86,7 +108,7 @@
       {
         "color": "green",
         "name": "kip",
-        "turn": false,
+        "turn": true,
         "numTrains": 12,
         "claimedRouteList": [
           {
@@ -1074,19 +1096,6 @@
         "endY": 1118,
         "doubleRoute": false
       },
-      "37": {
-        "points": 0,
-        "length": 2,
-        "start": "Flints Finger",
-        "end": "Torrhens Square",
-        "color": "purple",
-        "routeNumber": 37,
-        "startX": 265,
-        "startY": 808,
-        "endX": 254,
-        "endY": 652,
-        "doubleRoute": false
-      },
       "38": {
         "points": 0,
         "length": 5,
@@ -1283,7 +1292,9 @@
         "It\u0027s kip\u0027s turn.",
         "kip took a face up train card.",
         "kip took a face up train card.",
-        "It\u0027s jordan\u0027s turn."
+        "It\u0027s jordan\u0027s turn.",
+        "Flints Finger to Torrhens Square claimed by jordan",
+        "It\u0027s kip\u0027s turn."
       ]
     }
   }

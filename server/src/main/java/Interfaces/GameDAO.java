@@ -9,10 +9,14 @@ import Models.Gameplay.Game;
  */
 
 public interface GameDAO {
-    HashMap<String, Game> getGames();
-    void setGames(HashMap<String, Game> games);
-    void addGame(Game game);
-    void removeGame(Game game);
-    void loadGames();
-    void storeGames();
+//    HashMap<String, Game> getGames();
+//    void setGames(HashMap<String, Game> games);
+//    void addGame(Game game);
+//    void removeGame(Game game);
+//    void loadGames();
+//    void storeGames();
+
+    void storeGames(String jsonStr);
+    String loadGames();
+    void clear();
 }

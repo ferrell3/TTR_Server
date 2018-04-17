@@ -34,7 +34,7 @@ public class UserServices implements IServerUser {
         {
             if (password.equals(user.getPassword()))
             {
-                Database.getInstance().getClients().add(user.getAuthToken());
+//                Database.getInstance().getClients().add(user.getAuthToken());
                 request.setAuthToken(user.getAuthToken());
                 Database.getInstance().storeJsonUsers();
 
@@ -79,7 +79,7 @@ public class UserServices implements IServerUser {
             User user = new User(username, password, authToken);
             Database.getInstance().getUsers().put(username, user); //for login purposes
             Database.getInstance().getUsers().put(authToken, user); //for authentication purposes
-            Database.getInstance().getClients().add(authToken);
+//            Database.getInstance().getClients().add(authToken);
 
             Database.getInstance().storeJsonUsers();
 

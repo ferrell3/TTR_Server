@@ -1,11 +1,20 @@
 package Server;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 
 import DAOs.JsonCommandDAO;
 import DAOs.JsonGameDAO;
@@ -23,7 +32,7 @@ public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
     private HashMap<String, Game> games; //Key: gameId, Value: game object
 //    private ArrayList<String> clients; //List of active clients //For use with commands and polling mostly
-    private HashSet<String> clients;
+//    private HashSet<String> clients;
     private ArrayList <Command> masterCommandList;
 //    private ArrayList <Route> routes;
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
@@ -41,7 +50,7 @@ public class Database {
         users = new HashMap<>();
         games = new HashMap<>();
 //        clients = new ArrayList<>();
-        clients = new HashSet<>();
+//        clients = new HashSet<>();
         masterCommandList = new ArrayList<>();
 //        routes = new ArrayList<>();
         dataHandler = new DataHandler();
@@ -66,10 +75,10 @@ public class Database {
         users.put(u4.getUsername(), u4);
         users.put(u4.getAuthToken(), u4);
 
-        clients.add(u1.getAuthToken());
-        clients.add(u2.getAuthToken());
-        clients.add(u3.getAuthToken());
-        clients.add(u4.getAuthToken());
+//        clients.add(u1.getAuthToken());
+//        clients.add(u2.getAuthToken());
+//        clients.add(u3.getAuthToken());
+//        clients.add(u4.getAuthToken());
 
 //        storeJsonUsers();
         TestClientServices.getInstance().createGame();
@@ -141,13 +150,13 @@ public class Database {
         return users.get(username);
     }
 
-    public HashSet<String> getClients() {
-        return clients;
-    }
-
-    public void setClients(HashSet<String> clients) {
-        this.clients = clients;
-    }
+//    public HashSet<String> getClients() {
+//        return clients;
+//    }
+//
+//    public void setClients(HashSet<String> clients) {
+//        this.clients = clients;
+//    }
 
     public ArrayList<Command> getMasterCommandList() {
         return masterCommandList;
@@ -191,24 +200,20 @@ public class Database {
         JsonCommandDAO jcDAO = new JsonCommandDAO();
         JsonGameDAO jgDAO = new JsonGameDAO();
 
-        jgDAO.loadGames();
-        jcDAO.loadCommands();
-        juDAO.loadUsers();
-
-//        loadJsonUsers();
-//        loadJsonGames();
-//        loadJsonCMDs();
+        deserializeUsers(juDAO.loadUsers());
+        deserializeGames(jgDAO.loadGames());
+        deserializeCommands(jcDAO.loadLobbyCommands(), jcDAO.loadGameCommands());
     }
 
     public void storeJsonCMDs(String type) {
         JsonCommandDAO jcDAO = new JsonCommandDAO();
         if(type.equals("lobby"))
         {
-            jcDAO.storeLobbyCommands();
+            jcDAO.storeLobbyCommands(serializeLobbyCommands());
         }
         else if(type.equals("game"))
         {
-            jcDAO.storeGameCommands();
+            jcDAO.storeGameCommands(serializeGameCommands());
         }
         cmdCount++;
         if(cmdCount == delta)
@@ -221,67 +226,62 @@ public class Database {
     public void storeJsonGames() { //stores entire hashmap of games
         JsonGameDAO jgDAO = new JsonGameDAO();
 //        jgDAO.setGames(games);
-        jgDAO.storeGames();
+        jgDAO.storeGames(serializeGames());
     }
 
     public void storeJsonUsers() {
         JsonUserDAO juDAO = new JsonUserDAO();
 //        juDAO.setUsers(users);
-        juDAO.storeUsers();
+        juDAO.storeUsers(serializeUsers());
     }
 
 
     public void clearJsonData() {
-        clearUsers();
-        clearGames();
-        clearCommands();
+        new JsonUserDAO().clear();
+        new JsonGameDAO().clear();
+        new JsonCommandDAO().clear();
     }
 
-    private void clearUsers() {
-        try
-        {
-            PrintWriter out = new PrintWriter(new FileWriter("users.json"));
-            out.print("{}");
-            out.close();
-
-            out = new PrintWriter(new FileWriter("activeClients.json"));
-            out.print("{}");
-            out.close();
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+    private String serializeUsers() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(users);
     }
 
-    private void clearGames() {
-        try
-        {
-            PrintWriter out = new PrintWriter(new FileWriter("games.json"));
-            out.print("{}");
-            out.close();
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+    private void deserializeUsers(String jsonStr){
+        Gson gson = new GsonBuilder().create();
+        Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
+//        Type typeClients = new TypeToken<HashSet<String>>(){}.getType();
+        users = gson.fromJson(jsonStr, typeUser);
     }
 
-    private void clearCommands() {
-        try
-        {
-            PrintWriter out = new PrintWriter(new FileWriter("gameCommands.json"));
-            out.print("{}");
-            out.close();
-
-            out = new PrintWriter(new FileWriter("lobbyCommands.json"));
-            out.print("{}");
-            out.close();
-
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+    private String serializeGames() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(games);
     }
+
+    private void deserializeGames(String jsonStr){
+        Gson gson = new GsonBuilder().create();
+        Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
+        games = gson.fromJson(jsonStr, type);
+    }
+
+    private String serializeLobbyCommands() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(masterCommandList);
+    }
+
+    private String serializeGameCommands() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(gameCommands);
+    }
+
+    private void deserializeCommands(String jsonLobbyCommands, String jsonGameCommands){
+        Gson gson = new GsonBuilder().create();
+        Type typeLobby = new TypeToken<ArrayList<Command>>(){}.getType();
+        Type typeGame = new TypeToken<HashMap<String, ArrayList<Command>>>(){}.getType();
+
+        masterCommandList = gson.fromJson(jsonLobbyCommands, typeLobby);
+        gameCommands = gson.fromJson(jsonGameCommands, typeGame);
+    }
+
 }

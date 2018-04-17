@@ -62,7 +62,7 @@ public class GamePlayServices implements IGamePlay {
 
         try {
             // Check if requesting client is an active (logged in) client
-            if (Database.getInstance().getClients().contains(authToken))
+            if (Database.getInstance().getUsers().containsKey(authToken))
             {
                 // Check if game doesn't exist, return error
                 if (!Database.getInstance().getGames().containsKey(gameId))
@@ -313,7 +313,7 @@ public class GamePlayServices implements IGamePlay {
         int numCards = request.getDiscardDest().size();
         Result result = new Result();
 
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             if(Database.getInstance().getGames().containsKey(gameId))
             {
@@ -378,7 +378,7 @@ public class GamePlayServices implements IGamePlay {
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             // Check if game doesn't exist, return error
             if (!Database.getInstance().getGames().containsKey(gameId))
@@ -447,7 +447,7 @@ public class GamePlayServices implements IGamePlay {
         request.setUsername(username);
 
         // Check if requesting client is an active (logged in) client
-        if (Database.getInstance().getClients().contains(authToken))
+        if (Database.getInstance().getUsers().containsKey(authToken))
         {
             // Check if game doesn't exist, return error
             if (!Database.getInstance().getGames().containsKey(gameId))
@@ -502,7 +502,7 @@ public class GamePlayServices implements IGamePlay {
         request.setUsername(username);
 
         // Check if requesting client is an active (logged in) client
-        if (Database.getInstance().getClients().contains(authToken))
+        if (Database.getInstance().getUsers().containsKey(authToken))
         {
             // Check if game doesn't exist, return error
             if (!Database.getInstance().getGames().containsKey(gameId))

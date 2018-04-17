@@ -1,1 +1,1 @@
-include ':app', ':server', ':gson-2.6.2'
+include ':app', ':server', ':gson-2.6.2', ':sql_database', ':shared'

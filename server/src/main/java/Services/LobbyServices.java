@@ -46,7 +46,7 @@ public class LobbyServices implements ILobby {
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             //check if gameId is empty
             if(gameId.equals(""))
@@ -120,7 +120,7 @@ public class LobbyServices implements ILobby {
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
@@ -199,7 +199,7 @@ public class LobbyServices implements ILobby {
         String gameId = request.getGameId();
         Result result = new Result();
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
@@ -259,7 +259,7 @@ public class LobbyServices implements ILobby {
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
@@ -321,7 +321,7 @@ public class LobbyServices implements ILobby {
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             //check if gameId exists
             if(Database.getInstance().getGames().containsKey(gameId))
@@ -387,7 +387,7 @@ public class LobbyServices implements ILobby {
         Result result = new Result();
 
         //check if requesting client is an active (logged in) client
-        if(Database.getInstance().getClients().contains(authToken))
+        if(Database.getInstance().getUsers().containsKey(authToken))
         {
             ArrayList <Command> responseCommands = new ArrayList<>();
             for (int i = commandNum; i < Database.getInstance().getMasterCommandList().size(); i++)
