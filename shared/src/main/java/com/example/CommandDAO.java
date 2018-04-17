@@ -1,9 +1,9 @@
-package Interfaces;
+package com.example;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Models.Command;
 
 /**
  * Created by ferrell3 on 4/9/18.
@@ -22,8 +22,8 @@ public interface CommandDAO {
 //    void loadCommands();
 
     void storeLobbyCommands(String jsonStr);
-    void storeGameCommands(String jsonStr);
-    String loadLobbyCommands();
+    void storeGameCommands(String jsonStr) throws SQLException;
+    String loadLobbyCommands() throws SQLException;
     String loadGameCommands();
-    void clear();
+    void clear() throws SQLException;
 }

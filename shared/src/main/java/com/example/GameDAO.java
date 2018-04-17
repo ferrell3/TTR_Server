@@ -1,8 +1,7 @@
-package Interfaces;
+package com.example;
 
 import java.util.HashMap;
 
-import Models.Gameplay.Game;
 
 /**
  * Created by ferrell3 on 4/9/18.

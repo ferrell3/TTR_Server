@@ -1,26 +1,12 @@
 package DAOs;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.lang.annotation.Target;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
-import Interfaces.UserDAO;
-import Models.User;
-import Server.Database;
+import com.example.UserDAO;
 
 public class JsonUserDAO implements UserDAO {
 

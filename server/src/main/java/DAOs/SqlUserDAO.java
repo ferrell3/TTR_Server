@@ -1,9 +1,6 @@
 package DAOs;
 
-import java.util.HashMap;
-
-import Interfaces.UserDAO;
-import Models.User;
+import com.example.UserDAO;
 
 public class SqlUserDAO implements UserDAO {
     @Override

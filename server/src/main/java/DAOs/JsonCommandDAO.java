@@ -1,22 +1,12 @@
 package DAOs;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
-import Interfaces.CommandDAO;
-import Models.Command;
-import Server.Database;
+import com.example.CommandDAO;
 
 public class JsonCommandDAO implements CommandDAO {
 

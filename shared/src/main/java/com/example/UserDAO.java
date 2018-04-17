@@ -1,8 +1,6 @@
-package Interfaces;
+package com.example;
 
 import java.util.HashMap;
-
-import Models.User;
 
 /**
  * Created by ferrell3 on 4/9/18.

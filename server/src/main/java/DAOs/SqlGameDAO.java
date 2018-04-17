@@ -1,9 +1,6 @@
 package DAOs;
 
-import java.util.HashMap;
-
-import Interfaces.GameDAO;
-import Models.Gameplay.Game;
+import com.example.GameDAO;
 
 public class SqlGameDAO implements GameDAO {
     @Override
