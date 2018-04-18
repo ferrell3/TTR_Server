@@ -1,9 +1,9 @@
 package Plugin;
 
-import com.example.CommandDAO;
-import com.example.GameDAO;
+import com.shared.CommandDAO;
+import com.shared.GameDAO;
 import Interfaces.PluginFactory;
-import com.example.UserDAO;
+import com.shared.UserDAO;
 
 public class SqlPluginFactory implements PluginFactory{
     @Override

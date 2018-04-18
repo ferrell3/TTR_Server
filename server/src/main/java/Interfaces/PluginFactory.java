@@ -1,8 +1,8 @@
 package Interfaces;
 
-import com.example.CommandDAO;
-import com.example.GameDAO;
-import com.example.UserDAO;
+import com.shared.CommandDAO;
+import com.shared.GameDAO;
+import com.shared.UserDAO;
 
 public interface PluginFactory {
     public GameDAO createGameDAO();

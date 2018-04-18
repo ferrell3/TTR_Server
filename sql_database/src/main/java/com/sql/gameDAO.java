@@ -1,4 +1,6 @@
-package com.example;
+package com.sql;
+
+import com.shared.GameDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +24,7 @@ public class gameDAO implements GameDAO {
     //Games
 
     public String createGTable = "create Table if not exists Games(\n" +
-            "gameJson String not null,\n"+
+            "gameJson String not null\n"+
             ");";
 
     @Override
@@ -59,7 +61,7 @@ public class gameDAO implements GameDAO {
         PreparedStatement stmt2 = null;
         try{
             connect = DriverManager.getConnection(connectURL);
-            String sql = "games (gameJson)VALUES(?)";
+            String sql = "insert into Games (gameJson)VALUES(?)";
             stmt2 = connect.prepareStatement(sql);
             stmt2.setString(1, jsonStr);
             stmt2.executeUpdate();

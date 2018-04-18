@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import com.example.UserDAO;
+import com.shared.UserDAO;
 
 public class JsonUserDAO implements UserDAO {
 

@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import com.example.GameDAO;
+import com.shared.GameDAO;
 
 public class JsonGameDAO implements GameDAO {
 

@@ -1,4 +1,4 @@
-package com.example;
+package com.shared;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

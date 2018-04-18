@@ -1,6 +1,6 @@
 package DAOs;
 
-import com.example.CommandDAO;
+import com.shared.CommandDAO;
 
 public class SqlCommandDAO implements CommandDAO {
 

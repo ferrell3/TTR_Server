@@ -3,10 +3,10 @@ package Plugin;
 import DAOs.JsonCommandDAO;
 import DAOs.JsonGameDAO;
 import DAOs.JsonUserDAO;
-import com.example.CommandDAO;
-import com.example.GameDAO;
+import com.shared.CommandDAO;
+import com.shared.GameDAO;
 import Interfaces.PluginFactory;
-import com.example.UserDAO;
+import com.shared.UserDAO;
 
 public class JsonPluginFactory implements PluginFactory {
     @Override

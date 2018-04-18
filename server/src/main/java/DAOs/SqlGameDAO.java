@@ -1,6 +1,6 @@
 package DAOs;
 
-import com.example.GameDAO;
+import com.shared.GameDAO;
 
 public class SqlGameDAO implements GameDAO {
     @Override

@@ -1,4 +1,6 @@
-package com.example;
+package com.sql;
+
+import com.shared.CommandDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,11 +28,11 @@ public class commandDAO implements CommandDAO {
     }
 
     public String createlCommandTable = "create Table if not exists lobbyCommandSql(\n" +
-            "gCmdJson String not null,\n"+
+            "lCmdJson String not null\n"+
             ");";
 
     public String creategCommandTable = "create Table if not exists gameCommandSql(\n" +
-            "lCmdJson String not null,\n"+
+            "gCmdJson String not null\n"+
             ");";
 
 
@@ -70,7 +72,7 @@ public class commandDAO implements CommandDAO {
         PreparedStatement stmt2 = null;
         try{
             connect = DriverManager.getConnection(connectURL);
-            String sql = "insert into lobbyCommandSql (gCmdJson)VALUES(?)";
+            String sql = "insert into lobbyCommandSql (lCmdJson)VALUES(?)";
             stmt2 = connect.prepareStatement(sql);
             stmt2.setString(1, jsonStr);
             stmt2.executeUpdate();
@@ -142,7 +144,7 @@ public class commandDAO implements CommandDAO {
         ResultSet rs = null;
         try {
             connect=DriverManager.getConnection(connectURL);
-            String sql = "select gCmdJson from gameCommandSql";
+            String sql = "select lCmdJson from lobbyCommandSql";
             stmt= connect.prepareStatement(sql);
             rs = stmt.executeQuery();
             gameCmdJson =new String(rs.getString(1));
@@ -165,14 +167,14 @@ public class commandDAO implements CommandDAO {
     @Override
     public String loadGameCommands() throws SQLException {
         PreparedStatement stmt = null;
-        String lobbyCmdJson= "";
+        String gameCmdJson= "";
         ResultSet rs = null;
         try {
             connect=DriverManager.getConnection(connectURL);
-            String sql = "select lCmdJson from lobbyCommandSql";
+            String sql = "select gCmdJson from gameCommandSql";
             stmt= connect.prepareStatement(sql);
             rs = stmt.executeQuery();
-            lobbyCmdJson =new String(rs.getString(1));
+            gameCmdJson =new String(rs.getString(1));
         }catch (Exception e){
             System.out.println("Within CommandDao "+e);
         }
@@ -185,7 +187,7 @@ public class commandDAO implements CommandDAO {
             }
             connect.close();
         }
-        return lobbyCmdJson;
+        return gameCmdJson;
         //pulls string from table
     }
 

@@ -4,6 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.shared.CommandDAO;
+import com.shared.GameDAO;
+import com.shared.UserDAO;
+import com.sql.commandDAO;
+import com.sql.gameDAO;
+import com.sql.userDAO;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -39,6 +45,9 @@ public class Database {
     private DataHandler dataHandler;
     private int cmdCount;
     private int delta = 1;
+    private CommandDAO commandDAO = null;
+    private GameDAO gameDAO = null;
+    private UserDAO userDAO = null;
 
     private static Database theDB = new Database();
 
@@ -193,7 +202,58 @@ public class Database {
 
     public HashMap<Integer, Route> getDoubleRoutes() { return dataHandler.getDoubleRouteMap(); }
 
+    public void registerPlugin(String dbType) {
+        Class c = null;
+        Class u = null;
+        Class g = null;
 
+        //Decide which Data Store to use:
+
+//        String path = "";
+//        if(dbType.equals("sql"))
+//        {
+//            path = "com.sql";
+//        }
+//        else //dbType.equals("json")
+//        {
+//            path = "com.json";
+//        }
+        try {
+            c = Class.forName("com." + dbType + ".commandDAO");
+            g = Class.forName("com." + dbType + ".gameDAO");
+            u = Class.forName("com." + dbType + ".userDAO");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            commandDAO = (CommandDAO)c.newInstance();
+            gameDAO = (GameDAO)g.newInstance();
+            userDAO=(UserDAO)u.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        commandDAO = new commandDAO();
+        gameDAO = new gameDAO();
+        userDAO = new userDAO();
+    }
+
+    private void loadDatabase() {
+        try
+        {
+            userDAO.loadUsers();
+            commandDAO.loadLobbyCommands();
+            commandDAO.loadGameCommands();
+            gameDAO.loadGames();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
 
     void loadJSONdatabase() {
         JsonUserDAO juDAO = new JsonUserDAO();

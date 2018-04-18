@@ -1,6 +1,6 @@
 package DAOs;
 
-import com.example.UserDAO;
+import com.shared.UserDAO;
 
 public class SqlUserDAO implements UserDAO {
     @Override

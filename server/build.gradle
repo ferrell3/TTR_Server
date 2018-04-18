@@ -4,6 +4,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':gson-2.6.2')
     compile project(':shared')
+    compile files('build/libs/sql_database.jar')
+    compile project(path: ':sql_database')
 }
 
 sourceCompatibility = "1.7"

@@ -1,4 +1,6 @@
-package com.example;
+package com.sql;
+
+import com.shared.UserDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class userDAO implements UserDAO{
+public class userDAO implements UserDAO {
     private String dbName = "ttrserver.sqlite";
     private String connectURL = "jdbc:sqlite:"+dbName;
     private Connection connect;
@@ -23,7 +25,7 @@ public class userDAO implements UserDAO{
 
     //create table statement:
     public String createUserTable = "create Table if not exists Users(\n" +
-            "userJson String not null,\n"+
+            "userJson String not null\n"+
             ");";
 
 

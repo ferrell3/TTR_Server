@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import com.example.CommandDAO;
+import com.shared.CommandDAO;
 
 public class JsonCommandDAO implements CommandDAO {
 
