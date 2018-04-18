@@ -3,36 +3,26 @@ package Server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import com.shared.CommandDAO;
 import com.shared.GameDAO;
 import com.shared.UserDAO;
-import com.sql.commandDAO;
-import com.sql.gameDAO;
-import com.sql.userDAO;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
 
-import DAOs.JsonCommandDAO;
-import DAOs.JsonGameDAO;
-import DAOs.JsonUserDAO;
 import Data.DataHandler;
+import Interfaces.PluginFactory;
 import Models.Cards.DestinationCard;
 import Models.Command;
 import Models.Gameplay.Game;
 import Models.Gameplay.Player;
 import Models.Gameplay.Route;
 import Models.User;
-import TestClient.TestClientServices;
+import Plugin.JsonPluginFactory;
+import Plugin.SqlPluginFactory;
 
 public class Database {
     private HashMap<String, User> users; //Key: username, Value: user object
@@ -44,7 +34,8 @@ public class Database {
     private HashMap<String, ArrayList<Command>> gameCommands;   //List of cmdObjects for each game
     private DataHandler dataHandler;
     private int cmdCount;
-    private int delta = 1;
+
+    private int delta;
     private CommandDAO commandDAO = null;
     private GameDAO gameDAO = null;
     private UserDAO userDAO = null;
@@ -67,33 +58,33 @@ public class Database {
         cmdCount = 0;
     }
 
-    void loadTeam() {
-        //        User u = new User("username","password","authToken");
-        User u1 = new User("jordan", "aa", "a1fb6d30-51e7-4669-b944-120989aefb06");
-        User u2 = new User("kip","aa","1fee61ae-d871-4548-8fba-a775dab78f8b");
-        User u3 = new User("brian","aa","01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
-        User u4 = new User("finn","aa", "82f90744-ef61-4298-84ce-3070dfc25137");
-
-        //add team users to database
-        users.put(u1.getUsername(), u1);
-        users.put(u1.getAuthToken(), u1);
-        users.put(u2.getUsername(), u2);
-        users.put(u2.getAuthToken(), u2);
-        users.put(u3.getUsername(), u3);
-        users.put(u3.getAuthToken(), u3);
-        users.put(u4.getUsername(), u4);
-        users.put(u4.getAuthToken(), u4);
-
-//        clients.add(u1.getAuthToken());
-//        clients.add(u2.getAuthToken());
-//        clients.add(u3.getAuthToken());
-//        clients.add(u4.getAuthToken());
-
-//        storeJsonUsers();
-        TestClientServices.getInstance().createGame();
-//        storeJsonCMDs("lobby");
-//        storeJsonCMDs("game");
-    }
+//    void loadTeam() {
+//        //        User u = new User("username","password","authToken");
+//        User u1 = new User("jordan", "aa", "a1fb6d30-51e7-4669-b944-120989aefb06");
+//        User u2 = new User("kip","aa","1fee61ae-d871-4548-8fba-a775dab78f8b");
+//        User u3 = new User("brian","aa","01b7cb2c-24c1-4c82-8f6f-c6ee8ab39d2e");
+//        User u4 = new User("finn","aa", "82f90744-ef61-4298-84ce-3070dfc25137");
+//
+//        //add team users to database
+//        users.put(u1.getUsername(), u1);
+//        users.put(u1.getAuthToken(), u1);
+//        users.put(u2.getUsername(), u2);
+//        users.put(u2.getAuthToken(), u2);
+//        users.put(u3.getUsername(), u3);
+//        users.put(u3.getAuthToken(), u3);
+//        users.put(u4.getUsername(), u4);
+//        users.put(u4.getAuthToken(), u4);
+//
+////        clients.add(u1.getAuthToken());
+////        clients.add(u2.getAuthToken());
+////        clients.add(u3.getAuthToken());
+////        clients.add(u4.getAuthToken());
+//
+////        storeUsers();
+//        TestClientServices.getInstance().createGame();
+////        storeJsonCMDs("lobby");
+////        storeJsonCMDs("game");
+//    }
 
     public HashMap<String, ArrayList<Command>> getAllGameCommands() {
         return gameCommands;
@@ -173,7 +164,7 @@ public class Database {
 
     public void setMasterCommandList(ArrayList<Command> masterCommandList) {
         this.masterCommandList = masterCommandList;
-        storeJsonCMDs("lobby");
+        storeLobbyCommands();
     }
 
     public void addGameCommand(String gameId, Command command){
@@ -188,7 +179,7 @@ public class Database {
             gameCommands.put(gameId, commands);
         }
 
-        storeJsonCMDs("game");
+        storeGameCommands();
     }
 
     public void addGameHistory(String gameId, String msg){
@@ -202,105 +193,185 @@ public class Database {
 
     public HashMap<Integer, Route> getDoubleRoutes() { return dataHandler.getDoubleRouteMap(); }
 
+    public void setDelta(int delta) {
+        this.delta = delta;
+    }
+
     public void registerPlugin(String dbType) {
+        PluginFactory piFactory;
+
         Class c = null;
         Class u = null;
         Class g = null;
 
         //Decide which Data Store to use:
 
-//        String path = "";
-//        if(dbType.equals("sql"))
-//        {
-//            path = "com.sql";
-//        }
-//        else //dbType.equals("json")
-//        {
-//            path = "com.json";
-//        }
+        String path = "";
+        if(dbType.equals("sql"))
+        {
+            path = "com.sql.sql";
+            piFactory = new SqlPluginFactory();
+        }
+        else //dbType.equals("json")
+        {
+            path = "com.json.json";
+            piFactory = new JsonPluginFactory();
+        }
         try {
-            c = Class.forName("com." + dbType + ".commandDAO");
-            g = Class.forName("com." + dbType + ".gameDAO");
-            u = Class.forName("com." + dbType + ".userDAO");
+            c = Class.forName(path + "CommandDAO");
+            g = Class.forName(path + "GameDAO");
+            u = Class.forName(path + "UserDAO");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
         try {
-            commandDAO = (CommandDAO)c.newInstance();
-            gameDAO = (GameDAO)g.newInstance();
-            userDAO=(UserDAO)u.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+            commandDAO = (CommandDAO) c.newInstance();
+            gameDAO = (GameDAO) g.newInstance();
+            userDAO = (UserDAO) u.newInstance();
+        } catch (Exception e){
             e.printStackTrace();
         }
-        commandDAO = new commandDAO();
-        gameDAO = new gameDAO();
-        userDAO = new userDAO();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+        commandDAO = piFactory.createCommandDAO();
+        gameDAO = piFactory.createGameDAO();
+        userDAO = piFactory.createUserDAO();
+        loadDatabase();
     }
 
     private void loadDatabase() {
         try
         {
-            userDAO.loadUsers();
-            commandDAO.loadLobbyCommands();
-            commandDAO.loadGameCommands();
-            gameDAO.loadGames();
-
+            deserializeUsers(userDAO.loadUsers());
+            deserializeCommands(commandDAO.loadLobbyCommands(), commandDAO.loadGameCommands());
+            deserializeGames(gameDAO.loadGames());
         }catch (Exception e)
         {
             e.printStackTrace();
         }
 
-    }
-
-    void loadJSONdatabase() {
-        JsonUserDAO juDAO = new JsonUserDAO();
-        JsonCommandDAO jcDAO = new JsonCommandDAO();
-        JsonGameDAO jgDAO = new JsonGameDAO();
-
-        deserializeUsers(juDAO.loadUsers());
-        deserializeGames(jgDAO.loadGames());
-        deserializeCommands(jcDAO.loadLobbyCommands(), jcDAO.loadGameCommands());
-    }
-
-    public void storeJsonCMDs(String type) {
-        JsonCommandDAO jcDAO = new JsonCommandDAO();
-        if(type.equals("lobby"))
+//        for(int i = 0; i < gameCommands.size(); i++)
+        for(ArrayList<Command> cmdList : gameCommands.values())
         {
-            jcDAO.storeLobbyCommands(serializeLobbyCommands());
+            for(Command cmd : cmdList)
+            {
+                //TODO: fix me
+                cmd.execute();
+            }
         }
-        else if(type.equals("game"))
+    }
+
+    public void storeUsers() {
+        try
         {
-            jcDAO.storeGameCommands(serializeGameCommands());
+            userDAO.storeUsers(serializeUsers());
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void storeGames() {
+        try
+        {
+            gameDAO.storeGames(serializeGames());
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void storeLobbyCommands() {
+        try
+        {
+            commandDAO.storeLobbyCommands(serializeLobbyCommands());
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void storeGameCommands() {
+        try
+        {
+            commandDAO.storeGameCommands(serializeGameCommands());
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
         cmdCount++;
         if(cmdCount == delta)
         {
-            storeJsonGames();
+            storeGames();
             cmdCount = 0;
+            System.out.println("Games stored!");
+            try
+            {
+                commandDAO.clearGameCommands();
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void storeJsonGames() { //stores entire hashmap of games
-        JsonGameDAO jgDAO = new JsonGameDAO();
-//        jgDAO.setGames(games);
-        jgDAO.storeGames(serializeGames());
+    public void clear() {
+        try
+        {
+            userDAO.clear();
+            gameDAO.clear();
+            commandDAO.clear();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void storeJsonUsers() {
-        JsonUserDAO juDAO = new JsonUserDAO();
-//        juDAO.setUsers(users);
-        juDAO.storeUsers(serializeUsers());
-    }
+//    void loadJSONdatabase() {
+//        JsonUserDAO juDAO = new JsonUserDAO();
+//        JsonCommandDAO jcDAO = new JsonCommandDAO();
+//        JsonGameDAO jgDAO = new JsonGameDAO();
+//
+//        deserializeUsers(juDAO.loadUsers());
+//        deserializeGames(jgDAO.loadGames());
+//        deserializeCommands(jcDAO.loadLobbyCommands(), jcDAO.loadGameCommands());
+//    }
+
+//    public void storeJsonCMDs(String type) {
+//        JsonCommandDAO jcDAO = new JsonCommandDAO();
+//        if(type.equals("lobby"))
+//        {
+//            jcDAO.storeLobbyCommands(serializeLobbyCommands());
+//        }
+//        else if(type.equals("game"))
+//        {
+//            jcDAO.storeGameCommands(serializeGameCommands());
+//        }
+//        cmdCount++;
+//        if(cmdCount == delta)
+//        {
+//            storeGames();
+//            cmdCount = 0;
+//        }
+//    }
+
+//    public void storeGames() { //stores entire hashmap of games
+//        JsonGameDAO jgDAO = new JsonGameDAO();
+////        jgDAO.setGames(games);
+//        jgDAO.storeGames(serializeGames());
+//    }
+
+//    public void storeUsers() {
+//        JsonUserDAO juDAO = new JsonUserDAO();
+////        juDAO.setUsers(users);
+//        juDAO.storeUsers(serializeUsers());
+//    }
 
 
-    public void clearJsonData() {
-        new JsonUserDAO().clear();
-        new JsonGameDAO().clear();
-        new JsonCommandDAO().clear();
-    }
+//    public void clearJsonData() {
+//        new JsonUserDAO().clear();
+//        new JsonGameDAO().clear();
+//        new JsonCommandDAO().clear();
+//    }
 
     private String serializeUsers() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -312,6 +383,10 @@ public class Database {
         Type typeUser = new TypeToken<HashMap<String, User>>(){}.getType();
 //        Type typeClients = new TypeToken<HashSet<String>>(){}.getType();
         users = gson.fromJson(jsonStr, typeUser);
+        if(users == null)
+        {
+            users = new HashMap<>();
+        }
     }
 
     private String serializeGames() {
@@ -323,6 +398,10 @@ public class Database {
         Gson gson = new GsonBuilder().create();
         Type type = new TypeToken<HashMap<String, Game>>(){}.getType();
         games = gson.fromJson(jsonStr, type);
+        if(games == null)
+        {
+            games = new HashMap<>();
+        }
     }
 
     private String serializeLobbyCommands() {
@@ -342,6 +421,13 @@ public class Database {
 
         masterCommandList = gson.fromJson(jsonLobbyCommands, typeLobby);
         gameCommands = gson.fromJson(jsonGameCommands, typeGame);
+        if(masterCommandList == null)
+        {
+            masterCommandList = new ArrayList<>();
+        }
+        if(gameCommands == null)
+        {
+            gameCommands = new HashMap<>();
+        }
     }
-
 }

@@ -26,4 +26,5 @@ public interface CommandDAO {
     String loadLobbyCommands() throws SQLException;
     String loadGameCommands() throws SQLException;
     void clear() throws SQLException;
+    void clearGameCommands() throws SQLException;
 }

@@ -1113,6 +1113,886 @@
           "cardIndex": 0
         }
       ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 44,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "Hey man - is your refrigerator running?"
+          },
+          "chatMessage": "Hey man - is your refrigerator running?"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 44,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "Hey man - is your refrigerator running?"
+          },
+          "chatMessage": "Hey man - is your refrigerator running?"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 46,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "bob lob law"
+          },
+          "chatMessage": "bob lob law"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 46,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "bob lob law"
+          },
+          "chatMessage": "bob lob law"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 48,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "ghax"
+          },
+          "chatMessage": "ghax"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 48,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "ghax"
+          },
+          "chatMessage": "ghax"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 50,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "hi jordan - How art thou?"
+          },
+          "chatMessage": "hi jordan - How art thou?"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 50,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "hi jordan - How art thou?"
+          },
+          "chatMessage": "hi jordan - How art thou?"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 52,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "gkg"
+          },
+          "chatMessage": "gkg"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 52,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "gkg"
+          },
+          "chatMessage": "gkg"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 54,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "ufj"
+          },
+          "chatMessage": "ufj"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 54,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "ufj"
+          },
+          "chatMessage": "ufj"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 56,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "yfch"
+          },
+          "chatMessage": "yfch"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 56,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "yfch"
+          },
+          "chatMessage": "yfch"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 58,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "hf"
+          },
+          "chatMessage": "hf"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 58,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "hf"
+          },
+          "chatMessage": "hf"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 60,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tury"
+          },
+          "chatMessage": "tury"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 60,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tury"
+          },
+          "chatMessage": "tury"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 62,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "dgjda"
+          },
+          "chatMessage": "dgjda"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 62,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "dgjda"
+          },
+          "chatMessage": "dgjda"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 64,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "fjdsf"
+          },
+          "chatMessage": "fjdsf"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 64,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "fjdsf"
+          },
+          "chatMessage": "fjdsf"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 66,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "djgh"
+          },
+          "chatMessage": "djgh"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 66,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "djgh"
+          },
+          "chatMessage": "djgh"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 66,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tygu"
+          },
+          "chatMessage": "tygu"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 66,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tygu"
+          },
+          "chatMessage": "tygu"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 66,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tghk"
+          },
+          "chatMessage": "tghk"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 66,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tghk"
+          },
+          "chatMessage": "tghk"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 68,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tgjlg"
+          },
+          "chatMessage": "tgjlg"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 68,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "tgjlg"
+          },
+          "chatMessage": "tgjlg"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 68,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "fgjkh"
+          },
+          "chatMessage": "fgjkh"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 68,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "fgjkh"
+          },
+          "chatMessage": "fgjkh"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 78,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "fffffffffffffffff"
+          },
+          "chatMessage": "fffffffffffffffff"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 78,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "fffffffffffffffff"
+          },
+          "chatMessage": "fffffffffffffffff"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 78,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "hklhlkhkh;h;h;h;oh\u0027oih\u0027h;h;h;hiugiugpiuhiugliuglgiguyuyfkjfkjfkyfkuyfkjfkuyfkjhkjkgkjfjytfjyerswzqwxhgdfjgjfkfkhjgjhfjhgfjhfjhgfjhfjhfjhfjhgdjhdghfdhgxexgfxgxetwwesegrjdiytruytdytwqeweryteutdiyiffggjfjhggctdrytxtrcuruycuycitcuyovivkoplmjnhuyggtfrfdrd"
+          },
+          "chatMessage": "hklhlkhkh;h;h;h;oh\u0027oih\u0027h;h;h;hiugiugpiuhiugliuglgiguyuyfkjfkjfkyfkuyfkjfkuyfkjhkjkgkjfjytfjyerswzqwxhgdfjgjfkfkhjgjhfjhgfjhfjhgfjhfjhfjhfjhgdjhdghfdhgxexgfxgxetwwesegrjdiytruytdytwqeweryteutdiyiffggjfjhggctdrytxtrcuruycuycitcuyovivkoplmjnhuyggtfrfdrd"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 78,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "hklhlkhkh;h;h;h;oh\u0027oih\u0027h;h;h;hiugiugpiuhiugliuglgiguyuyfkjfkjfkyfkuyfkjfkuyfkjhkjkgkjfjytfjyerswzqwxhgdfjgjfkfkhjgjhfjhgfjhfjhgfjhfjhfjhfjhgdjhdghfdhgxexgfxgxetwwesegrjdiytruytdytwqeweryteutdiyiffggjfjhggctdrytxtrcuruycuycitcuyovivkoplmjnhuyggtfrfdrd"
+          },
+          "chatMessage": "hklhlkhkh;h;h;h;oh\u0027oih\u0027h;h;h;hiugiugpiuhiugliuglgiguyuyfkjfkjfkyfkuyfkjfkuyfkjhkjkgkjfjytfjyerswzqwxhgdfjgjfkfkhjgjhfjhgfjhfjhgfjhfjhfjhfjhgdjhdghfdhgxexgfxgxetwwesegrjdiytruytdytwqeweryteutdiyiffggjfjhggctdrytxtrcuruycuycitcuyovivkoplmjnhuyggtfrfdrd"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 80,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "aldfjalsdjfsadlfajsldfaslfjalsjdfasjflasjdfl;ashdfowealjshdfalksjdhfaskdfh;alsdhf;lsdf;aldfjals;f;lsdjf;lasdjf;alsfja;sdfja;lsdkf;wldhf;aosdifhalsdkfhalsdfhalskdfha;lsjfhalskdfha;snf;awlksdfjals;kfj;asljdf;owijniuanvnajfdh;aolkfj;alsjfa;slf;alskfja;lsfj;asldfjapsofdsfalsdjfllfj;fjal;sfja;lsfjaosdfnalsfj;alsdfj;aslkdf;alskdjfa;lsfja;lsfj;alskjf;alsdkjf;lasdjf;lasdfj;lasjdf;lajsdf;lajsdfl;jd;lfasjflasflawherenohowmfastcanyoutypewitoutputtingspaces?thisisactuallymuchmoredifficultthanitlooks...."
+          },
+          "chatMessage": "aldfjalsdjfsadlfajsldfaslfjalsjdfasjflasjdfl;ashdfowealjshdfalksjdhfaskdfh;alsdhf;lsdf;aldfjals;f;lsdjf;lasdjf;alsfja;sdfja;lsdkf;wldhf;aosdifhalsdkfhalsdfhalskdfha;lsjfhalskdfha;snf;awlksdfjals;kfj;asljdf;owijniuanvnajfdh;aolkfj;alsjfa;slf;alskfja;lsfj;asldfjapsofdsfalsdjfllfj;fjal;sfja;lsfjaosdfnalsfj;alsdfj;aslkdf;alskdjfa;lsfja;lsfj;alskjf;alsdkjf;lasdjf;lasdfj;lasjdf;lajsdf;lajsdfl;jd;lfasjflasflawherenohowmfastcanyoutypewitoutputtingspaces?thisisactuallymuchmoredifficultthanitlooks...."
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 80,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "aldfjalsdjfsadlfajsldfaslfjalsjdfasjflasjdfl;ashdfowealjshdfalksjdhfaskdfh;alsdhf;lsdf;aldfjals;f;lsdjf;lasdjf;alsfja;sdfja;lsdkf;wldhf;aosdifhalsdkfhalsdfhalskdfha;lsjfhalskdfha;snf;awlksdfjals;kfj;asljdf;owijniuanvnajfdh;aolkfj;alsjfa;slf;alskfja;lsfj;asldfjapsofdsfalsdjfllfj;fjal;sfja;lsfjaosdfnalsfj;alsdfj;aslkdf;alskdjfa;lsfja;lsfj;alskjf;alsdkjf;lasdjf;lasdfj;lasjdf;lajsdf;lajsdfl;jd;lfasjflasflawherenohowmfastcanyoutypewitoutputtingspaces?thisisactuallymuchmoredifficultthanitlooks...."
+          },
+          "chatMessage": "aldfjalsdjfsadlfajsldfaslfjalsjdfasjflasjdfl;ashdfowealjshdfalksjdhfaskdfh;alsdhf;lsdf;aldfjals;f;lsdjf;lasdjf;alsfja;sdfja;lsdkf;wldhf;aosdifhalsdkfhalsdfhalskdfha;lsjfhalskdfha;snf;awlksdfjals;kfj;asljdf;owijniuanvnajfdh;aolkfj;alsjfa;slf;alskfja;lsfj;asldfjapsofdsfalsdjfllfj;fjal;sfja;lsfjaosdfnalsfj;alsdfj;aslkdf;alskdjfa;lsfja;lsfj;alskjf;alsdkjf;lasdjf;lasdfj;lasjdf;lajsdf;lajsdfl;jd;lfasjflasflawherenohowmfastcanyoutypewitoutputtingspaces?thisisactuallymuchmoredifficultthanitlooks...."
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IChat",
+      "_methodName": "addChat",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 82,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "alkdj"
+          },
+          "chatMessage": "alkdj"
+        }
+      ]
+    },
+    {
+      "_className": "Interfaces.IGamePlay",
+      "_methodName": "addGameHistory",
+      "_strParamTypes": [
+        "Models.Request"
+      ],
+      "_paramValues": [
+        {
+          "authToken": "7669c7e5-1c28-4e3f-8b78-d5e501698508",
+          "gameId": "Test",
+          "commandNum": 0,
+          "action": "jordan sent a chat.",
+          "gameCMDNum": 82,
+          "cardIndex": 0,
+          "chat": {
+            "username": "jordan",
+            "message": "alkdj"
+          },
+          "chatMessage": "alkdj"
+        }
+      ]
     }
   ]
 }

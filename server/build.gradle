@@ -6,6 +6,7 @@ dependencies {
     compile project(':shared')
     compile files('build/libs/sql_database.jar')
     compile project(path: ':sql_database')
+    compile project(path: ':json_database')
 }
 
 sourceCompatibility = "1.7"

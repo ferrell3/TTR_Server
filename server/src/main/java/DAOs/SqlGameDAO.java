@@ -1,45 +1,45 @@
-package DAOs;
-
-import com.shared.GameDAO;
-
-public class SqlGameDAO implements GameDAO {
-    @Override
-    public void storeGames(String jsonStr) {
-
-    }
-
-    @Override
-    public String loadGames() { //directly into the database (i.e. Database.getInstance().setGames(...);
-        return null;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
+//package DAOs;
+//
+//import com.shared.GameDAO;
+//
+//public class SqlGameDAO implements GameDAO {
 //    @Override
-//    public HashMap<String, Game> getGames() {
+//    public void storeGames(String jsonStr) {
+//
+//    }
+//
+//    @Override
+//    public String loadGames() { //directly into the database (i.e. Database.getInstance().setGames(...);
 //        return null;
 //    }
 //
 //    @Override
-//    public void setGames(HashMap<String, Game> games) {
+//    public void clear() {
 //
 //    }
 //
-//    @Override
-//    public void addGame(Game game) {
-//
-//    }
-//
-//    @Override
-//    public void removeGame(Game game) {
-//
-//    }
-//
-//    @Override
-//    public void storeGames() {
-//
-//    }
-}
+////    @Override
+////    public HashMap<String, Game> getGames() {
+////        return null;
+////    }
+////
+////    @Override
+////    public void setGames(HashMap<String, Game> games) {
+////
+////    }
+////
+////    @Override
+////    public void addGame(Game game) {
+////
+////    }
+////
+////    @Override
+////    public void removeGame(Game game) {
+////
+////    }
+////
+////    @Override
+////    public void storeGames() {
+////
+////    }
+//}

@@ -13,7 +13,7 @@ import java.sql.Statement;
  * Created by jesjames on 4/17/18.
  */
 
-public class gameDAO implements GameDAO {
+public class sqlGameDAO implements GameDAO {
 
     //Class Properties:
     private String dbName = "ttrserver.sqlite";

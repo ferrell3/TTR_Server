@@ -13,7 +13,7 @@ import java.sql.Statement;
  * Created by jesjames on 4/17/18.
  */
 
-public class commandDAO implements CommandDAO {
+public class sqlCommandDAO implements CommandDAO {
     private String dbName = "ttrserver.sqlite";
     private String connectURL = "jdbc:sqlite:"+dbName;
     private Connection connect;
@@ -202,6 +202,26 @@ public class commandDAO implements CommandDAO {
             stmt.execute("drop table if exists lobbyCommandSql");
             stmt.execute("drop table if exists gameCommandSql");
             stmt.execute(createlCommandTable);
+            stmt.execute(creategCommandTable);
+            connect.commit();
+            connect.close();
+        }
+        catch (Exception e) {
+            connect.rollback();
+            connect.close();
+            System.out.println("error in dao : clear tables " + e);
+        }
+    }
+
+    @Override
+    public void clearGameCommands() throws SQLException {
+        Statement stmt = null;
+        connect  = null;
+        try {
+            connect = DriverManager.getConnection(connectURL);
+            connect.setAutoCommit(false);
+            stmt = connect.createStatement();
+            stmt.execute("drop table if exists gameCommandSql");
             stmt.execute(creategCommandTable);
             connect.commit();
             connect.close();

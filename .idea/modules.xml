@@ -5,8 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/TTR_Server.iml" filepath="$PROJECT_DIR$/TTR_Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gson-2.6.2/gson-2.6.2.iml" filepath="$PROJECT_DIR$/gson-2.6.2/gson-2.6.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/json_database/json_database.iml" filepath="$PROJECT_DIR$/json_database/json_database.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
       <module fileurl="file://$PROJECT_DIR$/shared/shared.iml" filepath="$PROJECT_DIR$/shared/shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sql_database/sql_database.iml" filepath="$PROJECT_DIR$/sql_database/sql_database.iml" />
       <module fileurl="file://$PROJECT_DIR$/SQL_Database/sql_database.iml" filepath="$PROJECT_DIR$/SQL_Database/sql_database.iml" />
     </modules>
   </component>

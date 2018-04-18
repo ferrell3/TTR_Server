@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class userDAO implements UserDAO {
+public class sqlUserDAO implements UserDAO {
     private String dbName = "ttrserver.sqlite";
     private String connectURL = "jdbc:sqlite:"+dbName;
     private Connection connect;
